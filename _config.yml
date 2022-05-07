@@ -24,17 +24,15 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Your awesome title
-email: your-email@domain.com
-author: GitHub User
-copyright: Copyright © 1970-2010
+title: Every Single Day
+email: dajeongdev@gmail.com
+author: Dajeong Park
+copyright: Copyright © 2022
 description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  
 
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://dajeongdev.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 favicon: "" # the favicon for your site
 
 # Yat date format
@@ -55,7 +53,7 @@ yat:
 # sitemap: false
 
 # If you want to change site language, you can set lang option
-# lang: "en"  # default lang is en
+lang: "ko"  # default lang is en
 
 # Translate languges
 # langs refer to https://cloud.google.com/translate/docs/languages
@@ -167,15 +165,15 @@ yat:
 
 # Disqus comments
 # disqus:
-#   shortname: "Your Disqus username"
+#   shortname: "Dajeong"
 
 # Gitment comments
 # gitment:
-#   username: "Your GitHub username"
+#   username: "dajeongdev"
 #   repo: "The repo to store comments"
 #   client_id: "Your client ID"
 #   client_secret: "Your client secret"
-#   redirect_uri: "Your redirect url"   # If you use a custom domain name
+#   redirect_uri: "https://dajeongdev.github.io"   # If you use a custom domain name
 
 # Build settings
 # highlighter: none

@@ -94,6 +94,7 @@ html {
 .site-brand {
   line-height: $header-height;
   margin-right: 50px;
+  font-weight: bold;
 
   .site-brand-inner {
     @include relative-font-size(1.125);
