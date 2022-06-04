@@ -1,0 +1,7 @@
+I"<h3 id="charatint-index">charAt(int index)</h3>
+<ul>
+  <li>문자열의 index 위치에 있는 글자를 char 타입으로 리턴한다.</li>
+  <li>index는 0부터 시작한다.</li>
+  <li>마지막 문자의 index는 문자열 길이 -1이다.</li>
+</ul>
+:ET

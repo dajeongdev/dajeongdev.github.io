@@ -1,0 +1,77 @@
+I"M<h3 id="charatint-index">charAt(int index)</h3>
+<ul>
+  <li>문자열의 index 위치에 있는 글자를 char 타입으로 리턴한다.</li>
+  <li>index는 0부터 시작한다.</li>
+  <li>마지막 문자의 index는 문자열 길이 -1이다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"Hello World"</span><span class="o">;</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="mi">0</span><span class="o">));</span> <span class="c1">// H</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">));</span> <span class="c1">// d</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<hr />
+
+<h3 id="문자열에서-특정-문자-개수-세기">문자열에서 특정 문자 개수 세기</h3>
+<h4 id="1-반복문">1. 반복문</h4>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span> <span class="nf">count</span><span class="o">(</span><span class="nc">String</span> <span class="n">str</span><span class="o">,</span> <span class="kt">char</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">count</span><span class="o">++;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">count</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<h4 id="2-replace">2. replace()</h4>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span> <span class="nf">count</span><span class="o">(</span><span class="nc">String</span> <span class="n">str</span><span class="o">,</span> <span class="kt">char</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">-</span> <span class="n">str</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">c</span><span class="o">),</span> <span class="s">""</span><span class="o">).</span><span class="na">length</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<hr />
+
+<h3 id="소수점-n번째-자리까지-반올림">소수점 n번째 자리까지 반올림</h3>
+<h4 id="1-mathround">1. Math.round()</h4>
+<ul>
+  <li>실수의 소수점 첫번째 자리를 반올림하여 정수로 리턴한다.</li>
+  <li>그 이상의 자리를 나타내고 싶다면 100.0 등을 곱해서 사용할 수 있다.</li>
+  <li>참고
+    <ol>
+      <li>Math.ceil(): 올림</li>
+      <li>Math.floor(): 버림</li>
+    </ol>
+  </li>
+</ul>
+
+<h4 id="2-stringformat">2. String.format()</h4>
+<ul>
+  <li>String 클래스의 format 메소드는 리턴되는 문자열 형태를 지정할 수 있어 Math.round 메소드처럼 소수점 n번째 자리까지 반올림하여 나타낼 수 있다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="n">pie</span> <span class="o">=</span> <span class="mf">3.14159265358979</span><span class="o">;</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"%.2f"</span><span class="o">,</span> <span class="n">pie</span><span class="o">));</span> <span class="c1">// 3.14</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"%.3f"</span><span class="o">,</span> <span class="n">pie</span><span class="o">));</span> <span class="c1">// 3.142</span>
+</code></pre></div></div>
+
+<h4 id="3-mathround와-stringformat">3. Math.round()와 String.format()</h4>
+<ul>
+  <li>두 메소드는 실수를 소수점 n번째까지 잘라서 나타낸다는 공통점이 있다.</li>
+  <li>그러나 Math.round()는 소수점 아래가 0일 경우 절삭하지만, String.format()은 절삭하지 않고 그대로 리턴한다는 차이점이 있다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="n">money</span> <span class="o">=</span> <span class="mf">10000.000</span><span class="o">;</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Math</span><span class="o">.</span><span class="na">round</span><span class="o">(</span><span class="n">money</span> <span class="o">*</span> <span class="mi">1000</span><span class="o">)</span> <span class="o">/</span> <span class="mi">1000</span><span class="o">);</span> <span class="c1">// 10000</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"%.3f"</span><span class="o">,</span> <span class="n">money</span><span class="o">));</span> <span class="c1">// 10000.000</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<hr />
+<h4 id="참고">참고</h4>
+<ul>
+  <li>https://coding-factory.tistory.com/250</li>
+</ul>
+:ET

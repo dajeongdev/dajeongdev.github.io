@@ -218,9 +218,9 @@ html[data-scroll-status='down'] .framework .sidebar { top: 20px; }
 
 .post .post-content img, .post .post-content svg, .post .post-content iframe { margin-left: auto; margin-right: auto; display: block; }
 
-.post .post-content h2, .post .post-content h3, .post .post-content h4, .post .post-content h5, .post .post-content h6 { margin: 60px 0 19px; }
+.post .post-content h2, .post .post-content h3, .post .post-content h4, .post .post-content h5, .post .post-content h6 { margin: 30px 0 19px; }
 
-.post .post-content p, .post .post-content hr { margin-bottom: 24px; }
+.post .post-content p, .post .post-content hr { margin-bottom: 14px; }
 
 .post .post-content hr { height: 1px; background-color: #ebebeb; border: none; }
 

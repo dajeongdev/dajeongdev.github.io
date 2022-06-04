@@ -1,0 +1,55 @@
+I"�
+<h3 id="mybatisjava-persistence-framework">MyBatis(Java Persistence Framework)</h3>
+
+<h4 id="장점">장점</h4>
+
+<h4 id="단점">단점</h4>
+
+<p><br /></p>
+
+<hr />
+<h3 id="jpajava-persistence-api">JPA(Java Persistence API)</h3>
+
+<h4 id="장점-1">장점</h4>
+
+<h4 id="단점-1">단점</h4>
+
+<p><br /></p>
+
+<!-- ---
+
+
+### SQL 중심 개발의 문제점
+중요한 데이터를 보관하기 위해서 많은 회사들이 관계형 데이터베이스를 사용하고 있다. 그래서 관계형 데이터베이스가 이해할 수 있는 SQL이 중요하지만, 그와 동시에 SQL에 의존적인 개발을 피하기 어렵다.
+1. 무한 반복과 지루한 코드
+- Spring, MyBatis를 사용하면서 Mapper에서의 CRUD, Java단의 DAO, Service의 반복을 경험해보지 않은 개발자가 있을까?
+2. 패러다임의 불일치
+- 객체와 관계형 데이터베이스는 애초에 다른 사상에서 나왔는데 그 둘을 묶어서 사용하려고 하니까 문제가 발생한다.
+- 관계형 데이터베이스: 데이터를 잘 정규화해서 보관
+- 객체: 필드와 메서드를 묶어서 캡슐화하여 사용
+- 객체지향 프로그래밍은 추상화, 캡슐화, 정보 은닉, 상속, 다형성 등 시스템의 복잡성을 제어할 수 있는 다양한 장치들을 제공한다.
+- 객체를 영구 보관하는 다양한 저장소 중 현실적인 대안이 관계형 데이터베이스일 뿐이다.
+3. 객체와 관계형 데이터베이스의 차이
+- 객체와 관계형 데이터베이스는 상속, 연관관계, 데이터 타입, 데이터 식별 방식 등에서 차이가 있다.
+
+계층형 아키텍처 -> 진정한 의미의 계층 분할이 어렵다.
+객체답게 모델링할 수록 매핑 작업만 늘어나고 힘들어진다.
+객체를 자바 컬렉션에 저장하듯이 데이터베이스에 저장하기 위해서는 결국 JPA를 사용해야 한다.
+
+<br> -->
+
+<hr />
+<h3 id="개인적인-의견">개인적인 의견</h3>
+<p>단점으로 러닝 커브와 복잡한 연산에 무리가 있다고 언급했지만 요즘엔 QueryDsl 같은 조회용 프레임워크를 함께 사용하여 그 간극을 줄이고 있다. 개인적으로 자바 개발자라면 한 번쯤 꼭 배워보는게 좋다고 생각한다.</p>
+
+<p><br /></p>
+
+<hr />
+<p><br /> 
+<strong>참고</strong></p>
+<ul>
+  <li></li>
+  <li><a href="https://dreaming-soohyun.tistory.com/entry/JPA%EC%99%80-MyBatis%EC%9D%98-%EC%B0%A8%EC%9D%B4-ORM%EA%B3%BC-SQL-Mapper">https://dreaming-soohyun.tistory.com/entry/JPA%EC%99%80-MyBatis%EC%9D%98-%EC%B0%A8%EC%9D%B4-ORM%EA%B3%BC-SQL-Mapper</a></li>
+  <li><a href="https://incheol-jung.gitbook.io/docs/q-and-a/spring/jpa-vs-mybatis">https://incheol-jung.gitbook.io/docs/q-and-a/spring/jpa-vs-mybatis</a></li>
+</ul>
+:ET

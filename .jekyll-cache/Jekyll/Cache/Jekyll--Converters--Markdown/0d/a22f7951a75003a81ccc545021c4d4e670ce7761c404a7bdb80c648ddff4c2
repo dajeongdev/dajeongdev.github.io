@@ -1,0 +1,7 @@
+I"�<p>MyBatis와 JPA를 알기 전에 알아두면 좋은 두 개념을 살펴보자.</p>
+<h3 id="sql-mapper">SQL Mapper</h3>
+<p>SQL Mapper는 개발자가 작성한 SQL문으로 해당되는 데이터를 읽고, 결과값을 객체화시켜 사용할 수 있게 해준다. 즉, RDB에 따라 SQL 문법이 다르므로 특정 RDB에 종속적이다.</p>
+<ul>
+  <li>예) MyBatis</li>
+</ul>
+:ET

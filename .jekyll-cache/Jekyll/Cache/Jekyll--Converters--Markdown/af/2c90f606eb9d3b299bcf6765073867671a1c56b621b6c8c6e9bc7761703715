@@ -1,0 +1,52 @@
+I"�<p>현재 회사에서는 MyBatis를 사용하고 있고, 작년에 김영한님의 강의를 들으며 JPA를 접했다.
+아직 실무에서 큰 스케일의 데이터를 접해보지 못해서 JPA의 가장 큰 장점인 –를 실제로 느껴보진 못했지만 코드를 작성할 때도 SQL을 많이 작성할 필요가 없다는 것이 가장 큰 메리트로 느껴졌다.</p>
+
+<h3 id="sql-mapper">SQL Mapper</h3>
+<ul>
+  <li>SQL Mapper는 개발자가 작성한 SQL문으로 해당되는 데이터를 읽고, 결과값을 객체화시켜 사용할 수 있게 해준다. 즉, RDB에 따라 SQL 문법이 다르므로 특정 RDB에 종속적이다.</li>
+  <li>예) MyBatis</li>
+</ul>
+
+<h3 id="ormobject-relational-mapping">ORM(Object-Relational Mapping)</h3>
+<ul>
+  <li>ORM은 객체와 RDB를 별개로 설계하고, ORM이 중간에서 매핑해주는 역할을 한다. 즉, ORM은 SQL문이 아닌 RDB에 데이터 자체를 매핑하기 때문에 SQL을 직접 작성할 필요가 없다.</li>
+  <li>해당 객체와의 매핑을 위한 SQL을 알아서 제공한다. 이로인해 어떤 RDB를 사용하던 상관이 없어졌다.</li>
+  <li>SQL문이 아닌 ORM에서 제공하는 메서드, 코드 또한 직관적이어서 사용하기 좋다.</li>
+  <li>예) Hibernate, JPA 등</li>
+</ul>
+
+<h3 id="mybatisjava-persistence-framework">MyBatis(Java Persistence Framework)</h3>
+<ul>
+  <li>MyBatis는 SQL Mapper의 일종으로 개발자가 지정한 SQL, 저장 프로시저 그리고 몇 가지 고급 매핑을 지원하는 영속성 프레임워크다.</li>
+  <li>MyBatis는 JDBC로 처리하는 상당 부분의 코드와 파라미터 설정 및 결과 매핑을 대신해주고, 데이터베이스 record에 원시 타입과 Map 그리고 Java POJO를 설정하여 매핑하기 위해 XML과 Annotation을 사용할 수 있다. 즉, SQL문을 직접 작성하여 객체와 매핑시켜준다.
+    <h4 id="장점">장점</h4>
+  </li>
+  <li>JPA에 비해 쉽고, SQL 쿼리를 그대로 사용하기에 복잡한 Join, 튜닝 등을 좀 더 수월하게 작성할 수 있다.</li>
+  <li>SQL의 세부적인 내용 변경 시 좀 더 간편하다.</li>
+  <li>동적 쿼리 사용 시 JPA보다 간편하게 구현 가능하다.
+단점</li>
+  <li>데이터베이스 변경 시 수정할 부분이 굉장히 많다. (특정 DB에 종속적이다.)</li>
+  <li>Mapper 작성부터 인터페이스 설계까지 JPA 보다 많은 설계와 파일, 로직이 필요하다.</li>
+</ul>
+
+<h3 id="jpajava-persistence-api">JPA(Java Persistence API)</h3>
+<ul>
+  <li>JPA는 Java ORM의 기술 표준에 대한 API 표준 명세로, 단순한 명세이기 때문에 Hibernate, DataNucleus, EpliseLink 등 다양한 구현체를 사용해야 한다.</li>
+  <li>실무에서 자주 사용하는 Spring Data JPA는 JPA를 간편하게 사용하기 위한 오픈 소스로 Spring Data Redis, Spring Data MongoDB 등 다양한 라이브러리가 존재한다.</li>
+  <li>RDB 종류에 상관없이 사용 가능하여 추후 DB 변경이나 코드 재사용에 용이하다.</li>
+  <li>기본적인 CRUD 제공과 페이징 처리 등 상당 부분이 구현되엉 있어 비즈니스 로직에 집중할 수 있다.</li>
+  <li>테이블 생성, 변경 등 엔티티 관리가 간편하다.</li>
+  <li>쿼리에 집중할 필요가 없어 빠른 개발이 가능하다.</li>
+  <li>이해해야 할 내용이 많으며, 연관관계 이해 없이 잘못 코딩하면 성능상의 문제가 반드시 발생한다.</li>
+  <li>단점으로 러닝 커브를 이야기하지만 자바 개발자라면 한 번쯤 꼭 배우는게 좋다고 생각한다.</li>
+</ul>
+
+<p><br /></p>
+
+<hr />
+
+<p><strong>참고</strong></p>
+<ul>
+  <li><a href="https://dreaming-soohyun.tistory.com/entry/JPA%EC%99%80-MyBatis%EC%9D%98-%EC%B0%A8%EC%9D%B4-ORM%EA%B3%BC-SQL-Mapper">https://dreaming-soohyun.tistory.com/entry/JPA%EC%99%80-MyBatis%EC%9D%98-%EC%B0%A8%EC%9D%B4-ORM%EA%B3%BC-SQL-Mapper</a></li>
+</ul>
+:ET
