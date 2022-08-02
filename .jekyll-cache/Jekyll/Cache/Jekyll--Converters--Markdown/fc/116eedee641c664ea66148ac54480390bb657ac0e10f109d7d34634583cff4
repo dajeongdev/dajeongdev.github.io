@@ -1,0 +1,58 @@
+I"�<h5 id="이동">이동</h5>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cd</span><span class="w"> </span><span class="p">[</span><span class="err">이동할</span><span class="w"> </span><span class="err">경로</span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
+
+<h5 id="드라이브-변경">드라이브 변경</h5>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="err">드라이브</span><span class="w"> </span><span class="err">문자열</span><span class="p">]:</span><span class="w"> </span><span class="n">//</span><span class="w"> </span><span class="nx">D:</span><span class="w">
+</span></code></pre></div></div>
+
+<h5 id="현재-위치의-파일과-폴더-목록-조회">현재 위치의 파일과 폴더 목록 조회</h5>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dir</span><span class="w">
+</span></code></pre></div></div>
+
+<h5 id="네트워크-설정-상태-조회">네트워크 설정 상태 조회</h5>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ipconfig</span><span class="w"> 
+</span><span class="n">//</span><span class="w"> </span><span class="nx">all</span><span class="w"> </span><span class="err">옵션으로</span><span class="w"> </span><span class="err">상세</span><span class="w"> </span><span class="err">설정</span><span class="w"> </span><span class="err">정보</span><span class="w"> </span><span class="err">보기</span><span class="w"> </span><span class="err">가능</span><span class="w">
+</span></code></pre></div></div>
+
+<h5 id="폴더-생성">폴더 생성</h5>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">md</span><span class="p">(</span><span class="n">or</span><span class="w"> </span><span class="nx">mkdir</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="err">폴더명</span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
+
+<h5 id="폴더-삭제">폴더 삭제</h5>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rm</span><span class="p">(</span><span class="n">rmdir</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="err">폴더명</span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
+
+<h5 id="환경-변수-path-조회">환경 변수 path 조회</h5>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">path</span><span class="w">
+</span></code></pre></div></div>
+
+<h5 id="파일-삭제">파일 삭제</h5>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">del</span><span class="w"> </span><span class="p">[</span><span class="err">파일명</span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
+
+<h5 id="파일-복사">파일 복사</h5>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">copy</span><span class="w"> </span><span class="p">[</span><span class="err">복사할</span><span class="w"> </span><span class="err">파일명</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="err">복사할</span><span class="w"> </span><span class="err">위치</span><span class="p">]</span><span class="w">
+</span><span class="n">xcopy</span><span class="w"> </span><span class="p">[</span><span class="err">복사할</span><span class="w"> </span><span class="err">파일명</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="err">복사할</span><span class="w"> </span><span class="err">위치</span><span class="p">]</span><span class="w"> </span><span class="nx">//</span><span class="w"> </span><span class="err">숨김파일도</span><span class="w"> </span><span class="err">복사</span><span class="w"> </span><span class="err">가능</span><span class="w">
+</span></code></pre></div></div>
+
+<h5 id="파일-이동">파일 이동</h5>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">move</span><span class="w"> </span><span class="p">[</span><span class="err">파일명</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="err">이동할</span><span class="w"> </span><span class="err">위치</span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
+
+<h5 id="파일명폴더명-변경">파일명/폴더명 변경</h5>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rename</span><span class="w"> </span><span class="p">[</span><span class="err">현재</span><span class="w"> </span><span class="err">파일명</span><span class="n">/</span><span class="err">폴더명</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="err">변경할</span><span class="w"> </span><span class="err">파일명</span><span class="n">/</span><span class="err">폴더명</span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
+
+<h5 id="현재-날짜-조회">현재 날짜 조회</h5>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">date</span><span class="w">
+</span></code></pre></div></div>
+
+<h5 id="현재-실행-중인-프로세스-모두-조회">현재 실행 중인 프로세스 모두 조회</h5>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tasklist</span><span class="w">
+</span></code></pre></div></div>
+
+<h5 id="명령-프롬프트-창-종료">명령 프롬프트 창 종료</h5>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">exit</span><span class="w">
+</span></code></pre></div></div>
+:ET
