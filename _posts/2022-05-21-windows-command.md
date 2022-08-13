@@ -77,3 +77,13 @@ tasklist
 ``` powershell
 exit
 ```
+
+##### 파일 생성
+``` powershell
+copy con [생성할 파일명]
+내용
+// 입력을 끝내고 싶으면 ctrl + z / ctrl + c
+```
+``` powershell
+echo "내용" > "생성할 파일명"
+```
