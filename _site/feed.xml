@@ -1,4 +1,145 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2022-07-23T15:48:04+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">Windows 명령어</title><link href="http://localhost:4000/wiki/2022/05/21/windows-command.html" rel="alternate" type="text/html" title="Windows 명령어" /><published>2022-05-21T00:00:00+09:00</published><updated>2022-05-21T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2022/05/21/windows-command</id><content type="html" xml:base="http://localhost:4000/wiki/2022/05/21/windows-command.html"><![CDATA[<h3 id="이동">이동</h3>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2022-08-22T20:24:45+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">IntelliJ 단축어 정리</title><link href="http://localhost:4000/wiki/2022/08/22/intellij.html" rel="alternate" type="text/html" title="IntelliJ 단축어 정리" /><published>2022-08-22T00:00:00+09:00</published><updated>2022-08-22T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2022/08/22/intellij</id><content type="html" xml:base="http://localhost:4000/wiki/2022/08/22/intellij.html"><![CDATA[<h4 id="intellij-단축키">IntelliJ 단축키</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>설명</th>
+      <th>단축키</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>이름 변경(Rename)</td>
+      <td>Shift + F6</td>
+    </tr>
+    <tr>
+      <td>접근제어자, 반환타입, 이름등 주요 정보 변경</td>
+      <td>Ctrl + F6</td>
+    </tr>
+    <tr>
+      <td>한 줄 복사</td>
+      <td>Ctrl + D</td>
+    </tr>
+    <tr>
+      <td>Inline</td>
+      <td>Ctrl + Alt + N</td>
+    </tr>
+    <tr>
+      <td>메소드 추출</td>
+      <td>Ctrl + Alt + M</td>
+    </tr>
+    <tr>
+      <td>변수 추출</td>
+      <td>Ctrl + Alt + V</td>
+    </tr>
+    <tr>
+      <td>Generate 탭 열기 (Constructor, Getter/Setter, Override 등)</td>
+      <td>Alt + Insert</td>
+    </tr>
+    <tr>
+      <td>implement methods / static import  / change lamda expression</td>
+      <td>Alt + Enter</td>
+    </tr>
+    <tr>
+      <td>이전 실행 메소드 재실행</td>
+      <td>Shift + F10</td>
+    </tr>
+    <tr>
+      <td>현재 커서 메소드 실행</td>
+      <td>Ctrl + Shift + F10</td>
+    </tr>
+    <tr>
+      <td>코드 정렬</td>
+      <td>Ctrl + Alt + L</td>
+    </tr>
+    <tr>
+      <td>import 정리</td>
+      <td>Ctrl + Alt + O</td>
+    </tr>
+    <tr>
+      <td>for</td>
+      <td>fori</td>
+    </tr>
+    <tr>
+      <td>for each문 생성</td>
+      <td>iter</td>
+    </tr>
+    <tr>
+      <td>System.out.println</td>
+      <td>sout</td>
+    </tr>
+    <tr>
+      <td>System.out.println + 가까운 변수</td>
+      <td>soutv</td>
+    </tr>
+    <tr>
+      <td>System.out.println + 메서드</td>
+      <td>soutm</td>
+    </tr>
+    <tr>
+      <td>public static void main</td>
+      <td>psvm</td>
+    </tr>
+    <tr>
+      <td>public static final</td>
+      <td>psf</td>
+    </tr>
+    <tr>
+      <td>private static final</td>
+      <td>prsf</td>
+    </tr>
+    <tr>
+      <td>throw new</td>
+      <td>thr</td>
+    </tr>
+  </tbody>
+</table>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="IDE" /><category term="IntelliJ" /><summary type="html"><![CDATA[IntelliJ 단축키]]></summary></entry><entry><title type="html">스택(Stack)</title><link href="http://localhost:4000/wiki/2022/05/28/stack.html" rel="alternate" type="text/html" title="스택(Stack)" /><published>2022-05-28T00:00:00+09:00</published><updated>2022-05-28T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2022/05/28/stack</id><content type="html" xml:base="http://localhost:4000/wiki/2022/05/28/stack.html"><![CDATA[<h5 id="특징">특징</h5>
+<ul>
+  <li>책을 쌓듯이 데이터를 차곡차곡 쌓아 올린 형태의 자료구조</li>
+  <li>선형 구조</li>
+  <li>같은 구조의 데이터를 정해진 방향으로만 쌓을 수 있다.</li>
+  <li>후입선출(LIFO) 구조: 마지막에 삽입된 데이터를 가장 먼저 꺼낸다.</li>
+  <li>데이터가 없을 때 pop하는 오류를 stack-underflow, 스택의 크기 이상의 데이터를 push하려는 오류를 stack-overflow라고 한다. (!)
+<br /></li>
+</ul>
+
+<h5 id="주요-연산">주요 연산</h5>
+<ul>
+  <li><strong>push</strong>: top을 위로 한 칸 올리고, top이 가리키는 위치에 데이터 저장(삽입)한다.</li>
+  <li><strong>pop</strong>: top이 가리키는 데이터를 반환하고, top을 아래로 한 칸 내린다(삭제).</li>
+  <li><strong>peek</strong>: 스택의 top에 있는 item을 반환한다. pop과 달리 stack에서 객체를 꺼내지 않는다.
+<br /></li>
+</ul>
+
+<h5 id="활용">활용</h5>
+<ul>
+  <li>브라우저의 방문 기록(뒤로 가기): 가장 나중에 열린 페이지부터 다시 보여준다.</li>
+  <li>역순 문자열 만들기: 가장 나중에 입력된 문자부터 출력한다.</li>
+  <li>실행 취소(undo): 가장 나중에 실행된 것부터 취소한다.</li>
+  <li>수식의 괄호 검사(연산자 우선순위를 위한 괄호 검사)</li>
+  <li>함수의 콜스택: 가장 마지막에 호출된 함수가 가장 먼저 실행을 완료하고 복귀하는 LIFO 구조다. 함수 호출이 발생하면 함수 수행에 필요한 정보를 스택 프레임에 저장하여 시스템 스택에 삽입한다.</li>
+  <li>깊이 우선 탐색(DFS) 
+<br /></li>
+</ul>
+
+<h5 id="stack과-queue">Stack과 Queue</h5>
+<ul>
+  <li><strong>공통점</strong>: Stack과 Queue 모두 Peek을 사용할 수 있다.
+    <ul>
+      <li>Peek 연산은 자료구조의 변화를 주지 않고, pop이나 dequeue를 할 때 리턴되는 item을 리턴할 수 있다.</li>
+    </ul>
+  </li>
+  <li><strong>차이점</strong>: 아이템을 삭제할 때 가장 큰 차이점이 있다.
+    <ul>
+      <li>Stack은 가장 마지막에 추가된 item을 삭제하고, Queue는 가장 처음 들어와 있던 item을 삭제한다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>참고</p>
+<ul>
+  <li>https://devuna.tistory.com/22</li>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="DataStructure" /><category term="Stack" /><summary type="html"><![CDATA[특징 책을 쌓듯이 데이터를 차곡차곡 쌓아 올린 형태의 자료구조 선형 구조 같은 구조의 데이터를 정해진 방향으로만 쌓을 수 있다. 후입선출(LIFO) 구조: 마지막에 삽입된 데이터를 가장 먼저 꺼낸다. 데이터가 없을 때 pop하는 오류를 stack-underflow, 스택의 크기 이상의 데이터를 push하려는 오류를 stack-overflow라고 한다. (!)]]></summary></entry><entry><title type="html">Windows 명령어</title><link href="http://localhost:4000/wiki/2022/05/21/windows-command.html" rel="alternate" type="text/html" title="Windows 명령어" /><published>2022-05-21T00:00:00+09:00</published><updated>2022-05-21T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2022/05/21/windows-command</id><content type="html" xml:base="http://localhost:4000/wiki/2022/05/21/windows-command.html"><![CDATA[<h3 id="이동">이동</h3>
 <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cd</span><span class="w"> </span><span class="p">[</span><span class="err">이동할</span><span class="w"> </span><span class="err">경로</span><span class="p">]</span><span class="w">
 </span></code></pre></div></div>
 
@@ -54,6 +195,14 @@
 
 <h3 id="명령-프롬프트-창-종료">명령 프롬프트 창 종료</h3>
 <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">exit</span><span class="w">
+</span></code></pre></div></div>
+
+<h5 id="파일-생성">파일 생성</h5>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">copy</span><span class="w"> </span><span class="nx">con</span><span class="w"> </span><span class="p">[</span><span class="err">생성할</span><span class="w"> </span><span class="err">파일명</span><span class="p">]</span><span class="w">
+</span><span class="err">내용</span><span class="w">
+</span><span class="n">//</span><span class="w"> </span><span class="err">입력을</span><span class="w"> </span><span class="err">끝내고</span><span class="w"> </span><span class="err">싶으면</span><span class="w"> </span><span class="nx">ctrl</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">z</span><span class="w"> </span><span class="nx">/</span><span class="w"> </span><span class="nx">ctrl</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">c</span><span class="w">
+</span></code></pre></div></div>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">echo</span><span class="w"> </span><span class="s2">"내용"</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="s2">"생성할 파일명"</span><span class="w">
 </span></code></pre></div></div>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Windows" /><category term="command" /><summary type="html"><![CDATA[이동 cd [이동할 경로]]]></summary></entry><entry><title type="html">Java method</title><link href="http://localhost:4000/wiki/2022/05/20/java-method.html" rel="alternate" type="text/html" title="Java method" /><published>2022-05-20T00:00:00+09:00</published><updated>2022-05-20T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2022/05/20/java-method</id><content type="html" xml:base="http://localhost:4000/wiki/2022/05/20/java-method.html"><![CDATA[<h3 id="charatint-index">charAt(int index)</h3>
 <ul>
   <li>문자열의 index 위치에 있는 글자를 char 타입으로 리턴한다.</li>
