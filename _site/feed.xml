@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2022-09-25T15:03:39+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">아스키코드 문자 ↔ 숫자</title><link href="http://localhost:4000/wiki/2022/09/25/ascii-to-string.html" rel="alternate" type="text/html" title="아스키코드 문자 ↔ 숫자" /><published>2022-09-25T00:00:00+09:00</published><updated>2022-09-25T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2022/09/25/ascii-to-string</id><content type="html" xml:base="http://localhost:4000/wiki/2022/09/25/ascii-to-string.html"><![CDATA[<h3 id="아스키코드-문자--숫자">아스키코드 문자 ↔ 숫자</h3>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2022-09-25T15:08:07+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">아스키코드 문자 ↔ 숫자</title><link href="http://localhost:4000/wiki/2022/09/25/ascii-to-string.html" rel="alternate" type="text/html" title="아스키코드 문자 ↔ 숫자" /><published>2022-09-25T00:00:00+09:00</published><updated>2022-09-25T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2022/09/25/ascii-to-string</id><content type="html" xml:base="http://localhost:4000/wiki/2022/09/25/ascii-to-string.html"><![CDATA[<h3 id="아스키코드-문자--숫자">아스키코드 문자 ↔ 숫자</h3>
 
 <table>
   <thead>
@@ -490,7 +490,60 @@
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">97</span><span class="o">;</span>
 <span class="kt">char</span> <span class="n">ch</span> <span class="o">=</span> <span class="o">(</span><span class="kt">char</span><span class="o">)</span> <span class="n">num</span><span class="o">;</span> <span class="c1">// a</span>
 </code></pre></div></div>
-<p><br /></p>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="Method" /><category term="AsciiCode" /><summary type="html"><![CDATA[아스키코드 문자 ↔ 숫자]]></summary></entry><entry><title type="html">진수 변환</title><link href="http://localhost:4000/wiki/2022/09/16/n-number-convert.html" rel="alternate" type="text/html" title="진수 변환" /><published>2022-09-16T00:00:00+09:00</published><updated>2022-09-16T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2022/09/16/n-number-convert</id><content type="html" xml:base="http://localhost:4000/wiki/2022/09/16/n-number-convert.html"><![CDATA[<h3 id="진수-변환">진수 변환</h3>
+<p><br /></p>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="Method" /><category term="AsciiCode" /><summary type="html"><![CDATA[아스키코드 문자 ↔ 숫자]]></summary></entry><entry><title type="html">소수 판별</title><link href="http://localhost:4000/wiki/2022/09/24/prime-number.html" rel="alternate" type="text/html" title="소수 판별" /><published>2022-09-24T00:00:00+09:00</published><updated>2022-09-24T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2022/09/24/prime-number</id><content type="html" xml:base="http://localhost:4000/wiki/2022/09/24/prime-number.html"><![CDATA[<h3 id="소수-판별">소수 판별</h3>
+
+<h4 id="소수">소수</h4>
+<ul>
+  <li>1과 자기 자신으로만 나누어지는 숫자
+<br />
+<br /></li>
+</ul>
+
+<h4 id="0부터-n까지-소수-구하기">0부터 N까지 소수 구하기</h4>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span> <span class="no">N</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">check</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="no">N</span> <span class="o">+</span> <span class="mi">1</span><span class="o">];</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="no">N</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">check</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">result</span><span class="o">++;</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="no">N</span><span class="o">;</span> <span class="n">j</span> <span class="o">+=</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">check</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+ <span class="o">}</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h4 id="해당-숫자가-소수인지-판별">해당 숫자가 소수인지 판별</h4>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isPrime</span><span class="o">(</span><span class="kt">int</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
+	<span class="k">if</span> <span class="o">(</span><span class="n">num</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+
+	<span class="c1">// 2부터 시작해서 해당 숫자까지 약수가 있으면 false</span>
+	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">num</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">num</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="c1">// 약수가 없으면 true</span>
+	<span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h4 id="math-클래스의-sqrt-메소드">Math 클래스의 sqrt() 메소드</h4>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">sqrt()</code>: 2부터 루트 <code class="language-plaintext highlighter-rouge">n</code>까지의 범위에서 소수를 체크해주는 함수</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span> <span class="no">N</span><span class="o">)</span> <span class="o">{</span>
+	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="no">N</span><span class="o">);</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="no">N</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="Method" /><category term="Algorithm" /><summary type="html"><![CDATA[소수 판별]]></summary></entry><entry><title type="html">진수 변환</title><link href="http://localhost:4000/wiki/2022/09/16/n-number-convert.html" rel="alternate" type="text/html" title="진수 변환" /><published>2022-09-16T00:00:00+09:00</published><updated>2022-09-16T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2022/09/16/n-number-convert</id><content type="html" xml:base="http://localhost:4000/wiki/2022/09/16/n-number-convert.html"><![CDATA[<h3 id="진수-변환">진수 변환</h3>
 
 <h4 id="10진수--2816진수">10진수 → 2/8/16진수</h4>
 
@@ -976,79 +1029,4 @@
 </span><span class="n">//</span><span class="w"> </span><span class="err">입력을</span><span class="w"> </span><span class="err">끝내고</span><span class="w"> </span><span class="err">싶으면</span><span class="w"> </span><span class="nx">ctrl</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">z</span><span class="w"> </span><span class="nx">/</span><span class="w"> </span><span class="nx">ctrl</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">c</span><span class="w">
 </span></code></pre></div></div>
 <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">echo</span><span class="w"> </span><span class="s2">"내용"</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="s2">"생성할 파일명"</span><span class="w">
-</span></code></pre></div></div>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Windows" /><category term="command" /><summary type="html"><![CDATA[이동 cd [이동할 경로]]]></summary></entry><entry><title type="html">Java method</title><link href="http://localhost:4000/wiki/2022/05/20/java-method.html" rel="alternate" type="text/html" title="Java method" /><published>2022-05-20T00:00:00+09:00</published><updated>2022-05-20T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2022/05/20/java-method</id><content type="html" xml:base="http://localhost:4000/wiki/2022/05/20/java-method.html"><![CDATA[<h3 id="charatint-index">charAt(int index)</h3>
-<ul>
-  <li>문자열의 index 위치에 있는 글자를 char 타입으로 리턴한다.</li>
-  <li>index는 0부터 시작한다.</li>
-  <li>마지막 문자의 index는 문자열 길이 -1이다.</li>
-</ul>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"Hello World"</span><span class="o">;</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="mi">0</span><span class="o">));</span> <span class="c1">// H</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">));</span> <span class="c1">// d</span>
-</code></pre></div></div>
-<p><br /></p>
-
-<hr />
-
-<h3 id="문자열에서-특정-문자-개수-세기">문자열에서 특정 문자 개수 세기</h3>
-<h4 id="1-반복문">1. 반복문</h4>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span> <span class="nf">count</span><span class="o">(</span><span class="nc">String</span> <span class="n">str</span><span class="o">,</span> <span class="kt">char</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">count</span><span class="o">++;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="n">count</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<h4 id="2-replace">2. replace()</h4>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span> <span class="nf">count</span><span class="o">(</span><span class="nc">String</span> <span class="n">str</span><span class="o">,</span> <span class="kt">char</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">-</span> <span class="n">str</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">c</span><span class="o">),</span> <span class="s">""</span><span class="o">).</span><span class="na">length</span><span class="o">();</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p><br /></p>
-
-<hr />
-
-<h3 id="소수점-n번째-자리까지-반올림">소수점 n번째 자리까지 반올림</h3>
-<h4 id="1-mathround">1. Math.round()</h4>
-<ul>
-  <li>실수의 소수점 첫번째 자리를 반올림하여 정수로 리턴한다.</li>
-  <li>그 이상의 자리를 나타내고 싶다면 100.0 등을 곱해서 사용할 수 있다.</li>
-  <li>참고
-    <ol>
-      <li>Math.ceil(): 올림</li>
-      <li>Math.floor(): 버림</li>
-    </ol>
-  </li>
-</ul>
-
-<h4 id="2-stringformat">2. String.format()</h4>
-<ul>
-  <li>String 클래스의 format 메소드는 리턴되는 문자열 형태를 지정할 수 있어 Math.round 메소드처럼 소수점 n번째 자리까지 반올림하여 나타낼 수 있다.</li>
-</ul>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="n">pie</span> <span class="o">=</span> <span class="mf">3.14159265358979</span><span class="o">;</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"%.2f"</span><span class="o">,</span> <span class="n">pie</span><span class="o">));</span> <span class="c1">// 3.14</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"%.3f"</span><span class="o">,</span> <span class="n">pie</span><span class="o">));</span> <span class="c1">// 3.142</span>
-</code></pre></div></div>
-
-<h4 id="3-mathround와-stringformat">3. Math.round()와 String.format()</h4>
-<ul>
-  <li>두 메소드는 실수를 소수점 n번째까지 잘라서 나타낸다는 공통점이 있다.</li>
-  <li>그러나 Math.round()는 소수점 아래가 0일 경우 절삭하지만, String.format()은 절삭하지 않고 그대로 리턴한다는 차이점이 있다.</li>
-</ul>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="n">money</span> <span class="o">=</span> <span class="mf">10000.000</span><span class="o">;</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Math</span><span class="o">.</span><span class="na">round</span><span class="o">(</span><span class="n">money</span> <span class="o">*</span> <span class="mi">1000</span><span class="o">)</span> <span class="o">/</span> <span class="mi">1000</span><span class="o">);</span> <span class="c1">// 10000</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"%.3f"</span><span class="o">,</span> <span class="n">money</span><span class="o">));</span> <span class="c1">// 10000.000</span>
-</code></pre></div></div>
-<p><br /></p>
-
-<hr />
-<h4 id="참고">참고</h4>
-<ul>
-  <li>https://coding-factory.tistory.com/250</li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><summary type="html"><![CDATA[charAt(int index) 문자열의 index 위치에 있는 글자를 char 타입으로 리턴한다. index는 0부터 시작한다. 마지막 문자의 index는 문자열 길이 -1이다.]]></summary></entry></feed>
+</span></code></pre></div></div>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Windows" /><category term="command" /><summary type="html"><![CDATA[이동 cd [이동할 경로]]]></summary></entry></feed>

@@ -7,22 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>진수 변환 | Every Single Day</title>
+<title>소수 판별 | Every Single Day</title>
 <meta name="generator" content="Jekyll v4.2.2">
-<meta property="og:title" content="진수 변환">
+<meta property="og:title" content="소수 판별">
 <meta name="author" content="Dajeong Park">
 <meta property="og:locale" content="ko">
-<meta name="description" content="진수 변환">
-<meta property="og:description" content="진수 변환">
-<link rel="canonical" href="http://localhost:4000/wiki/2022/09/16/n-number-convert.html">
-<meta property="og:url" content="http://localhost:4000/wiki/2022/09/16/n-number-convert.html">
+<meta name="description" content="소수 판별">
+<meta property="og:description" content="소수 판별">
+<link rel="canonical" href="http://localhost:4000/wiki/2022/09/24/prime-number.html">
+<meta property="og:url" content="http://localhost:4000/wiki/2022/09/24/prime-number.html">
 <meta property="og:site_name" content="Every Single Day">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2022-09-16T00:00:00+09:00">
+<meta property="article:published_time" content="2022-09-24T00:00:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="진수 변환">
+<meta property="twitter:title" content="소수 판별">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2022-09-16T00:00:00+09:00","datePublished":"2022-09-16T00:00:00+09:00","description":"진수 변환","headline":"진수 변환","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2022/09/16/n-number-convert.html"},"url":"http://localhost:4000/wiki/2022/09/16/n-number-convert.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2022-09-24T00:00:00+09:00","datePublished":"2022-09-24T00:00:00+09:00","description":"소수 판별","headline":"소수 판별","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2022/09/24/prime-number.html"},"url":"http://localhost:4000/wiki/2022/09/24/prime-number.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -617,11 +617,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">진수 변환</h1>
+  <h1 class="post-title p-name" itemprop="name headline">소수 판별</h1>
   <h2 class="post-subtitle"></h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2022-09-16T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Sep 16, 2022
+    <time class="dt-published" datetime="2022-09-24T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Sep 24, 2022
     </time>
 
     
@@ -658,147 +658,70 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
   </p>
 <div class="post-tags">
-<a class="post-tag" href="/tags.html#Java">#Java</a><a class="post-tag" href="/tags.html#Method">#Method</a>
+<a class="post-tag" href="/tags.html#Java">#Java</a><a class="post-tag" href="/tags.html#Method">#Method</a><a class="post-tag" href="/tags.html#Algorithm">#Algorithm</a>
 </div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <h3 id="진수-변환">진수 변환</h3>
+      <h3 id="소수-판별">소수 판별</h3>
 
-<h4 id="10진수--2816진수">10진수 → 2/8/16진수</h4>
+<h4 id="소수">소수</h4>
+<ul>
+  <li>1과 자기 자신으로만 나누어지는 숫자
+<br>
+<br>
+</li>
+</ul>
 
-<table>
-  <thead>
-    <tr>
-      <th>return type</th>
-      <th>class</th>
-      <th>method</th>
-      <th>설명</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>static String</td>
-      <td>java.lang.Integer</td>
-      <td>toBinaryString(int i)</td>
-      <td>10진수 → 2진수</td>
-    </tr>
-    <tr>
-      <td>static String</td>
-      <td>java.lang.Integer</td>
-      <td>toOctalString(int i)</td>
-      <td>10진수 → 8진수</td>
-    </tr>
-    <tr>
-      <td>static String</td>
-      <td>java.lang.Integer</td>
-      <td>toHexaString(int i)</td>
-      <td>10진수 → 16진수</td>
-    </tr>
-  </tbody>
-</table>
+<h4 id="0부터-n까지-소수-구하기">0부터 N까지 소수 구하기</h4>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span> <span class="no">N</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
 
-<p>➕ 위의 세 메소드는 파라미터로 정수 뿐만 아니라 정수 두 개를 비트 연산자(OR)로 계산할 수도 있다.</p>
-
-<h4 id="10진수--n진수">10진수 → N진수</h4>
-
-<table>
-  <thead>
-    <tr>
-      <th>return type</th>
-      <th>class</th>
-      <th>method</th>
-      <th>설명</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>static String</td>
-      <td>java.lang.Integer</td>
-      <td>toString(int n, int radix)</td>
-      <td>10진수 → N진수</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>예시</strong></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">decimal</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
-<span class="nc">String</span> <span class="n">binary</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">toBInaryString</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
-<span class="nc">String</span> <span class="n">octial</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">toOctalString</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
-<span class="nc">String</span> <span class="n">hexa</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">toHexaString</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
-
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"10진수: "</span> <span class="o">+</span> <span class="n">decimal</span><span class="o">);</span> <span class="c1">// 10</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"2진수: "</span> <span class="o">+</span> <span class="n">binary</span><span class="o">);</span>  <span class="c1">// 1010</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"8진수: "</span> <span class="o">+</span> <span class="n">octial</span><span class="o">);</span> <span class="c1">// 12</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"16진수: "</span> <span class="o">+</span> <span class="n">hexa</span><span class="o">);</span> <span class="c1">// a</span>
-
-<span class="cm">/* 비트 연산자로 계산하기 */</span>
-<span class="nc">Integer</span><span class="o">.</span><span class="na">toBinaryString</span><span class="o">(</span><span class="mi">10</span> <span class="o">|</span> <span class="mi">12</span><span class="o">);</span> <span class="c1">// 1110</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">check</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="no">N</span> <span class="o">+</span> <span class="mi">1</span><span class="o">];</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="no">N</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">check</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">result</span><span class="o">++;</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="no">N</span><span class="o">;</span> <span class="n">j</span> <span class="o">+=</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">check</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+ <span class="o">}</span>
 </code></pre></div></div>
 <p><br></p>
 
-<h3 id="2816진수--10진수">2/8/16진수 → 10진수</h3>
+<h4 id="해당-숫자가-소수인지-판별">해당 숫자가 소수인지 판별</h4>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isPrime</span><span class="o">(</span><span class="kt">int</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
+	<span class="k">if</span> <span class="o">(</span><span class="n">num</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
 
-<table>
-  <thead>
-    <tr>
-      <th>return type</th>
-      <th>class</th>
-      <th>method</th>
-      <th>설명</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>static int</td>
-      <td>java.lang.Integer</td>
-      <td>parseInt(String s)</td>
-      <td>문자열 → 10진수 int (default 10진수)</td>
-    </tr>
-    <tr>
-      <td>static int</td>
-      <td>java.lang.Integer</td>
-      <td>parseInt(String s, int radix)</td>
-      <td>문자열을 변환할 진수(radix)로 읽어 int로 리턴</td>
-    </tr>
-  </tbody>
-</table>
+	<span class="c1">// 2부터 시작해서 해당 숫자까지 약수가 있으면 false</span>
+	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">num</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">num</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+	<span class="o">}</span>
 
-<h3 id="n진수--10진수">N진수 → 10진수</h3>
+	<span class="c1">// 약수가 없으면 true</span>
+	<span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p><br></p>
 
-<table>
-  <thead>
-    <tr>
-      <th>return type</th>
-      <th>class</th>
-      <th>method</th>
-      <th>설명</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>static int</td>
-      <td>java.lang.Integer</td>
-      <td>parseInt(String, s, int radix)</td>
-      <td>N진수 → 10진수</td>
-    </tr>
-  </tbody>
-</table>
+<h4 id="math-클래스의-sqrt-메소드">Math 클래스의 sqrt() 메소드</h4>
+<ul>
+  <li>
+<code class="language-plaintext highlighter-rouge">sqrt()</code>: 2부터 루트 <code class="language-plaintext highlighter-rouge">n</code>까지의 범위에서 소수를 체크해주는 함수</li>
+</ul>
 
-<p><strong>예시</strong></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">binary</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="s">"1010"</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
-<span class="kt">int</span> <span class="n">octial</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="s">"12"</span><span class="o">,</span> <span class="mi">8</span><span class="o">);</span>
-<span class="kt">int</span> <span class="n">hexa</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="s">"A"</span><span class="o">,</span> <span class="mi">16</span><span class="o">);</span>
-
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"2진수 -&gt; 10진수: "</span> <span class="o">+</span> <span class="n">binary</span><span class="o">);</span> <span class="c1">// 10</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"8진수 -&gt; 10진수: "</span> <span class="o">+</span> <span class="n">octial</span><span class="o">);</span> <span class="c1">// 10</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"16진수 -&gt; 10진수: "</span> <span class="o">+</span> <span class="n">hexa</span><span class="o">);</span> <span class="c1">// 10</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span> <span class="no">N</span><span class="o">)</span> <span class="o">{</span>
+	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="no">N</span><span class="o">);</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="no">N</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
+<span class="o">}</span>
 </code></pre></div></div>
 
 
@@ -806,15 +729,15 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/wiki/2022/09/15/string-replacement.html" title="문자열 치환">문자열 치환</a><a class="next" href="/wiki/2022/09/24/prime-number.html" title="소수 판별">소수 판별</a>
+<a class="previous" href="/wiki/2022/09/16/n-number-convert.html" title="진수 변환">진수 변환</a><a class="next" href="/wiki/2022/09/25/ascii-to-string.html" title="아스키코드 문자 ↔ 숫자">아스키코드 문자 ↔ 숫자</a>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/wiki/2022/09/15/string-replacement.html" title="소수 판별">문자열 치환</a></li>
-<li><a class="post-link" href="/wiki/2022/05/21/windows-command.html" title="소수 판별">Windows 명령어</a></li>
-<li><a class="post-link" href="/wiki/2022/09/25/ascii-to-string.html" title="소수 판별">아스키코드 문자 ↔ 숫자</a></li>
-<li><a class="post-link" href="/wiki/2022/09/08/mysql-in.html" title="소수 판별">IN</a></li>
+        <li><a class="post-link" href="/wiki/2022/09/24/prime-number.html" title="아스키코드 문자 ↔ 숫자">소수 판별</a></li>
+<li><a class="post-link" href="/wiki/2022/05/28/stack.html" title="아스키코드 문자 ↔ 숫자">스택(Stack)</a></li>
+<li><a class="post-link" href="/wiki/2022/08/28/java-regex-pattern-syntax-error.html" title="아스키코드 문자 ↔ 숫자">Dangling meta character '?' near index 0</a></li>
+<li><a class="post-link" href="/wiki/2022/09/25/ascii-to-string.html" title="아스키코드 문자 ↔ 숫자">아스키코드 문자 ↔ 숫자</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>
