@@ -1,0 +1,143 @@
+I"P<h3 id="아스키코드-문자--숫자">아스키코드 문자 ↔ 숫자</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">10진수</th>
+      <th style="text-align: center">16진수</th>
+      <th style="text-align: center">문자</th>
+      <th style="text-align: center">10진수</th>
+      <th style="text-align: center">16진수</th>
+      <th style="text-align: center">문자</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0x00</td>
+      <td style="text-align: center">NUL</td>
+      <td style="text-align: center">32</td>
+      <td style="text-align: center">0x20</td>
+      <td style="text-align: center">SP</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">0x00</td>
+      <td style="text-align: center">SOH</td>
+      <td style="text-align: center">33</td>
+      <td style="text-align: center">0x20</td>
+      <td style="text-align: center">SP</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">0x00</td>
+      <td style="text-align: center">STX</td>
+      <td style="text-align: center">34</td>
+      <td style="text-align: center">0x20</td>
+      <td style="text-align: center">SP</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">3</td>
+      <td style="text-align: center">0x00</td>
+      <td style="text-align: center">ETX</td>
+      <td style="text-align: center">35</td>
+      <td style="text-align: center">0x20</td>
+      <td style="text-align: center">SP</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4</td>
+      <td style="text-align: center">0x00</td>
+      <td style="text-align: center">EOT</td>
+      <td style="text-align: center">36</td>
+      <td style="text-align: center">0x20</td>
+      <td style="text-align: center">SP</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">5</td>
+      <td style="text-align: center">0x00</td>
+      <td style="text-align: center">ENQ</td>
+      <td style="text-align: center">37</td>
+      <td style="text-align: center">0x20</td>
+      <td style="text-align: center">SP</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">6</td>
+      <td style="text-align: center">0x00</td>
+      <td style="text-align: center">ACK</td>
+      <td style="text-align: center">38</td>
+      <td style="text-align: center">0x20</td>
+      <td style="text-align: center">SP</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">0x00</td>
+      <td style="text-align: center">BEL</td>
+      <td style="text-align: center">39</td>
+      <td style="text-align: center">0x20</td>
+      <td style="text-align: center">SP</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">8</td>
+      <td style="text-align: center">0x00</td>
+      <td style="text-align: center">BS</td>
+      <td style="text-align: center">40</td>
+      <td style="text-align: center">0x20</td>
+      <td style="text-align: center">SP</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">9</td>
+      <td style="text-align: center">0x00</td>
+      <td style="text-align: center">HT</td>
+      <td style="text-align: center">41</td>
+      <td style="text-align: center">0x20</td>
+      <td style="text-align: center">SP</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>| 10 | 0x00 | LF | 42 | 0x20 | SP |
+| 11 | 0x00 | VT | 43 | 0x20 | SP |
+| 12 | 0x00 | FF | 44 | 0x20 | SP |
+| 13 | 0x00 | CR | 45 | 0x20 | SP |
+| 14 | 0x00 | SO | 46 | 0x20 | SP |
+| 15 | 0x00 | SI | 47 | 0x20 | SP |
+| 16 | 0x00 | DLE | 48 | 0x20 | SP |
+| 17 | 0x00 | DC1 | 49 | 0x20 | SP |
+| 18 | 0x00 | DC2 | 50 | 0x20 | SP |
+| 19 | 0x00 | DC3 | 51 | 0x20 | SP |
+| 20 | 0x00 | DC4 | 52 | 0x20 | SP |
+| 21 | 0x00 | NAK | 53 | 0x20 | SP |
+| 22 | 0x00 | SYN | 54 | 0x20 | SP |
+| 23 | 0x00 | ETB | 55 | 0x20 | SP |
+| 24 | 0x00 | CAN | 56 | 0x20 | SP |
+| 25 | 0x00 | EM | 57 | 0x20 | SP |
+| 26 | 0x00 | SUB | 58 | 0x20 | SP |
+| 27 | 0x00 | ESC | 59 | 0x20 | SP |
+| 28 | 0x00 | FS | 60 | 0x20 | SP |
+| 29 | 0x00 | GS | 61 | 0x20 | SP |
+| 30 | 0x00 | RS | 62 | 0x20 | SP |
+| 31 | 0x00 | US | 63 | 0x20 | SP |
+<br /></p>
+
+<h3><strong>⭐⭐⭐</strong></h3>
+<ul>
+  <li>알파벳 <strong>A~Z: 65 ~ 90</strong></li>
+  <li>알파벳 <strong>a~z: 97 ~ 122</strong>
+<br /></li>
+</ul>
+
+<h4 id="문자--숫자">문자 → 숫자</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"A"</span><span class="o">;</span>
+<span class="kt">char</span> <span class="n">ch</span> <span class="o">=</span> <span class="n">str</span><span class="o">.**</span><span class="n">charAt</span><span class="o">(</span><span class="mi">0</span><span class="o">)**;</span>
+<span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="n">ch</span><span class="o">;</span> <span class="c1">// 65</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h4 id="숫자--문자">숫자 → 문자</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">97</span><span class="o">;</span>
+<span class="kt">char</span> <span class="n">ch</span> <span class="o">=</span> <span class="o">(</span><span class="kt">char</span><span class="o">)</span> <span class="n">num</span><span class="o">;</span> <span class="c1">// a</span>
+</code></pre></div></div>
+<p><br /></p>
+:ET

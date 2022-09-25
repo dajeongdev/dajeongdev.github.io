@@ -1,0 +1,60 @@
+I"�	<h3 id="아스키코드-문자--숫자">아스키코드 문자 ↔ 숫자</h3>
+
+<p>|10진수|16진수|문자|10진수|16진수|문자|
+|—|:—:|—:|
+|0|0x00|NUL|32|0x20|SP|
+|1|0x00|SOH|33|0x20|SP|
+|2|0x00|STX|34|0x20|SP|
+|3|0x00|ETX|35|0x20|SP|
+|4|0x00|EOT|36|0x20|SP|
+|5|0x00|ENQ|37|0x20|SP|
+|6|0x00|ACK|38|0x20|SP|
+|7|0x00|BEL|39|0x20|SP|
+|8|0x00|BS|40|0x20|SP|
+|9|0x00|HT|41|0x20|SP|
+|10|0x00|LF|42|0x20|SP|
+|11|0x00|VT|43|0x20|SP|
+|12|0x00|FF|44|0x20|SP|
+|13|0x00|CR|45|0x20|SP|
+|14|0x00|SO|46|0x20|SP|
+|15|0x00|SI|47|0x20|SP|
+|16|0x00|DLE|48|0x20|SP|
+|17|0x00|DC1|49|0x20|SP|
+|18|0x00|DC2|50|0x20|SP|
+|19|0x00|DC3|51|0x20|SP|
+|20|0x00|DC4|52|0x20|SP|
+|21|0x00|NAK|53|0x20|SP|
+|22|0x00|SYN|54|0x20|SP|
+|23|0x00|ETB|55|0x20|SP|
+|24|0x00|CAN|56|0x20|SP|
+|25|0x00|EM|57|0x20|SP|
+|26|0x00|SUB|58|0x20|SP|
+|27|0x00|ESC|59|0x20|SP|
+|28|0x00|FS|60|0x20|SP|
+|29|0x00|GS|61|0x20|SP|
+|30|0x00|RS|62|0x20|SP|
+|31|0x00|US|63|0x20|SP|
+<br /></p>
+
+<h3><strong>⭐⭐⭐</strong></h3>
+<ul>
+  <li>알파벳 <strong>A~Z: 65 ~ 90</strong></li>
+  <li>알파벳 <strong>a~z: 97 ~ 122</strong>
+<br /></li>
+</ul>
+
+<h4 id="문자--숫자">문자 → 숫자</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"A"</span><span class="o">;</span>
+<span class="kt">char</span> <span class="n">ch</span> <span class="o">=</span> <span class="n">str</span><span class="o">.**</span><span class="n">charAt</span><span class="o">(</span><span class="mi">0</span><span class="o">)**;</span>
+<span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="n">ch</span><span class="o">;</span> <span class="c1">// 65</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h4 id="숫자--문자">숫자 → 문자</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">97</span><span class="o">;</span>
+<span class="kt">char</span> <span class="n">ch</span> <span class="o">=</span> <span class="o">(</span><span class="kt">char</span><span class="o">)</span> <span class="n">num</span><span class="o">;</span> <span class="c1">// a</span>
+</code></pre></div></div>
+<p><br /></p>
+:ET

@@ -1,0 +1,47 @@
+I"�<h3 id="아스키코드-문자--숫자">아스키코드 문자 ↔ 숫자</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>10진수</td>
+      <td>16진수</td>
+      <td>문자</td>
+      <td>10진수</td>
+      <td>16진수</td>
+      <td>문자</td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>0x00</td>
+      <td>NUL</td>
+      <td>32</td>
+      <td>0x20</td>
+      <td>SP</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<h3><strong>⭐⭐⭐</strong></h3>
+<ul>
+  <li>알파벳 <strong>A~Z: 65 ~ 90</strong></li>
+  <li>알파벳 <strong>a~z: 97 ~ 122</strong>
+<br /></li>
+</ul>
+
+<h4 id="문자--숫자">문자 → 숫자</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"A"</span><span class="o">;</span>
+<span class="kt">char</span> <span class="n">ch</span> <span class="o">=</span> <span class="n">str</span><span class="o">.**</span><span class="n">charAt</span><span class="o">(</span><span class="mi">0</span><span class="o">)**;</span>
+<span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="n">ch</span><span class="o">;</span> <span class="c1">// 65</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h4 id="숫자--문자">숫자 → 문자</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">97</span><span class="o">;</span>
+<span class="kt">char</span> <span class="n">ch</span> <span class="o">=</span> <span class="o">(</span><span class="kt">char</span><span class="o">)</span> <span class="n">num</span><span class="o">;</span> <span class="c1">// a</span>
+</code></pre></div></div>
+<p><br /></p>
+:ET
