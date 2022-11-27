@@ -690,6 +690,459 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <h2 class="post-title">
+        <a class="post-link" href="/wiki/2022/11/27/cut-string.html">
+          문자열 자르기
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 27, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+      </div>
+      <a class="post-excerpt" href="/wiki/2022/11/27/cut-string.html">
+        <p>
+        문자열 자르기
+
+1. String.split()
+
+  지정한 구분자(정규표현식)로 문자열을 나눠 문자열 배열에 저장한다.
+  공백 포함
+
+
+
+2. StringTokenizer
+
+  지정한 구분자(문자열)로 문자열을 나눈다.
+  구분자 생략 시 공백이 디폴트
+  생성자
+    StringTokenizer(String str) // 공백... <span class="read_more">...</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Java">#Java</a><a class="post-tag" href="/tags.html#Method">#Method</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/wiki/2022/10/31/map-getOrDefault.html">
+          Map - getOrDefault(Object key, V defaultValue)
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Oct 31, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+      </div>
+      <a class="post-excerpt" href="/wiki/2022/10/31/map-getOrDefault.html">
+        <p>
+        Map - getOrDefault(Object key, V defaultValue)
+public V getOrDefault(Object key, V defaultValue) {
+		Node&lt;K,V&gt; e;
+		return (e = getNode(key)) == null ? defaultValue : e.value;
+}
+
+
+  key가 존재하면 ke... <span class="read_more">...</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Java">#Java</a><a class="post-tag" href="/tags.html#Map">#Map</a><a class="post-tag" href="/tags.html#Method">#Method</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/wiki/2022/10/29/LRU.html">
+          LRU
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Oct 29, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+      </div>
+      <a class="post-excerpt" href="/wiki/2022/10/29/LRU.html">
+        <p>
+        LRU
+
+
+  LRU는 가장 오랫동안 참조되지 않은 페이지를 교체하는 방식이다.
+  사용된지 가장 오래된 페이지는 앞으로도 사용될 확률이 낮다는 가설에 의해 만들어진 알고리즘이다.
+
+
+
+LRU의 원리
+
+  캐시가 가득 찼을 때, 가장 오랫동안 참조되지 않은 페이지를 찾아서 없애는 방식으로 LRU를 구현할 수 있다.
+  페이지... <span class="read_more">...</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Algorithm">#Algorithm</a><a class="post-tag" href="/tags.html#Cache">#Cache</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/wiki/2022/10/17/thymeleaf-rest-controller.html">
+          Thymeleaf와 @RestController
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Oct 17, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+      </div>
+      <a class="post-excerpt" href="/wiki/2022/10/17/thymeleaf-rest-controller.html">
+        <p>
+        Thymeleaf와 @RestController
+
+테스트를 해보려고 테스트 컨트롤러에 @RestController을 설정한 후 String으로 view 이름을 리턴했더니 화면에 입력한 view 이름이 그대로 나왔다.
+@RestController
+public class TestController {
+
+    @GetMap... <span class="read_more">...</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Java">#Java</a><a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#Annotation">#Annotation</a><a class="post-tag" href="/tags.html#Thymeleaf">#Thymeleaf</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/wiki/2022/10/08/slice-array.html">
+          배열 자르기
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Oct 08, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+      </div>
+      <a class="post-excerpt" href="/wiki/2022/10/08/slice-array.html">
+        <p>
+        배열 자르기
+
+1. Stream의 skip과 limit
+Arrays.stream.skip(num)
+
+  skip은 숫자(num)만큼 아이템을 건너뛴 다음 그 뒤의 아이템으로 새로운 스트림을 생성한다.
+Arrays.stream.limit(num)
+  limit은 지정한 개수(num)만큼 가져와서 새로운 스트림을 리턴한다.
+
+
+int[] array = {1, 2, 3, ... <span class="read_more">...</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Java">#Java</a><a class="post-tag" href="/tags.html#Array">#Array</a><a class="post-tag" href="/tags.html#Method">#Method</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
         <a class="post-link" href="/wiki/2022/10/05/fibonacci.html">
           피보나치 수열 이해하기
         </a>
@@ -1108,7 +1561,7 @@ replace(CharSequence target, CharSequence replacement)
         </p>
       </a>
       <div class="post-tags">
-<a class="post-tag" href="/tags.html#Java">#Java</a><a class="post-tag" href="/tags.html#Method">#Method</a>
+<a class="post-tag" href="/tags.html#Java">#Java</a><a class="post-tag" href="/tags.html#String">#String</a><a class="post-tag" href="/tags.html#Method">#Method</a>
 </div>
     </li>
 <li>
@@ -1975,7 +2428,7 @@ SQL Mapper는 직접 작성한 SQL에 해당되는 데이터를 읽고, 결과�
   <ul>
     <li>
       <a href="/index.html">
-        All<span>14</span>
+        All<span>19</span>
       </a>
     </li>
 
@@ -1988,7 +2441,7 @@ SQL Mapper는 직접 작성한 SQL에 해당되는 데이터를 읽고, 결과�
     
       <li>
         <a href="/categories.html#h-wiki">
-          wiki <span>13</span>
+          wiki <span>18</span>
         </a>
       </li>
     

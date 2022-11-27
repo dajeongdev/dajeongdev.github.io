@@ -1,4 +1,169 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2022-10-06T16:20:15+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">피보나치 수열 이해하기</title><link href="http://localhost:4000/wiki/2022/10/05/fibonacci.html" rel="alternate" type="text/html" title="피보나치 수열 이해하기" /><published>2022-10-05T00:00:00+09:00</published><updated>2022-10-05T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2022/10/05/fibonacci</id><content type="html" xml:base="http://localhost:4000/wiki/2022/10/05/fibonacci.html"><![CDATA[<h3 id="피보나치-수열">피보나치 수열</h3>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2022-11-27T22:51:23+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">문자열 자르기</title><link href="http://localhost:4000/wiki/2022/11/27/cut-string.html" rel="alternate" type="text/html" title="문자열 자르기" /><published>2022-11-27T00:00:00+09:00</published><updated>2022-11-27T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2022/11/27/cut-string</id><content type="html" xml:base="http://localhost:4000/wiki/2022/11/27/cut-string.html"><![CDATA[<h3 id="문자열-자르기">문자열 자르기</h3>
+
+<h4 id="1-stringsplit">1. String.split()</h4>
+<ul>
+  <li>지정한 구분자(정규표현식)로 문자열을 나눠 문자열 배열에 저장한다.</li>
+  <li>공백 포함
+<br /></li>
+</ul>
+
+<h4 id="2-stringtokenizer">2. StringTokenizer</h4>
+<ul>
+  <li>지정한 구분자(문자열)로 문자열을 나눈다.</li>
+  <li>구분자 생략 시 공백이 디폴트</li>
+  <li>생성자
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">StringTokenizer</span><span class="o">(</span><span class="nc">String</span> <span class="n">str</span><span class="o">)</span> <span class="c1">// 공백 구분자 사용</span>
+<span class="nc">StringTokenizer</span><span class="o">(</span><span class="nc">String</span> <span class="n">str</span><span class="o">,</span> <span class="nc">String</span> <span class="n">delim</span><span class="o">)</span> <span class="c1">// 구분자 지정</span>
+<span class="nc">StringTokenizer</span><span class="o">(</span><span class="nc">String</span> <span class="n">str</span><span class="o">,</span> <span class="nc">String</span> <span class="n">delim</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">returnDelims</span><span class="o">)</span> <span class="c1">// 구분자도 토큰에 포함</span>
+</code></pre></div>    </div>
+  </li>
+  <li>메소드
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">nextToken</span><span class="o">()</span>     <span class="c1">// 다음 토큰 반환 (이전 토큰은 삭제)</span>
+<span class="n">hasMoreTokens</span><span class="o">()</span> <span class="c1">// 리턴할 토큰이 남아있으면 true, 없으면 false</span>
+<span class="n">countTokens</span><span class="o">()</span>   <span class="c1">// 남아있는 토큰의 갯수</span>
+</code></pre></div>    </div>
+    <p><br /></p>
+  </li>
+</ul>
+
+<h4 id="공통점">공통점</h4>
+<ul>
+  <li>지정한 구분자를 통해 문자열을 나눈다.
+<br /></li>
+</ul>
+
+<h4 id="차이점">차이점</h4>
+<p>|  | String.split() | StringTokenizer |
+| — | — | — |
+| 구분자 | 정규표현식 | 문자/문자열 |
+| 빈 문자열 인식 | O | X |
+| 결과값 | String[] | StringTokenizer → 반복문으로 출력 가능 |
+<br /></p>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="Method" /><summary type="html"><![CDATA[문자열 자르기]]></summary></entry><entry><title type="html">Map - getOrDefault(Object key, V defaultValue)</title><link href="http://localhost:4000/wiki/2022/10/31/map-getOrDefault.html" rel="alternate" type="text/html" title="Map - getOrDefault(Object key, V defaultValue)" /><published>2022-10-31T00:00:00+09:00</published><updated>2022-10-31T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2022/10/31/map-getOrDefault</id><content type="html" xml:base="http://localhost:4000/wiki/2022/10/31/map-getOrDefault.html"><![CDATA[<h3 id="map---getordefaultobject-key-v-defaultvalue">Map - getOrDefault(Object key, V defaultValue)</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="no">V</span> <span class="nf">getOrDefault</span><span class="o">(</span><span class="nc">Object</span> <span class="n">key</span><span class="o">,</span> <span class="no">V</span> <span class="n">defaultValue</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">Node</span><span class="o">&lt;</span><span class="no">K</span><span class="o">,</span><span class="no">V</span><span class="o">&gt;</span> <span class="n">e</span><span class="o">;</span>
+		<span class="k">return</span> <span class="o">(</span><span class="n">e</span> <span class="o">=</span> <span class="n">getNode</span><span class="o">(</span><span class="n">key</span><span class="o">))</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">defaultValue</span> <span class="o">:</span> <span class="n">e</span><span class="o">.</span><span class="na">value</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>key가 존재하면 key의 value를 반환하고, 없으면 설정한 디폴트 값을 반환한다.
+<br /></li>
+</ul>
+
+<p><strong>사용 예시 (프로그래머스 level2 위장)</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[][]</span> <span class="n">clothes1</span> <span class="o">=</span> <span class="o">/{/{</span><span class="s">"yellow_hat"</span><span class="o">,</span> <span class="s">"headgear"</span><span class="o">/},</span> 
+			<span class="o">/{</span><span class="s">"blue_sunglasses"</span><span class="o">,</span> <span class="s">"eyewear"</span><span class="o">/},</span> 
+			<span class="o">/{</span><span class="s">"green_turban"</span><span class="o">,</span> <span class="s">"headgear"</span><span class="o">/}/};</span>
+<span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">clothes</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+		<span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">clothes</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">1</span><span class="o">],</span> <span class="n">map</span><span class="o">.</span><span class="na">getOrDefault</span><span class="o">(</span><span class="n">clothes</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">1</span><span class="o">],</span> <span class="mi">1</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>HashMap은 동일한 key에 value를 추가할 경우 value가 덮어쓰기 되기 때문에 getOrDefault() 메소드를 사용하여 예시처럼 카운트를 추가하는 등의 방법을 사용할 수 있다.</li>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="Map" /><category term="Method" /><summary type="html"><![CDATA[Map - getOrDefault(Object key, V defaultValue) public V getOrDefault(Object key, V defaultValue) { Node&lt;K,V&gt; e; return (e = getNode(key)) == null ? defaultValue : e.value; } key가 존재하면 key의 value를 반환하고, 없으면 설정한 디폴트 값을 반환한다.]]></summary></entry><entry><title type="html">LRU</title><link href="http://localhost:4000/wiki/2022/10/29/LRU.html" rel="alternate" type="text/html" title="LRU" /><published>2022-10-29T00:00:00+09:00</published><updated>2022-10-29T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2022/10/29/LRU</id><content type="html" xml:base="http://localhost:4000/wiki/2022/10/29/LRU.html"><![CDATA[<h3 id="lru">LRU</h3>
+
+<ul>
+  <li>LRU는 가장 오랫동안 참조되지 않은 페이지를 교체하는 방식이다.</li>
+  <li>사용된지 가장 오래된 페이지는 앞으로도 사용될 확률이 낮다는 가설에 의해 만들어진 알고리즘이다.
+<br /></li>
+</ul>
+
+<h4 id="lru의-원리">LRU의 원리</h4>
+<ul>
+  <li>캐시가 가득 찼을 때, 가장 오랫동안 참조되지 않은 페이지를 찾아서 없애는 방식으로 LRU를 구현할 수 있다.</li>
+  <li>페이지를 새로 참조할 때마다 연결리스트의 맨 앞에 페이지 번호를 추가한다. 그러면 맨 뒤에 있는 페이지 번호가 가장 오랫동안 참조되지 않은 페이지 번호가 된다.</li>
+  <li>캐시 크기가 3일 때 이미 3개의 페이지가 캐시에 들어있다면, 맨 뒤에 있는 페이지 번호 node를 지우고, 새로운 페이지 번호 node를 앞에 연결해주는 방식이다.</li>
+  <li>LRU를 구현할 때는 Doubly Linked List를 사용하고, head에 가까운 노드일 수록 가장 최근에 참조된 페이지, tail에 가까운 node일 수록 가장 오랫동안 참조되지 않은 페이지를 의미한다. LRU의 개념에 따라 캐시 크기를 넘어간다면 tail에 가까운 페이지가 먼저 삭제되도록 한다.
+<br /></li>
+</ul>
+
+<h4 id="cache-hitmiss">Cache Hit/Miss</h4>
+<ul>
+  <li><strong>Cache Hit</strong>: CPU가 참고하고자 하는 메모리가 캐시에 존재하고 있을 경우</li>
+  <li><strong>Cache Miss</strong>: CPU가 참고하고자 하는 메모리가 캐시에 존재하지 않을 경우
+<br /></li>
+</ul>
+
+<h4 id="hit-ratiomiss-ratio">Hit Ratio/Miss Ratio</h4>
+<ul>
+  <li><strong>Hit Ratio</strong>: Cache Hit / (Cache Hit + Cache Miss)</li>
+  <li><strong>Miss Ratio</strong>: Cache Miss / (Cache Hit + Cache Miss)
+<br /></li>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Algorithm" /><category term="Cache" /><summary type="html"><![CDATA[LRU]]></summary></entry><entry><title type="html">Thymeleaf와 @RestController</title><link href="http://localhost:4000/wiki/2022/10/17/thymeleaf-rest-controller.html" rel="alternate" type="text/html" title="Thymeleaf와 @RestController" /><published>2022-10-17T00:00:00+09:00</published><updated>2022-10-17T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2022/10/17/thymeleaf-rest-controller</id><content type="html" xml:base="http://localhost:4000/wiki/2022/10/17/thymeleaf-rest-controller.html"><![CDATA[<h3 id="thymeleaf와-restcontroller">Thymeleaf와 @RestController</h3>
+
+<p>테스트를 해보려고 테스트 컨트롤러에 @RestController을 설정한 후 String으로 view 이름을 리턴했더니 화면에 입력한 view 이름이 그대로 나왔다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestController</span> <span class="o">{</span>
+
+    <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/sample"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">hello</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">"sample"</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h4 id="왜-그럴까">왜 그럴까?</h4>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">@RestController</code>에는 <code class="language-plaintext highlighter-rouge">@Controller</code> 애노테이션과 <code class="language-plaintext highlighter-rouge">@ResponseBody</code> 애노테이션이 포함되어 있다. Controller에서 페이지 렌더링과 Json 데이터를 함께 리턴해야 할 때 사용한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">@Controller</code>는 리턴 값이 String이라면 view 이름으로 인식하여 view를 찾아 렌더링 한다.
+    <ul>
+      <li>페이지 이동(<code class="language-plaintext highlighter-rouge">@Controller</code>), Json 데이터 리턴(<code class="language-plaintext highlighter-rouge">@ResponseBody</code>)</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">@ResponseBody</code>: 자바 객체를 HTTP 요청의 body 내용으로 매핑하는 역할을 하는 애노테이션
+<br /></li>
+</ul>
+
+<h4 id="형태">형태</h4>
+<p><code class="language-plaintext highlighter-rouge">@Controller</code></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Target</span><span class="o">(</span><span class="nc">ElementType</span><span class="o">.</span><span class="na">TYPE</span><span class="o">)</span>
+<span class="nd">@Retention</span><span class="o">(</span><span class="nc">RetentionPolicy</span><span class="o">.</span><span class="na">RUNTIME</span><span class="o">)</span>
+<span class="nd">@Documented</span>
+<span class="nd">@Component</span>
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="nc">Controller</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">@RestController</code></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Target</span><span class="o">(</span><span class="nc">ElementType</span><span class="o">.</span><span class="na">TYPE</span><span class="o">)</span>
+<span class="nd">@Retention</span><span class="o">(</span><span class="nc">RetentionPolicy</span><span class="o">.</span><span class="na">RUNTIME</span><span class="o">)</span>
+<span class="nd">@Documented</span>
+<span class="nd">@Controller</span>
+<span class="nd">@ResponseBody</span>
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="nc">RestController</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h4 id="해결-방법">해결 방법</h4>
+<p><code class="language-plaintext highlighter-rouge">ModelAndView</code>를 사용하여 <code class="language-plaintext highlighter-rouge">setViewName()</code>에는 이동할 view 이름, <code class="language-plaintext highlighter-rouge">addObject()</code> 등에는 사용할 변수명을 입력해주면, <code class="language-plaintext highlighter-rouge">@RestController</code>나 <code class="language-plaintext highlighter-rouge">@Controller</code> 애노테이션 둘 다 상관없이 동작한다.</p>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="Spring" /><category term="Annotation" /><category term="Thymeleaf" /><summary type="html"><![CDATA[Thymeleaf와 @RestController]]></summary></entry><entry><title type="html">배열 자르기</title><link href="http://localhost:4000/wiki/2022/10/08/slice-array.html" rel="alternate" type="text/html" title="배열 자르기" /><published>2022-10-08T00:00:00+09:00</published><updated>2022-10-08T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2022/10/08/slice-array</id><content type="html" xml:base="http://localhost:4000/wiki/2022/10/08/slice-array.html"><![CDATA[<h3 id="배열-자르기">배열 자르기</h3>
+
+<h4 id="1-stream의-skip과-limit">1. Stream의 skip과 limit</h4>
+<p><strong>Arrays.stream.skip(num)</strong></p>
+<ul>
+  <li>skip은 숫자(num)만큼 아이템을 건너뛴 다음 그 뒤의 아이템으로 새로운 스트림을 생성한다.
+<strong>Arrays.stream.limit(num)</strong></li>
+  <li>limit은 지정한 개수(num)만큼 가져와서 새로운 스트림을 리턴한다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span><span class="o">[]</span> <span class="n">array</span> <span class="o">=</span> <span class="o">{</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">7</span><span class="o">,</span> <span class="mi">8</span><span class="o">,</span> <span class="mi">9</span><span class="o">,</span> <span class="mi">10</span><span class="o">};</span>
+
+<span class="kt">int</span><span class="o">[]</span> <span class="n">skip</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">array</span><span class="o">)</span>
+						<span class="o">.</span><span class="na">skip</span><span class="o">(</span><span class="mi">4</span><span class="o">)</span>
+						<span class="o">.</span><span class="na">toArray</span><span class="o">();</span> <span class="c1">// [5, 6, 7, 8, 9, 10]</span>
+
+<span class="kt">int</span><span class="o">[]</span> <span class="n">limit</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">array</span><span class="o">)</span>
+							<span class="o">.</span><span class="na">limit</span><span class="o">(</span><span class="mi">4</span><span class="o">)</span>
+							<span class="o">.</span><span class="na">toArray</span><span class="o">();</span> <span class="c1">// [1, 2, 3, 4]</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h4 id="2-copyofrange">2. copyOfRange</h4>
+<ul>
+  <li>i번째 숫자부터 j번째 숫자까지 자를 때 사용할 수 있다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span><span class="o">[]</span> <span class="n">array</span> <span class="o">=</span> <span class="o">{</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">};</span>
+<span class="kt">int</span><span class="o">[]</span> <span class="n">temp</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">copyOfRange</span><span class="o">(</span><span class="n">array</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">4</span><span class="o">);</span> <span class="c1">// [3, 4, 5]</span>
+</code></pre></div></div>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="Array" /><category term="Method" /><summary type="html"><![CDATA[배열 자르기]]></summary></entry><entry><title type="html">피보나치 수열 이해하기</title><link href="http://localhost:4000/wiki/2022/10/05/fibonacci.html" rel="alternate" type="text/html" title="피보나치 수열 이해하기" /><published>2022-10-05T00:00:00+09:00</published><updated>2022-10-05T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2022/10/05/fibonacci</id><content type="html" xml:base="http://localhost:4000/wiki/2022/10/05/fibonacci.html"><![CDATA[<h3 id="피보나치-수열">피보나치 수열</h3>
 
 <ul>
   <li>피보나치 수열은 재귀 함수의 대표적인 예시로, 첫째 및 둘째 항이 1이며 그 뒤의 모든 항은 바로 앞 두 항의 합인 수열이다.
@@ -798,235 +963,4 @@
 <p>참고</p>
 <ul>
   <li><a href="https://coding-factory.tistory.com/128">https://coding-factory.tistory.com/128</a></li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="Method" /><summary type="html"><![CDATA[문자열 치환]]></summary></entry><entry><title type="html">IN</title><link href="http://localhost:4000/wiki/2022/09/08/mysql-in.html" rel="alternate" type="text/html" title="IN" /><published>2022-09-08T00:00:00+09:00</published><updated>2022-09-08T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2022/09/08/mysql-in</id><content type="html" xml:base="http://localhost:4000/wiki/2022/09/08/mysql-in.html"><![CDATA[<h3 id="in">IN</h3>
-
-<h4 id="개념">개념</h4>
-<ul>
-  <li>여러 값을 OR 관계로 묶어서 나열하는 조건을 WHERE 절에 사용할 때 쓸 수 있는 키워드</li>
-  <li>IN 연산자는 조건의 범위를 지정하는 데 사용된다.</li>
-  <li>값은 콤마(,)로 구분하여 괄호 내에 묶고, 이 값 중에서 하나 이상과 일치하면 조건에 맞는 것으로 평가된다.
-<br /></li>
-</ul>
-
-<h4 id="예시">예시</h4>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- OR 조건 표현</span>
-<span class="k">where</span> <span class="n">condition</span> <span class="o">=</span> <span class="nv">"A"</span> <span class="k">or</span> <span class="n">condition</span> <span class="o">=</span> <span class="nv">"B"</span><span class="p">;</span>
-
-<span class="c1">-- IN 조건</span>
-<span class="k">where</span> <span class="n">condition</span> <span class="k">in</span> <span class="p">(</span><span class="nv">"A"</span><span class="p">,</span> <span class="nv">"B"</span><span class="p">);</span>
-</code></pre></div></div>
-<p><br /></p>
-
-<h4 id="장점">장점</h4>
-<ul>
-  <li>목록에 넣을 값이 여러 개일 때, IN 연산자가 OR 연산자 보다 쓰기도, 보기도, 이해하기도 쉽다.</li>
-  <li>IN을 사용하면 조건 순서를 보다 쉽게 관리할 수 있고, 연산자의 수도 줄어든다.</li>
-  <li>IN 연산자가 OR 연산자 보다 실행 속도가 빠르다.</li>
-  <li>IN 연산자 안에 다른 SELECT문(서브 쿼리)를 넣을 수 있다.
-<br /></li>
-</ul>
-
-<h5 id="참고">참고</h5>
-<ul>
-  <li><a href="https://velog.io/@inyong_pang/MySQL-IN-%EC%A1%B0%EA%B1%B4"></a><a href="https://velog.io/@inyong_pang/MySQL-IN-%EC%A1%B0%EA%B1%B4">https://velog.io/@inyong_pang/MySQL-IN-조건</a></li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="SQL" /><category term="MySQL" /><summary type="html"><![CDATA[IN]]></summary></entry><entry><title type="html">default method</title><link href="http://localhost:4000/wiki/2022/09/06/default-method.html" rel="alternate" type="text/html" title="default method" /><published>2022-09-06T00:00:00+09:00</published><updated>2022-09-06T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2022/09/06/default-method</id><content type="html" xml:base="http://localhost:4000/wiki/2022/09/06/default-method.html"><![CDATA[<h3 id="default-method">default method</h3>
-
-<h5 id="기존의-인터페이스">기존의 인터페이스</h5>
-<p>기존의 인터페이스는 추상 메서드만 존재할 수 있고, 이를 상속 받는 구현체에서 직접 해당 추상 메소드를 구현해야 한다. 
-이는 인터페이스에 메서드가 추가되면 그 인터페이스를 상속 받는 모든 구현체 클래스에 추가 메서드를 구현해주어야 하는 문제가 발생한다.
-이 경우 <strong>확장(open)은 할 수 있지만, 변경에 대한 폐쇄(close)는 위반했다</strong>고 할 수 있다. (객체 지향의 원칙 중 OCP) 
-<strong>새로운 메소드가 인터페이스에 추가된다는 이유로 새로운 메소드를 사용하지 않는 구현체에도 추가적으로 구현을 해야 하기 때문</strong>이다. 즉, 기존의 코드가 변경되어버린다.
-<br /></p>
-
-<h4 id="default-method-1">default method</h4>
-<p>JAVA 8부터 추가된 default method를 통해 인터페이스에서도 메소드를 구현할 수 있게 되었다.
-인터페이스에 default 메소드를 추가해도 구현체에 추가적인 변경을 하지 않기 때문에 <strong>기존 구현체의 코드 변경 없이 확장할 수 있게 된 것</strong> 이다.
-<br /></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">TestInterface</span> <span class="o">{</span>
-		<span class="kt">void</span> <span class="nf">testAbstractMethod1</span><span class="o">();</span>
-		<span class="kt">void</span> <span class="nf">testAbstractMethod2</span><span class="o">();</span>
-
-		<span class="k">default</span> <span class="nc">String</span> <span class="nf">defaultMethod1</span><span class="o">()</span> <span class="o">{</span>
-				<span class="c1">// 구현 코드</span>
-		<span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p><br /></p>
-
-<h5 id="추가">추가</h5>
-<p>자바 8부터는 이전 버전과는 다르게 추상 클래스를 그렇게 많이 쓰지 않고, 추상 클래스가 하던 일을 많은 부분 인터페이스가 하게 되었기 때문에 정말 필요한 경우가 아니라면 인터페이스에 있는 default 메소드를 사용해서 시도해보는 것이 좋다.
-<br />
-<br /></p>
-
-<h5 id="참고">참고</h5>
-<ul>
-  <li><a href="https://velog.io/@heoseungyeon%EB%94%94%ED%8F%B4%ED%8A%B8-%EB%A9%94%EC%84%9C%EB%93%9CDefault-Method">https://velog.io/@heoseungyeon/디폴트-메서드Default-Method</a></li>
-  <li><a href="https://www.inflearn.com/course/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/dashboard">https://www.inflearn.com/course/디자인-패턴/dashboard</a>
-```</li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="Java8" /><summary type="html"><![CDATA[default method]]></summary></entry><entry><title type="html">Dangling meta character ‘?’ near index 0</title><link href="http://localhost:4000/wiki/2022/08/28/java-regex-pattern-syntax-error.html" rel="alternate" type="text/html" title="Dangling meta character ‘?’ near index 0" /><published>2022-08-28T00:00:00+09:00</published><updated>2022-08-28T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2022/08/28/java-regex-pattern-syntax-error</id><content type="html" xml:base="http://localhost:4000/wiki/2022/08/28/java-regex-pattern-syntax-error.html"><![CDATA[<h3 id="dangling-meta-character--near-index-0">Dangling meta character ‘?’ near index 0</h3>
-
-<h5 id="에러">에러</h5>
-<p><img src="../../../../assets/images/posts/java-regex-pattern-syntax-error.png" />
-<br /></p>
-
-<h5 id="코드">코드</h5>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">split</span> <span class="o">=</span> <span class="n">question</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">"?"</span><span class="o">);</span>
-</code></pre></div></div>
-<p><br /></p>
-
-<h5 id="원인">원인</h5>
-<ul>
-  <li>split() 메소드 사용시 특정한 문자를 regex로 사용하는 경우 동작하지 않는다.
-  * 특정한 문자: 이미 문법 상 사용 중인 특수문자 (|, &amp;, ^, *, ?, . 등)
-<br /></li>
-</ul>
-
-<h5 id="해결-방법">해결 방법</h5>
-<ul>
-  <li>regex 앞에 <strong>백슬래시(\)</strong>를 <strong>두 번</strong> 넣어주면 코드가 정상적으로 동작한다.
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">split</span> <span class="o">=</span> <span class="n">question</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">"\\?"</span><span class="o">);</span>
-</code></pre></div>    </div>
-  </li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="Error" /><summary type="html"><![CDATA[Dangling meta character ‘?’ near index 0]]></summary></entry><entry><title type="html">IntelliJ 단축어 정리</title><link href="http://localhost:4000/wiki/2022/08/22/intellij.html" rel="alternate" type="text/html" title="IntelliJ 단축어 정리" /><published>2022-08-22T00:00:00+09:00</published><updated>2022-08-22T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2022/08/22/intellij</id><content type="html" xml:base="http://localhost:4000/wiki/2022/08/22/intellij.html"><![CDATA[<h4 id="intellij-단축키">IntelliJ 단축키</h4>
-
-<table>
-  <thead>
-    <tr>
-      <th>설명</th>
-      <th>단축키</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>이름 변경(Rename)</td>
-      <td>Shift + F6</td>
-    </tr>
-    <tr>
-      <td>접근제어자, 반환타입, 이름등 주요 정보 변경</td>
-      <td>Ctrl + F6</td>
-    </tr>
-    <tr>
-      <td>한 줄 복사</td>
-      <td>Ctrl + D</td>
-    </tr>
-    <tr>
-      <td>Inline</td>
-      <td>Ctrl + Alt + N</td>
-    </tr>
-    <tr>
-      <td>메소드 추출</td>
-      <td>Ctrl + Alt + M</td>
-    </tr>
-    <tr>
-      <td>변수 추출</td>
-      <td>Ctrl + Alt + V</td>
-    </tr>
-    <tr>
-      <td>Generate 탭 열기 (Constructor, Getter/Setter, Override 등)</td>
-      <td>Alt + Insert</td>
-    </tr>
-    <tr>
-      <td>implement methods / static import  / change lamda expression</td>
-      <td>Alt + Enter</td>
-    </tr>
-    <tr>
-      <td>이전 실행 메소드 재실행</td>
-      <td>Shift + F10</td>
-    </tr>
-    <tr>
-      <td>현재 커서 메소드 실행</td>
-      <td>Ctrl + Shift + F10</td>
-    </tr>
-    <tr>
-      <td>코드 정렬</td>
-      <td>Ctrl + Alt + L</td>
-    </tr>
-    <tr>
-      <td>import 정리</td>
-      <td>Ctrl + Alt + O</td>
-    </tr>
-    <tr>
-      <td>for</td>
-      <td>fori</td>
-    </tr>
-    <tr>
-      <td>for each문 생성</td>
-      <td>iter</td>
-    </tr>
-    <tr>
-      <td>System.out.println</td>
-      <td>sout</td>
-    </tr>
-    <tr>
-      <td>System.out.println + 가까운 변수</td>
-      <td>soutv</td>
-    </tr>
-    <tr>
-      <td>System.out.println + 메서드</td>
-      <td>soutm</td>
-    </tr>
-    <tr>
-      <td>public static void main</td>
-      <td>psvm</td>
-    </tr>
-    <tr>
-      <td>public static final</td>
-      <td>psf</td>
-    </tr>
-    <tr>
-      <td>private static final</td>
-      <td>prsf</td>
-    </tr>
-    <tr>
-      <td>throw new</td>
-      <td>thr</td>
-    </tr>
-  </tbody>
-</table>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="IDE" /><category term="IntelliJ" /><summary type="html"><![CDATA[IntelliJ 단축키]]></summary></entry><entry><title type="html">스택(Stack)</title><link href="http://localhost:4000/wiki/2022/05/28/stack.html" rel="alternate" type="text/html" title="스택(Stack)" /><published>2022-05-28T00:00:00+09:00</published><updated>2022-05-28T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2022/05/28/stack</id><content type="html" xml:base="http://localhost:4000/wiki/2022/05/28/stack.html"><![CDATA[<h5 id="특징">특징</h5>
-<ul>
-  <li>책을 쌓듯이 데이터를 차곡차곡 쌓아 올린 형태의 자료구조</li>
-  <li>선형 구조</li>
-  <li>같은 구조의 데이터를 정해진 방향으로만 쌓을 수 있다.</li>
-  <li>후입선출(LIFO) 구조: 마지막에 삽입된 데이터를 가장 먼저 꺼낸다.</li>
-  <li>데이터가 없을 때 pop하는 오류를 stack-underflow, 스택의 크기 이상의 데이터를 push하려는 오류를 stack-overflow라고 한다. (!)
-<br /></li>
-</ul>
-
-<h5 id="주요-연산">주요 연산</h5>
-<ul>
-  <li><strong>push</strong>: top을 위로 한 칸 올리고, top이 가리키는 위치에 데이터 저장(삽입)한다.</li>
-  <li><strong>pop</strong>: top이 가리키는 데이터를 반환하고, top을 아래로 한 칸 내린다(삭제).</li>
-  <li><strong>peek</strong>: 스택의 top에 있는 item을 반환한다. pop과 달리 stack에서 객체를 꺼내지 않는다.
-<br /></li>
-</ul>
-
-<h5 id="활용">활용</h5>
-<ul>
-  <li>브라우저의 방문 기록(뒤로 가기): 가장 나중에 열린 페이지부터 다시 보여준다.</li>
-  <li>역순 문자열 만들기: 가장 나중에 입력된 문자부터 출력한다.</li>
-  <li>실행 취소(undo): 가장 나중에 실행된 것부터 취소한다.</li>
-  <li>수식의 괄호 검사(연산자 우선순위를 위한 괄호 검사)</li>
-  <li>함수의 콜스택: 가장 마지막에 호출된 함수가 가장 먼저 실행을 완료하고 복귀하는 LIFO 구조다. 함수 호출이 발생하면 함수 수행에 필요한 정보를 스택 프레임에 저장하여 시스템 스택에 삽입한다.</li>
-  <li>깊이 우선 탐색(DFS) 
-<br /></li>
-</ul>
-
-<h5 id="stack과-queue">Stack과 Queue</h5>
-<ul>
-  <li><strong>공통점</strong>: Stack과 Queue 모두 Peek을 사용할 수 있다.
-    <ul>
-      <li>Peek 연산은 자료구조의 변화를 주지 않고, pop이나 dequeue를 할 때 리턴되는 item을 리턴할 수 있다.</li>
-    </ul>
-  </li>
-  <li><strong>차이점</strong>: 아이템을 삭제할 때 가장 큰 차이점이 있다.
-    <ul>
-      <li>Stack은 가장 마지막에 추가된 item을 삭제하고, Queue는 가장 처음 들어와 있던 item을 삭제한다.</li>
-    </ul>
-  </li>
-</ul>
-
-<p>참고</p>
-<ul>
-  <li>https://devuna.tistory.com/22</li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="DataStructure" /><category term="Stack" /><summary type="html"><![CDATA[특징 책을 쌓듯이 데이터를 차곡차곡 쌓아 올린 형태의 자료구조 선형 구조 같은 구조의 데이터를 정해진 방향으로만 쌓을 수 있다. 후입선출(LIFO) 구조: 마지막에 삽입된 데이터를 가장 먼저 꺼낸다. 데이터가 없을 때 pop하는 오류를 stack-underflow, 스택의 크기 이상의 데이터를 push하려는 오류를 stack-overflow라고 한다. (!)]]></summary></entry></feed>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="String" /><category term="Method" /><summary type="html"><![CDATA[문자열 치환]]></summary></entry></feed>

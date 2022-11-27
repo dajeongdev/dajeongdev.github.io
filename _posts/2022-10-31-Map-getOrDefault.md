@@ -7,8 +7,6 @@ tags: [Java,Map,Method]
 ---
 
 ### Map - getOrDefault(Object key, V defaultValue)
-
-
 ```java
 public V getOrDefault(Object key, V defaultValue) {
 		Node<K,V> e;
@@ -21,10 +19,9 @@ public V getOrDefault(Object key, V defaultValue) {
 
 **사용 예시 (프로그래머스 level2 위장)**
 ```java
-String[][] clothes1 = {{"yellow_hat", "headgear"}, 
-				{"blue_sunglasses", "eyewear"}, 
-				{"green_turban", "headgear"}
-		};
+String[][] clothes1 = /{/{"yellow_hat", "headgear"/}, 
+			/{"blue_sunglasses", "eyewear"/}, 
+			/{"green_turban", "headgear"/}/};
 HashMap<String, Integer> map = new HashMap<>();
 for (int i = 0; i < clothes.length; i++) {
 		map.put(clothes[i][1], map.getOrDefault(clothes[i][1], 1) + 1);
