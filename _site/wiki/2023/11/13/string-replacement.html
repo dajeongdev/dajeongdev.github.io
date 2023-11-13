@@ -7,22 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Windows 명령어 | Every Single Day</title>
+<title>문자열 치환 | Every Single Day</title>
 <meta name="generator" content="Jekyll v4.2.2">
-<meta property="og:title" content="Windows 명령어">
+<meta property="og:title" content="문자열 치환">
 <meta name="author" content="Dajeong Park">
 <meta property="og:locale" content="ko">
-<meta name="description" content="이동 cd [이동할 경로]">
-<meta property="og:description" content="이동 cd [이동할 경로]">
-<link rel="canonical" href="http://localhost:4000/wiki/2023/11/13/windows-command.html">
-<meta property="og:url" content="http://localhost:4000/wiki/2023/11/13/windows-command.html">
+<meta name="description" content="문자열 치환">
+<meta property="og:description" content="문자열 치환">
+<link rel="canonical" href="http://localhost:4000/wiki/2023/11/13/string-replacement.html">
+<meta property="og:url" content="http://localhost:4000/wiki/2023/11/13/string-replacement.html">
 <meta property="og:site_name" content="Every Single Day">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2023-11-13T00:00:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="Windows 명령어">
+<meta property="twitter:title" content="문자열 치환">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2023-11-13T00:00:00+09:00","datePublished":"2023-11-13T00:00:00+09:00","description":"이동 cd [이동할 경로]","headline":"Windows 명령어","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2023/11/13/windows-command.html"},"url":"http://localhost:4000/wiki/2023/11/13/windows-command.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2023-11-13T00:00:00+09:00","datePublished":"2023-11-13T00:00:00+09:00","description":"문자열 치환","headline":"문자열 치환","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2023/11/13/string-replacement.html"},"url":"http://localhost:4000/wiki/2023/11/13/string-replacement.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -617,7 +617,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">Windows 명령어</h1>
+  <h1 class="post-title p-name" itemprop="name headline">문자열 치환</h1>
   <h2 class="post-subtitle"></h2>
 
   <p class="post-meta">
@@ -658,95 +658,94 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
   </p>
 <div class="post-tags">
-<a class="post-tag" href="/tags.html#Windows">#Windows</a><a class="post-tag" href="/tags.html#command">#command</a>
+<a class="post-tag" href="/tags.html#Java">#Java</a><a class="post-tag" href="/tags.html#String">#String</a><a class="post-tag" href="/tags.html#Method">#Method</a>
 </div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <h3 id="이동">이동</h3>
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cd</span><span class="w"> </span><span class="p">[</span><span class="err">이동할</span><span class="w"> </span><span class="err">경로</span><span class="p">]</span><span class="w">
-</span></code></pre></div></div>
+      <h1 id="문자열-치환">문자열 치환</h1>
 
-<h3 id="드라이브-변경">드라이브 변경</h3>
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="err">드라이브</span><span class="w"> </span><span class="err">문자열</span><span class="p">]:</span><span class="w"> </span><span class="n">//</span><span class="w"> </span><span class="nx">D:</span><span class="w">
-</span></code></pre></div></div>
+<h2 id="종류">종류</h2>
+<ol>
+  <li>replace()</li>
+  <li>replaceAll()</li>
+  <li>replaceFirst()
+<br>
+</li>
+</ol>
 
-<h3 id="현재-위치의-파일과-폴더-목록-조회">현재 위치의 파일과 폴더 목록 조회</h3>
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dir</span><span class="w">
-</span></code></pre></div></div>
+<h2 id="replacecharsequence-target-charsequence-replacement">replace(CharSequence target, CharSequence replacement)</h2>
+<ul>
+  <li>일치하는 문자열(target)을 대체할 문자(replacement)로 치환한다.
+    <div class="language-java highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"가/나/다/라/마/바/사"</span><span class="o">;</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"/"</span><span class="o">,</span> <span class="s">","</span><span class="o">));</span> <span class="c1">// 가,나,다,라,마,바,사</span>
+</code></pre></div>    </div>
+    <p><br></p>
+  </li>
+</ul>
 
-<h3 id="네트워크-설정-상태-조회">네트워크 설정 상태 조회</h3>
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ipconfig</span><span class="w"> 
-</span><span class="n">//</span><span class="w"> </span><span class="nx">all</span><span class="w"> </span><span class="err">옵션으로</span><span class="w"> </span><span class="err">상세</span><span class="w"> </span><span class="err">설정</span><span class="w"> </span><span class="err">정보</span><span class="w"> </span><span class="err">보기</span><span class="w"> </span><span class="err">가능</span><span class="w">
-</span></code></pre></div></div>
+<h2 id="replaceallstring-regex-string-replacement">replaceAll(String regex, String replacement)</h2>
+<ul>
+  <li>일치하는 정규 표현식(regex)을 대체할 문자열(replacement)로 <strong>전부</strong> 치환한다.
+    <ul>
+      <li>replace()와 유사하지만, <code class="language-plaintext highlighter-rouge">.</code>(온점) 같은 경우 정규 표현식으로 모든 문자를 의미하기 때문에 모든 문자열이 치환될 수 있다.
+        <div class="language-java highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"가.나.다.라.마.바.사"</span><span class="o">;</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str2</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"."</span><span class="o">,</span> <span class="s">","</span><span class="o">));</span> <span class="c1">// 가,나,다,라,마,바,사</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str2</span><span class="o">.</span><span class="na">replaceAll</span><span class="o">(</span><span class="s">"."</span><span class="o">,</span> <span class="s">","</span><span class="o">));</span> <span class="c1">// ,,,,,,,,,,,,,</span>
+</code></pre></div>        </div>
+        <p><br></p>
+      </li>
+    </ul>
+  </li>
+</ul>
 
-<h3 id="폴더-생성">폴더 생성</h3>
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">md</span><span class="p">(</span><span class="n">or</span><span class="w"> </span><span class="nx">mkdir</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="err">폴더명</span><span class="p">]</span><span class="w">
-</span></code></pre></div></div>
+<h2 id="replacefirststring-target-string-replacement">replaceFirst(String target, String replacement)</h2>
+<ul>
+  <li>첫번째로 일치하는 문자열(target)를 대체할 문자(replacement)로 치환한다.
+    <div class="language-java highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"가/나/다/라/마/바/사"</span><span class="o">;</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"/"</span><span class="o">,</span> <span class="s">","</span><span class="o">));</span> <span class="c1">// 가,나/다/라/마/바/사</span>
+</code></pre></div>    </div>
+    <p><br></p>
+  </li>
+</ul>
 
-<h3 id="폴더-삭제">폴더 삭제</h3>
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rm</span><span class="p">(</span><span class="n">rmdir</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="err">폴더명</span><span class="p">]</span><span class="w">
-</span></code></pre></div></div>
+<p><strong>실무 사용 예시</strong>
+→ 해시태그가 포함되어 있는 내용에 바꾸고 싶은 내용이 해시태그마다 다를 때 사용함</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">contents</span> <span class="o">=</span> <span class="s">"..."</span><span class="o">;</span>
+<span class="n">contents</span> <span class="o">=</span> <span class="n">contents</span><span class="o">.</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"#"</span><span class="o">,</span> <span class="n">str1</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"#"</span><span class="o">,</span> <span class="n">str2</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"#"</span><span class="o">,</span> <span class="n">str3</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"#"</span><span class="o">,</span> <span class="n">str4</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"#"</span><span class="o">,</span> <span class="n">str5</span><span class="o">);</span>
+</code></pre></div></div>
+<p><br></p>
 
-<h3 id="환경-변수-path-조회">환경 변수 path 조회</h3>
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">path</span><span class="w">
-</span></code></pre></div></div>
-
-<h3 id="파일-삭제">파일 삭제</h3>
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">del</span><span class="w"> </span><span class="p">[</span><span class="err">파일명</span><span class="p">]</span><span class="w">
-</span></code></pre></div></div>
-
-<h3 id="파일-복사">파일 복사</h3>
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">copy</span><span class="w"> </span><span class="p">[</span><span class="err">복사할</span><span class="w"> </span><span class="err">파일명</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="err">복사할</span><span class="w"> </span><span class="err">위치</span><span class="p">]</span><span class="w">
-</span><span class="n">xcopy</span><span class="w"> </span><span class="p">[</span><span class="err">복사할</span><span class="w"> </span><span class="err">파일명</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="err">복사할</span><span class="w"> </span><span class="err">위치</span><span class="p">]</span><span class="w"> </span><span class="nx">//</span><span class="w"> </span><span class="err">숨김파일도</span><span class="w"> </span><span class="err">복사</span><span class="w"> </span><span class="err">가능</span><span class="w">
-</span></code></pre></div></div>
-
-<h3 id="파일-이동">파일 이동</h3>
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">move</span><span class="w"> </span><span class="p">[</span><span class="err">파일명</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="err">이동할</span><span class="w"> </span><span class="err">위치</span><span class="p">]</span><span class="w">
-</span></code></pre></div></div>
-
-<h3 id="파일명폴더명-변경">파일명/폴더명 변경</h3>
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rename</span><span class="w"> </span><span class="p">[</span><span class="err">현재</span><span class="w"> </span><span class="err">파일명</span><span class="n">/</span><span class="err">폴더명</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="err">변경할</span><span class="w"> </span><span class="err">파일명</span><span class="n">/</span><span class="err">폴더명</span><span class="p">]</span><span class="w">
-</span></code></pre></div></div>
-
-<h3 id="현재-날짜-조회">현재 날짜 조회</h3>
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">date</span><span class="w">
-</span></code></pre></div></div>
-
-<h3 id="현재-실행-중인-프로세스-모두-조회">현재 실행 중인 프로세스 모두 조회</h3>
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tasklist</span><span class="w">
-</span></code></pre></div></div>
-
-<h3 id="명령-프롬프트-창-종료">명령 프롬프트 창 종료</h3>
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">exit</span><span class="w">
-</span></code></pre></div></div>
-
-<h5 id="파일-생성">파일 생성</h5>
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">copy</span><span class="w"> </span><span class="nx">con</span><span class="w"> </span><span class="p">[</span><span class="err">생성할</span><span class="w"> </span><span class="err">파일명</span><span class="p">]</span><span class="w">
-</span><span class="err">내용</span><span class="w">
-</span><span class="n">//</span><span class="w"> </span><span class="err">입력을</span><span class="w"> </span><span class="err">끝내고</span><span class="w"> </span><span class="err">싶으면</span><span class="w"> </span><span class="nx">ctrl</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">z</span><span class="w"> </span><span class="nx">/</span><span class="w"> </span><span class="nx">ctrl</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">c</span><span class="w">
-</span></code></pre></div></div>
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">echo</span><span class="w"> </span><span class="s2">"내용"</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="s2">"생성할 파일명"</span><span class="w">
-</span></code></pre></div></div>
+<p>참고</p>
+<ul>
+  <li><a href="https://coding-factory.tistory.com/128">https://coding-factory.tistory.com/128</a></li>
+</ul>
 
 
     </div>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/wiki/2023/11/13/thymeleaf-rest-controller.html" title="Thymeleaf와 @RestController">Thymeleaf와 @RestController</a><span></span>
+<a class="previous" href="/wiki/2023/11/13/stack.html" title="Stack">Stack</a><a class="next" href="/wiki/2023/11/13/thymeleaf-rest-controller.html" title="Thymeleaf와 @RestController">Thymeleaf와 @RestController</a>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/wiki/2023/11/13/java-regex-pattern-syntax-error.html" title="">Dangling meta character '?' near index 0</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/map-getOrDefault.html" title="">Map - getOrDefault(Object key, V defaultValue)</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/array-slice-method.html" title="">배열 자르기</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/ascii-to-string.html" title="">아스키코드 문자 ↔ 숫자</a></li>
+        <li><a class="post-link" href="/wiki/2023/11/13/java-regex-pattern-syntax-error.html" title="Thymeleaf와 @RestController">Dangling meta character '?' near index 0</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/mysql-in.html" title="Thymeleaf와 @RestController">MySQL IN</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/prg-pattern.html" title="Thymeleaf와 @RestController">PRG 패턴과 RedirectAttributes</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/string-replacement.html" title="Thymeleaf와 @RestController">문자열 치환</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>
