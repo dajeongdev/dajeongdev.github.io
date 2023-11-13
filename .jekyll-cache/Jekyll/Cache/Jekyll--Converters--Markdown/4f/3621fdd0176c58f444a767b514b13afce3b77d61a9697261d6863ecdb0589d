@@ -1,0 +1,48 @@
+I"<h1 id="thymeleaf와-restcontroller">Thymeleaf와 @RestController</h1>
+
+<h2 id="개요">개요</h2>
+<p>테스트를 해보려고 테스트 컨트롤러에 @RestController을 설정한 후 String으로 view 이름을 리턴했더니 화면에 입력한 view 이름이 그대로 나왔다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestController</span> <span class="o">{</span>
+
+    <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/sample"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">hello</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">"sample"</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="왜-그럴까">왜 그럴까?</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">@RestController</code>에는 <code class="language-plaintext highlighter-rouge">@Controller</code> 애노테이션과 <code class="language-plaintext highlighter-rouge">@ResponseBody</code> 애노테이션이 포함되어 있다. Controller에서 페이지 렌더링과 Json 데이터를 함께 리턴해야 할 때 사용한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">@Controller</code>는 리턴 값이 String이라면 view 이름으로 인식하여 view를 찾아 렌더링 한다.
+    <ul>
+      <li>페이지 이동(<code class="language-plaintext highlighter-rouge">@Controller</code>), Json 데이터 리턴(<code class="language-plaintext highlighter-rouge">@ResponseBody</code>)</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">@ResponseBody</code>: 자바 객체를 HTTP 요청의 body 내용으로 매핑하는 역할을 하는 애노테이션
+<br /></li>
+</ul>
+
+<h3 id="형태">형태</h3>
+<p><code class="language-plaintext highlighter-rouge">@Controller</code></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Target</span><span class="o">(</span><span class="nc">ElementType</span><span class="o">.</span><span class="na">TYPE</span><span class="o">)</span>
+<span class="nd">@Retention</span><span class="o">(</span><span class="nc">RetentionPolicy</span><span class="o">.</span><span class="na">RUNTIME</span><span class="o">)</span>
+<span class="nd">@Documented</span>
+<span class="nd">@Component</span>
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="nc">Controller</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">@RestController</code></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Target</span><span class="o">(</span><span class="nc">ElementType</span><span class="o">.</span><span class="na">TYPE</span><span class="o">)</span>
+<span class="nd">@Retention</span><span class="o">(</span><span class="nc">RetentionPolicy</span><span class="o">.</span><span class="na">RUNTIME</span><span class="o">)</span>
+<span class="nd">@Documented</span>
+<span class="nd">@Controller</span>
+<span class="nd">@ResponseBody</span>
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="nc">RestController</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="해결-방법">해결 방법</h3>
+<p><code class="language-plaintext highlighter-rouge">ModelAndView</code>를 사용하여 <code class="language-plaintext highlighter-rouge">setViewName()</code>에는 이동할 view 이름, <code class="language-plaintext highlighter-rouge">addObject()</code> 등에는 사용할 변수명을 입력해주면, <code class="language-plaintext highlighter-rouge">@RestController</code>나 <code class="language-plaintext highlighter-rouge">@Controller</code> 애노테이션 둘 다 상관없이 동작한다.</p>
+:ET

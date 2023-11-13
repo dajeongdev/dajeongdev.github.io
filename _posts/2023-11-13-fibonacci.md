@@ -41,7 +41,7 @@ public int solution(int n) {
 }
 ```
 - 이 코드를 제출했더니 7번부터 오답이 나왔다.. 그래서 한참 고민하다가 질문하기 페이지를 봤는데 좋은 답변을 달아주셔서 참고했다.
-    <img src="../../../../assets/images/posts/fibonacci-reference.png">
+    <img src="../assets/images/posts/fibonacci-reference.png">
     - **정리**: 자료형의 크기에 제한이 있는 언어를 사용할 경우 (A + B) % C == ((A % C) + (B % C)) % C라는 모듈러 연산의 성질을 이용하여, 계산 결과에 1234567으로 나눈 나머지를 대신 넣는 것으로 int 범위 내에 항상 값이 존재하도록 보장할 수 있다.
 
 **수정 코드**

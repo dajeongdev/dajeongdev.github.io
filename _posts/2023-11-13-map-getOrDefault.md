@@ -1,6 +1,6 @@
 ---
 layout: post
-title: [JAVA] Map - getOrDefault(Object key, V defaultValue)
+title: Map - getOrDefault(Object key, V defaultValue)
 subtitle: 
 categories: wiki
 tags: [Java,Map,Method]

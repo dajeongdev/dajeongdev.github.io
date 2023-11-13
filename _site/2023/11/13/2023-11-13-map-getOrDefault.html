@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h2 id="map---getordefaultobject-key-v-defaultvalue">Map - getOrDefault(Object key, V defaultValue)</h2>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="no">V</span> <span class="nf">getOrDefault</span><span class="o">(</span><span class="nc">Object</span> <span class="n">key</span><span class="o">,</span> <span class="no">V</span> <span class="n">defaultValue</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">Node</span><span class="o">&lt;</span><span class="no">K</span><span class="o">,</span><span class="no">V</span><span class="o">&gt;</span> <span class="n">e</span><span class="o">;</span>
+		<span class="k">return</span> <span class="o">(</span><span class="n">e</span> <span class="o">=</span> <span class="n">getNode</span><span class="o">(</span><span class="n">key</span><span class="o">))</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">defaultValue</span> <span class="o">:</span> <span class="n">e</span><span class="o">.</span><span class="na">value</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>key가 존재하면 key의 value를 반환하고, 없으면 설정한 디폴트 값을 반환한다.
+<br>
+</li>
+</ul>
+
+<p><strong>사용 예시 (프로그래머스 level2 위장)</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[][]</span> <span class="n">clothes1</span> <span class="o">=</span> <span class="o">/{/{</span><span class="s">"yellow_hat"</span><span class="o">,</span> <span class="s">"headgear"</span><span class="o">/},</span> 
+			<span class="o">/{</span><span class="s">"blue_sunglasses"</span><span class="o">,</span> <span class="s">"eyewear"</span><span class="o">/},</span> 
+			<span class="o">/{</span><span class="s">"green_turban"</span><span class="o">,</span> <span class="s">"headgear"</span><span class="o">/}/};</span>
+<span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">clothes</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+		<span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">clothes</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">1</span><span class="o">],</span> <span class="n">map</span><span class="o">.</span><span class="na">getOrDefault</span><span class="o">(</span><span class="n">clothes</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">1</span><span class="o">],</span> <span class="mi">1</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>HashMap은 동일한 key에 value를 추가할 경우 value가 덮어쓰기 되기 때문에 getOrDefault() 메소드를 사용하여 예시처럼 카운트를 추가하는 등의 방법을 사용할 수 있다.</li>
+</ul>
+</body></html>

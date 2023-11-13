@@ -9,7 +9,7 @@ tags: [Java,Error]
 # Dangling meta character '?' near index 0
 
 ## 에러
-<img src="../../../../assets/images/posts/java-regex-pattern-syntax-error.png">
+<img src="../assets/images/posts/java-regex-pattern-syntax-error.png">
 <br>
 
 ## 코드

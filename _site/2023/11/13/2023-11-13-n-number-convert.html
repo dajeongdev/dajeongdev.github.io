@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h1 id="진수-변환">진수 변환</h1>
+
+<h2 id="10진수--2816진수">10진수 → 2/8/16진수</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>return type</th>
+      <th>class</th>
+      <th>method</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>static String</td>
+      <td>java.lang.Integer</td>
+      <td>toBinaryString(int i)</td>
+      <td>10진수 → 2진수</td>
+    </tr>
+    <tr>
+      <td>static String</td>
+      <td>java.lang.Integer</td>
+      <td>toOctalString(int i)</td>
+      <td>10진수 → 8진수</td>
+    </tr>
+    <tr>
+      <td>static String</td>
+      <td>java.lang.Integer</td>
+      <td>toHexaString(int i)</td>
+      <td>10진수 → 16진수</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>➕ 위의 세 메소드는 파라미터로 정수 뿐만 아니라 정수 두 개를 비트 연산자(OR)로 계산할 수도 있다.</p>
+
+<h2 id="10진수--n진수">10진수 → N진수</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>return type</th>
+      <th>class</th>
+      <th>method</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>static String</td>
+      <td>java.lang.Integer</td>
+      <td>toString(int n, int radix)</td>
+      <td>10진수 → N진수</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>예시</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">decimal</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+<span class="nc">String</span> <span class="n">binary</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">toBInaryString</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+<span class="nc">String</span> <span class="n">octial</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">toOctalString</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+<span class="nc">String</span> <span class="n">hexa</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">toHexaString</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"10진수: "</span> <span class="o">+</span> <span class="n">decimal</span><span class="o">);</span> <span class="c1">// 10</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"2진수: "</span> <span class="o">+</span> <span class="n">binary</span><span class="o">);</span>  <span class="c1">// 1010</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"8진수: "</span> <span class="o">+</span> <span class="n">octial</span><span class="o">);</span> <span class="c1">// 12</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"16진수: "</span> <span class="o">+</span> <span class="n">hexa</span><span class="o">);</span> <span class="c1">// a</span>
+
+<span class="cm">/* 비트 연산자로 계산하기 */</span>
+<span class="nc">Integer</span><span class="o">.</span><span class="na">toBinaryString</span><span class="o">(</span><span class="mi">10</span> <span class="o">|</span> <span class="mi">12</span><span class="o">);</span> <span class="c1">// 1110</span>
+</code></pre></div></div>
+<p><br></p>
+
+<h2 id="2816진수--10진수">2/8/16진수 → 10진수</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>return type</th>
+      <th>class</th>
+      <th>method</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>static int</td>
+      <td>java.lang.Integer</td>
+      <td>parseInt(String s)</td>
+      <td>문자열 → 10진수 int (default 10진수)</td>
+    </tr>
+    <tr>
+      <td>static int</td>
+      <td>java.lang.Integer</td>
+      <td>parseInt(String s, int radix)</td>
+      <td>문자열을 변환할 진수(radix)로 읽어 int로 리턴</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="n진수--10진수">N진수 → 10진수</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>return type</th>
+      <th>class</th>
+      <th>method</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>static int</td>
+      <td>java.lang.Integer</td>
+      <td>parseInt(String, s, int radix)</td>
+      <td>N진수 → 10진수</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>예시</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">binary</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="s">"1010"</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
+<span class="kt">int</span> <span class="n">octial</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="s">"12"</span><span class="o">,</span> <span class="mi">8</span><span class="o">);</span>
+<span class="kt">int</span> <span class="n">hexa</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="s">"A"</span><span class="o">,</span> <span class="mi">16</span><span class="o">);</span>
+
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"2진수 -&gt; 10진수: "</span> <span class="o">+</span> <span class="n">binary</span><span class="o">);</span> <span class="c1">// 10</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"8진수 -&gt; 10진수: "</span> <span class="o">+</span> <span class="n">octial</span><span class="o">);</span> <span class="c1">// 10</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"16진수 -&gt; 10진수: "</span> <span class="o">+</span> <span class="n">hexa</span><span class="o">);</span> <span class="c1">// 10</span>
+</code></pre></div></div>
+</body></html>

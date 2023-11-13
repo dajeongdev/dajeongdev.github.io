@@ -1,6 +1,6 @@
 ---
 layout: post
-title: [JAVA} 문자열 자르기
+title: 문자열 자르기
 subtitle: String.split(), StringTokenizer
 categories: wiki
 tags: [Java,Method]

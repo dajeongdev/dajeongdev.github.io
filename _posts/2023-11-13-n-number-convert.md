@@ -1,6 +1,6 @@
 ---
 layout: post
-title: [JAVA] 진수 변환
+title: 진수 변환
 subtitle: 
 categories: wiki
 tags: [Java,Method]

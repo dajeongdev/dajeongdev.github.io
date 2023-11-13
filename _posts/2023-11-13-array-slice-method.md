@@ -1,6 +1,6 @@
 ---
 layout: post
-title: [JAVA] 배열 자르기
+title: 배열 자르기
 subtitle: 
 categories: wiki
 tags: [Java,Array,Method]

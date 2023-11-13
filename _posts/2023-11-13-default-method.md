@@ -1,6 +1,6 @@
 ---
 layout: post
-title: [JAVA] default method
+title: default method
 subtitle: 
 categories: wiki
 tags: [Java,Java8]

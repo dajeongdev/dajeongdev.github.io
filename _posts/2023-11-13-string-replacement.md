@@ -1,6 +1,6 @@
 ---
 layout: post
-title: [JAVA] 문자열 치환
+title: 문자열 치환
 subtitle: 
 categories: wiki
 tags: [Java,String,Method]
