@@ -1,20 +1,20 @@
 ---
 layout: post
-title: 문자열 치환
+title: [JAVA] 문자열 치환
 subtitle: 
 categories: wiki
 tags: [Java,String,Method]
 ---
 
-### 문자열 치환
+# 문자열 치환
 
-#### 종류
+## 종류
 1. replace()
 2. replaceAll()
 3. replaceFirst()
 <br>
 
-### replace(CharSequence target, CharSequence replacement)
+## replace(CharSequence target, CharSequence replacement)
 - 일치하는 문자열(target)을 대체할 문자(replacement)로 치환한다.
 ```java
 String str = "가/나/다/라/마/바/사";
@@ -22,7 +22,7 @@ System.out.println(str.replace("/", ",")); // 가,나,다,라,마,바,사
 ```
 <br>
 
-### replaceAll(String regex, String replacement)
+## replaceAll(String regex, String replacement)
 - 일치하는 정규 표현식(regex)을 대체할 문자열(replacement)로 **전부** 치환한다.
     - replace()와 유사하지만, `.`(온점) 같은 경우 정규 표현식으로 모든 문자를 의미하기 때문에 모든 문자열이 치환될 수 있다.
 ```java
@@ -32,7 +32,7 @@ System.out.println(str2.replaceAll(".", ",")); // ,,,,,,,,,,,,,
 ```
 <br>
 
-### replaceFirst(String target, String replacement)
+## replaceFirst(String target, String replacement)
 - 첫번째로 일치하는 문자열(target)를 대체할 문자(replacement)로 치환한다.
 ```java
 String str = "가/나/다/라/마/바/사";

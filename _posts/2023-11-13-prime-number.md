@@ -1,19 +1,19 @@
 ---
 layout: post
-title: 소수 판별
+title: 자바로 소수 판별
 subtitle: 
 categories: wiki
 tags: [Java,Method,Algorithm]
 ---
 
-### 소수 판별
+# 소수 판별
 
-#### 소수
+## 소수
 - 1과 자기 자신으로만 나누어지는 숫자
 <br/>
 <br/>
 
-#### 0부터 N까지 소수 구하기
+## 0부터 N까지 소수 구하기
 ```java
 public int solution(int N) {
     int result = 0;
@@ -32,7 +32,7 @@ public int solution(int N) {
 ```
 <br>
 
-#### 해당 숫자가 소수인지 판별
+## 해당 숫자가 소수인지 판별
 ```java
 public boolean isPrime(int num) {
 	if (num == 1) return false;
@@ -48,7 +48,7 @@ public boolean isPrime(int num) {
 ```
 <br>
 
-#### Math 클래스의 sqrt() 메소드
+## Math 클래스의 sqrt() 메소드
 - `sqrt()`: 2부터 루트 `n`까지의 범위에서 소수를 체크해주는 함수
 
 ```java

@@ -1,12 +1,12 @@
 ---
 layout: post
-title: IntelliJ 단축어 정리
+title: IntelliJ 단축키 정리
 subtitle: 
 categories: wiki
 tags: [IDE,IntelliJ]
 ---
 
-#### IntelliJ 단축키
+# IntelliJ 단축키
 
 |설명|단축키|
 |------|----|

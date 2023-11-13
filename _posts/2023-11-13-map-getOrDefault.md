@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Map - getOrDefault(Object key, V defaultValue)
+title: [JAVA] Map - getOrDefault(Object key, V defaultValue)
 subtitle: 
 categories: wiki
 tags: [Java,Map,Method]
 ---
 
-### Map - getOrDefault(Object key, V defaultValue)
+## Map - getOrDefault(Object key, V defaultValue)
 ```java
 public V getOrDefault(Object key, V defaultValue) {
 		Node<K,V> e;

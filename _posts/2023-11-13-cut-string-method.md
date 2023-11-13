@@ -1,21 +1,19 @@
 ---
 layout: post
-title: 문자열 자르기
+title: [JAVA} 문자열 자르기
 subtitle: String.split(), StringTokenizer
 categories: wiki
 tags: [Java,Method]
 ---
 
-### 문자열 자르기
+# 문자열 자르기
 
-
-#### 1. String.split()
+## 1. String.split()
 - 지정한 구분자(정규표현식)로 문자열을 나눠 문자열 배열에 저장한다.
 - 공백 포함
 <br/>
 
-
-#### 2. StringTokenizer
+## 2. StringTokenizer
 - 지정한 구분자(문자열)로 문자열을 나눈다.
 - 구분자 생략 시 공백이 디폴트
 - 생성자
@@ -32,12 +30,11 @@ countTokens()   // 남아있는 토큰의 갯수
 ```
 <br/>
 
-#### 공통점
+### 공통점
 - 지정한 구분자를 통해 문자열을 나눈다.
 <br/>
 
-
-#### 차이점
+### 차이점
 |  | String.split() | StringTokenizer |
 | --- | --- | --- |
 | 구분자 | 정규표현식 | 문자/문자열 |

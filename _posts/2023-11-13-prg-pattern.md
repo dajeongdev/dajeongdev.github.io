@@ -3,18 +3,18 @@ layout: post
 title: PRG 패턴과 RedirectAttributes
 subtitle: redirect 시 GET, POST
 categories: wiki
-tags: [Java,HTTP,Spring]
+tags: [Java,Spring,HTTP]
 ---
 
-### PRG 패턴과 RedirectAttributes
+# PRG 패턴과 RedirectAttributes
 
 
-#### **배경 및 문제점**
+## **배경 및 문제점**
 - POST로 가입하는 로직을 작성하다가 해당 페이지에서 새로고침을 하면 중복 가입이 되거나 성공 후 이동하는 로직에서 처리가 되지 않는 버그를 발견했다.
 <br/>
 
 
-#### 해결 방안 (=PRG 패턴)
+## 해결 방안 (=PRG 패턴)
 ```java
 @PostMapping("/add")
 public String addItemV5(Item item) {

@@ -1,15 +1,14 @@
 ---
 layout: post
-title: 배열 자르기
+title: [JAVA] 배열 자르기
 subtitle: 
 categories: wiki
 tags: [Java,Array,Method]
 ---
 
-### 배열 자르기
+# 배열 자르기
 
-
-#### 1. Stream의 skip과 limit
+## 1. Stream의 skip과 limit
 **Arrays.stream.skip(num)**
 - skip은 숫자(num)만큼 아이템을 건너뛴 다음 그 뒤의 아이템으로 새로운 스트림을 생성한다.
 **Arrays.stream.limit(num)**
@@ -29,7 +28,7 @@ int[] limit = Arrays.stream(array)
 <br/>
 
 
-#### 2. copyOfRange
+## 2. copyOfRange
 - i번째 숫자부터 j번째 숫자까지 자를 때 사용할 수 있다.
 
 ```java

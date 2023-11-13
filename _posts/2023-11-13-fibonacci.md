@@ -1,13 +1,12 @@
 ---
 layout: post
-title: 피보나치 수열 이해하기
+title: 자바로 피보나치 수열 이해하기
 subtitle: 
 categories: wiki
 tags: [Java,Algorithm]
 ---
 
-### 피보나치 수열
-
+# 피보나치 수열
 - 피보나치 수열은 재귀 함수의 대표적인 예시로, 첫째 및 둘째 항이 1이며 그 뒤의 모든 항은 바로 앞 두 항의 합인 수열이다.
     - F(0) = 0, F(1) = 1일 때, 1 이상의 n에 대하여 F(n) = F(n-1) + F(n-2)
     - **재귀 함수**: 자기 자신을 다시 호출해 작업을 수행하는 함수
@@ -22,7 +21,7 @@ public int fibonacci(int n) {
 ```
 <br/>
 
-#### 프로그래머스 피보나치 수 풀이
+## 프로그래머스 피보나치 수 풀이
 **원래 코드**
 ```java
 public int solution(int n) {

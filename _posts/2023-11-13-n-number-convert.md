@@ -1,14 +1,14 @@
 ---
 layout: post
-title: 진수 변환
+title: [JAVA] 진수 변환
 subtitle: 
 categories: wiki
 tags: [Java,Method]
 ---
 
-### 진수 변환
+# 진수 변환
 
-#### 10진수 → 2/8/16진수
+## 10진수 → 2/8/16진수
 
 | return type | class | method | 설명 |
 | --- | --- | --- | --- |
@@ -18,7 +18,7 @@ tags: [Java,Method]
 
 ➕ 위의 세 메소드는 파라미터로 정수 뿐만 아니라 정수 두 개를 비트 연산자(OR)로 계산할 수도 있다.
 
-#### 10진수 → N진수
+## 10진수 → N진수
 
 | return type | class | method | 설명 |
 | --- | --- | --- | --- |
@@ -42,14 +42,14 @@ Integer.toBinaryString(10 | 12); // 1110
 ```
 <br/>
 
-### 2/8/16진수 → 10진수
+## 2/8/16진수 → 10진수
 
 | return type | class | method | 설명 |
 | --- | --- | --- | --- |
 | static int | java.lang.Integer | parseInt(String s) | 문자열 → 10진수 int (default 10진수) |
 | static int | java.lang.Integer | parseInt(String s, int radix) | 문자열을 변환할 진수(radix)로 읽어 int로 리턴 |
 
-### N진수 → 10진수
+## N진수 → 10진수
 
 | return type | class | method | 설명 |
 | --- | --- | --- | --- |
