@@ -1,0 +1,42 @@
+I"2	<p>##@ 1. String.split()</p>
+<ul>
+  <li>지정한 구분자(정규표현식)로 문자열을 나눠 문자열 배열에 저장한다.</li>
+  <li>공백 포함 <br />
+<br /></li>
+</ul>
+
+<h3 id="2-stringtokenizer">2. StringTokenizer</h3>
+<ul>
+  <li>지정한 구분자(문자열)로 문자열을 나눈다.</li>
+  <li>구분자 생략 시 공백이 디폴트</li>
+  <li><strong>생성자</strong></li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">StringTokenizer</span><span class="o">(</span><span class="nc">String</span> <span class="n">str</span><span class="o">)</span> <span class="c1">// 공백 구분자 사용</span>
+<span class="nc">StringTokenizer</span><span class="o">(</span><span class="nc">String</span> <span class="n">str</span><span class="o">,</span> <span class="nc">String</span> <span class="n">delim</span><span class="o">)</span> <span class="c1">// 구분자 지정</span>
+<span class="nc">StringTokenizer</span><span class="o">(</span><span class="nc">String</span> <span class="n">str</span><span class="o">,</span> <span class="nc">String</span> <span class="n">delim</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">returnDelims</span><span class="o">)</span> <span class="c1">// 구분자도 토큰에 포함</span>
+</code></pre></div></div>
+<ul>
+  <li><strong>메소드</strong></li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">nextToken</span><span class="o">()</span>     <span class="c1">// 다음 토큰 반환 (이전 토큰은 삭제)</span>
+<span class="n">hasMoreTokens</span><span class="o">()</span> <span class="c1">// 리턴할 토큰이 남아있으면 true, 없으면 false</span>
+<span class="n">countTokens</span><span class="o">()</span>   <span class="c1">// 남아있는 토큰의 갯수</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h4 id="공통점">공통점</h4>
+<ul>
+  <li>지정한 구분자를 통해 문자열을 나눈다.
+<br /></li>
+</ul>
+
+<h4 id="차이점">차이점</h4>
+<p>|  | String.split() | StringTokenizer |
+| — | — | — |
+| 구분자 | 정규표현식 | 문자/문자열 |
+| 빈 문자열 인식 | O | X |
+| 결과값 | String[] | StringTokenizer → 반복문으로 출력 가능 |
+<br /></p>
+:ET

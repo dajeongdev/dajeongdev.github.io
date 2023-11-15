@@ -1,0 +1,18 @@
+I"@<h3 id="종류">종류</h3>
+<ol>
+  <li>replace()</li>
+  <li>replaceAll()</li>
+  <li>replaceFirst() <br />
+<br /></li>
+</ol>
+
+<h3 id="replacecharsequence-target-charsequence-replacement">replace(CharSequence target, CharSequence replacement)</h3>
+<ul>
+  <li>일치하는 <strong>문자열(target)</strong>을 대체할 문자(replacement)로 치환한다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"가/나/다/라/마/바/사"</span><span class="o">;</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"/"</span><span class="o">,</span> <span class="s">","</span><span class="o">));</span> <span class="c1">// 가,나,다,라,마,바,사</span>
+</code></pre></div></div>
+<p><br /></p>
+:ET

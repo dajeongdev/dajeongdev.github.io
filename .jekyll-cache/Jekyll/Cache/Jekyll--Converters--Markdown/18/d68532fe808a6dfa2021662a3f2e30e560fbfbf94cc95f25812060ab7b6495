@@ -1,0 +1,7 @@
+I"�<h3 id="10진수--2816진수">10진수 → 2/8/16진수</h3>
+<p>| return type | class | method | 설명 |
+| — | — | — | — |
+| static String | java.lang.Integer | toBinaryString(int i) | 10진수 → 2진수 |
+| static String | java.lang.Integer | toOctalString(int i) | 10진수 → 8진수 |
+| static String | java.lang.Integer | toHexaString(int i) | 10진수 → 16진수 |</p>
+:ET

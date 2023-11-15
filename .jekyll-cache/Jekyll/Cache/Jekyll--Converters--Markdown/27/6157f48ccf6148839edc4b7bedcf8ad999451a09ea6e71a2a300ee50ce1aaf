@@ -1,0 +1,6 @@
+I"<h3 id="개요">개요</h3>
+<p>테스트를 해보려고 테스트 컨트롤러에 @RestController을 설정한 후 String으로 view 이름을 리턴했더니 화면에 입력한 view 이름이 그대로 나왔다.
+```java
+@RestController
+public class TestController {</p>
+:ET

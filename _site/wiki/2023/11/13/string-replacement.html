@@ -12,8 +12,8 @@
 <meta property="og:title" content="문자열 치환">
 <meta name="author" content="Dajeong Park">
 <meta property="og:locale" content="ko">
-<meta name="description" content="문자열 치환">
-<meta property="og:description" content="문자열 치환">
+<meta name="description" content='종류 replace() replaceAll() replaceFirst() replace(CharSequence target, CharSequence replacement) 일치하는 문자열(target)을 대체할 문자(replacement)로 치환한다. String str = "가/나/다/라/마/바/사"; System.out.println(str.replace("/", ",")); // 가,나,다,라,마,바,사'>
+<meta property="og:description" content='종류 replace() replaceAll() replaceFirst() replace(CharSequence target, CharSequence replacement) 일치하는 문자열(target)을 대체할 문자(replacement)로 치환한다. String str = "가/나/다/라/마/바/사"; System.out.println(str.replace("/", ",")); // 가,나,다,라,마,바,사'>
 <link rel="canonical" href="http://localhost:4000/wiki/2023/11/13/string-replacement.html">
 <meta property="og:url" content="http://localhost:4000/wiki/2023/11/13/string-replacement.html">
 <meta property="og:site_name" content="Every Single Day">
@@ -22,7 +22,7 @@
 <meta name="twitter:card" content="summary">
 <meta property="twitter:title" content="문자열 치환">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2023-11-13T00:00:00+09:00","datePublished":"2023-11-13T00:00:00+09:00","description":"문자열 치환","headline":"문자열 치환","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2023/11/13/string-replacement.html"},"url":"http://localhost:4000/wiki/2023/11/13/string-replacement.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2023-11-13T00:00:00+09:00","datePublished":"2023-11-13T00:00:00+09:00","description":"종류 replace() replaceAll() replaceFirst() replace(CharSequence target, CharSequence replacement) 일치하는 문자열(target)을 대체할 문자(replacement)로 치환한다. String str = &quot;가/나/다/라/마/바/사&quot;; System.out.println(str.replace(&quot;/&quot;, &quot;,&quot;)); // 가,나,다,라,마,바,사","headline":"문자열 치환","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2023/11/13/string-replacement.html"},"url":"http://localhost:4000/wiki/2023/11/13/string-replacement.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -667,57 +667,56 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <h1 id="문자열-치환">문자열 치환</h1>
-
-<h2 id="종류">종류</h2>
+      <h3 id="종류">종류</h3>
 <ol>
   <li>replace()</li>
   <li>replaceAll()</li>
-  <li>replaceFirst()
+  <li>replaceFirst() <br>
 <br>
 </li>
 </ol>
 
-<h2 id="replacecharsequence-target-charsequence-replacement">replace(CharSequence target, CharSequence replacement)</h2>
+<h3 id="replacecharsequence-target-charsequence-replacement">replace(CharSequence target, CharSequence replacement)</h3>
 <ul>
-  <li>일치하는 문자열(target)을 대체할 문자(replacement)로 치환한다.
-    <div class="language-java highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"가/나/다/라/마/바/사"</span><span class="o">;</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"/"</span><span class="o">,</span> <span class="s">","</span><span class="o">));</span> <span class="c1">// 가,나,다,라,마,바,사</span>
-</code></pre></div>    </div>
-    <p><br></p>
-  </li>
+  <li>일치하는 <strong>문자열(target)</strong>을 대체할 문자(replacement)로 치환한다.</li>
 </ul>
 
-<h2 id="replaceallstring-regex-string-replacement">replaceAll(String regex, String replacement)</h2>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"가/나/다/라/마/바/사"</span><span class="o">;</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"/"</span><span class="o">,</span> <span class="s">","</span><span class="o">));</span> <span class="c1">// 가,나,다,라,마,바,사</span>
+</code></pre></div></div>
+<p><br></p>
+
+<h3 id="replaceallstring-regex-string-replacement">replaceAll(String regex, String replacement)</h3>
 <ul>
   <li>일치하는 정규 표현식(regex)을 대체할 문자열(replacement)로 <strong>전부</strong> 치환한다.
     <ul>
-      <li>replace()와 유사하지만, <code class="language-plaintext highlighter-rouge">.</code>(온점) 같은 경우 정규 표현식으로 모든 문자를 의미하기 때문에 모든 문자열이 치환될 수 있다.
-        <div class="language-java highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"가.나.다.라.마.바.사"</span><span class="o">;</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str2</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"."</span><span class="o">,</span> <span class="s">","</span><span class="o">));</span> <span class="c1">// 가,나,다,라,마,바,사</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str2</span><span class="o">.</span><span class="na">replaceAll</span><span class="o">(</span><span class="s">"."</span><span class="o">,</span> <span class="s">","</span><span class="o">));</span> <span class="c1">// ,,,,,,,,,,,,,</span>
-</code></pre></div>        </div>
-        <p><br></p>
-      </li>
+      <li>replace()와 유사하지만, <code class="language-plaintext highlighter-rouge">.</code>(온점) 같은 경우 정규 표현식으로 모든 문자를 의미하기 때문에 모든 문자열이 치환될 수 있다.</li>
     </ul>
   </li>
 </ul>
 
-<h2 id="replacefirststring-target-string-replacement">replaceFirst(String target, String replacement)</h2>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"가.나.다.라.마.바.사"</span><span class="o">;</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str2</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"."</span><span class="o">,</span> <span class="s">","</span><span class="o">));</span> <span class="c1">// 가,나,다,라,마,바,사</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str2</span><span class="o">.</span><span class="na">replaceAll</span><span class="o">(</span><span class="s">"."</span><span class="o">,</span> <span class="s">","</span><span class="o">));</span> <span class="c1">// ,,,,,,,,,,,,,</span>
+</code></pre></div></div>
+<p><br></p>
+
+<h3 id="replacefirststring-target-string-replacement">replaceFirst(String target, String replacement)</h3>
 <ul>
-  <li>첫번째로 일치하는 문자열(target)를 대체할 문자(replacement)로 치환한다.
-    <div class="language-java highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"가/나/다/라/마/바/사"</span><span class="o">;</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"/"</span><span class="o">,</span> <span class="s">","</span><span class="o">));</span> <span class="c1">// 가,나/다/라/마/바/사</span>
-</code></pre></div>    </div>
-    <p><br></p>
-  </li>
+  <li>
+<strong>첫번째</strong>로 일치하는 문자열(target)를 대체할 문자(replacement)로 치환한다.</li>
 </ul>
 
-<p><strong>실무 사용 예시</strong>
-→ 해시태그가 포함되어 있는 내용에 바꾸고 싶은 내용이 해시태그마다 다를 때 사용함</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"가/나/다/라/마/바/사"</span><span class="o">;</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"/"</span><span class="o">,</span> <span class="s">","</span><span class="o">));</span> <span class="c1">// 가,나/다/라/마/바/사</span>
+</code></pre></div></div>
+<p><br></p>
+
+<h3 id="실무-사용-예시">실무 사용 예시</h3>
+<ul>
+  <li>해시태그가 포함되어 있는 내용에 바꾸고 싶은 내용이 해시태그마다 다를 때 사용함</li>
+</ul>
+
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">contents</span> <span class="o">=</span> <span class="s">"..."</span><span class="o">;</span>
 <span class="n">contents</span> <span class="o">=</span> <span class="n">contents</span><span class="o">.</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"#"</span><span class="o">,</span> <span class="n">str1</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"#"</span><span class="o">,</span> <span class="n">str2</span><span class="o">)</span>
@@ -727,7 +726,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 </code></pre></div></div>
 <p><br></p>
 
-<p>참고</p>
+<h1 id="참고">참고</h1>
 <ul>
   <li><a href="https://coding-factory.tistory.com/128">https://coding-factory.tistory.com/128</a></li>
 </ul>
@@ -742,10 +741,10 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/wiki/2023/11/13/java-regex-pattern-syntax-error.html" title="Thymeleaf와 @RestController">Dangling meta character '?' near index 0</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/mysql-in.html" title="Thymeleaf와 @RestController">MySQL IN</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/prg-pattern.html" title="Thymeleaf와 @RestController">PRG 패턴과 RedirectAttributes</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/string-replacement.html" title="Thymeleaf와 @RestController">문자열 치환</a></li>
+        <li><a class="post-link" href="/wiki/2023/11/13/string-replacement.html" title="Thymeleaf와 @RestController">문자열 치환</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/map-getOrDefault.html" title="Thymeleaf와 @RestController">Map - getOrDefault(Object key, V defaultValue)</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/n-number-convert.html" title="Thymeleaf와 @RestController">진수 변환</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/windows-command.html" title="Thymeleaf와 @RestController">Windows 명령어</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>

@@ -1,0 +1,18 @@
+I"�<h3 id="특징">특징</h3>
+<ul>
+  <li>책을 쌓듯이 데이터를 차곡차곡 쌓아 올린 형태의 자료구조</li>
+  <li>선형 구조</li>
+  <li>같은 구조의 데이터를 정해진 방향으로만 쌓을 수 있다.</li>
+  <li>후입선출(LIFO) 구조: 마지막에 삽입된 데이터를 가장 먼저 꺼낸다.</li>
+  <li>데이터가 없을 때 pop하는 오류를 stack-underflow, 스택의 크기 이상의 데이터를 push하려는 오류를 stack-overflow라고 한다. (!)
+<br /></li>
+</ul>
+
+<h3 id="주요-연산">주요 연산</h3>
+<ul>
+  <li><strong>push</strong>: top을 위로 한 칸 올리고, top이 가리키는 위치에 데이터 저장(삽입)한다.</li>
+  <li><strong>pop</strong>: top이 가리키는 데이터를 반환하고, top을 아래로 한 칸 내린다(삭제).</li>
+  <li><strong>peek</strong>: 스택의 top에 있는 item을 반환한다. pop과 달리 stack에서 객체를 꺼내지 않는다.
+<br /></li>
+</ul>
+:ET

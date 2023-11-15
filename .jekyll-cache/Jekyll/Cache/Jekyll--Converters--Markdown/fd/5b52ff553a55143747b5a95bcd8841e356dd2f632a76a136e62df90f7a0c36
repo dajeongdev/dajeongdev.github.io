@@ -1,0 +1,33 @@
+I"�<h3 id="배경-및-문제점"><strong>배경 및 문제점</strong></h3>
+<ul>
+  <li>POST로 가입하는 로직을 작성하다가 해당 페이지에서 새로고침을 하면 중복 가입이 되거나 성공 후 이동하는 로직에서 처리가 되지 않는 버그를 발견했다.</li>
+</ul>
+
+<h3 id="해결-방안-prg-패턴">해결 방안 (=PRG 패턴)</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@PostMapping</span><span class="o">(</span><span class="s">"/add"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nc">String</span> <span class="nf">addItemV5</span><span class="o">(</span><span class="nc">Item</span> <span class="n">item</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">itemRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">item</span><span class="o">);</span>
+      <span class="k">return</span> <span class="s">"redirect:/basic/items/"</span> <span class="o">+</span> <span class="n">item</span><span class="o">.</span><span class="na">getId</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>회원 가입 메소드(POST)에서 새로고침을 하거나 성공 로직으로 넘어갈 때 forward를 사용했더니 url이 바뀌지 않는다는 것을 확인했다. 그래서 forward가 아닌 redirect를 사용하여 다시 로그인 view로 보내는 방식으로 해결했다.</li>
+  <li>forward는 서버 내부에서 일어나는 호출이기 때문에 URL이 바뀌지 않기 때문에 클라이언트가 인식하지 못한다. 반면에, redirect의 경우 클라이언트에 응답을 보냈다가, 클라이언트가 redirect path로 재요청하기 때문에 URL 경로도 변경된다.</li>
+  <li>즉, 마지막에 호출한 내용이 로그인 화면이 되는 것이다. 이후 새로 고침을 해도 로그인 화면으로 이동하게 되므로 문제를 해결할 수 있다.</li>
+  <li>이러한 해결 방식을 <strong>PRG(Post-Redirect-Get) 패턴</strong>이라고 한다.</li>
+</ul>
+
+<h4 id="redirectattributes">RedirectAttributes</h4>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@PostMapping</span><span class="o">(</span><span class="s">"/add"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nc">String</span> <span class="nf">addItemV6</span><span class="o">(</span><span class="nc">Item</span> <span class="n">item</span><span class="o">,</span> <span class="nc">RedirectAttributes</span> <span class="n">redirectAttributes</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nc">Item</span> <span class="n">saveItem</span> <span class="o">=</span> <span class="n">itemRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">item</span><span class="o">);</span>
+      <span class="n">redirectAttributes</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">"itemId"</span><span class="o">,</span> <span class="n">saveItem</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>
+      <span class="n">redirectAttributes</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">"status"</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+      <span class="k">return</span> <span class="s">"redirect:/basic/items/{itemId}"</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>URL 인코딩 및 @PathVariable과 쿼리 파라미터를 처리해주는 객체</li>
+  <li>추가된 속성이 @PathVariable에 포함되면 바인딩해주고, 나머지 값은 쿼리 파라미터로 처리한다.</li>
+</ul>
+:ET

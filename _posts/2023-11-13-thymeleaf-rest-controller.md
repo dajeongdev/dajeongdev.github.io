@@ -5,10 +5,7 @@ subtitle:
 categories: wiki
 tags: [Java,Spring,Annotation,Thymeleaf]
 ---
-
-# Thymeleaf와 @RestController
-
-## 개요
+### 개요
 테스트를 해보려고 테스트 컨트롤러에 @RestController을 설정한 후 String으로 view 이름을 리턴했더니 화면에 입력한 view 이름이 그대로 나왔다.
 ```java
 @RestController
@@ -28,6 +25,7 @@ public class TestController {
 - `@Controller`는 리턴 값이 String이라면 view 이름으로 인식하여 view를 찾아 렌더링 한다.
     - 페이지 이동(`@Controller`), Json 데이터 리턴(`@ResponseBody`)
 - `@ResponseBody`: 자바 객체를 HTTP 요청의 body 내용으로 매핑하는 역할을 하는 애노테이션
+<br/>
 <br/>
 
 

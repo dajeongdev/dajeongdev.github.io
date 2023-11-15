@@ -1,0 +1,95 @@
+I"l<table>
+  <thead>
+    <tr>
+      <th>설명</th>
+      <th>단축키</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>이름 변경(Rename)</td>
+      <td>Shift + F6</td>
+    </tr>
+    <tr>
+      <td>접근제어자, 반환타입, 이름등 주요 정보 변경</td>
+      <td>Ctrl + F6</td>
+    </tr>
+    <tr>
+      <td>한 줄 복사</td>
+      <td>Ctrl + D</td>
+    </tr>
+    <tr>
+      <td>Inline</td>
+      <td>Ctrl + Alt + N</td>
+    </tr>
+    <tr>
+      <td>메소드 추출</td>
+      <td>Ctrl + Alt + M</td>
+    </tr>
+    <tr>
+      <td>변수 추출</td>
+      <td>Ctrl + Alt + V</td>
+    </tr>
+    <tr>
+      <td>Generate 탭 열기 (Constructor, Getter/Setter, Override 등)</td>
+      <td>Alt + Insert</td>
+    </tr>
+    <tr>
+      <td>implement methods / static import  / change lamda expression</td>
+      <td>Alt + Enter</td>
+    </tr>
+    <tr>
+      <td>이전 실행 메소드 재실행</td>
+      <td>Shift + F10</td>
+    </tr>
+    <tr>
+      <td>현재 커서 메소드 실행</td>
+      <td>Ctrl + Shift + F10</td>
+    </tr>
+    <tr>
+      <td>코드 정렬</td>
+      <td>Ctrl + Alt + L</td>
+    </tr>
+    <tr>
+      <td>import 정리</td>
+      <td>Ctrl + Alt + O</td>
+    </tr>
+    <tr>
+      <td>for</td>
+      <td>fori</td>
+    </tr>
+    <tr>
+      <td>for each문 생성</td>
+      <td>iter</td>
+    </tr>
+    <tr>
+      <td>System.out.println</td>
+      <td>sout</td>
+    </tr>
+    <tr>
+      <td>System.out.println + 가까운 변수</td>
+      <td>soutv</td>
+    </tr>
+    <tr>
+      <td>System.out.println + 메서드</td>
+      <td>soutm</td>
+    </tr>
+    <tr>
+      <td>public static void main</td>
+      <td>psvm</td>
+    </tr>
+    <tr>
+      <td>public static final</td>
+      <td>psf</td>
+    </tr>
+    <tr>
+      <td>private static final</td>
+      <td>prsf</td>
+    </tr>
+    <tr>
+      <td>throw new</td>
+      <td>thr</td>
+    </tr>
+  </tbody>
+</table>
+:ET

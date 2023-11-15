@@ -1,0 +1,68 @@
+I"'<p>먼저 MyBatis와 JPA를 알아보기 전에 알아두면 좋은 두 개념을 살펴보자.</p>
+<h4 id="sql-mapper">SQL Mapper</h4>
+<p>SQL Mapper는 직접 작성한 SQL에 해당되는 데이터를 읽고, 결과값을 객체화시켜 사용할 수 있게 해준다. SQL에 데이터베이스에 따라 SQL 문법이 다르므로 특정 RDB에 종속적이며, SQL에 의존적인 개발하게 된다.</p>
+<ul>
+  <li>예) MyBatis</li>
+</ul>
+
+<h4 id="ormobject-relational-mapping">ORM(Object-Relational Mapping)</h4>
+<p>ORM은 객체는 객체대로 설계하고, 관계형 데이터베이스(RDB)는 관계형 데이터베이스대로 설계 후 ORM이 중간에서 매핑해주는 것을 의미한다. SQL이 아닌 관계형 데이터베이스에 데이터 자체를 매핑하기 때문에 SQL을 직접 작성할 필요가 없다.
+이로 인해 특정 데이터베이스에 구애받지 않으며, 제공하는 메서드와 코드 또한 직관적이어서 사용하기 편리하다.</p>
+<ul>
+  <li>예) Hibernate, JPA 등 <br />
+<br /></li>
+</ul>
+
+<h3 id="mybatisjava-persistence-framework">MyBatis(Java Persistence Framework)</h3>
+<p>MyBatis는 SQL Mapper의 일종으로 개발자가 지정한 SQL, 저장 프로시저 그리고 몇 가지 고급 매핑을 지원하는 영속성 프레임워크다. MyBatis는 JDBC로 처리하는 상당 부분의 코드와 파라미터 설정 및 결과 매핑을 대신해주고, 데이터베이스 record에 원시 타입과 Map 그리고 Java POJO를 설정하여 매핑하기 위해 XML과 Annotation을 사용할 수 있다. 즉, SQL문을 직접 작성하여 객체와 매핑시켜준다.</p>
+
+<h3 id="장점">장점</h3>
+<ul>
+  <li>SQL 쿼리를 직접 작성하므로 최적화된 쿼리를 구현할 수 있다.</li>
+  <li>SQL의 세부적인 내용 변경이나 동적 쿼리 사용 시 JPA보다 간편하게 구현 가능하다.</li>
+</ul>
+
+<h3 id="단점">단점</h3>
+<ul>
+  <li>쿼리를 직접 작성하기 때문에 데이터베이스 변경 시 수정할 부분이 굉장히 많아진다. (특정 데이터베이스에 종속적이다)</li>
+  <li>런타임 시 에러를 발견할 수 있다.</li>
+  <li>비슷한 코드를 반복적으로 작업하게 된다.</li>
+</ul>
+
+<p><br /></p>
+
+<hr />
+<h2 id="jpajava-persistence-api">JPA(Java Persistence API)</h2>
+<p>JPA는 Java ORM의 기술 표준에 대한 API 표준 명세로, 객체와 데이터베이스의 패러다임 불일치로 인한 문제점을 해결하기 위해 등장했다. 개발자는 객체지향적인 개발을 하고, JPA가 이를 관계형 데이터베이스에 맞게 SQL을 대신 생성해서 실행하기 때문에 SQL에 종속적인 개발이 아닌 객체 중심 개발을 할 수 있다.
+JPA는 인터페이스이기 때문에, 구현체로는 Hibernate, EclipseLink, DataNucleus 등이 있다. Spring에서 JPA를 사용할 땐 이 구현체들을 직접 다루는게 아니라 좀 더 쉽게 사용하기 위해 추상화시킨 Spring Data JPA를 사용한다. 덕분에 관계형 데이터베이스 외에 다른 저장소로 쉽게 교체할 수 있다. (예: Spring Data JPA -&gt; Spring Data MongoDB)</p>
+
+<h3 id="장점-1">장점</h3>
+<ul>
+  <li>객체 중심 개발을 하기 때문에 생산성이 향상되고, 유지보수 또한 편하다.</li>
+  <li>컴파일 시에 에러를 발견할 수 있다.</li>
+</ul>
+
+<h3 id="단점-1">단점</h3>
+<ul>
+  <li>객체지향과 관계형 데이터베이스 둘 다 이해해야 하기 때문에 러닝 커브가 높다.</li>
+</ul>
+
+<p><br /></p>
+
+<hr />
+<h2 id="개인적인-의견">개인적인 의견</h2>
+<p>요즘엔 QueryDsl 같은 조회용 프레임워크를 함께 사용하여 복잡한 연산도 깔끔하게 할 수 있다. 개인적으로 자바 개발자라면 한 번쯤 꼭 배워보는게 좋다고 생각하며, 언젠가는 꼭 실무에서 JPA를 사용해보고 싶다!</p>
+
+<p><br /></p>
+
+<hr />
+<p><br /> 
+<strong>참고</strong></p>
+<ul>
+  <li><a href="https://mybatis.org/mybatis-3/ko/index.html">https://mybatis.org/mybatis-3/ko/index.html</a></li>
+  <li><a href="https://dreaming-soohyun.tistory.com/entry/JPA%EC%99%80-MyBatis%EC%9D%98-%EC%B0%A8%EC%9D%B4-ORM%EA%B3%BC-SQL-Mapper">https://dreaming-soohyun.tistory.com/entry/JPA%EC%99%80-MyBatis%EC%9D%98-%EC%B0%A8%EC%9D%B4-ORM%EA%B3%BC-SQL-Mapper</a></li>
+  <li><a href="https://incheol-jung.gitbook.io/docs/q-and-a/spring/jpa-vs-mybatis">https://incheol-jung.gitbook.io/docs/q-and-a/spring/jpa-vs-mybatis</a></li>
+  <li>이동욱님의 책 [스프링 부트와 AWS로 혼자 구현하는 웹 서비스]</li>
+  <li>김영한님의 인프런 강의 [실전! 스프링 부트와 JPA 활용 시리즈] <a href="https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-JPA-%ED%99%9C%EC%9A%A9-1">https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-JPA-%ED%99%9C%EC%9A%A9-1</a></li>
+</ul>
+:ET

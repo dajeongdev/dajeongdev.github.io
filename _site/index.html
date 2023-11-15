@@ -816,14 +816,13 @@ xcopy [복사할 파일명] [복사할 위치] // 숨김파일도 ... <span clas
       </div>
       <a class="post-excerpt" href="/wiki/2023/11/13/thymeleaf-rest-controller.html">
         <p>
-        Thymeleaf와 @RestController
-
-개요
+        개요
 테스트를 해보려고 테스트 컨트롤러에 @RestController을 설정한 후 String으로 view 이름을 리턴했더니 화면에 입력한 view 이름이 그대로 나왔다.
 @RestController
 public class TestController {
 
-    @Get... <span class="read_more">...</span>
+    @GetMapping("/sample")
+    public... <span class="read_more">...</span>
         </p>
       </a>
       <div class="post-tags">
@@ -904,20 +903,20 @@ public class TestController {
       </div>
       <a class="post-excerpt" href="/wiki/2023/11/13/string-replacement.html">
         <p>
-        문자열 치환
-
-종류
+        종류
 
   replace()
   replaceAll()
-  replaceFirst()
+  replaceFirst() 
 
 
 
 replace(CharSequence target, CharSequence replacement)
 
   일치하는 문자열(target)을 대체할 문자(replacement)로 치환한다.
-    String str = "... <span class="read_more">...</span>
+
+
+String str = "가/나/다/라/마/... <span class="read_more">...</span>
         </p>
       </a>
       <div class="post-tags">
@@ -998,15 +997,13 @@ replace(CharSequence target, CharSequence replacement)
       </div>
       <a class="post-excerpt" href="/wiki/2023/11/13/stack.html">
         <p>
-        Stack
-
-특징
+        특징
 
   책을 쌓듯이 데이터를 차곡차곡 쌓아 올린 형태의 자료구조
   선형 구조
   같은 구조의 데이터를 정해진 방향으로만 쌓을 수 있다.
   후입선출(LIFO) 구조: 마지막에 삽입된 데이터를 가장 먼저 꺼낸다.
-  데이터가 없을 때 pop하는 오류를 stack-underflow, 스택의 크기 이상의... <span class="read_more">...</span>
+  데이터가 없을 때 pop하는 오류를 stack-underflow, 스택의 크기 이상의 데이터를 pu... <span class="read_more">...</span>
         </p>
       </a>
       <div class="post-tags">
@@ -1087,12 +1084,9 @@ replace(CharSequence target, CharSequence replacement)
       </div>
       <a class="post-excerpt" href="/wiki/2023/11/13/prime-number.html">
         <p>
-        소수 판별
+        소수
 
-소수
-
-  1과 자기 자신으로만 나누어지는 숫자
-
+  1과 자기 자신으로만 나누어지는 숫자 
 
 
 
@@ -1104,7 +1098,7 @@ public int solution(int N) {
     for (int i = 2; i &lt; N; i++) {
         if (check[i] == 0) {
             result++;
- ... <span class="read_more">...</span>
+        ... <span class="read_more">...</span>
         </p>
       </a>
       <div class="post-tags">
@@ -1185,17 +1179,16 @@ public int solution(int N) {
       </div>
       <a class="post-excerpt" href="/wiki/2023/11/13/prg-pattern.html">
         <p>
-        PRG 패턴과 RedirectAttributes
+        배경 및 문제점
 
-배경 및 문제점
-
-  POST로 가입하는 로직을 작성하다가 해당 페이지에서 새로고침을 하면 중복 가입이 되거나 성공 후 이동하는 로직에서 처리가 되지 않는 버그를 발견했다.
+  POST로 가입하는 로직을 작성하다가 해당 페이지에서 새로고침을 하면 중복 가입이 되거나 성공 후 이동하는 로직에서 처리가 되지 않는 버그를 발견했다.  
 
 
 
 해결 방안 (=PRG 패턴)
 @PostMapping("/add")
-public String ... <span class="read_more">...</span>
+public String addItemV5(Item item) {
+     ... <span class="read_more">...</span>
         </p>
       </a>
       <div class="post-tags">
@@ -1276,9 +1269,7 @@ public String ... <span class="read_more">...</span>
       </div>
       <a class="post-excerpt" href="/wiki/2023/11/13/n-number-convert.html">
         <p>
-        진수 변환
-
-10진수 → 2/8/16진수
+        10진수 → 2/8/16진수
 
 
   
@@ -1294,7 +1285,7 @@ public String ... <span class="read_more">...</span>
       static String
       java.lang.Integer
       toBinaryString(int i)
-  ... <span class="read_more">...</span>
+      10진... <span class="read_more">...</span>
         </p>
       </a>
       <div class="post-tags">
@@ -1375,19 +1366,17 @@ public String ... <span class="read_more">...</span>
       </div>
       <a class="post-excerpt" href="/wiki/2023/11/13/mysql-in.html">
         <p>
-        IN
-
-개념
+        개념
 
   여러 값을 OR 관계로 묶어서 나열하는 조건을 WHERE 절에 사용할 때 쓸 수 있는 키워드
   IN 연산자는 조건의 범위를 지정하는 데 사용된다.
-  값은 콤마(,)로 구분하여 괄호 내에 묶고, 이 값 중에서 하나 이상과 일치하면 조건에 맞는 것으로 평가된다.
+  값은 콤마(,)로 구분하여 괄호 내에 묶고, 이 값 중에서 하나 이상과 일치하면 조건에 맞는 것으로 평가된다. 
 
 
 
 예시
 -- OR 조건 표현
-where condition =... <span class="read_more">...</span>
+where condition = "A" ... <span class="read_more">...</span>
         </p>
       </a>
       <div class="post-tags">
@@ -1558,7 +1547,7 @@ public V getOrDefault(Object key, V defaultValue) {
 }
 
 
-  key가 존재하면 ke... <span class="read_more">...</span>
+  key가 존재하면 key... <span class="read_more">...</span>
         </p>
       </a>
       <div class="post-tags">
@@ -1639,9 +1628,7 @@ public V getOrDefault(Object key, V defaultValue) {
       </div>
       <a class="post-excerpt" href="/wiki/2023/11/13/java-regex-pattern-syntax-error.html">
         <p>
-        Dangling meta character ‘?’ near index 0
-
-에러
+        에러
 
 
 
@@ -1653,7 +1640,13 @@ String[] split = question.split("?");
 원인
 
   split() 메소드 사용시 특정한 문자를 regex로 사용하는 경우 동작하지 않는다.
-  * 특정한 문자: 이미 문법 상 사용 중인 특수문자 (|, &amp;, ^, *, ?... <span class="read_more">...</span>
+  * 특정한 문자: 이미 문법 상 사용 중인 특수문자 (|, &amp;, ^, *, ?, . 등) 
+
+
+
+해결 방법
+
+  regex 앞에 백슬래시(\)를 두 번 넣어주면 코드가... <span class="read_more">...</span>
         </p>
       </a>
       <div class="post-tags">
@@ -1734,9 +1727,7 @@ String[] split = question.split("?");
       </div>
       <a class="post-excerpt" href="/wiki/2023/11/13/intellij-shortcut.html">
         <p>
-        IntelliJ 단축키
-
-
+        
   
     
       설명
@@ -1752,7 +1743,8 @@ String[] split = question.split("?");
       접근제어자, 반환타입, 이름등 주요 정보 변경
       Ctrl + F6
     
- ... <span class="read_more">...</span>
+    
+      한 줄 ... <span class="read_more">...</span>
         </p>
       </a>
       <div class="post-tags">
@@ -1833,13 +1825,16 @@ String[] split = question.split("?");
       </div>
       <a class="post-excerpt" href="/wiki/2023/11/13/fibonacci.html">
         <p>
-        피보나치 수열
-
+        
   피보나치 수열은 재귀 함수의 대표적인 예시로, 첫째 및 둘째 항이 1이며 그 뒤의 모든 항은 바로 앞 두 항의 합인 수열이다.
     
       F(0) = 0, F(1) = 1일 때, 1 이상의 n에 대하여 F(n) = F(n-1) + F(n-2)
       재귀 함수: 자기 자신을 다시 호출해 작업을 수행하는 함수
-        public int fibon... <span class="read_more">...</span>
+    
+  
+
+
+public int fibonacci(int ... <span class="read_more">...</span>
         </p>
       </a>
       <div class="post-tags">
@@ -1920,12 +1915,10 @@ String[] split = question.split("?");
       </div>
       <a class="post-excerpt" href="/wiki/2023/11/13/default-method.html">
         <p>
-        default method
-
-기존의 인터페이스
+        기존의 인터페이스
 기존의 인터페이스는 추상 메서드만 존재할 수 있고, 이를 상속 받는 구현체에서 직접 해당 추상 메소드를 구현해야 한다. 
 이는 인터페이스에 메서드가 추가되면 그 인터페이스를 상속 받는 모든 구현체 클래스에 추가 메서드를 구현해주어야 하는 문제가 발생한다.
-이 경우 확장(op... <span class="read_more">...</span>
+이 경우 확장(open)은 할 수 있지만, 변경에... <span class="read_more">...</span>
         </p>
       </a>
       <div class="post-tags">
@@ -2006,12 +1999,10 @@ String[] split = question.split("?");
       </div>
       <a class="post-excerpt" href="/wiki/2023/11/13/cut-string-method.html">
         <p>
-        문자열 자르기
-
-1. String.split()
+        ##@ 1. String.split()
 
   지정한 구분자(정규표현식)로 문자열을 나눠 문자열 배열에 저장한다.
-  공백 포함
+  공백 포함 
 
 
 
@@ -2020,7 +2011,9 @@ String[] split = question.split("?");
   지정한 구분자(문자열)로 문자열을 나눈다.
   구분자 생략 시 공백이 디폴트
   생성자
-    StringTokenizer(String str) // 공백... <span class="read_more">...</span>
+
+
+StringTokenizer(String str) ... <span class="read_more">...</span>
         </p>
       </a>
       <div class="post-tags">
@@ -2101,9 +2094,7 @@ String[] split = question.split("?");
       </div>
       <a class="post-excerpt" href="/wiki/2023/11/13/ascii-to-string.html">
         <p>
-        아스키코드 문자 ↔ 숫자
-
-
+        
   
     
       10
@@ -2126,7 +2117,8 @@ String[] split = question.split("?");
       0x00
       NUL
       32
-  ... <span class="read_more">...</span>
+      0x20
+      ... <span class="read_more">...</span>
         </p>
       </a>
       <div class="post-tags">
@@ -2207,17 +2199,19 @@ String[] split = question.split("?");
       </div>
       <a class="post-excerpt" href="/wiki/2023/11/13/array-slice-method.html">
         <p>
-        배열 자르기
+        1. Stream의 skip과 limit
 
-1. Stream의 skip과 limit
-Arrays.stream.skip(num)
+Arrays.stream.skip(num)**
 
   skip은 숫자(num)만큼 아이템을 건너뛴 다음 그 뒤의 아이템으로 새로운 스트림을 생성한다.
-Arrays.stream.limit(num)
+
+
+Arrays.stream.limit(num)**
+
   limit은 지정한 개수(num)만큼 가져와서 새로운 스트림을 리턴한다.
 
 
-int[] array = {1, 2, 3, ... <span class="read_more">...</span>
+int[] array = {1, 2, 3, 4, ... <span class="read_more">...</span>
         </p>
       </a>
       <div class="post-tags">
@@ -2298,9 +2292,8 @@ int[] array = {1, 2, 3, ... <span class="read_more">...</span>
       </div>
       <a class="post-excerpt" href="/blog/2023/11/13/1-promise.html">
         <p>
-        한동안 쉬었던 블로그를 개편하고 다시 열심히 쌓아보려고 한다..!
+        한동안 쉬었던 블로그를 개편하고 다시 열심히 쌓아보려고 한다..! 
 열정을 믿지 말고 성실하게 꾸준히 해보자! 파이팅!
-
 
 
 공부 겸 위키용 블로그니까 틀린 부분이 있으면 언제든지 말씀해주세요~!
@@ -2308,97 +2301,6 @@ int[] array = {1, 2, 3, ... <span class="read_more">...</span>
         </p>
       </a>
       <div class="post-tags"><a class="post-tag" href="/tags.html#%EB%8B%A4%EC%A7%90">#다짐</a></div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/wiki/2022/11/13/LRU.html">
-          LRU
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Nov 13, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
-      </div>
-      <a class="post-excerpt" href="/wiki/2022/11/13/LRU.html">
-        <p>
-        LRU
-
-  LRU는 가장 오랫동안 참조되지 않은 페이지를 교체하는 방식이다.
-  사용된지 가장 오래된 페이지는 앞으로도 사용될 확률이 낮다는 가설에 의해 만들어진 알고리즘이다.
-
-
-
-LRU의 원리
-
-  캐시가 가득 찼을 때, 가장 오랫동안 참조되지 않은 페이지를 찾아서 없애는 방식으로 LRU를 구현할 수 있다.
-  페이지를... <span class="read_more">...</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#Algorithm">#Algorithm</a><a class="post-tag" href="/tags.html#Cache">#Cache</a>
-</div>
     </li>
 </ul>
 
@@ -2434,7 +2336,7 @@ LRU의 원리
   <ul>
     <li>
       <a href="/index.html">
-        All<span>19</span>
+        All<span>18</span>
       </a>
     </li>
 
@@ -2447,7 +2349,7 @@ LRU의 원리
     
       <li>
         <a href="/categories.html#h-wiki">
-          wiki <span>18</span>
+          wiki <span>17</span>
         </a>
       </li>
     

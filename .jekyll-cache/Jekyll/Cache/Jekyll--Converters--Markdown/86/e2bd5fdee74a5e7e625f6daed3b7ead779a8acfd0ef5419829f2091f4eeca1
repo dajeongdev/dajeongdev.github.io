@@ -1,0 +1,24 @@
+I"�<h3 id="에러">에러</h3>
+<p><img src="https://dajeongdev.github.io/assets/images/posts/java-regex-pattern-syntax-error.png" alt="error_image" />
+<br /></p>
+
+<h3 id="코드">코드</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">split</span> <span class="o">=</span> <span class="n">question</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">"?"</span><span class="o">);</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="원인">원인</h3>
+<ul>
+  <li>split() 메소드 사용시 특정한 문자를 regex로 사용하는 경우 동작하지 않는다.
+  * 특정한 문자: 이미 문법 상 사용 중인 특수문자 (|, &amp;, ^, *, ?, . 등) <br />
+<br /></li>
+</ul>
+
+<h3 id="해결-방법">해결 방법</h3>
+<ul>
+  <li>regex 앞에 <strong>백슬래시(\)</strong>를 <strong>두 번</strong> 넣어주면 코드가 정상적으로 동작한다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">split</span> <span class="o">=</span> <span class="n">question</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">"\\?"</span><span class="o">);</span>
+</code></pre></div></div>
+:ET

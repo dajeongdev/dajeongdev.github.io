@@ -12,8 +12,8 @@
 <meta property="og:title" content="MySQL IN">
 <meta name="author" content="Dajeong Park">
 <meta property="og:locale" content="ko">
-<meta name="description" content="IN">
-<meta property="og:description" content="IN">
+<meta name="description" content="개념 여러 값을 OR 관계로 묶어서 나열하는 조건을 WHERE 절에 사용할 때 쓸 수 있는 키워드 IN 연산자는 조건의 범위를 지정하는 데 사용된다. 값은 콤마(,)로 구분하여 괄호 내에 묶고, 이 값 중에서 하나 이상과 일치하면 조건에 맞는 것으로 평가된다.">
+<meta property="og:description" content="개념 여러 값을 OR 관계로 묶어서 나열하는 조건을 WHERE 절에 사용할 때 쓸 수 있는 키워드 IN 연산자는 조건의 범위를 지정하는 데 사용된다. 값은 콤마(,)로 구분하여 괄호 내에 묶고, 이 값 중에서 하나 이상과 일치하면 조건에 맞는 것으로 평가된다.">
 <link rel="canonical" href="http://localhost:4000/wiki/2023/11/13/mysql-in.html">
 <meta property="og:url" content="http://localhost:4000/wiki/2023/11/13/mysql-in.html">
 <meta property="og:site_name" content="Every Single Day">
@@ -22,7 +22,7 @@
 <meta name="twitter:card" content="summary">
 <meta property="twitter:title" content="MySQL IN">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2023-11-13T00:00:00+09:00","datePublished":"2023-11-13T00:00:00+09:00","description":"IN","headline":"MySQL IN","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2023/11/13/mysql-in.html"},"url":"http://localhost:4000/wiki/2023/11/13/mysql-in.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2023-11-13T00:00:00+09:00","datePublished":"2023-11-13T00:00:00+09:00","description":"개념 여러 값을 OR 관계로 묶어서 나열하는 조건을 WHERE 절에 사용할 때 쓸 수 있는 키워드 IN 연산자는 조건의 범위를 지정하는 데 사용된다. 값은 콤마(,)로 구분하여 괄호 내에 묶고, 이 값 중에서 하나 이상과 일치하면 조건에 맞는 것으로 평가된다.","headline":"MySQL IN","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2023/11/13/mysql-in.html"},"url":"http://localhost:4000/wiki/2023/11/13/mysql-in.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -667,18 +667,16 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <h3 id="in">IN</h3>
-
-<h4 id="개념">개념</h4>
+      <h3 id="개념">개념</h3>
 <ul>
   <li>여러 값을 OR 관계로 묶어서 나열하는 조건을 WHERE 절에 사용할 때 쓸 수 있는 키워드</li>
   <li>IN 연산자는 조건의 범위를 지정하는 데 사용된다.</li>
-  <li>값은 콤마(,)로 구분하여 괄호 내에 묶고, 이 값 중에서 하나 이상과 일치하면 조건에 맞는 것으로 평가된다.
+  <li>값은 콤마(,)로 구분하여 괄호 내에 묶고, 이 값 중에서 하나 이상과 일치하면 조건에 맞는 것으로 평가된다. <br>
 <br>
 </li>
 </ul>
 
-<h4 id="예시">예시</h4>
+<h3 id="예시">예시</h3>
 <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- OR 조건 표현</span>
 <span class="k">where</span> <span class="n">condition</span> <span class="o">=</span> <span class="nv">"A"</span> <span class="k">or</span> <span class="n">condition</span> <span class="o">=</span> <span class="nv">"B"</span><span class="p">;</span>
 
@@ -687,17 +685,17 @@ document.addEventListener('DOMContentLoaded', function(event) {
 </code></pre></div></div>
 <p><br></p>
 
-<h4 id="장점">장점</h4>
+<h3 id="장점">장점</h3>
 <ul>
   <li>목록에 넣을 값이 여러 개일 때, IN 연산자가 OR 연산자 보다 쓰기도, 보기도, 이해하기도 쉽다.</li>
   <li>IN을 사용하면 조건 순서를 보다 쉽게 관리할 수 있고, 연산자의 수도 줄어든다.</li>
   <li>IN 연산자가 OR 연산자 보다 실행 속도가 빠르다.</li>
-  <li>IN 연산자 안에 다른 SELECT문(서브 쿼리)를 넣을 수 있다.
+  <li>IN 연산자 안에 다른 SELECT문(서브 쿼리)를 넣을 수 있다. <br>
 <br>
 </li>
 </ul>
 
-<h5 id="참고">참고</h5>
+<h1 id="참고">참고</h1>
 <ul>
   <li>
 <a href="https://velog.io/@inyong_pang/MySQL-IN-%EC%A1%B0%EA%B1%B4"></a><a href="https://velog.io/@inyong_pang/MySQL-IN-%EC%A1%B0%EA%B1%B4">https://velog.io/@inyong_pang/MySQL-IN-조건</a>
@@ -714,10 +712,10 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/wiki/2023/11/13/cut-string-method.html" title="진수 변환">문자열 자르기</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/java-regex-pattern-syntax-error.html" title="진수 변환">Dangling meta character '?' near index 0</a></li>
-<li><a class="post-link" href="/wiki/2022/11/13/LRU.html" title="진수 변환">LRU</a></li>
+        <li><a class="post-link" href="/wiki/2023/11/13/windows-command.html" title="진수 변환">Windows 명령어</a></li>
 <li><a class="post-link" href="/wiki/2023/11/13/ascii-to-string.html" title="진수 변환">아스키코드 문자 ↔ 숫자</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/n-number-convert.html" title="진수 변환">진수 변환</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/thymeleaf-rest-controller.html" title="진수 변환">Thymeleaf와 @RestController</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>

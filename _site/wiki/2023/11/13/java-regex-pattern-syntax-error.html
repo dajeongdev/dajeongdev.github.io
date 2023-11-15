@@ -12,8 +12,8 @@
 <meta property="og:title" content="Dangling meta character ‘?’ near index 0">
 <meta name="author" content="Dajeong Park">
 <meta property="og:locale" content="ko">
-<meta name="description" content="Dangling meta character ‘?’ near index 0">
-<meta property="og:description" content="Dangling meta character ‘?’ near index 0">
+<meta name="description" content="에러">
+<meta property="og:description" content="에러">
 <link rel="canonical" href="http://localhost:4000/wiki/2023/11/13/java-regex-pattern-syntax-error.html">
 <meta property="og:url" content="http://localhost:4000/wiki/2023/11/13/java-regex-pattern-syntax-error.html">
 <meta property="og:site_name" content="Every Single Day">
@@ -22,7 +22,7 @@
 <meta name="twitter:card" content="summary">
 <meta property="twitter:title" content="Dangling meta character ‘?’ near index 0">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2023-11-13T00:00:00+09:00","datePublished":"2023-11-13T00:00:00+09:00","description":"Dangling meta character ‘?’ near index 0","headline":"Dangling meta character ‘?’ near index 0","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2023/11/13/java-regex-pattern-syntax-error.html"},"url":"http://localhost:4000/wiki/2023/11/13/java-regex-pattern-syntax-error.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2023-11-13T00:00:00+09:00","datePublished":"2023-11-13T00:00:00+09:00","description":"에러","headline":"Dangling meta character ‘?’ near index 0","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2023/11/13/java-regex-pattern-syntax-error.html"},"url":"http://localhost:4000/wiki/2023/11/13/java-regex-pattern-syntax-error.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -667,33 +667,30 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <h1 id="dangling-meta-character--near-index-0">Dangling meta character ‘?’ near index 0</h1>
-
-<h2 id="에러">에러</h2>
-<p><img src="../assets/images/posts/java-regex-pattern-syntax-error.png">
+      <h3 id="에러">에러</h3>
+<p><img src="https://dajeongdev.github.io/assets/images/posts/java-regex-pattern-syntax-error.png" alt="error_image">
 <br></p>
 
-<h2 id="코드">코드</h2>
+<h3 id="코드">코드</h3>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">split</span> <span class="o">=</span> <span class="n">question</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">"?"</span><span class="o">);</span>
 </code></pre></div></div>
 <p><br></p>
 
-<h2 id="원인">원인</h2>
+<h3 id="원인">원인</h3>
 <ul>
   <li>split() 메소드 사용시 특정한 문자를 regex로 사용하는 경우 동작하지 않는다.
-  * 특정한 문자: 이미 문법 상 사용 중인 특수문자 (|, &amp;, ^, *, ?, . 등)
+  * 특정한 문자: 이미 문법 상 사용 중인 특수문자 (|, &amp;, ^, *, ?, . 등) <br>
 <br>
 </li>
 </ul>
 
-<h2 id="해결-방법">해결 방법</h2>
+<h3 id="해결-방법">해결 방법</h3>
 <ul>
-  <li>regex 앞에 <strong>백슬래시(\)</strong>를 <strong>두 번</strong> 넣어주면 코드가 정상적으로 동작한다.
-    <div class="language-java highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">split</span> <span class="o">=</span> <span class="n">question</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">"\\?"</span><span class="o">);</span>
-</code></pre></div>    </div>
-  </li>
+  <li>regex 앞에 <strong>백슬래시(\)</strong>를 <strong>두 번</strong> 넣어주면 코드가 정상적으로 동작한다.</li>
 </ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">split</span> <span class="o">=</span> <span class="n">question</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">"\\?"</span><span class="o">);</span>
+</code></pre></div></div>
 
 
     </div>
@@ -705,10 +702,10 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/wiki/2023/11/13/thymeleaf-rest-controller.html" title="Map - getOrDefault(Object key, V defaultValue)">Thymeleaf와 @RestController</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/mysql-in.html" title="Map - getOrDefault(Object key, V defaultValue)">MySQL IN</a></li>
+        <li><a class="post-link" href="/wiki/2023/11/13/windows-command.html" title="Map - getOrDefault(Object key, V defaultValue)">Windows 명령어</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/stack.html" title="Map - getOrDefault(Object key, V defaultValue)">Stack</a></li>
+<li><a class="post-link" href="/blog/2023/11/13/1-promise.html" title="Map - getOrDefault(Object key, V defaultValue)">every single day</a></li>
 <li><a class="post-link" href="/wiki/2023/11/13/fibonacci.html" title="Map - getOrDefault(Object key, V defaultValue)">자바로 피보나치 수열 이해하기</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/windows-command.html" title="Map - getOrDefault(Object key, V defaultValue)">Windows 명령어</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>

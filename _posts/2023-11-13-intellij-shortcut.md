@@ -5,9 +5,6 @@ subtitle:
 categories: wiki
 tags: [IDE,IntelliJ]
 ---
-
-# IntelliJ 단축키
-
 |설명|단축키|
 |------|----|
 |이름 변경(Rename)|Shift + F6|
