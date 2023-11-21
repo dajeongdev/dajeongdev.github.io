@@ -1,0 +1,30 @@
+I"�<h3 id="배경">배경</h3>
+<p>코딩테스트로 문제를 풀다가 list에서 원소를 삭제하는 remove() 메소드를 사용할 때 값이 일치하면 삭제하고 싶은데 그냥 숫자를 넣으면 인덱스로 인식하는 것을 발견하였다. <br />
+<br /></p>
+
+<h3 id="integer-removeint-index">Integer remove(int index)</h3>
+<ul>
+  <li>파라미터를 int로 전달하면 해당 index의 값을 삭제한다.
+<br /></li>
+</ul>
+
+<h3 id="boolean-removeobject-o">boolean remove(Object o)</h3>
+<ul>
+  <li>파라미터로 Object 객체를 전달하면, List에서 해당 객체를 찾아서 <strong>첫번째</strong>로 나오는 값을 삭제한 뒤 값을 삭제하는 데 성공하면 <strong>true</strong>, 값이 없으면 <strong>false</strong>를 리턴한다.</li>
+  <li><strong>예시</strong> (프로그래머스 level 0 배열에서 원소 삭제하기)
+    <ul>
+      <li><a href="https://school.programmers.co.kr/learn/courses/30/lessons/181844">https://school.programmers.co.kr/learn/courses/30/lessons/181844</a>
+        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">delete_list</span><span class="o">)</span> <span class="o">{</span>
+<span class="nc">List</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">answer</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">arr</span><span class="o">).</span><span class="na">boxed</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="nc">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
+<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">delete_list</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+<span class="k">if</span> <span class="o">(</span><span class="n">answer</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">delete_list</span><span class="o">[</span><span class="n">i</span><span class="o">]))</span>
+        <span class="n">answer</span><span class="o">.</span><span class="na">remove</span><span class="o">(**</span><span class="nc">Integer</span><span class="o">.</span><span class="na">valueOf</span><span class="o">**(</span><span class="n">delete_list</span><span class="o">[</span><span class="n">i</span><span class="o">]));</span> <span class="c1">// (Integer)으로 형변환도 가능</span>
+<span class="k">return</span> <span class="n">answer</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">mapToInt</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">i</span><span class="o">).</span><span class="na">toArray</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>그래서 위처럼 Object로 인식할 수 있도록 <strong>Wrapper 클래스로(여기선 Integer) 형변환해주는 방법</strong>이 있다.</li>
+</ul>
+:ET

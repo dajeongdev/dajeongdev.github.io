@@ -5,7 +5,7 @@ subtitle: String.split(), StringTokenizer
 categories: wiki
 tags: [Java,Method]
 ---
-##@ 1. String.split()
+### 1. String.split()
 - 지정한 구분자(정규표현식)로 문자열을 나눠 문자열 배열에 저장한다.
 - 공백 포함   
 <br/>
