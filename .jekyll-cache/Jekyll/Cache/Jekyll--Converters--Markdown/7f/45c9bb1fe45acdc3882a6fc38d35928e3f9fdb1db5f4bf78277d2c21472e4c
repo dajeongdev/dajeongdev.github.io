@@ -1,0 +1,53 @@
+I"O<h3 id="배경">배경</h3>
+<p>현재 프로젝트에서 QueryDSL을 사용 중인데 여기에 집계함수를 사용하고 싶어서 사용자 함수 추가를 위해 서치 후 적용해보려고 했다. 그런데 이게 웬일.. Spring boot 3점대에서는 hibernate 6.1을 기본으로 사용하고 있어서 당장 올해 3월까지 올라온 블로그 글의 코드도 적용되지 않았다.. 그래서 한시간을 고생해서 적용해보고 고치고 하다가 김영한님 JPA 강의의 커뮤니티에 어떤 친절한 분이 해결방안을 올려주셨다.. 정말 천사,,</p>
+
+<p><img src="https://dajeongdev.github.io/assets/images/posts/spring-boot-3.2-hibernate-version.png" />
+<a href="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0.0-M4-Release-Notes">https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0.0-M4-Release-Notes</a>
+<br /></p>
+
+<h3 id="해결">해결</h3>
+<ol>
+  <li>FunctionContributor의 구현체를 만들어준다.
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomFunctionContributor</span> <span class="kd">implements</span> <span class="nc">FunctionContributor</span> <span class="o">{</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">contributeFunctions</span><span class="o">(</span><span class="nc">FunctionContributions</span> <span class="n">functionContributions</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">functionContributions</span><span class="o">.</span><span class="na">getFunctionRegistry</span><span class="o">()</span>
+            <span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s">"group_concat"</span><span class="o">,</span> <span class="k">new</span> <span class="nc">StandardSQLFunction</span><span class="o">(</span><span class="s">"group_concat"</span><span class="o">,</span> <span class="nc">StandardBasicTypes</span><span class="o">.</span><span class="na">STRING</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>src/main/resources 하위에 META-INF/services/org.hibernate.boot.model.FunctionContributor 파일을 생성한다.</p>
+  </li>
+  <li>
+    <p>해당 파일에 1번의 구현체를 등록한다.</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">패키지명.구현체</code> 이름의 형태로 등록</li>
+      <li>com.example.com.config.~Contributor</li>
+    </ul>
+  </li>
+</ol>
+
+<ul>
+  <li>yml 파일의 dialect 변경은 필요없음
+<br /></li>
+</ul>
+
+<h4 id="시도">시도</h4>
+<ul>
+  <li><a href="https://discourse.hibernate.org/t/migrate-hibernate-5-to-6-with-spring-boot-2-7-x-to-3/7787/2">https://discourse.hibernate.org/t/migrate-hibernate-5-to-6-with-spring-boot-2-7-x-to-3/7787/2</a></li>
+  <li><a href="https://discourse.hibernate.org/t/migration-of-dialect-to-hibernate-6/6956/16">https://discourse.hibernate.org/t/migration-of-dialect-to-hibernate-6/6956/16</a></li>
+  <li><a href="https://thisiswoo.github.io/development/using-jpa-querydsl-groupconcat-func.html">https://thisiswoo.github.io/development/using-jpa-querydsl-groupconcat-func.html</a>
+<br /></li>
+</ul>
+
+<p><strong>참고</strong></p>
+<ul>
+  <li><a href="https://www.inflearn.com/questions/1096265/hibernate-6-custom-%ED%95%A8%EC%88%98-%EB%93%B1%EB%A1%9D-%EB%B0%A9%EB%B2%95-%EA%B3%B5%EC%9C%A0"></a><a href="https://www.inflearn.com/questions/1096265/hibernate-6-custom-%ED%95%A8%EC%88%98-%EB%93%B1%EB%A1%9D-%EB%B0%A9%EB%B2%95-%EA%B3%B5%EC%9C%A0">https://www.inflearn.com/questions/1096265/hibernate-6-custom-함수-등록-방법-공유</a></li>
+  <li><a href="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0.0-M4-Release-Notes">https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0.0-M4-Release-Notes</a></li>
+  <li><a href="https://velog.io/@ttomy/%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%A0%95%EC%9D%98-dialectmatch-against%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0"></a><a href="https://velog.io/@ttomy/%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%A0%95%EC%9D%98-dialectmatch-against%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0">https://velog.io/@ttomy/사용자-정의-dialectmatch-against사용하기</a></li>
+</ul>
+:ET

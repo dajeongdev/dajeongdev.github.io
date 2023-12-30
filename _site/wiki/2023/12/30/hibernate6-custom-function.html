@@ -7,22 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>PRG 패턴과 RedirectAttributes | Every Single Day</title>
+<title>hibernate6 custom function(MySQL Dialect) | Every Single Day</title>
 <meta name="generator" content="Jekyll v4.2.2">
-<meta property="og:title" content="PRG 패턴과 RedirectAttributes">
+<meta property="og:title" content="hibernate6 custom function(MySQL Dialect)">
 <meta name="author" content="Dajeong Park">
 <meta property="og:locale" content="ko">
-<meta name="description" content="배경 및 문제점 POST로 가입하는 로직을 작성하다가 해당 페이지에서 새로고침을 하면 중복 가입이 되거나 성공 후 이동하는 로직에서 처리가 되지 않는 버그를 발견했다.">
-<meta property="og:description" content="배경 및 문제점 POST로 가입하는 로직을 작성하다가 해당 페이지에서 새로고침을 하면 중복 가입이 되거나 성공 후 이동하는 로직에서 처리가 되지 않는 버그를 발견했다.">
-<link rel="canonical" href="http://localhost:4000/wiki/2023/11/13/prg-pattern.html">
-<meta property="og:url" content="http://localhost:4000/wiki/2023/11/13/prg-pattern.html">
+<meta name="description" content="배경 현재 프로젝트에서 QueryDSL을 사용 중인데 여기에 집계함수를 사용하고 싶어서 사용자 함수 추가를 위해 서치 후 적용해보려고 했다. 그런데 이게 웬일.. Spring boot 3점대에서는 hibernate 6.1을 기본으로 사용하고 있어서 당장 올해 3월까지 올라온 블로그 글의 코드도 적용되지 않았다.. 그래서 한시간을 고생해서 적용해보고 고치고 하다가 김영한님 JPA 강의의 커뮤니티에 어떤 친절한 분이 해결방안을 올려주셨다.. 정말 천사,,">
+<meta property="og:description" content="배경 현재 프로젝트에서 QueryDSL을 사용 중인데 여기에 집계함수를 사용하고 싶어서 사용자 함수 추가를 위해 서치 후 적용해보려고 했다. 그런데 이게 웬일.. Spring boot 3점대에서는 hibernate 6.1을 기본으로 사용하고 있어서 당장 올해 3월까지 올라온 블로그 글의 코드도 적용되지 않았다.. 그래서 한시간을 고생해서 적용해보고 고치고 하다가 김영한님 JPA 강의의 커뮤니티에 어떤 친절한 분이 해결방안을 올려주셨다.. 정말 천사,,">
+<link rel="canonical" href="http://localhost:4000/wiki/2023/12/30/hibernate6-custom-function.html">
+<meta property="og:url" content="http://localhost:4000/wiki/2023/12/30/hibernate6-custom-function.html">
 <meta property="og:site_name" content="Every Single Day">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2023-11-13T00:00:00+09:00">
+<meta property="article:published_time" content="2023-12-30T00:00:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="PRG 패턴과 RedirectAttributes">
+<meta property="twitter:title" content="hibernate6 custom function(MySQL Dialect)">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2023-11-13T00:00:00+09:00","datePublished":"2023-11-13T00:00:00+09:00","description":"배경 및 문제점 POST로 가입하는 로직을 작성하다가 해당 페이지에서 새로고침을 하면 중복 가입이 되거나 성공 후 이동하는 로직에서 처리가 되지 않는 버그를 발견했다.","headline":"PRG 패턴과 RedirectAttributes","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2023/11/13/prg-pattern.html"},"url":"http://localhost:4000/wiki/2023/11/13/prg-pattern.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2023-12-30T00:00:00+09:00","datePublished":"2023-12-30T00:00:00+09:00","description":"배경 현재 프로젝트에서 QueryDSL을 사용 중인데 여기에 집계함수를 사용하고 싶어서 사용자 함수 추가를 위해 서치 후 적용해보려고 했다. 그런데 이게 웬일.. Spring boot 3점대에서는 hibernate 6.1을 기본으로 사용하고 있어서 당장 올해 3월까지 올라온 블로그 글의 코드도 적용되지 않았다.. 그래서 한시간을 고생해서 적용해보고 고치고 하다가 김영한님 JPA 강의의 커뮤니티에 어떤 친절한 분이 해결방안을 올려주셨다.. 정말 천사,,","headline":"hibernate6 custom function(MySQL Dialect)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2023/12/30/hibernate6-custom-function.html"},"url":"http://localhost:4000/wiki/2023/12/30/hibernate6-custom-function.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -617,11 +617,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">PRG 패턴과 RedirectAttributes</h1>
-  <h2 class="post-subtitle">redirect 시 GET, POST</h2>
+  <h1 class="post-title p-name" itemprop="name headline">hibernate6 custom function(MySQL Dialect)</h1>
+  <h2 class="post-subtitle"></h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2023-11-13T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Nov 13, 2023
+    <time class="dt-published" datetime="2023-12-30T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Dec 30, 2023
     </time>
 
     
@@ -658,50 +658,73 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
   </p>
 <div class="post-tags">
-<a class="post-tag" href="/tags.html#Java">#Java</a><a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#HTTP">#HTTP</a>
+<a class="post-tag" href="/tags.html#Hibernate6">#Hibernate6</a><a class="post-tag" href="/tags.html#MySQLDialect">#MySQLDialect</a><a class="post-tag" href="/tags.html#SpringBoot3">#SpringBoot3</a><a class="post-tag" href="/tags.html#QueryDSL">#QueryDSL</a><a class="post-tag" href="/tags.html#JPQL">#JPQL</a>
 </div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <h3 id="배경-및-문제점"><strong>배경 및 문제점</strong></h3>
+      <h3 id="배경">배경</h3>
+<p>현재 프로젝트에서 QueryDSL을 사용 중인데 여기에 집계함수를 사용하고 싶어서 사용자 함수 추가를 위해 서치 후 적용해보려고 했다. 그런데 이게 웬일.. Spring boot 3점대에서는 hibernate 6.1을 기본으로 사용하고 있어서 당장 올해 3월까지 올라온 블로그 글의 코드도 적용되지 않았다.. 그래서 한시간을 고생해서 적용해보고 고치고 하다가 김영한님 JPA 강의의 커뮤니티에 어떤 친절한 분이 해결방안을 올려주셨다.. 정말 천사,,</p>
+
+<p><img src="https://dajeongdev.github.io/assets/images/posts/spring-boot-3.2-hibernate-version.png">
+<a href="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0.0-M4-Release-Notes">https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0.0-M4-Release-Notes</a>
+<br>
+<br></p>
+
+<h3 id="해결">해결</h3>
+<ol>
+  <li>FunctionContributor의 구현체를 만들어준다.
+    <div class="language-java highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomFunctionContributor</span> <span class="kd">implements</span> <span class="nc">FunctionContributor</span> <span class="o">{</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">contributeFunctions</span><span class="o">(</span><span class="nc">FunctionContributions</span> <span class="n">functionContributions</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">functionContributions</span><span class="o">.</span><span class="na">getFunctionRegistry</span><span class="o">()</span>
+            <span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s">"group_concat"</span><span class="o">,</span> <span class="k">new</span> <span class="nc">StandardSQLFunction</span><span class="o">(</span><span class="s">"group_concat"</span><span class="o">,</span> <span class="nc">StandardBasicTypes</span><span class="o">.</span><span class="na">STRING</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>src/main/resources 하위에 META-INF/services/org.hibernate.boot.model.FunctionContributor 파일을 생성한다.</li>
+  <li>
+    <p>해당 파일에 1번의 구현체를 등록한다.</p>
+
+    <ul>
+      <li>
+<code class="language-plaintext highlighter-rouge">패키지명.구현체</code> 이름의 형태로 등록</li>
+      <li>com.example.com.config.~Contributor
+      -   yml 파일의 dialect 변경은 필요없음
+<br> <br>
+<br>
+</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="시도">시도</h3>
 <ul>
-  <li>POST로 가입하는 로직을 작성하다가 해당 페이지에서 새로고침을 하면 중복 가입이 되거나 성공 후 이동하는 로직에서 처리가 되지 않는 버그를 발견했다.  <br>
+  <li><a href="https://discourse.hibernate.org/t/migrate-hibernate-5-to-6-with-spring-boot-2-7-x-to-3/7787/2">https://discourse.hibernate.org/t/migrate-hibernate-5-to-6-with-spring-boot-2-7-x-to-3/7787/2</a></li>
+  <li><a href="https://discourse.hibernate.org/t/migration-of-dialect-to-hibernate-6/6956/16">https://discourse.hibernate.org/t/migration-of-dialect-to-hibernate-6/6956/16</a></li>
+  <li>
+<a href="https://thisiswoo.github.io/development/using-jpa-querydsl-groupconcat-func.html">https://thisiswoo.github.io/development/using-jpa-querydsl-groupconcat-func.html</a>
+<br>
 <br>
 </li>
 </ul>
 
-<h3 id="해결-방안-prg-패턴">해결 방안 (=PRG 패턴)</h3>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@PostMapping</span><span class="o">(</span><span class="s">"/add"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="nc">String</span> <span class="nf">addItemV5</span><span class="o">(</span><span class="nc">Item</span> <span class="n">item</span><span class="o">)</span> <span class="o">{</span>
-      <span class="n">itemRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">item</span><span class="o">);</span>
-      <span class="k">return</span> <span class="s">"redirect:/basic/items/"</span> <span class="o">+</span> <span class="n">item</span><span class="o">.</span><span class="na">getId</span><span class="o">();</span>
-<span class="o">}</span>
-</code></pre></div></div>
+<p><strong>참고</strong></p>
 <ul>
-  <li>회원 가입 메소드(POST)에서 새로고침을 하거나 성공 로직으로 넘어갈 때 forward를 사용했더니 url이 바뀌지 않는다는 것을 확인했다. 그래서 forward가 아닌 redirect를 사용하여 다시 로그인 view로 보내는 방식으로 해결했다.</li>
-  <li>forward는 서버 내부에서 일어나는 호출이기 때문에 URL이 바뀌지 않기 때문에 클라이언트가 인식하지 못한다. 반면에, redirect의 경우 클라이언트에 응답을 보냈다가, 클라이언트가 redirect path로 재요청하기 때문에 URL 경로도 변경된다.</li>
-  <li>즉, 마지막에 호출한 내용이 로그인 화면이 되는 것이다. 이후 새로 고침을 해도 로그인 화면으로 이동하게 되므로 문제를 해결할 수 있다.</li>
-  <li>이러한 해결 방식을 <strong>PRG(Post-Redirect-Get) 패턴</strong>이라고 한다. <br>
-<br>
+  <li>
+<a href="https://www.inflearn.com/questions/1096265/hibernate-6-custom-%ED%95%A8%EC%88%98-%EB%93%B1%EB%A1%9D-%EB%B0%A9%EB%B2%95-%EA%B3%B5%EC%9C%A0"></a><a href="https://www.inflearn.com/questions/1096265/hibernate-6-custom-%ED%95%A8%EC%88%98-%EB%93%B1%EB%A1%9D-%EB%B0%A9%EB%B2%95-%EA%B3%B5%EC%9C%A0">https://www.inflearn.com/questions/1096265/hibernate-6-custom-함수-등록-방법-공유</a>
 </li>
-</ul>
-
-<h3 id="redirectattributes">RedirectAttributes</h3>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@PostMapping</span><span class="o">(</span><span class="s">"/add"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="nc">String</span> <span class="nf">addItemV6</span><span class="o">(</span><span class="nc">Item</span> <span class="n">item</span><span class="o">,</span> <span class="nc">RedirectAttributes</span> <span class="n">redirectAttributes</span><span class="o">)</span> <span class="o">{</span>
-      <span class="nc">Item</span> <span class="n">saveItem</span> <span class="o">=</span> <span class="n">itemRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">item</span><span class="o">);</span>
-      <span class="n">redirectAttributes</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">"itemId"</span><span class="o">,</span> <span class="n">saveItem</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>
-      <span class="n">redirectAttributes</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">"status"</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
-      <span class="k">return</span> <span class="s">"redirect:/basic/items/{itemId}"</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<ul>
-  <li>URL 인코딩 및 @PathVariable과 쿼리 파라미터를 처리해주는 객체</li>
-  <li>추가된 속성이 @PathVariable에 포함되면 바인딩해주고, 나머지 값은 쿼리 파라미터로 처리한다.</li>
+  <li><a href="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0.0-M4-Release-Notes">https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0.0-M4-Release-Notes</a></li>
+  <li>
+<a href="https://velog.io/@ttomy/%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%A0%95%EC%9D%98-dialectmatch-against%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0"></a><a href="https://velog.io/@ttomy/%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%A0%95%EC%9D%98-dialectmatch-against%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0">https://velog.io/@ttomy/사용자-정의-dialectmatch-against사용하기</a>
+</li>
 </ul>
 
 
@@ -709,15 +732,15 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/wiki/2023/11/13/n-number-convert.html" title="진수 변환">진수 변환</a><a class="next" href="/wiki/2023/11/13/prime-number.html" title="자바로 소수 판별">자바로 소수 판별</a>
+<a class="previous" href="/wiki/2023/11/21/list-remove-method.html" title="List에서 원소 삭제하기 remove()">List에서 원소 삭제하기 remove()</a><span></span>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/blog/2023/11/13/1-promise.html" title="자바로 소수 판별">every single day</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/java-regex-pattern-syntax-error.html" title="자바로 소수 판별">Dangling meta character '?' near index 0</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/ascii-to-string.html" title="자바로 소수 판별">아스키코드 문자 ↔ 숫자</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/string-replacement.html" title="자바로 소수 판별">문자열 치환</a></li>
+        <li><a class="post-link" href="/wiki/2023/11/21/list-remove-method.html" title="">List에서 원소 삭제하기 remove()</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/map-getOrDefault.html" title="">Map - getOrDefault(Object key, V defaultValue)</a></li>
+<li><a class="post-link" href="/blog/2023/11/13/1-promise.html" title="">every single day</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/mybatis-jpa.html" title="">MyBatis와 JPA</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>
