@@ -7,22 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Map - getOrDefault(Object key, V defaultValue) | Every Single Day</title>
+<title>update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법 | Every Single Day</title>
 <meta name="generator" content="Jekyll v4.2.2">
-<meta property="og:title" content="Map - getOrDefault(Object key, V defaultValue)">
+<meta property="og:title" content="update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법">
 <meta name="author" content="Dajeong Park">
 <meta property="og:locale" content="ko">
-<meta name="description" content="Map - getOrDefault(Object key, V defaultValue) public V getOrDefault(Object key, V defaultValue) { Node&lt;K,V&gt; e; return (e = getNode(key)) == null ? defaultValue : e.value; } key가 존재하면 key의 value를 반환하고, 없으면 설정한 디폴트 값을 반환한다.">
-<meta property="og:description" content="Map - getOrDefault(Object key, V defaultValue) public V getOrDefault(Object key, V defaultValue) { Node&lt;K,V&gt; e; return (e = getNode(key)) == null ? defaultValue : e.value; } key가 존재하면 key의 value를 반환하고, 없으면 설정한 디폴트 값을 반환한다.">
-<link rel="canonical" href="http://localhost:4000/wiki/2023/11/13/map-getOrDefault.html">
-<meta property="og:url" content="http://localhost:4000/wiki/2023/11/13/map-getOrDefault.html">
+<meta name="description" content="배경 update문의 결과를 확인하는데 생성일 컬럼이 null로 update 되는 문제를 발견했다.">
+<meta property="og:description" content="배경 update문의 결과를 확인하는데 생성일 컬럼이 null로 update 되는 문제를 발견했다.">
+<link rel="canonical" href="http://localhost:4000/wiki/2024/01/12/jpa-created-date-column-null.html">
+<meta property="og:url" content="http://localhost:4000/wiki/2024/01/12/jpa-created-date-column-null.html">
 <meta property="og:site_name" content="Every Single Day">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2023-11-13T00:00:00+09:00">
+<meta property="article:published_time" content="2024-01-12T00:00:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="Map - getOrDefault(Object key, V defaultValue)">
+<meta property="twitter:title" content="update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2023-11-13T00:00:00+09:00","datePublished":"2023-11-13T00:00:00+09:00","description":"Map - getOrDefault(Object key, V defaultValue) public V getOrDefault(Object key, V defaultValue) { Node&lt;K,V&gt; e; return (e = getNode(key)) == null ? defaultValue : e.value; } key가 존재하면 key의 value를 반환하고, 없으면 설정한 디폴트 값을 반환한다.","headline":"Map - getOrDefault(Object key, V defaultValue)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2023/11/13/map-getOrDefault.html"},"url":"http://localhost:4000/wiki/2023/11/13/map-getOrDefault.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2024-01-12T00:00:00+09:00","datePublished":"2024-01-12T00:00:00+09:00","description":"배경 update문의 결과를 확인하는데 생성일 컬럼이 null로 update 되는 문제를 발견했다.","headline":"update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2024/01/12/jpa-created-date-column-null.html"},"url":"http://localhost:4000/wiki/2024/01/12/jpa-created-date-column-null.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -617,11 +617,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">Map - getOrDefault(Object key, V defaultValue)</h1>
+  <h1 class="post-title p-name" itemprop="name headline">update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법</h1>
   <h2 class="post-subtitle"></h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2023-11-13T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Nov 13, 2023
+    <time class="dt-published" datetime="2024-01-12T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Jan 12, 2024
     </time>
 
     
@@ -661,35 +661,50 @@ document.addEventListener('DOMContentLoaded', function(event) {
     <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
   </p>
 <div class="post-tags">
-<a class="post-tag" href="/tags.html#Java">#Java</a><a class="post-tag" href="/tags.html#Map">#Map</a><a class="post-tag" href="/tags.html#Method">#Method</a>
+<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#JPA">#JPA</a>
 </div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <h3 id="map---getordefaultobject-key-v-defaultvalue">Map - getOrDefault(Object key, V defaultValue)</h3>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="no">V</span> <span class="nf">getOrDefault</span><span class="o">(</span><span class="nc">Object</span> <span class="n">key</span><span class="o">,</span> <span class="no">V</span> <span class="n">defaultValue</span><span class="o">)</span> <span class="o">{</span>
-		<span class="nc">Node</span><span class="o">&lt;</span><span class="no">K</span><span class="o">,</span><span class="no">V</span><span class="o">&gt;</span> <span class="n">e</span><span class="o">;</span>
-		<span class="k">return</span> <span class="o">(</span><span class="n">e</span> <span class="o">=</span> <span class="n">getNode</span><span class="o">(</span><span class="n">key</span><span class="o">))</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">defaultValue</span> <span class="o">:</span> <span class="n">e</span><span class="o">.</span><span class="na">value</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></div></div>
+      <h3 id="배경">배경</h3>
 <ul>
-  <li>key가 존재하면 key의 value를 반환하고, 없으면 설정한 디폴트 값을 반환한다. <br>
+  <li>update문의 결과를 확인하는데 생성일 컬럼이 null로 update 되는 문제를 발견했다. <br>
 <br>
 </li>
 </ul>
 
-<h4 id="사용-예시-프로그래머스-level-2-위장">사용 예시 (프로그래머스 level 2 위장)</h4>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[][]</span> <span class="n">clothes1</span> <span class="o">=</span> <span class="o">/{/{</span><span class="s">"yellow_hat"</span><span class="o">,</span> <span class="s">"headgear"</span><span class="o">/},</span> 
-			<span class="o">/{</span><span class="s">"blue_sunglasses"</span><span class="o">,</span> <span class="s">"eyewear"</span><span class="o">/},</span> 
-			<span class="o">/{</span><span class="s">"green_turban"</span><span class="o">,</span> <span class="s">"headgear"</span><span class="o">/}/};</span>
-<span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
-<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">clothes</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-		<span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">clothes</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">1</span><span class="o">],</span> <span class="n">map</span><span class="o">.</span><span class="na">getOrDefault</span><span class="o">(</span><span class="n">clothes</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">1</span><span class="o">],</span> <span class="mi">1</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></div></div>
+<h3 id="원인">원인</h3>
 <ul>
-  <li>HashMap은 동일한 key에 value를 추가할 경우 value가 덮어쓰기 되기 때문에 getOrDefault() 메소드를 사용하여 예시처럼 카운트를 추가하는 등의 방법을 사용할 수 있다.</li>
+  <li>정확히는 생성일 컬럼에 이름을 설정하기 위해 붙인 @Column 어노테이션의 옵션 중 하나인 updatable의 기본값이 true라서 값을 설정해주지 않은 생성일 컬럼에 null이 update 된 것이다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Target</span><span class="o">({</span><span class="no">METHOD</span><span class="o">,</span> <span class="no">FIELD</span><span class="o">})</span> 
+<span class="nd">@Retention</span><span class="o">(</span><span class="no">RUNTIME</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="nc">Column</span> <span class="o">{</span>
+	    <span class="cm">/**
+	     * (Optional) Whether the column is included in SQL UPDATE 
+	     * statements generated by the persistence provider.
+	     */</span>
+	    <span class="kt">boolean</span> <span class="nf">updatable</span><span class="o">()</span> <span class="k">default</span> <span class="kc">true</span><span class="o">;</span>
+  <span class="o">}</span>
+</code></pre></div></div>
+<p><br></p>
+
+<h3 id="해결-방법">해결 방법</h3>
+<ul>
+  <li>그래서 @Column 어노테이션의 updatable 옵션을 false로 지정해주어야 한다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@CreatedDate</span>
+<span class="nd">@Column</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"created_date_time"</span><span class="o">,</span> <span class="o">**</span><span class="n">updatable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">**)</span>
+<span class="kd">private</span> <span class="nc">LocalDateTime</span> <span class="n">createdDateTime</span><span class="o">;</span>
+</code></pre></div></div>
+<p><br></p>
+
+<h4 id="참고">참고</h4>
+<ul>
+  <li>https://wakestand.tistory.com/935</li>
 </ul>
 
 
@@ -697,15 +712,15 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/wiki/2023/11/13/java-regex-pattern-syntax-error.html" title="Dangling meta character '?' near index 0">Dangling meta character '?' near index...</a><a class="next" href="/wiki/2023/11/13/mybatis-jpa.html" title="MyBatis와 JPA">MyBatis와 JPA</a>
+<a class="previous" href="/wiki/2023/12/30/hibernate6-custom-function.html" title="hibernate6 custom function(MySQL Dialect)">hibernate6 custom function(MySQL Dialect)</a><span></span>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/wiki/2023/11/13/cut-string-method.html" title="MyBatis와 JPA">문자열 자르기</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/n-number-convert.html" title="MyBatis와 JPA">진수 변환</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/prime-number.html" title="MyBatis와 JPA">자바로 소수 판별</a></li>
-<li><a class="post-link" href="/wiki/2024/01/12/jpa-created-date-column-null.html" title="MyBatis와 JPA">update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법</a></li>
+        <li><a class="post-link" href="/wiki/2024/01/12/jpa-created-date-column-null.html" title="">update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/intellij-shortcut.html" title="">IntelliJ 단축키 정리</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/cut-string-method.html" title="">문자열 자르기</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/java-regex-pattern-syntax-error.html" title="">Dangling meta character '?' near index 0</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>
