@@ -1,4 +1,60 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2024-01-12T14:33:37+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법</title><link href="http://localhost:4000/wiki/2024/01/12/jpa-created-date-column-null.html" rel="alternate" type="text/html" title="update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법" /><published>2024-01-12T00:00:00+09:00</published><updated>2024-01-12T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/01/12/jpa-created-date-column-null</id><content type="html" xml:base="http://localhost:4000/wiki/2024/01/12/jpa-created-date-column-null.html"><![CDATA[<h3 id="배경">배경</h3>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2024-01-30T17:14:19+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">SpringBoot 3.2부터 @PathVariable 이름 미지정 시 에러</title><link href="http://localhost:4000/wiki/2024/01/17/pathvariable-name-missing.html" rel="alternate" type="text/html" title="SpringBoot 3.2부터 @PathVariable 이름 미지정 시 에러" /><published>2024-01-17T00:00:00+09:00</published><updated>2024-01-17T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/01/17/pathvariable-name-missing</id><content type="html" xml:base="http://localhost:4000/wiki/2024/01/17/pathvariable-name-missing.html"><![CDATA[<h3 id="배경">배경</h3>
+<ul>
+  <li>팀원이 작업한 코드를 pull 받아서 실행시켰는데 아래처럼 에러가 발생했다. 그런데 팀원이 올리기 전에 실행시켰을 땐 발생하지 않았던 에러가 왜 내 로컬에서는 발생했을까?
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">IllegalArgumentException</span><span class="o">:</span> <span class="nc">Name</span> <span class="k">for</span> <span class="n">argument</span> <span class="n">of</span> <span class="n">type</span> <span class="o">[</span><span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">String</span><span class="o">]</span> <span class="n">not</span> <span class="n">specified</span><span class="o">,</span> <span class="n">and</span> <span class="n">parameter</span> <span class="n">name</span> <span class="n">information</span> <span class="n">not</span> <span class="n">found</span> <span class="n">in</span> <span class="kd">class</span> <span class="nc">file</span> <span class="n">either</span><span class="o">.</span>
+</code></pre></div>    </div>
+    <p><br /></p>
+  </li>
+</ul>
+
+<h3 id="원인">원인</h3>
+<ul>
+  <li>Spring Boot 3.2 이전에는 경로의 변수명와 @PathVariable의 변수명이 같을 때 생략할 수 있었다.
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/{id}"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nc">String</span> <span class="nf">testMethod</span><span class="o">(</span><span class="nd">@PathVariable</span> <span class="nc">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{...}</span>
+</code></pre></div>    </div>
+    <p><img src="https://dajeongdev.github.io/assets/images/posts/parameter-name-retention.png" /></p>
+  </li>
+  <li>Spring Boot 3.2 전에는 바이트코드를 파싱해서 매개변수 이름을 추론하려고 시도했지만 3.2 부터는 이 부분이 사라져서 @PathVariable을 포함한 몇몇 어노테이션(@RequestParam, @Autowired, @ConfigurationProperties)에서 매개변수 인식 문제가 발생하고 있다.</li>
+  <li><a href="https://github.com/spring-projects/spring-framework/wiki/Upgrading-to-Spring-Framework-6.x#parameter-name-retention">공식 문서 참고</a>
+<br /></li>
+</ul>
+
+<h3 id="해결방법">해결방법</h3>
+<ol>
+  <li><strong>어노테이션에 이름을 생략하지 않고 항상 적는다.</strong>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/{id}"</span><span class="o">)</span>
+ <span class="kd">public</span> <span class="nc">String</span> <span class="nf">testMethod</span><span class="o">(</span><span class="nd">@PathVariable</span><span class="o">(</span><span class="s">"id"</span><span class="o">)</span> <span class="nc">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{...}</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>컴파일 시점에 -parameters 옵션을 적용한다.</strong>
+    <ol>
+      <li>IntelliJ IDEA에서 File -&gt; Settings를 연다. (Mac은 IntelliJ IDEA -&gt; Settings)</li>
+      <li>Build, Execution, Deployment → Compiler → Java Compiler로 이동한다.</li>
+      <li>Additional command line parameters라는 항목에 다음을 추가한다. (<code class="language-plaintext highlighter-rouge">-parameters</code>)</li>
+      <li>out 폴더를 삭제하고 다시 실행한다. <strong>꼭 out 폴더를 삭제해야 다시 컴파일이 일어난다.</strong></li>
+    </ol>
+  </li>
+  <li><strong>Gradle로 빌드하고 실행한다.</strong>
+    <ul>
+      <li>참고로 이 문제는 Build, Execution, Deployment -&gt; Build Tools -&gt; Gradle에서 Build and run using를 IntelliJ IDEA로 선택한 경우에만 발생한다.</li>
+      <li>Gradle로 선택한 경우에는 Gradle이 컴파일 시점에 해당 옵션을 자동으로 적용해준다.
+<br /></li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="나의-의견">나의 의견</h4>
+<ul>
+  <li>결국 김영한님 강의를 많이 봤던 나는 프로젝트 초반에 Build and run using 설정을 IntelliJ로 바꾸고 사용 중이었고, 팀원은 Gradle로 빌드 및 실행을 하고 있어서 발생한 문제였다.</li>
+  <li>나 또한 설정을 바꿨지만, Spring Boot 3.2부터 이름을 붙이지 않으면 에러가 발생할 수도 있는 부분이기 때문에 우리 팀은 해결방법 1번을 선택하여 이름을 일관적이게 붙여주기로 결정했다.
+<br /></li>
+</ul>
+
+<h4 id="참고">참고</h4>
+<ul>
+  <li><a href="https://www.inflearn.com/questions/1088283/pathvariable-%EB%B3%80%EC%88%98%EB%AA%85-%EA%B0%99%EC%9D%84%EB%95%8C-%EC%83%9D%EB%9E%B5%EC%8B%9C-%EC%98%A4%EB%A5%98-%EB%B9%8C%EB%93%9C-%EC%84%A4%EC%A0%95%EC%9D%84-gradle%EB%A1%9C-%ED%95%98%EB%A9%B4-%ED%95%B4%EA%B2%B0%EB%90%98%EB%8A%94-%EA%B2%83-%EA%B0%99%EC%8A%B5%EB%8B%88%EB%8B%A4">https://www.inflearn.com/questions/1088283</a></li>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Spring" /><category term="SpringBoot" /><summary type="html"><![CDATA[배경 팀원이 작업한 코드를 pull 받아서 실행시켰는데 아래처럼 에러가 발생했다. 그런데 팀원이 올리기 전에 실행시켰을 땐 발생하지 않았던 에러가 왜 내 로컬에서는 발생했을까? java.lang.IllegalArgumentException: Name for argument of type [java.lang.String] not specified, and parameter name information not found in class file either.]]></summary></entry><entry><title type="html">update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법</title><link href="http://localhost:4000/wiki/2024/01/12/jpa-created-date-column-null.html" rel="alternate" type="text/html" title="update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법" /><published>2024-01-12T00:00:00+09:00</published><updated>2024-01-12T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/01/12/jpa-created-date-column-null</id><content type="html" xml:base="http://localhost:4000/wiki/2024/01/12/jpa-created-date-column-null.html"><![CDATA[<h3 id="배경">배경</h3>
 <ul>
   <li>update문의 결과를 확인하는데 생성일 컬럼이 null로 update 되는 문제를 발견했다. <br />
 <br /></li>
@@ -112,40 +168,7 @@
     </ul>
   </li>
   <li>그래서 위처럼 Object로 인식할 수 있도록 <strong>Wrapper 클래스로(여기선 Integer) 형변환해주는 방법</strong>이 있다.</li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="List" /><category term="Method" /><summary type="html"><![CDATA[배경 코딩테스트로 문제를 풀다가 list에서 원소를 삭제하는 remove() 메소드를 사용할 때 값이 일치하면 삭제하고 싶은데 그냥 숫자를 넣으면 인덱스로 인식하는 것을 발견하였다.]]></summary></entry><entry><title type="html">default method</title><link href="http://localhost:4000/wiki/2023/11/13/default-method.html" rel="alternate" type="text/html" title="default method" /><published>2023-11-13T00:00:00+09:00</published><updated>2023-11-13T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2023/11/13/default-method</id><content type="html" xml:base="http://localhost:4000/wiki/2023/11/13/default-method.html"><![CDATA[<h3 id="기존의-인터페이스">기존의 인터페이스</h3>
-<p>기존의 인터페이스는 추상 메서드만 존재할 수 있고, 이를 상속 받는 구현체에서 직접 해당 추상 메소드를 구현해야 한다. 
-이는 인터페이스에 메서드가 추가되면 그 인터페이스를 상속 받는 모든 구현체 클래스에 추가 메서드를 구현해주어야 하는 문제가 발생한다.
-이 경우 <strong>확장(open)은 할 수 있지만, 변경에 대한 폐쇄(close)는 위반했다</strong>고 할 수 있다. (객체 지향의 원칙 중 OCP) 
-<strong>새로운 메소드가 인터페이스에 추가된다는 이유로 새로운 메소드를 사용하지 않는 구현체에도 추가적으로 구현을 해야 하기 때문</strong>이다. 즉, 기존의 코드가 변경되어버린다. <br />
-<br /></p>
-
-<h3 id="default-method">default method</h3>
-<p>JAVA 8부터 추가된 default method를 통해 인터페이스에서도 메소드를 구현할 수 있게 되었다.
-인터페이스에 default 메소드를 추가해도 구현체에 추가적인 변경을 하지 않기 때문에 <strong>기존 구현체의 코드 변경 없이 확장할 수 있게 된 것</strong> 이다.
-<br /></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">TestInterface</span> <span class="o">{</span>
-		<span class="kt">void</span> <span class="nf">testAbstractMethod1</span><span class="o">();</span>
-		<span class="kt">void</span> <span class="nf">testAbstractMethod2</span><span class="o">();</span>
-
-		<span class="k">default</span> <span class="nc">String</span> <span class="nf">defaultMethod1</span><span class="o">()</span> <span class="o">{</span>
-				<span class="c1">// 구현 코드</span>
-		<span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p><br /></p>
-
-<h3 id="추가">추가</h3>
-<p>자바 8부터는 이전 버전과는 다르게 추상 클래스를 그렇게 많이 쓰지 않고, 추상 클래스가 하던 일을 많은 부분 인터페이스가 하게 되었기 때문에 정말 필요한 경우가 아니라면 인터페이스에 있는 default 메소드를 사용해서 시도해보는 것이 좋다.
-<br />
-<br /></p>
-
-<h2 id="참고">참고</h2>
-<ul>
-  <li><a href="https://velog.io/@heoseungyeon%EB%94%94%ED%8F%B4%ED%8A%B8-%EB%A9%94%EC%84%9C%EB%93%9CDefault-Method">https://velog.io/@heoseungyeon/디폴트-메서드Default-Method</a></li>
-  <li><a href="https://www.inflearn.com/course/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/dashboard">https://www.inflearn.com/course/디자인-패턴/dashboard</a>
-```</li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="Java8" /><summary type="html"><![CDATA[기존의 인터페이스 기존의 인터페이스는 추상 메서드만 존재할 수 있고, 이를 상속 받는 구현체에서 직접 해당 추상 메소드를 구현해야 한다. 이는 인터페이스에 메서드가 추가되면 그 인터페이스를 상속 받는 모든 구현체 클래스에 추가 메서드를 구현해주어야 하는 문제가 발생한다. 이 경우 확장(open)은 할 수 있지만, 변경에 대한 폐쇄(close)는 위반했다고 할 수 있다. (객체 지향의 원칙 중 OCP) 새로운 메소드가 인터페이스에 추가된다는 이유로 새로운 메소드를 사용하지 않는 구현체에도 추가적으로 구현을 해야 하기 때문이다. 즉, 기존의 코드가 변경되어버린다.]]></summary></entry><entry><title type="html">자바로 피보나치 수열 이해하기</title><link href="http://localhost:4000/wiki/2023/11/13/fibonacci.html" rel="alternate" type="text/html" title="자바로 피보나치 수열 이해하기" /><published>2023-11-13T00:00:00+09:00</published><updated>2023-11-13T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2023/11/13/fibonacci</id><content type="html" xml:base="http://localhost:4000/wiki/2023/11/13/fibonacci.html"><![CDATA[<ul>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="List" /><category term="Method" /><summary type="html"><![CDATA[배경 코딩테스트로 문제를 풀다가 list에서 원소를 삭제하는 remove() 메소드를 사용할 때 값이 일치하면 삭제하고 싶은데 그냥 숫자를 넣으면 인덱스로 인식하는 것을 발견하였다.]]></summary></entry><entry><title type="html">자바로 피보나치 수열 이해하기</title><link href="http://localhost:4000/wiki/2023/11/13/fibonacci.html" rel="alternate" type="text/html" title="자바로 피보나치 수열 이해하기" /><published>2023-11-13T00:00:00+09:00</published><updated>2023-11-13T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2023/11/13/fibonacci</id><content type="html" xml:base="http://localhost:4000/wiki/2023/11/13/fibonacci.html"><![CDATA[<ul>
   <li>피보나치 수열은 재귀 함수의 대표적인 예시로, 첫째 및 둘째 항이 1이며 그 뒤의 모든 항은 바로 앞 두 항의 합인 수열이다.
     <ul>
       <li>F(0) = 0, F(1) = 1일 때, 1 이상의 n에 대하여 F(n) = F(n-1) + F(n-2)</li>

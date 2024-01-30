@@ -1,6 +1,6 @@
 ---
 layout: post
-title: @PathVariable 이름 미지정 시 에러
+title: SpringBoot 3.2부터 @PathVariable 이름 미지정 시 에러
 subtitle: 
 categories: wiki
 tags: [Spring, SpringBoot]
