@@ -1,4 +1,70 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2024-01-30T17:14:19+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">SpringBoot 3.2부터 @PathVariable 이름 미지정 시 에러</title><link href="http://localhost:4000/wiki/2024/01/17/pathvariable-name-missing.html" rel="alternate" type="text/html" title="SpringBoot 3.2부터 @PathVariable 이름 미지정 시 에러" /><published>2024-01-17T00:00:00+09:00</published><updated>2024-01-17T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/01/17/pathvariable-name-missing</id><content type="html" xml:base="http://localhost:4000/wiki/2024/01/17/pathvariable-name-missing.html"><![CDATA[<h3 id="배경">배경</h3>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2024-02-26T16:35:32+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">String 배열 -&amp;gt; String</title><link href="http://localhost:4000/wiki/2024/02/26/string-array-to-string.html" rel="alternate" type="text/html" title="String 배열 -&amp;gt; String" /><published>2024-02-26T00:00:00+09:00</published><updated>2024-02-26T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/02/26/string-array-to-string</id><content type="html" xml:base="http://localhost:4000/wiki/2024/02/26/string-array-to-string.html"><![CDATA[<h3 id="배경">배경</h3>
+<ul>
+  <li>코딩테스트 문제를 풀면서 String 배열을 String으로 변환하는 작업이 자주 나와서 기록해두려고 한다. <br />
+<br /></li>
+</ul>
+
+<h3 id="1-stringjoincharsequence-delimiter-charsequence-elements">1. String.join(CharSequence delimiter, CharSequence… elements)</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">join()</code> 메서드는 delimiter(구분자)를 사용하여 elements(대상 배열)을 문자열을 리턴할 수 있다.</li>
+  <li>String.join() 메서드는 Java 1.8 이상부터 사용 가능
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">strArr</span> <span class="o">=</span> <span class="o">{</span><span class="s">"hello"</span><span class="o">,</span> <span class="s">"java"</span><span class="o">};</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">join</span><span class="o">(</span><span class="s">","</span><span class="o">,</span> <span class="n">strArr</span><span class="o">));</span>
+<span class="c1">// 결과 : hello,java</span>
+</code></pre></div>    </div>
+    <p><br /></p>
+  </li>
+</ul>
+
+<h3 id="2-arraystostringobject-a">2. Arrays.toString(Object[] a)</h3>
+<ul>
+  <li>Arrays 클래스의 <code class="language-plaintext highlighter-rouge">toString()</code> 메서드를 사용하여 배열 모양의 문자열을 리턴할 수 있다.
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">strArr</span> <span class="o">=</span> <span class="o">{</span><span class="s">"hello"</span><span class="o">,</span> <span class="s">"java"</span><span class="o">};</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">strArr</span><span class="o">));</span>
+<span class="c1">// 결과 : [hello, java]</span>
+</code></pre></div>    </div>
+    <p><br /></p>
+  </li>
+</ul>
+
+<h3 id="3-stream---collectorsjoining">3. Stream - Collectors.joining()</h3>
+<ul>
+  <li>Stream의 <code class="language-plaintext highlighter-rouge">Collectors.joining()</code> 메서드를 사용하여 문자열을 리턴할 수 있다.</li>
+  <li>Stream은 Java 1.8 이상부터 사용 가능
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">strArr</span> <span class="o">=</span> <span class="o">{</span><span class="s">"hello"</span><span class="o">,</span> <span class="s">"java"</span><span class="o">};</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">strArr</span><span class="o">).</span><span class="na">collect</span><span class="o">(</span><span class="nc">Collectors</span><span class="o">.</span><span class="na">joining</span><span class="o">()));</span>
+<span class="c1">// 결과 : hellojava</span>
+</code></pre></div>    </div>
+    <p><br /></p>
+  </li>
+</ul>
+
+<h3 id="4-stringbuilderappendstring-str">4. StringBuilder.append(String str)</h3>
+<ul>
+  <li>가장 기본적인 방법 중에는 StringBuilder를 생성하여 <code class="language-plaintext highlighter-rouge">append()</code> 메서드를 사용하여 문자열을 리턴할 수 있다.</li>
+  <li>빠르지만 for문을 사용하기 때문에 코드가 조금 길어진다는 단점이 있다.
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">strArr</span> <span class="o">=</span> <span class="o">{</span><span class="s">"hello"</span><span class="o">,</span> <span class="s">"java"</span><span class="o">};</span>
+<span class="nc">StringBuilder</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span><span class="o">();</span>
+<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">strArr</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+  <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">strArr</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+<span class="o">}</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sb</span><span class="o">);</span>
+<span class="c1">// 결과 : hellojava</span>
+</code></pre></div>    </div>
+    <p><br /></p>
+  </li>
+</ul>
+
+<h3 id="5-apache-commons-lang-3--라이브러리">5. Apache Commons Lang 3  라이브러리</h3>
+<ul>
+  <li><a href="https://commons.apache.org/proper/commons-lang">Apache Commons Lang 3</a> 라이브러리는 Java의 유틸리티 클래스 패키지로, 문자열, 배열, 숫자 등 매우 다양하고 편리한 기능을 제공한다.</li>
+  <li>그 중 StringUtils 클래스의 <code class="language-plaintext highlighter-rouge">join()</code> 메서드를 사용하여 문자열 배열을 문자열로 리턴할 수 있다.
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">strArr</span> <span class="o">=</span> <span class="o">{</span><span class="s">"hello"</span><span class="o">,</span> <span class="s">"java"</span><span class="o">};</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">StringUtils</span><span class="o">.</span><span class="na">join</span><span class="o">(</span><span class="n">strArr</span><span class="o">,</span> <span class="s">","</span><span class="o">));</span>
+<span class="c1">// 결과 : hello,java</span>
+</code></pre></div>    </div>
+  </li>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="String" /><summary type="html"><![CDATA[배경 코딩테스트 문제를 풀면서 String 배열을 String으로 변환하는 작업이 자주 나와서 기록해두려고 한다.]]></summary></entry><entry><title type="html">SpringBoot 3.2부터 @PathVariable 이름 미지정 시 에러</title><link href="http://localhost:4000/wiki/2024/01/17/pathvariable-name-missing.html" rel="alternate" type="text/html" title="SpringBoot 3.2부터 @PathVariable 이름 미지정 시 에러" /><published>2024-01-17T00:00:00+09:00</published><updated>2024-01-17T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/01/17/pathvariable-name-missing</id><content type="html" xml:base="http://localhost:4000/wiki/2024/01/17/pathvariable-name-missing.html"><![CDATA[<h3 id="배경">배경</h3>
 <ul>
   <li>팀원이 작업한 코드를 pull 받아서 실행시켰는데 아래처럼 에러가 발생했다. 그런데 팀원이 올리기 전에 실행시켰을 땐 발생하지 않았던 에러가 왜 내 로컬에서는 발생했을까?
     <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">IllegalArgumentException</span><span class="o">:</span> <span class="nc">Name</span> <span class="k">for</span> <span class="n">argument</span> <span class="n">of</span> <span class="n">type</span> <span class="o">[</span><span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">String</span><span class="o">]</span> <span class="n">not</span> <span class="n">specified</span><span class="o">,</span> <span class="n">and</span> <span class="n">parameter</span> <span class="n">name</span> <span class="n">information</span> <span class="n">not</span> <span class="n">found</span> <span class="n">in</span> <span class="kd">class</span> <span class="nc">file</span> <span class="n">either</span><span class="o">.</span>
@@ -168,71 +234,7 @@
     </ul>
   </li>
   <li>그래서 위처럼 Object로 인식할 수 있도록 <strong>Wrapper 클래스로(여기선 Integer) 형변환해주는 방법</strong>이 있다.</li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="List" /><category term="Method" /><summary type="html"><![CDATA[배경 코딩테스트로 문제를 풀다가 list에서 원소를 삭제하는 remove() 메소드를 사용할 때 값이 일치하면 삭제하고 싶은데 그냥 숫자를 넣으면 인덱스로 인식하는 것을 발견하였다.]]></summary></entry><entry><title type="html">자바로 피보나치 수열 이해하기</title><link href="http://localhost:4000/wiki/2023/11/13/fibonacci.html" rel="alternate" type="text/html" title="자바로 피보나치 수열 이해하기" /><published>2023-11-13T00:00:00+09:00</published><updated>2023-11-13T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2023/11/13/fibonacci</id><content type="html" xml:base="http://localhost:4000/wiki/2023/11/13/fibonacci.html"><![CDATA[<ul>
-  <li>피보나치 수열은 재귀 함수의 대표적인 예시로, 첫째 및 둘째 항이 1이며 그 뒤의 모든 항은 바로 앞 두 항의 합인 수열이다.
-    <ul>
-      <li>F(0) = 0, F(1) = 1일 때, 1 이상의 n에 대하여 F(n) = F(n-1) + F(n-2)</li>
-      <li><strong>재귀 함수</strong>: 자기 자신을 다시 호출해 작업을 수행하는 함수</li>
-    </ul>
-  </li>
-</ul>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span> <span class="nf">fibonacci</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-		<span class="k">if</span><span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">||</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
-			<span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
-		<span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="o">)</span> <span class="o">{</span>			
-			<span class="k">return</span> <span class="nf">fibonacci</span><span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="o">)</span> <span class="o">+</span> <span class="n">fibonacci</span><span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span>
-		<span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p><br /></p>
-
-<h3 id="프로그래머스-피보나치-수-풀이">프로그래머스 피보나치 수 풀이</h3>
-
-<h4 id="원래-코드">원래 코드</h4>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-	<span class="kt">int</span> <span class="n">answer</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-	<span class="kt">int</span> <span class="n">first</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-	<span class="kt">int</span> <span class="n">second</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-	<span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
-		<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-			<span class="n">answer</span> <span class="o">=</span> <span class="o">(</span><span class="n">first</span> <span class="o">+</span> <span class="n">second</span><span class="o">);</span>
-			<span class="n">first</span> <span class="o">=</span> <span class="n">second</span><span class="o">;</span>
-			<span class="n">second</span> <span class="o">=</span> <span class="n">answer</span><span class="o">;</span>
-		<span class="o">}</span>
-	<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
-  <span class="o">}</span>
-	<span class="k">return</span> <span class="n">answer</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<ul>
-  <li>이 코드를 제출했더니 7번부터 오답이 나왔다.. 그래서 한참 고민하다가 질문하기 페이지를 봤는데 좋은 답변을 달아주셔서 참고했다.
-  <img src="https://dajeongdev.github.io/assets/images/posts/fibonacci-reference.png" />
-    <ul>
-      <li><strong>정리</strong>: 자료형의 크기에 제한이 있는 언어를 사용할 경우 (A + B) % C == ((A % C) + (B % C)) % C라는 모듈러 연산의 성질을 이용하여, 계산 결과에 1234567으로 나눈 나머지를 대신 넣는 것으로 int 범위 내에 항상 값이 존재하도록 보장할 수 있다. <br />
-<br /></li>
-    </ul>
-  </li>
-</ul>
-
-<h4 id="수정-코드">수정 코드</h4>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-	<span class="kt">int</span> <span class="n">answer</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-	<span class="kt">int</span> <span class="n">first</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-	<span class="kt">int</span> <span class="n">second</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-	<span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
-		<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-			<span class="n">answer</span> <span class="o">=</span> <span class="o">(</span><span class="n">first</span> <span class="o">+</span> <span class="n">second</span><span class="o">)</span> <span class="o">%</span> <span class="mi">1234567</span><span class="o">;</span>
-			<span class="n">first</span> <span class="o">=</span> <span class="n">second</span><span class="o">;</span>
-			<span class="n">second</span> <span class="o">=</span> <span class="n">answer</span><span class="o">;</span>
-		<span class="o">}</span>
-	<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
-  <span class="o">}</span>
-	<span class="k">return</span> <span class="n">answer</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></div></div>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="Algorithm" /><summary type="html"><![CDATA[피보나치 수열은 재귀 함수의 대표적인 예시로, 첫째 및 둘째 항이 1이며 그 뒤의 모든 항은 바로 앞 두 항의 합인 수열이다. F(0) = 0, F(1) = 1일 때, 1 이상의 n에 대하여 F(n) = F(n-1) + F(n-2) 재귀 함수: 자기 자신을 다시 호출해 작업을 수행하는 함수]]></summary></entry><entry><title type="html">IntelliJ 단축키 정리</title><link href="http://localhost:4000/wiki/2023/11/13/intellij-shortcut.html" rel="alternate" type="text/html" title="IntelliJ 단축키 정리" /><published>2023-11-13T00:00:00+09:00</published><updated>2023-11-13T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2023/11/13/intellij-shortcut</id><content type="html" xml:base="http://localhost:4000/wiki/2023/11/13/intellij-shortcut.html"><![CDATA[<table>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="List" /><category term="Method" /><summary type="html"><![CDATA[배경 코딩테스트로 문제를 풀다가 list에서 원소를 삭제하는 remove() 메소드를 사용할 때 값이 일치하면 삭제하고 싶은데 그냥 숫자를 넣으면 인덱스로 인식하는 것을 발견하였다.]]></summary></entry><entry><title type="html">IntelliJ 단축키 정리</title><link href="http://localhost:4000/wiki/2023/11/13/intellij-shortcut.html" rel="alternate" type="text/html" title="IntelliJ 단축키 정리" /><published>2023-11-13T00:00:00+09:00</published><updated>2023-11-13T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2023/11/13/intellij-shortcut</id><content type="html" xml:base="http://localhost:4000/wiki/2023/11/13/intellij-shortcut.html"><![CDATA[<table>
   <thead>
     <tr>
       <th>설명</th>
