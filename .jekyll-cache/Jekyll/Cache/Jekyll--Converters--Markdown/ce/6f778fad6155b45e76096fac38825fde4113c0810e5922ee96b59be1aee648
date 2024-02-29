@@ -1,0 +1,63 @@
+I"�<p><img src="https://dajeongdev.github.io/assets/images/posts/programmers-12906.png" /></p>
+<ul>
+  <li>연속적으로 나타나는 숫자, 즉 앞의 숫자와 겹치면 제거하기 때문에 Stack을 사용해서 풀이를 해보려고 한다.</li>
+  <li>https://school.programmers.co.kr/learn/courses/30/lessons/12906
+<br /></li>
+</ul>
+
+<h3 id="풀이">풀이</h3>
+<p><strong>첫번째</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">firstSolution</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span><span class="o">)</span> <span class="o">{</span>
+	<span class="nc">Stack</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">answer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Stack</span><span class="o">&lt;&gt;();</span>
+	<span class="n">answer</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">arr</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">answer</span><span class="o">.</span><span class="na">peek</span><span class="o">()</span> <span class="o">==</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">])</span> <span class="o">{</span>
+			<span class="k">continue</span><span class="o">;</span>
+		<span class="o">}</span>
+		<span class="n">answer</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+	<span class="o">}</span>
+	<span class="k">return</span> <span class="n">answer</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">mapToInt</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">i</span><span class="o">).</span><span class="na">toArray</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>이렇게 했더니 33.7점 나옴…</li>
+  <li><code class="language-plaintext highlighter-rouge">arr.length - 1</code> 부분이 오답 → <code class="language-plaintext highlighter-rouge">arr.length</code>라고 해야 배열 끝까지 확인함</li>
+  <li>리턴값이 틀린 줄 알았는데 저 부분은 맞음
+<br /></li>
+</ul>
+
+<p><strong>두번째</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">secondSolution</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span><span class="o">)</span> <span class="o">{</span>
+	<span class="nc">Stack</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">answer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Stack</span><span class="o">&lt;&gt;();</span>
+	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">nun</span> <span class="o">:</span> <span class="n">arr</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">answer</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">()</span> <span class="o">||</span> <span class="n">answer</span><span class="o">.</span><span class="na">peek</span><span class="o">()</span> <span class="o">!=</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">answer</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">num</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+	<span class="k">return</span> <span class="n">answer</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">mapToInt</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">i</span><span class="o">).</span><span class="na">toArray</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>한 줄이라도 더 줄이기 위해 스택에 배열의 첫번째 값을 넣는 코드(<code class="language-plaintext highlighter-rouge">answer.add(arr[0]</code>)를 제거하고, if문에 <code class="language-plaintext highlighter-rouge">answer.isEmpty()</code>로 바꿈</li>
+  <li>따라서 index를 쓸 필요가 없기 때문에 향상된 for문으로 조금 더 가독성 있게 작성
+<br /></li>
+</ul>
+
+<h4 id="참고">참고</h4>
+<ul>
+  <li>다른 사람들 풀이를 보니 Stack을 사용하지 않은 사람도 많았다. Stack 클래스를 사용하는 것도 좋지만, 다른 클래스를 사용한 코드들도 많이 참고해서 이해력을 높여봐야겠다.
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">otherSolution</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">answer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+  <span class="kt">int</span> <span class="n">prev</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span> <span class="c1">// 이전값 저장</span>
+  <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">num</span> <span class="o">:</span> <span class="n">arr</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">prev</span> <span class="o">!=</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">answer</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">num</span><span class="o">);</span>
+      <span class="o">}</span>
+      <span class="n">prev</span> <span class="o">=</span> <span class="n">num</span><span class="o">;</span>
+  <span class="o">}</span>
+  <span class="k">return</span> <span class="n">answer</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">mapToInt</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">i</span><span class="o">).</span><span class="na">toArray</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+:ET

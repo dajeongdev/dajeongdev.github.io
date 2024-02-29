@@ -1,4 +1,65 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2024-02-26T16:35:32+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">String 배열 -&amp;gt; String</title><link href="http://localhost:4000/wiki/2024/02/26/string-array-to-string.html" rel="alternate" type="text/html" title="String 배열 -&amp;gt; String" /><published>2024-02-26T00:00:00+09:00</published><updated>2024-02-26T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/02/26/string-array-to-string</id><content type="html" xml:base="http://localhost:4000/wiki/2024/02/26/string-array-to-string.html"><![CDATA[<h3 id="배경">배경</h3>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2024-02-29T15:37:31+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">프로그래머스 - 같은 숫자는 싫어 풀이</title><link href="http://localhost:4000/wiki/2024/02/29/programmers-12906.html" rel="alternate" type="text/html" title="프로그래머스 - 같은 숫자는 싫어 풀이" /><published>2024-02-29T00:00:00+09:00</published><updated>2024-02-29T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/02/29/programmers-12906</id><content type="html" xml:base="http://localhost:4000/wiki/2024/02/29/programmers-12906.html"><![CDATA[<p><img src="https://dajeongdev.github.io/assets/images/posts/programmers-12906.png" /></p>
+<ul>
+  <li>연속적으로 나타나는 숫자, 즉 앞의 숫자와 겹치면 제거하기 때문에 Stack을 사용해서 풀이를 해보려고 한다.</li>
+  <li>https://school.programmers.co.kr/learn/courses/30/lessons/12906
+<br /></li>
+</ul>
+
+<h3 id="풀이">풀이</h3>
+<p><strong>첫번째</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">firstSolution</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span><span class="o">)</span> <span class="o">{</span>
+	<span class="nc">Stack</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">answer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Stack</span><span class="o">&lt;&gt;();</span>
+	<span class="n">answer</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">arr</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">answer</span><span class="o">.</span><span class="na">peek</span><span class="o">()</span> <span class="o">==</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">])</span> <span class="o">{</span>
+			<span class="k">continue</span><span class="o">;</span>
+		<span class="o">}</span>
+		<span class="n">answer</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+	<span class="o">}</span>
+	<span class="k">return</span> <span class="n">answer</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">mapToInt</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">i</span><span class="o">).</span><span class="na">toArray</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>이렇게 했더니 33.7점 나옴…</li>
+  <li><code class="language-plaintext highlighter-rouge">arr.length - 1</code> 부분이 오답 → <code class="language-plaintext highlighter-rouge">arr.length</code>라고 해야 배열 끝까지 확인함</li>
+  <li>리턴값이 틀린 줄 알았는데 저 부분은 맞음
+<br /></li>
+</ul>
+
+<p><strong>두번째</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">secondSolution</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span><span class="o">)</span> <span class="o">{</span>
+	<span class="nc">Stack</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">answer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Stack</span><span class="o">&lt;&gt;();</span>
+	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">nun</span> <span class="o">:</span> <span class="n">arr</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">answer</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">()</span> <span class="o">||</span> <span class="n">answer</span><span class="o">.</span><span class="na">peek</span><span class="o">()</span> <span class="o">!=</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">answer</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">num</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+	<span class="k">return</span> <span class="n">answer</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">mapToInt</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">i</span><span class="o">).</span><span class="na">toArray</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>한 줄이라도 더 줄이기 위해 스택에 배열의 첫번째 값을 넣는 코드(<code class="language-plaintext highlighter-rouge">answer.add(arr[0]</code>)를 제거하고, if문에 <code class="language-plaintext highlighter-rouge">answer.isEmpty()</code>로 바꿈</li>
+  <li>따라서 index를 쓸 필요가 없기 때문에 향상된 for문으로 조금 더 가독성 있게 작성
+<br /></li>
+</ul>
+
+<h4 id="참고">참고</h4>
+<ul>
+  <li>다른 사람들 풀이를 보니 Stack을 사용하지 않은 사람도 많았다. Stack 클래스를 사용하는 것도 좋지만, 다른 클래스를 사용한 코드들도 많이 참고해서 이해력을 높여봐야겠다.
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">otherSolution</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">answer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+  <span class="kt">int</span> <span class="n">prev</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span> <span class="c1">// 이전값 저장</span>
+  <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">num</span> <span class="o">:</span> <span class="n">arr</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">prev</span> <span class="o">!=</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">answer</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">num</span><span class="o">);</span>
+      <span class="o">}</span>
+      <span class="n">prev</span> <span class="o">=</span> <span class="n">num</span><span class="o">;</span>
+  <span class="o">}</span>
+  <span class="k">return</span> <span class="n">answer</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">mapToInt</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">i</span><span class="o">).</span><span class="na">toArray</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="DataStructure" /><category term="Programmers" /><summary type="html"><![CDATA[연속적으로 나타나는 숫자, 즉 앞의 숫자와 겹치면 제거하기 때문에 Stack을 사용해서 풀이를 해보려고 한다. https://school.programmers.co.kr/learn/courses/30/lessons/12906]]></summary></entry><entry><title type="html">String 배열 -&amp;gt; String</title><link href="http://localhost:4000/wiki/2024/02/26/string-array-to-string.html" rel="alternate" type="text/html" title="String 배열 -&amp;gt; String" /><published>2024-02-26T00:00:00+09:00</published><updated>2024-02-26T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/02/26/string-array-to-string</id><content type="html" xml:base="http://localhost:4000/wiki/2024/02/26/string-array-to-string.html"><![CDATA[<h3 id="배경">배경</h3>
 <ul>
   <li>코딩테스트 문제를 풀면서 String 배열을 String으로 변환하는 작업이 자주 나와서 기록해두려고 한다. <br />
 <br /></li>
@@ -234,100 +295,7 @@
     </ul>
   </li>
   <li>그래서 위처럼 Object로 인식할 수 있도록 <strong>Wrapper 클래스로(여기선 Integer) 형변환해주는 방법</strong>이 있다.</li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="List" /><category term="Method" /><summary type="html"><![CDATA[배경 코딩테스트로 문제를 풀다가 list에서 원소를 삭제하는 remove() 메소드를 사용할 때 값이 일치하면 삭제하고 싶은데 그냥 숫자를 넣으면 인덱스로 인식하는 것을 발견하였다.]]></summary></entry><entry><title type="html">IntelliJ 단축키 정리</title><link href="http://localhost:4000/wiki/2023/11/13/intellij-shortcut.html" rel="alternate" type="text/html" title="IntelliJ 단축키 정리" /><published>2023-11-13T00:00:00+09:00</published><updated>2023-11-13T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2023/11/13/intellij-shortcut</id><content type="html" xml:base="http://localhost:4000/wiki/2023/11/13/intellij-shortcut.html"><![CDATA[<table>
-  <thead>
-    <tr>
-      <th>설명</th>
-      <th>단축키</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>이름 변경(Rename)</td>
-      <td>Shift + F6</td>
-    </tr>
-    <tr>
-      <td>접근제어자, 반환타입, 이름등 주요 정보 변경</td>
-      <td>Ctrl + F6</td>
-    </tr>
-    <tr>
-      <td>한 줄 복사</td>
-      <td>Ctrl + D</td>
-    </tr>
-    <tr>
-      <td>Inline</td>
-      <td>Ctrl + Alt + N</td>
-    </tr>
-    <tr>
-      <td>메소드 추출</td>
-      <td>Ctrl + Alt + M</td>
-    </tr>
-    <tr>
-      <td>변수 추출</td>
-      <td>Ctrl + Alt + V</td>
-    </tr>
-    <tr>
-      <td>Generate 탭 열기 (Constructor, Getter/Setter, Override 등)</td>
-      <td>Alt + Insert</td>
-    </tr>
-    <tr>
-      <td>implement methods / static import  / change lamda expression</td>
-      <td>Alt + Enter</td>
-    </tr>
-    <tr>
-      <td>이전 실행 메소드 재실행</td>
-      <td>Shift + F10</td>
-    </tr>
-    <tr>
-      <td>현재 커서 메소드 실행</td>
-      <td>Ctrl + Shift + F10</td>
-    </tr>
-    <tr>
-      <td>코드 정렬</td>
-      <td>Ctrl + Alt + L</td>
-    </tr>
-    <tr>
-      <td>import 정리</td>
-      <td>Ctrl + Alt + O</td>
-    </tr>
-    <tr>
-      <td>for</td>
-      <td>fori</td>
-    </tr>
-    <tr>
-      <td>for each문 생성</td>
-      <td>iter</td>
-    </tr>
-    <tr>
-      <td>System.out.println</td>
-      <td>sout</td>
-    </tr>
-    <tr>
-      <td>System.out.println + 가까운 변수</td>
-      <td>soutv</td>
-    </tr>
-    <tr>
-      <td>System.out.println + 메서드</td>
-      <td>soutm</td>
-    </tr>
-    <tr>
-      <td>public static void main</td>
-      <td>psvm</td>
-    </tr>
-    <tr>
-      <td>public static final</td>
-      <td>psf</td>
-    </tr>
-    <tr>
-      <td>private static final</td>
-      <td>prsf</td>
-    </tr>
-    <tr>
-      <td>throw new</td>
-      <td>thr</td>
-    </tr>
-  </tbody>
-</table>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="IDE" /><category term="IntelliJ" /><summary type="html"><![CDATA[설명 단축키 이름 변경(Rename) Shift + F6 접근제어자, 반환타입, 이름등 주요 정보 변경 Ctrl + F6 한 줄 복사 Ctrl + D Inline Ctrl + Alt + N 메소드 추출 Ctrl + Alt + M 변수 추출 Ctrl + Alt + V Generate 탭 열기 (Constructor, Getter/Setter, Override 등) Alt + Insert implement methods / static import / change lamda expression Alt + Enter 이전 실행 메소드 재실행 Shift + F10 현재 커서 메소드 실행 Ctrl + Shift + F10 코드 정렬 Ctrl + Alt + L import 정리 Ctrl + Alt + O for fori for each문 생성 iter System.out.println sout System.out.println + 가까운 변수 soutv System.out.println + 메서드 soutm public static void main psvm public static final psf private static final prsf throw new thr]]></summary></entry><entry><title type="html">Dangling meta character ‘?’ near index 0</title><link href="http://localhost:4000/wiki/2023/11/13/java-regex-pattern-syntax-error.html" rel="alternate" type="text/html" title="Dangling meta character ‘?’ near index 0" /><published>2023-11-13T00:00:00+09:00</published><updated>2023-11-13T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2023/11/13/java-regex-pattern-syntax-error</id><content type="html" xml:base="http://localhost:4000/wiki/2023/11/13/java-regex-pattern-syntax-error.html"><![CDATA[<h3 id="에러">에러</h3>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="List" /><category term="Method" /><summary type="html"><![CDATA[배경 코딩테스트로 문제를 풀다가 list에서 원소를 삭제하는 remove() 메소드를 사용할 때 값이 일치하면 삭제하고 싶은데 그냥 숫자를 넣으면 인덱스로 인식하는 것을 발견하였다.]]></summary></entry><entry><title type="html">Dangling meta character ‘?’ near index 0</title><link href="http://localhost:4000/wiki/2023/11/13/java-regex-pattern-syntax-error.html" rel="alternate" type="text/html" title="Dangling meta character ‘?’ near index 0" /><published>2023-11-13T00:00:00+09:00</published><updated>2023-11-13T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2023/11/13/java-regex-pattern-syntax-error</id><content type="html" xml:base="http://localhost:4000/wiki/2023/11/13/java-regex-pattern-syntax-error.html"><![CDATA[<h3 id="에러">에러</h3>
 <p><img src="https://dajeongdev.github.io/assets/images/posts/java-regex-pattern-syntax-error.png" alt="error_image" />
 <br /></p>
 
