@@ -1,4 +1,78 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2024-03-05T21:01:34+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">Queue</title><link href="http://localhost:4000/wiki/2024/03/05/queue.html" rel="alternate" type="text/html" title="Queue" /><published>2024-03-05T00:00:00+09:00</published><updated>2024-03-05T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/03/05/queue</id><content type="html" xml:base="http://localhost:4000/wiki/2024/03/05/queue.html"><![CDATA[<h3 id="queue선형-큐">Queue(선형 큐)</h3>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2024-03-17T15:15:27+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">문자열 대치</title><link href="http://localhost:4000/wiki/2024/03/17/string-replacement.html" rel="alternate" type="text/html" title="문자열 대치" /><published>2024-03-17T00:00:00+09:00</published><updated>2024-03-17T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/03/17/string-replacement</id><content type="html" xml:base="http://localhost:4000/wiki/2024/03/17/string-replacement.html"><![CDATA[<h3 id="종류">종류</h3>
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">replace()</code></li>
+  <li><code class="language-plaintext highlighter-rouge">replaceAll()</code></li>
+  <li><code class="language-plaintext highlighter-rouge">replaceFirst()</code>
+<br />
+<br /></li>
+</ol>
+
+<h3 id="replacecharsequence-target-charsequence-replacement">replace(CharSequence target, CharSequence replacement)</h3>
+<ul>
+  <li>일치하는 문자열(target)을 새로운 문자열(replacement)로 치환한다.
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"가/나/다/라/마/바/사"</span><span class="o">;</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"/"</span><span class="o">,</span> <span class="s">","</span><span class="o">));</span> <span class="c1">// 가,나,다,라,마,바,사</span>
+</code></pre></div>    </div>
+    <p><br /></p>
+  </li>
+</ul>
+
+<h3 id="replaceallstring-regex-string-replacement">replaceAll(String regex, String replacement)</h3>
+<ul>
+  <li>일치하는 정규 표현식(regex)을 새로운 문자열(replacement)로 <strong>전부</strong> 치환한다.
+    <ul>
+      <li>replace()와 유사하지만, <code class="language-plaintext highlighter-rouge">.</code>(온점) 같은 경우 정규 표현식으로 모든 문자를 의미하기 때문에 모든 문자열이 치환될 수 있다.
+        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"가.나.다.라.마.바.사"</span><span class="o">;</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str2</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"."</span><span class="o">,</span> <span class="s">","</span><span class="o">));</span> <span class="c1">// 가,나,다,라,마,바,사</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str2</span><span class="o">.</span><span class="na">replaceAll</span><span class="o">(</span><span class="s">"."</span><span class="o">,</span> <span class="s">","</span><span class="o">));</span> <span class="c1">// ,,,,,,,,,,,,,</span>
+</code></pre></div>        </div>
+        <p><br /></p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="replace와-replaceall">replace()와 replaceAll()</h3>
+<ul>
+  <li>두 메소드는 일반 문자열 리터럴을 비교할 땐 실행 결과에 차이가 없다.</li>
+  <li>하지만 replaceAll()은 문자열 대치에 정규식을 사용하여 조금 더 구체적인 검증이 가능하다.
+<br />
+<br /></li>
+</ul>
+
+<h3 id="replacefirststring-target-string-replacement">replaceFirst(String target, String replacement)</h3>
+<ul>
+  <li>첫번째로 일치하는 문자열(target)를 대체할 문자(replacement)로 치환한다.
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"가/나/다/라/마/바/사"</span><span class="o">;</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"/"</span><span class="o">,</span> <span class="s">","</span><span class="o">));</span> <span class="c1">// 가,나/다/라/마/바/사</span>
+</code></pre></div>    </div>
+    <p><br /></p>
+  </li>
+</ul>
+
+<h3 id="실무-사용-예시">실무 사용 예시</h3>
+<ul>
+  <li>해시태그가 포함되어 있는 내용에 바꾸고 싶은 내용이 해시태그마다 다를 때 사용한다.
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">contents</span> <span class="o">=</span> <span class="n">reportMapper</span><span class="o">.</span><span class="na">findReportTemplate</span><span class="o">(</span><span class="mi">60001</span><span class="o">);</span>
+<span class="n">contents</span> <span class="o">=</span> <span class="n">contents</span><span class="o">.</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"#"</span><span class="o">,</span> <span class="n">childName</span><span class="o">)</span>
+              <span class="o">.</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"#"</span><span class="o">,</span> <span class="nc">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">progress</span><span class="o">.</span><span class="na">getCount</span><span class="o">()))</span>
+              <span class="o">.</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"#"</span><span class="o">,</span> <span class="n">progress</span><span class="o">.</span><span class="na">getPercent</span><span class="o">())</span>
+              <span class="o">.</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"#"</span><span class="o">,</span> <span class="n">previous</span><span class="o">)</span>
+              <span class="o">.</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"#"</span><span class="o">,</span> <span class="n">average</span><span class="o">);</span>
+</code></pre></div>    </div>
+    <p><br /></p>
+  </li>
+</ul>
+
+<h4 id="참고">참고</h4>
+<ul>
+  <li>https://coding-factory.tistory.com/128</li>
+  <li>031724 추가
+    <ul>
+      <li>https://bada744.tistory.com/16</li>
+    </ul>
+  </li>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="String" /><category term="Method" /><summary type="html"><![CDATA[종류 replace() replaceAll() replaceFirst()]]></summary></entry><entry><title type="html">Queue</title><link href="http://localhost:4000/wiki/2024/03/05/queue.html" rel="alternate" type="text/html" title="Queue" /><published>2024-03-05T00:00:00+09:00</published><updated>2024-03-05T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/03/05/queue</id><content type="html" xml:base="http://localhost:4000/wiki/2024/03/05/queue.html"><![CDATA[<h3 id="queue선형-큐">Queue(선형 큐)</h3>
 <h4 id="특징">특징</h4>
 <ul>
   <li>줄 서있는 것처럼 선입선출(FIFO) 형태의 자료구조</li>
@@ -479,29 +553,7 @@
     </ul>
   </li>
   <li>그래서 위처럼 Object로 인식할 수 있도록 <strong>Wrapper 클래스로(여기선 Integer) 형변환해주는 방법</strong>이 있다.</li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="List" /><category term="Method" /><summary type="html"><![CDATA[배경 코딩테스트로 문제를 풀다가 list에서 원소를 삭제하는 remove() 메소드를 사용할 때 값이 일치하면 삭제하고 싶은데 그냥 숫자를 넣으면 인덱스로 인식하는 것을 발견하였다.]]></summary></entry><entry><title type="html">Map - getOrDefault(Object key, V defaultValue)</title><link href="http://localhost:4000/wiki/2023/11/13/map-getOrDefault.html" rel="alternate" type="text/html" title="Map - getOrDefault(Object key, V defaultValue)" /><published>2023-11-13T00:00:00+09:00</published><updated>2023-11-13T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2023/11/13/map-getOrDefault</id><content type="html" xml:base="http://localhost:4000/wiki/2023/11/13/map-getOrDefault.html"><![CDATA[<h3 id="map---getordefaultobject-key-v-defaultvalue">Map - getOrDefault(Object key, V defaultValue)</h3>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="no">V</span> <span class="nf">getOrDefault</span><span class="o">(</span><span class="nc">Object</span> <span class="n">key</span><span class="o">,</span> <span class="no">V</span> <span class="n">defaultValue</span><span class="o">)</span> <span class="o">{</span>
-		<span class="nc">Node</span><span class="o">&lt;</span><span class="no">K</span><span class="o">,</span><span class="no">V</span><span class="o">&gt;</span> <span class="n">e</span><span class="o">;</span>
-		<span class="k">return</span> <span class="o">(</span><span class="n">e</span> <span class="o">=</span> <span class="n">getNode</span><span class="o">(</span><span class="n">key</span><span class="o">))</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">defaultValue</span> <span class="o">:</span> <span class="n">e</span><span class="o">.</span><span class="na">value</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<ul>
-  <li>key가 존재하면 key의 value를 반환하고, 없으면 설정한 디폴트 값을 반환한다. <br />
-<br /></li>
-</ul>
-
-<h4 id="사용-예시-프로그래머스-level-2-위장">사용 예시 (프로그래머스 level 2 위장)</h4>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[][]</span> <span class="n">clothes1</span> <span class="o">=</span> <span class="o">/{/{</span><span class="s">"yellow_hat"</span><span class="o">,</span> <span class="s">"headgear"</span><span class="o">/},</span> 
-			<span class="o">/{</span><span class="s">"blue_sunglasses"</span><span class="o">,</span> <span class="s">"eyewear"</span><span class="o">/},</span> 
-			<span class="o">/{</span><span class="s">"green_turban"</span><span class="o">,</span> <span class="s">"headgear"</span><span class="o">/}/};</span>
-<span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
-<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">clothes</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-		<span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">clothes</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">1</span><span class="o">],</span> <span class="n">map</span><span class="o">.</span><span class="na">getOrDefault</span><span class="o">(</span><span class="n">clothes</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">1</span><span class="o">],</span> <span class="mi">1</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<ul>
-  <li>HashMap은 동일한 key에 value를 추가할 경우 value가 덮어쓰기 되기 때문에 getOrDefault() 메소드를 사용하여 예시처럼 카운트를 추가하는 등의 방법을 사용할 수 있다.</li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="Map" /><category term="Method" /><summary type="html"><![CDATA[Map - getOrDefault(Object key, V defaultValue) public V getOrDefault(Object key, V defaultValue) { Node&lt;K,V&gt; e; return (e = getNode(key)) == null ? defaultValue : e.value; } key가 존재하면 key의 value를 반환하고, 없으면 설정한 디폴트 값을 반환한다.]]></summary></entry><entry><title type="html">MyBatis와 JPA</title><link href="http://localhost:4000/wiki/2023/11/13/mybatis-jpa.html" rel="alternate" type="text/html" title="MyBatis와 JPA" /><published>2023-11-13T00:00:00+09:00</published><updated>2023-11-13T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2023/11/13/mybatis-jpa</id><content type="html" xml:base="http://localhost:4000/wiki/2023/11/13/mybatis-jpa.html"><![CDATA[<p>먼저 MyBatis와 JPA를 알아보기 전에 알아두면 좋은 두 개념을 살펴보자.</p>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="List" /><category term="Method" /><summary type="html"><![CDATA[배경 코딩테스트로 문제를 풀다가 list에서 원소를 삭제하는 remove() 메소드를 사용할 때 값이 일치하면 삭제하고 싶은데 그냥 숫자를 넣으면 인덱스로 인식하는 것을 발견하였다.]]></summary></entry><entry><title type="html">MyBatis와 JPA</title><link href="http://localhost:4000/wiki/2023/11/13/mybatis-jpa.html" rel="alternate" type="text/html" title="MyBatis와 JPA" /><published>2023-11-13T00:00:00+09:00</published><updated>2023-11-13T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2023/11/13/mybatis-jpa</id><content type="html" xml:base="http://localhost:4000/wiki/2023/11/13/mybatis-jpa.html"><![CDATA[<p>먼저 MyBatis와 JPA를 알아보기 전에 알아두면 좋은 두 개념을 살펴보자.</p>
 <h4 id="sql-mapper">SQL Mapper</h4>
 <p>SQL Mapper는 직접 작성한 SQL에 해당되는 데이터를 읽고, 결과값을 객체화시켜 사용할 수 있게 해준다. SQL에 데이터베이스에 따라 SQL 문법이 다르므로 특정 RDB에 종속적이며, SQL에 의존적인 개발하게 된다.</p>
 <ul>

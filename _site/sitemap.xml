@@ -61,10 +61,6 @@
 <lastmod>2023-11-13T00:00:00+09:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/wiki/2023/11/13/string-replacement.html</loc>
-<lastmod>2023-11-13T00:00:00+09:00</lastmod>
-</url>
-<url>
 <loc>http://localhost:4000/wiki/2023/11/13/thymeleaf-rest-controller.html</loc>
 <lastmod>2023-11-13T00:00:00+09:00</lastmod>
 </url>
@@ -99,6 +95,10 @@
 <url>
 <loc>http://localhost:4000/wiki/2024/03/05/queue.html</loc>
 <lastmod>2024-03-05T00:00:00+09:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/wiki/2024/03/17/string-replacement.html</loc>
+<lastmod>2024-03-17T00:00:00+09:00</lastmod>
 </url>
 <url>
 <loc>http://localhost:4000/about.html</loc>

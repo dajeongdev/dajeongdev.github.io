@@ -1,0 +1,75 @@
+I"�<h3 id="종류">종류</h3>
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">replace()</code></li>
+  <li><code class="language-plaintext highlighter-rouge">replaceAll()</code></li>
+  <li><code class="language-plaintext highlighter-rouge">replaceFirst()</code>
+<br /></li>
+</ol>
+
+<h3 id="replacecharsequence-target-charsequence-replacement">replace(CharSequence target, CharSequence replacement)</h3>
+<ul>
+  <li>일치하는 문자열(target)을 새로운 문자열(replacement)로 치환한다.
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"가/나/다/라/마/바/사"</span><span class="o">;</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"/"</span><span class="o">,</span> <span class="s">","</span><span class="o">));</span> <span class="c1">// 가,나,다,라,마,바,사</span>
+</code></pre></div>    </div>
+    <p><br /></p>
+  </li>
+</ul>
+
+<h3 id="replaceallstring-regex-string-replacement">replaceAll(String regex, String replacement)</h3>
+<ul>
+  <li>일치하는 정규 표현식(regex)을 새로운 문자열(replacement)로 <strong>전부</strong> 치환한다.
+    <ul>
+      <li>replace()와 유사하지만, <code class="language-plaintext highlighter-rouge">.</code>(온점) 같은 경우 정규 표현식으로 모든 문자를 의미하기 때문에 모든 문자열이 치환될 수 있다.
+        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"가.나.다.라.마.바.사"</span><span class="o">;</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str2</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"."</span><span class="o">,</span> <span class="s">","</span><span class="o">));</span> <span class="c1">// 가,나,다,라,마,바,사</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str2</span><span class="o">.</span><span class="na">replaceAll</span><span class="o">(</span><span class="s">"."</span><span class="o">,</span> <span class="s">","</span><span class="o">));</span> <span class="c1">// ,,,,,,,,,,,,,</span>
+</code></pre></div>        </div>
+        <p><br /></p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="replace와-replaceall">replace()와 replaceAll()</h3>
+<ul>
+  <li>두 메소드는 일반 문자열 리터럴을 비교할 땐 실행 결과에 차이가 없다.</li>
+  <li>하지만 replaceAll()은 문자열 대치에 정규식을 사용하여 조금 더 구체적인 검증이 가능하다.
+<br />
+<br /></li>
+</ul>
+
+<h3 id="replacefirststring-target-string-replacement">replaceFirst(String target, String replacement)</h3>
+<ul>
+  <li>첫번째로 일치하는 문자열(target)를 대체할 문자(replacement)로 치환한다.
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"가/나/다/라/마/바/사"</span><span class="o">;</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"/"</span><span class="o">,</span> <span class="s">","</span><span class="o">));</span> <span class="c1">// 가,나/다/라/마/바/사</span>
+</code></pre></div>    </div>
+    <p><br /></p>
+  </li>
+</ul>
+
+<h3 id="실무-사용-예시">실무 사용 예시</h3>
+<ul>
+  <li>해시태그가 포함되어 있는 내용에 바꾸고 싶은 내용이 해시태그마다 다를 때 사용한다.
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">contents</span> <span class="o">=</span> <span class="n">reportMapper</span><span class="o">.</span><span class="na">findReportTemplate</span><span class="o">(</span><span class="mi">60001</span><span class="o">);</span>
+<span class="n">contents</span> <span class="o">=</span> <span class="n">contents</span><span class="o">.</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"#"</span><span class="o">,</span> <span class="n">childName</span><span class="o">)</span>
+              <span class="o">.</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"#"</span><span class="o">,</span> <span class="nc">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">progress</span><span class="o">.</span><span class="na">getCount</span><span class="o">()))</span>
+              <span class="o">.</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"#"</span><span class="o">,</span> <span class="n">progress</span><span class="o">.</span><span class="na">getPercent</span><span class="o">())</span>
+              <span class="o">.</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"#"</span><span class="o">,</span> <span class="n">previous</span><span class="o">)</span>
+              <span class="o">.</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"#"</span><span class="o">,</span> <span class="n">average</span><span class="o">);</span>
+</code></pre></div>    </div>
+    <p><br /></p>
+  </li>
+</ul>
+
+<h4 id="참고">참고</h4>
+<ul>
+  <li>https://coding-factory.tistory.com/128</li>
+  <li>031724 추가
+    <ul>
+      <li>https://bada744.tistory.com/16</li>
+    </ul>
+  </li>
+</ul>
+:ET
