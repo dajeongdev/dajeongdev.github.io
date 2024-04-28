@@ -1,0 +1,87 @@
+I"�<h4 id="1-os-선택">1. OS 선택</h4>
+<ul>
+  <li>레퍼런스가 많고 지속적으로 업데이트가 되고 있는 <strong>Ubuntu</strong>로 선택함
+<br />
+<br /></li>
+</ul>
+
+<h4 id="2-서버-생성-순서">2. 서버 생성 순서</h4>
+<ol>
+  <li>VPC 설정</li>
+  <li>Subnet 설정</li>
+  <li>서버 생성
+    <ul>
+      <li>서버 인증키(pem) 설정</li>
+    </ul>
+  </li>
+  <li>ACG(방화벽) 설정
+<br /></li>
+</ol>
+
+<h4 id="3-vpcvirtual-private-cloud-설정">3. VPC(Virtual Private Cloud) 설정</h4>
+<ul>
+  <li>전용 네트워크</li>
+  <li>필수
+    <ul>
+      <li>이름, IP 주소 범위
+<br /></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="4-subnet-설정">4. Subnet 설정</h3>
+<ul>
+  <li>VPC 내에 세분화된 격리 공간 제공</li>
+  <li>필수
+    <ul>
+      <li>이름, VPC, IP 주소 범위(VPC 범위 내), 가용 Zone, Network ACL, Internet Gateway 전용 여부(public), 용도
+<br /></li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="5-서버-생성">5. 서버 생성</h4>
+<ul>
+  <li>Standard</li>
+  <li>서버 스펙: s2-g3(vCPU 2EA, Memory 8GB)</li>
+  <li>스토리지: CB1 (기본 스토리지, 10GB)</li>
+  <li>서버 인증키(pem)
+<br /></li>
+</ul>
+
+<h4 id="6-acg방화벽-설정">6. ACG(방화벽) 설정</h4>
+<ul>
+  <li>22
+    <ul>
+      <li>접속할 PC</li>
+      <li>IP 입력</li>
+      <li><strong>팀원들 IP 입력 필요</strong> ⭐</li>
+    </ul>
+  </li>
+  <li>80, 443
+    <ul>
+      <li>URL 링크로 접속</li>
+      <li>클라이언트를 위한 포트</li>
+      <li>80: HTTP</li>
+      <li>443: HTTPS</li>
+    </ul>
+  </li>
+  <li>81
+    <ul>
+      <li>Nginx Proxy Manager의 접속을 위한 포트</li>
+    </ul>
+  </li>
+  <li>3306
+    <ul>
+      <li>DB 접속
+<br /></li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>참고</strong></p>
+<ul>
+  <li>https://velog.io/@ejh990521/CentOS-vs-Ubuntu</li>
+  <li>https://docs.3rdeyesys.com/compute/ncloud_compute_server_vpc_create.html</li>
+</ul>
+:ET
