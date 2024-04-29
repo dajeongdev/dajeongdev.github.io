@@ -3,6 +3,13 @@ layout: post
 title: 아메리카노트 서버 구성 <4> 자동 배포
 subtitle: 
 categories: wiki
+tags: [Server, NaverCloudPlatform, Project, Deploy]
+---
+---
+layout: post
+title: 아메리카노트 서버 구성 <4> 자동 배포
+subtitle: 
+categories: wiki
 tags: [Server, NaverCloudPlatform, Project, Deploy, GithubActions]
 ---
 - 프로젝트를 서버에 배포해봤다면 번거롭다는 생각을 한번쯤 해봤을 것 같습니다. 그래서 이번에는 그 배포를 자동으로 진행해보겠습니다.
