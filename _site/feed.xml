@@ -1,4 +1,504 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2024-04-28T23:34:13+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">아메리카노트 서버 구성 &amp;lt;1&amp;gt; Linux 서버 생성</title><link href="http://localhost:4000/wiki/2024/04/28/create-linux-server.html" rel="alternate" type="text/html" title="아메리카노트 서버 구성 &amp;lt;1&amp;gt; Linux 서버 생성" /><published>2024-04-28T00:00:00+09:00</published><updated>2024-04-28T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/04/28/create-linux-server</id><content type="html" xml:base="http://localhost:4000/wiki/2024/04/28/create-linux-server.html"><![CDATA[<h4 id="배경">배경</h4>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2024-04-29T22:23:22+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">아메리카노트 서버 구성 &amp;lt;5&amp;gt; 도메인 연결</title><link href="http://localhost:4000/wiki/2024/04/29/americanote-server5-connect-domain-name.html" rel="alternate" type="text/html" title="아메리카노트 서버 구성 &amp;lt;5&amp;gt; 도메인 연결" /><published>2024-04-29T00:00:00+09:00</published><updated>2024-04-29T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/04/29/americanote-server5-connect-domain-name</id><content type="html" xml:base="http://localhost:4000/wiki/2024/04/29/americanote-server5-connect-domain-name.html"><![CDATA[<ul>
+  <li>자동 배포까지 했으니 어느정도는 백엔드 코드를 서버에 올리는 것까지 했다고 할 수 있겠습니다.</li>
+  <li>저도 여기가 마지막인 줄 알았으나..
+<img src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/9ba32892-8688-4f23-aa75-806a8df95b37" alt="domain1" /></li>
+  <li>첨부한 이미지는 프론트분이 API가 요청되지 않는다고 캡쳐해주신 에러 메세지입니다. 읽어보면 HTTPS인 프론트 도메인에서 HTTP인 백엔드 도메인으로 요청하는 부분에서 XMLHttpRequest 에러가 발생했습니다. 바로 CORS 문제입니다 ㅎㅎ</li>
+  <li>검색해보니 프론트 쪽에서 간단하게 <code class="language-plaintext highlighter-rouge">&lt;meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"&gt;</code> 같은 HTML 코드를 넣어서 해결하는 방법도 있었지만, 그래도 저희는 해결되지 않아서 결국 도메인을 구매하기로 결정했습니다. (심지어 마감 전날 토요일에 ㅎㅎ)
+<br />
+<br /></li>
+</ul>
+
+<h4 id="1-카페24에서-도메인-구매">1. 카페24에서 도메인 구매</h4>
+<ul>
+  <li>아주 익숙한 카페24에서 도메인을 구매하기로 결정했습니다.</li>
+  <li>좋은 이름이면 참 좋겠지만 프론트에서 API로 요청할 때만 필요하기 때문에 1년에 단돈 500원에 구매할 수 있는 <code class="language-plaintext highlighter-rouge">.store</code>를 선택했습니다.</li>
+</ul>
+
+<p><img width="875" alt="domain2" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/b015dcca-441f-4fe1-9067-0577379b6bc6" />
+<br />
+<br /></p>
+
+<h3 id="2-서버에-nginx-설치하기">2. 서버에 Nginx 설치하기</h3>
+<ul>
+  <li>이제 도메인과 서버를 연결해주기 위해서 서버에 nginx를 설치해보겠습니다.</li>
+  <li>먼저 설치하기 전에 패키지 목록을 업데이트 해줍니다.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt update
+<span class="nb">sudo </span>apt upgrade
+</code></pre></div>    </div>
+  </li>
+  <li>그리고 nginx를 설치하겠습니다.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>nginx
+</code></pre></div>    </div>
+  </li>
+  <li>계속할지 묻는 메시지가 표시되면 ‘Y’를 누르고 enter 키를 치다보면 설치가 완료됩니다.
+  <img width="970" alt="domain3" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/4943ca29-1701-4786-9015-11ec1efd5ed1" />
+    <ul>
+      <li>저는 이렇게 하다가 중간에 에러가 발생했는데요, 이유는 IPV6 설정때문이었습니다. 해결해주기 위해 <code class="language-plaintext highlighter-rouge">/etc/nginx/sites-available/default</code> 파일에 접근해서 아래처럼 수정해줍니다.
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  server <span class="o">{</span>
+      listen 80 default_server<span class="p">;</span>
+      <span class="c"># listen [::]:80 default_server; # 이 부분 주석 처리</span>
+    
+      ...
+    
+      root /var/www/html<span class="p">;</span>
+    
+      <span class="c"># Add index.php to the list if you are using PHP</span>
+      index index.html index.htm index.nginx-debian.html<span class="p">;</span>
+    
+      server_name _<span class="p">;</span>
+    
+      location / <span class="o">{</span>
+              <span class="c"># First attempt to serve request as file, then</span>
+              <span class="c"># as directory, then fall back to displaying a 404.</span>
+              try_files <span class="nv">$uri</span> <span class="nv">$uri</span>/ <span class="o">=</span>404<span class="p">;</span>
+      <span class="o">}</span>
+  				...
+  <span class="o">}</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>이제 설치를 마쳤으면 nginx를 시작합니다.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>service nginx start
+<span class="nb">sudo </span>service nginx status <span class="c"># nginx 상태 확인</span>
+</code></pre></div>    </div>
+    <p><img width="1045" alt="domain4" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/5447c65d-2df6-4850-945c-e19f8dd219b6" />
+<br />
+<br /></p>
+  </li>
+</ul>
+
+<h4 id="3-방화벽-설정">3. 방화벽 설정</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw app list
+</code></pre></div></div>
+<ul>
+  <li>위의 명령어를 입력하여 방화벽 설정을 확인하면 방화벽 설정이 가능한 애플리케이션 목록이 나옵니다.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Available applications:
+Nginx Full <span class="c"># 80, 443 포트 허용</span>
+Nginx HTTP <span class="c"># 80 포트만 허용</span>
+Nginx HTTPS <span class="c"># 443 포트만 허용</span>
+OpenSSH
+</code></pre></div>    </div>
+  </li>
+  <li>저희는 이 다음에 HTTPS까지 적용하기 위해서 ‘Nginx Full’ 방화벽을 허용해줍니다.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw allow <span class="s1">'Nginx Full'</span>
+<span class="nb">sudo </span>ufw status <span class="c"># 상태 체크</span>
+</code></pre></div>    </div>
+    <p>```bash
+Status: inactive</p>
+  </li>
+</ul>
+
+<p>To                         Action      From
+–                         ——      —-
+Nginx HTTP                 ALLOW       Anywhere
+Nginx HTTP (v6)            ALLOW       Anywhere (v6)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- 그리고 위처럼 상태가 inactive로 되어있으면 아래 명령어를 입력하여 활성화 시켜줍니다.
+    - ***tip***: 아래 명령어를 입력하면 ssh 연결을 방해할 수도 있다는 경고 문구가 나오는데, 이때 y를 하기 전에 반드시 22번 포트를 허용하거나 제한해줍니다.
+    &lt;img width="608" alt="domain5" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/429317de-249e-49fb-b516-7ebe01647d45"&gt;
+    ```bash
+    sudo ufw limit/allow 22
+    ```
+    - 처음 설정할 때는 이 부분을 몰라서 ssh에 들어갈 수 없게 되는 사태가 벌어졌지만, NCP 서버 콘솔에 원격으로 접속하는 곳으로 들어가 22번 포트를 허용하는 방식으로 겨우 해결했습니다…💦💦💦
+```bash
+sudo ufw enable
+</code></pre></div></div>
+<ul>
+  <li>이제 public ip로 접근해보면 nginx 화면이 성공적으로 뜨는 것을 확인할 수 있습니다.</li>
+</ul>
+
+<p><img width="745" alt="domain6" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/d9ee761f-1926-4fce-82dd-85382f1eb292" />
+<br />
+<br /></p>
+
+<h4 id="4-도메인-연결">4. 도메인 연결</h4>
+<ul>
+  <li>public ip로 뜨는 걸 봤으니 이제 도메인과 연결해주겠습니다.</li>
+  <li>먼저 기본 nginx의 화면이 아닌 다른 화면으로 출력하기 위해 index.html 파일을 만들어줍니다.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo mkdir</span> <span class="nt">-p</span> /var/www/도메인이름/html <span class="c"># 폴더 생성</span>
+<span class="nb">sudo chown</span> <span class="nt">-R</span> <span class="nv">$USER</span>:<span class="nv">$USER</span> /var/www/도메인이름/html <span class="c"># 소유자 설정</span>
+<span class="nb">sudo chmod</span> <span class="nt">-R</span> 755 /var/www/도메인이름 <span class="c">#권한 설정</span>
+<span class="nb">sudo </span>vi /var/www/도메인이름/html/index.html <span class="c"># index.html 파일 생성</span>
+</code></pre></div>    </div>
+  </li>
+  <li>위에서 수정했던 <code class="language-plaintext highlighter-rouge">/etc/nginx/sites-available/default</code> 파일 대신 이번에는 도메인 이름으로 된 파일을 만들어서 아래처럼 설정해줍니다.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>vi /etc/nginx/sites-available/도메인이름
+<span class="c"># 위 파일로 자동으로 이동한 뒤 아래 내용 입력</span>
+server <span class="o">{</span>
+  listen 80<span class="p">;</span>
+
+  root /var/www/도메인 이름/html<span class="p">;</span> <span class="c"># 위에서 만든 html 폴더</span>
+  index index.html index.htm index.nginx-debian.html<span class="p">;</span>
+
+  server_name 도메인 이름 www.도메인 이름<span class="p">;</span>
+
+  location / <span class="o">{</span>
+      try_files <span class="nv">$uri</span> <span class="nv">$uri</span>/ <span class="o">=</span>404<span class="p">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>위 파일을 nginx에서 연결해주기 위해 해당 파일을 sites-enabled 폴더에 심볼릭 링크 설정을 해줍니다.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo ln</span> <span class="nt">-s</span> /etc/nginx/sites-available/도메인이름 /etc/nginx/sites-enabled/
+</code></pre></div>    </div>
+  </li>
+  <li>이제 브라우저에서 도메인을 입력하면 위에서 생성한 index.html이 확인할 수 있습니다.
+<br />
+<br /></li>
+</ul>
+
+<h4 id="참고">참고</h4>
+<ul>
+  <li>https://jaehyeon48.github.io/nginx/configure-nginx-on-ubuntu-2004/</li>
+  <li><a href="https://velog.io/@xangj0ng/Linux-Ubuntu-Nginx-%EC%84%A4%EC%B9%98">https://velog.io/@xangj0ng/Linux-Ubuntu-Nginx-설치</a></li>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Server" /><category term="NaverCloudPlatform" /><category term="Project" /><category term="DNS" /><summary type="html"><![CDATA[자동 배포까지 했으니 어느정도는 백엔드 코드를 서버에 올리는 것까지 했다고 할 수 있겠습니다. 저도 여기가 마지막인 줄 알았으나.. 첨부한 이미지는 프론트분이 API가 요청되지 않는다고 캡쳐해주신 에러 메세지입니다. 읽어보면 HTTPS인 프론트 도메인에서 HTTP인 백엔드 도메인으로 요청하는 부분에서 XMLHttpRequest 에러가 발생했습니다. 바로 CORS 문제입니다 ㅎㅎ 검색해보니 프론트 쪽에서 간단하게 &lt;meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"&gt; 같은 HTML 코드를 넣어서 해결하는 방법도 있었지만, 그래도 저희는 해결되지 않아서 결국 도메인을 구매하기로 결정했습니다. (심지어 마감 전날 토요일에 ㅎㅎ)]]></summary></entry><entry><title type="html">아메리카노트 서버 구성 &amp;lt;2&amp;gt; MySQL 데이터베이스 생성</title><link href="http://localhost:4000/wiki/2024/04/29/americanote-server2-create-mysql-database.html" rel="alternate" type="text/html" title="아메리카노트 서버 구성 &amp;lt;2&amp;gt; MySQL 데이터베이스 생성" /><published>2024-04-29T00:00:00+09:00</published><updated>2024-04-29T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/04/29/americanote-server2-create-mysql-database</id><content type="html" xml:base="http://localhost:4000/wiki/2024/04/29/americanote-server2-create-mysql-database.html"><![CDATA[<p>이번에는 NCP에서 MySQL DB Server를 생성하고 연결해보겠습니다.
+<br />
+<br /></p>
+
+<h4 id="db-server-생성">DB Server 생성</h4>
+<p><img width="678" alt="create-mysql1" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/44d6bbc1-bc7a-46b8-ba8f-11681852aac9" /></p>
+<ul>
+  <li>고가용성까지는 필요 없기 때문에 해제를 해주고, 이전 단계에서 만들었던 VPC와 Subnet을 선택해주었습니다.
+<br />
+<br />
+<br /></li>
+</ul>
+
+<p><img width="551" alt="create-mysql2" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/a51e2e02-7af7-4614-a433-f81839ad3545" /></p>
+<ul>
+  <li>기본 설정에서 거의 건드리지 않고 DB server와 서비스 이름만 지정해주었습니다.
+<br />
+<br />
+<br /></li>
+</ul>
+
+<p><img width="682" alt="create-mysql3" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/c4d4c493-9ce9-45e5-94b3-54ee3004eec0" /></p>
+<ul>
+  <li>USER_ID와 USER 암호로 MySQL admin을 생성해줍니다.</li>
+  <li>HOST는 접속할 Client IP를 입력하는 건데 아래 예시처럼 전체 접속을 허용해주기 위해 %를 입력했습니다.
+<br />
+<br />
+<br /></li>
+</ul>
+
+<p><img width="362" alt="create-mysql4" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/95182b3c-e4e8-4d00-8ed5-7061fd7667dd" /></p>
+<ul>
+  <li>또한 백업 설정은 추가 요금이 발생한다길래 과감히 포기했습니다^^..</li>
+  <li>다음을 누르고 최종 확인을 하면 몇 분 안에 DB 서버가 생성됩니다.
+<br />
+<br />
+<br /></li>
+</ul>
+
+<h4 id="방화벽acg-설정">방화벽(ACG) 설정</h4>
+<ul>
+  <li>생성 후 끝이 아니라 DB에 접속하기 위해 방화벽을 설정해줍니다.</li>
+  <li>참고로 DB에 0.0.0.0으로 모두 허용해주는 게 위험하다고 생각해서 자주 쓰는 IP들만 등록해두었습니다.</li>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="NaverCloudPlatform" /><category term="Project" /><category term="MySQL" /><category term="DataBase" /><summary type="html"><![CDATA[이번에는 NCP에서 MySQL DB Server를 생성하고 연결해보겠습니다.]]></summary></entry><entry><title type="html">아메리카노트 서버 구성 &amp;lt;3&amp;gt; 프로젝트 배포</title><link href="http://localhost:4000/wiki/2024/04/29/americanote-server3-deploy-project.html" rel="alternate" type="text/html" title="아메리카노트 서버 구성 &amp;lt;3&amp;gt; 프로젝트 배포" /><published>2024-04-29T00:00:00+09:00</published><updated>2024-04-29T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/04/29/americanote-server3-deploy-project</id><content type="html" xml:base="http://localhost:4000/wiki/2024/04/29/americanote-server3-deploy-project.html"><![CDATA[<p>서버와 데이터베이스를 생성했다면 이번에는 서버에 프로젝트를 배포해보겠습니다.
+<br />
+<br /></p>
+
+<h4 id="1-서버에-접근하기">1. 서버에 접근하기</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh username@public-ip <span class="nt">-p</span> 22<span class="o">(</span>허용 포트<span class="o">)</span>
+<span class="c"># password</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h4 id="2-서버에-java-설치">2. 서버에 JAVA 설치</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>openjdk-17-jdk
+java <span class="nt">--version</span> <span class="c"># 자바 버전 확인</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h4 id="3-프로젝트-가져오기">3. 프로젝트 가져오기</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone <span class="nt">--branch</span> 가져올브랜치 https://github.com/깃헙아이디/레포지토리명.git <span class="c"># 프로젝트 복제</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h4 id="4-별도로-필요한-yml-파일이-있다면-optional">4. 별도로 필요한 yml 파일이 있다면 (optional)</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>Americanote <span class="c"># 리포지토리로 들어가기</span>
+<span class="nb">cd </span>src/main/resources <span class="c"># yml 파일이 위치할 resources 폴더로 이동</span>
+<span class="nb">cat</span> <span class="o">&gt;</span> ~.yml <span class="c"># yml 파일 생성 및 편집</span>
+<span class="c"># yml 파일 내용 붙여넣기</span>
+<span class="c"># 필요한 yml 파일을 모두 만들었으면 다시 리포지토리 홈으로 돌아갑니다.</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h4 id="5-gradle-빌드-후-실행하기">5. Gradle 빌드 후 실행하기</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./gradlew clean build <span class="nt">-x</span> <span class="nb">test</span> <span class="c"># 테스트 없이 처음부터 빌드</span>
+<span class="nb">cd </span>build/libs <span class="c"># jar 파일이 존재하는 폴더로 이동</span>
+ll 혹은 <span class="nb">ls</span> <span class="c"># 폴더 보기</span>
+<span class="nb">nohup </span>java <span class="nt">-jar</span> <span class="o">[</span>이름-SNAPSHOT.jar] &amp;
+</code></pre></div></div>
+<ul>
+  <li>nohup
+    <ul>
+      <li>no hang up의 약자, 말그대로 끊지마!</li>
+      <li>사용자가 세션과 연결을 종료해도, 데몬 형태로 실행하게 하여 해당 프로세스가 종료되지 않습니다.</li>
+    </ul>
+  </li>
+  <li>&amp;
+    <ul>
+      <li>프로그램 실행 시 마지막에 붙여주면 백그라운드에서 해당 프로세스가 실행됩니다.
+<br />
+  → 어떤 프로그램을 종료없이 백그라운드에서 실행시킬 때 <code class="language-plaintext highlighter-rouge">nohup ~ &amp;</code> 조합을 사용하는 게 가장 확실하고 안전합니다.
+<br />
+<br /></li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="6-로그-확인">6. 로그 확인</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 실행 후 ll 이나 ls로 확인해보면 nohup.out이 생성됩니다.</span>
+<span class="nb">tail</span> <span class="nt">-f</span> nohup.out <span class="c"># 실시간 업데이트 로그</span>
+<span class="nb">cat </span>nohup.out     <span class="c"># 현재까지 로그</span>
+</code></pre></div></div>
+<ul>
+  <li>제대로 실행되었는지 확인하기 위해 로그를 실행 후 로그를 반드시 확인하는 편입니다.
+<br />
+<br /></li>
+</ul>
+
+<h4 id="7-만약-이미-프로젝트가-실행-중이라면-종료하고-실행하자">7. 만약 이미 프로젝트가 실행 중이라면? 종료하고 실행하자</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>netstat <span class="nt">-tulpn</span> <span class="c"># 실행 중인 프로세스 확인</span>
+<span class="nb">kill</span> <span class="nt">-9</span> <span class="o">[</span>PID 번호]
+</code></pre></div></div>
+<ul>
+  <li>Gradle 빌드 후 실행하기 전에 한번쯤 확인하면 좋겠습니다.
+<br />
+<br /></li>
+</ul>
+
+<h4 id="참고">참고</h4>
+<ul>
+  <li><a href="https://1.theapplemango.com/entry/%EB%84%A4%EC%9D%B4%EB%B2%84-%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%ED%94%8C%EB%9E%AB%ED%8F%BCNCP-%EC%84%9C%EB%B2%84-%EA%B5%AC%EC%B6%95-%EB%B0%8F-%EC%8A%A4%ED%94%84%EB%A7%81-%EB%B0%B0%ED%8F%AC%EA%B9%8C%EC%A7%80-2">https://1.theapplemango.com/entry/네이버-클라우드-플랫폼NCP-서버-구축-및-스프링-배포까지-2</a></li>
+  <li><a href="https://joonyon.tistory.com/entry/%EC%89%BD%EA%B2%8C-%EC%84%A4%EB%AA%85%ED%95%9C-nohup-%EA%B3%BC-%EB%B0%B1%EA%B7%B8%EB%9D%BC%EC%9A%B4%EB%93%9C-%EB%AA%85%EB%A0%B9%EC%96%B4-%EC%82%AC%EC%9A%A9%EB%B2%95">https://joonyon.tistory.com/entry/쉽게-설명한-nohup-과-백그라운드-명령어-사용법</a></li>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Server" /><category term="NaverCloudPlatform" /><category term="Project" /><category term="Deploy" /><summary type="html"><![CDATA[서버와 데이터베이스를 생성했다면 이번에는 서버에 프로젝트를 배포해보겠습니다.]]></summary></entry><entry><title type="html">아메리카노트 서버 구성 &amp;lt;4&amp;gt; 자동 배포</title><link href="http://localhost:4000/wiki/2024/04/29/americanote-server4-automatical-deploy.html" rel="alternate" type="text/html" title="아메리카노트 서버 구성 &amp;lt;4&amp;gt; 자동 배포" /><published>2024-04-29T00:00:00+09:00</published><updated>2024-04-29T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/04/29/americanote-server4-automatical-deploy</id><content type="html" xml:base="http://localhost:4000/wiki/2024/04/29/americanote-server4-automatical-deploy.html"><![CDATA[<hr />
+<p>layout: post
+title: 아메리카노트 서버 구성 &lt;4&gt; 자동 배포
+subtitle: 
+categories: wiki
+tags: [Server, NaverCloudPlatform, Project, Deploy, GithubActions]
+—</p>
+<ul>
+  <li>프로젝트를 서버에 배포해봤다면 번거롭다는 생각을 한번쯤 해봤을 것 같습니다. 그래서 이번에는 그 배포를 자동으로 진행해보겠습니다.</li>
+  <li>자동 배포는 Github Actions의 self-hosted runner를 사용했습니다.
+<br />
+<br /></li>
+</ul>
+
+<h4 id="1-프로젝트-리포지토리에서-github-actions-runner-생성하기">1. 프로젝트 리포지토리에서 Github Actions Runner 생성하기</h4>
+<ul>
+  <li>프로젝트 리포지토리로 이동하여 Settings - Actions - Runners - New self-hosted runner 화면으로 이동합니다.
+<img width="1344" alt="github-actions1" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/c576842e-5e21-4301-a477-b84727d1d967" />
+<br />
+<br /></li>
+</ul>
+
+<h4 id="2-서버에서-명령어-입력하기">2. 서버에서 명령어 입력하기</h4>
+<ul>
+  <li>서버에 Github Actions runner를 생성해주는 명령어들로 하나씩 차근차근 입력해 줍니다.</li>
+  <li>마지막 명령어 실행 중 <strong>Must not run with sudo</strong> 라는 에러 메시지가 발생하면 <code class="language-plaintext highlighter-rouge">export RUNNER_ALLOW_RUNASROOT="1”</code>를 입력한 뒤 재시도하면 됩니다.
+<img width="788" alt="github-actions2" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/43dad816-a9ed-4eaa-b137-d76272e537b6" /></li>
+  <li>설치 완료 이후 화면
+<img width="671" alt="github-actions3" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/9bf0bd39-e89e-468b-9755-6debf9c54ac6" /></li>
+  <li>이후 아래 명령어를 입력하면 Github Actions를 수신할 준비가 완료됩니다.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo</span> ./svc.sh <span class="nb">install
+sudo</span> ./svc.sh start
+</code></pre></div>    </div>
+    <p><br />
+<br /></p>
+  </li>
+</ul>
+
+<h4 id="3-리포지토리에서-actons-workflow-생성">3. 리포지토리에서 Actons workflow 생성</h4>
+<ul>
+  <li>다시 리포지토리로 돌아가서 Actions 탭에서 왼쪽 상단의 New workflow를 클릭한 뒤 저희 프로젝트에 맞는 ‘Java with Gradle’을 선택하여 워크플로우를 생성합니다.</li>
+  <li>이 워크플로우가 바로 Github Actions가 서버에서 수행할 업무들입니다.</li>
+  <li>이전 페이지(<a href="https://dajeongdev.github.io/wiki/2024/04/29/deploy-project.html">&lt;3&gt; 프로젝트 배포</a>)에서 직접 설치 및 작성한 것과 동일하게 진행합니다.
+    <ul>
+      <li>JDK 17 설치</li>
+      <li>YML 파일 생성</li>
+      <li>Gradle 빌드</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name: Auto Deploy
+
+on:
+  push:
+    branches:
+      - develop
+
+<span class="nb">jobs</span>:
+  build:
+
+    runs-on: self-hosted
+
+    steps:
+      <span class="c"># checkout</span>
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      <span class="c"># JDK setting</span>
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: <span class="s1">'17'</span>
+          distribution: <span class="s1">'zulu'</span>
+
+      <span class="c"># secret yml file 생성</span>
+      - name: Set secret yml
+        run: |
+          <span class="nb">mkdir</span> <span class="nt">-p</span> src/main/resources
+          <span class="nb">echo</span> <span class="s2">"$"</span> | <span class="nb">base64</span> <span class="nt">--decode</span> <span class="o">&gt;</span> src/main/resources/application-database.yml
+          <span class="nb">echo</span> <span class="s2">"$"</span> | <span class="nb">base64</span> <span class="nt">--decode</span> <span class="o">&gt;</span> src/main/resources/application-naver-token.yml
+          <span class="nb">echo</span> <span class="s2">"$"</span> | <span class="nb">base64</span> <span class="nt">--decode</span> <span class="o">&gt;</span> src/main/resources/application-security.yml
+          find src
+        shell: bash
+
+      <span class="c"># Gradle 권한 부여</span>
+      - name: Grant permission <span class="k">for </span>gradlew
+        run: <span class="nb">chmod</span> +x ./gradlew
+
+      <span class="c"># 테스트 없이 빌드</span>
+      - name: Build with Gradle
+        run: ./gradlew clean build <span class="nt">-x</span> <span class="nb">test</span>
+
+      <span class="c"># 포트가 사용 중이라면 종료</span>
+      - name: Kill 8009 port <span class="k">if </span>exist
+        run: |
+            <span class="k">if </span><span class="nb">sudo </span>lsof <span class="nt">-i</span> :8009<span class="p">;</span> <span class="k">then
+              </span><span class="nb">echo</span> <span class="s2">"Port 8009 is already in use. Killing the process..."</span>
+              <span class="nb">sudo kill</span> <span class="nt">-9</span> <span class="sb">`</span><span class="nb">sudo </span>lsof <span class="nt">-t</span> <span class="nt">-i</span>:8009<span class="sb">`</span>
+            <span class="k">fi</span>
+
+      <span class="c"># build/libs 폴더 속 jar 파일 실행</span>
+      - name: Execute Jar File
+        run: |
+          <span class="nb">sudo nohup </span>java <span class="nt">-jar</span> build/libs/americano-0.0.1-SNAPSHOT.jar 1&gt;/root/nohup/output.log 2&gt;/root/nohup/error.log &amp;
+          <span class="nb">sleep </span>10
+</code></pre></div></div>
+<ul>
+  <li>secret yml 파일의 경우 별도로 필요한 yml들을 Base64로 인코딩하여 리포지토리 Settings → Secrets and variables → Actions에서 Repository Secrets로 설정해주었습니다.
+<img width="1340" alt="github-actions4" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/f2771b69-b97f-4255-9e94-6e3c1307921d" /></li>
+  <li>또한, Github Actions self-hosted runner에서는 nohup이 적용되지 않아 자꾸 <code class="language-plaintext highlighter-rouge">Unable access to jarfile</code>가 발생하여, 결국 이 부분을 제거했더니 성공적으로 실행되었습니다.
+    <ul>
+      <li><del>nohup이 적용되지 않는 부분은 추후 원인을 찾아내면 꼭 작성해두도록 하겠습니다!</del> <strong>방법을 찾아서 추가하겠습니다. 또한 어이없게도 제가 nohup 이후에 설정한 게 없기 때문에 로그를 확인할 수 없어 필요하기도 했습니다..🥲</strong>
+        <ul>
+          <li>nohup의 출력은 프로젝트 내에서 권한 밖이기 때문에 발생한 에러라고 확인이 됩니다. 그래서 프로젝트 밖의 경로로 설정하여 표준 출력과 에러를 구분하여 로그를 전달하는 방식으로 스크립트를 추가했습니다.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 이전
+<span class="nb">sudo nohup </span>java <span class="nt">-jar</span> build/libs/americano-0.0.1-SNAPSHOT.jar &amp;
+// 현재
+ <span class="nb">sudo nohup </span>java <span class="nt">-jar</span> build/libs/americano-0.0.1-SNAPSHOT.jar 1&gt;/root/nohup/output.log 2&gt;/root/nohup/error.log &amp;
+</code></pre></div></div>
+<p><br />
+<br /></p>
+
+<h4 id="참고">참고</h4>
+<ul>
+  <li>https://e-room.tistory.com/145</li>
+  <li>https://be-student.tistory.com/75</li>
+  <li><a href="https://velog.io/@bjk1649/github-Action-%EB%A7%8C%EC%9C%BC%EB%A1%9C-%EC%A7%80%EC%86%8D%EC%A0%81-%EB%B0%B0%ED%8F%ACCD-%EB%AA%BB%ED%95%98%EB%82%98">https://velog.io/@bjk1649/github-Action-만으로-지속적-배포CD-못하나</a></li>
+  <li>https://green-joo.tistory.com/26</li>
+  <li><a href="https://velog.io/@chlee4858/20211205-github%EC%97%90%EC%84%9C-CICD-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0-github-action">https://velog.io/@chlee4858/20211205-github에서-CICD-적용하기-github-action</a></li>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Server" /><category term="NaverCloudPlatform" /><category term="Project" /><category term="Deploy" /><summary type="html"><![CDATA[layout: post title: 아메리카노트 서버 구성 &lt;4&gt; 자동 배포 subtitle: categories: wiki tags: [Server, NaverCloudPlatform, Project, Deploy, GithubActions] — 프로젝트를 서버에 배포해봤다면 번거롭다는 생각을 한번쯤 해봤을 것 같습니다. 그래서 이번에는 그 배포를 자동으로 진행해보겠습니다. 자동 배포는 Github Actions의 self-hosted runner를 사용했습니다.]]></summary></entry><entry><title type="html">아메리카노트 서버 구성 &amp;lt;6&amp;gt; HTTPS 적용</title><link href="http://localhost:4000/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain.html" rel="alternate" type="text/html" title="아메리카노트 서버 구성 &amp;lt;6&amp;gt; HTTPS 적용" /><published>2024-04-29T00:00:00+09:00</published><updated>2024-04-29T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain</id><content type="html" xml:base="http://localhost:4000/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain.html"><![CDATA[<ul>
+  <li>이전 단계에서 진행했던 방화벽에서의 80, 443 포트 허용과 도메인이 있다면 이제 기간은 짧지만 무료로 받을 수 있는 Letsencrypt의 SSL 인증서를 발급 받아보겠습니다.
+<br />
+<br /></li>
+</ul>
+
+<h4 id="ssl-인증서-발급받기">SSL 인증서 발급받기</h4>
+<ul>
+  <li>인증서를 발급받기 위해 letsencrypt의 certbot을 설치해주고, 인증서를 발급받습니다.</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt update <span class="c"># 패키지 업데이트</span>
+<span class="nb">sudo </span>apt <span class="nb">install </span>certbot python3-certbot-nginx
+<span class="nb">sudo </span>certbot <span class="nt">--nginx</span> <span class="nt">-d</span> 도메인이름 <span class="nt">-d</span> www.도메인이름
+</code></pre></div></div>
+
+<ul>
+  <li>첫 실행 시에는 이메일을 입력하고 약관에 동의해야 합니다.</li>
+  <li>이후 certbot이 letsencrypt 서버와 통신 중 도메인이 유효한치 확인하는 과정을 거칩니다.
+    <ul>
+      <li>저는 이 부분에서 에러가 참 많이 발생했는데요 ㅎㅎ 하나씩 살펴보겠습니다.
+        <ol>
+          <li><strong>/well-known/acme-challenge/ 폴더가 허용되지 않았습니다.</strong>
+            <ul>
+              <li>
+                <p>이 부분은 Nginx에서 적용하는 부분이라 이전 단계에서 만들었던 <code class="language-plaintext highlighter-rouge">/etc/nginx/sites-available/도메인이름</code> 파일에서 추가해주었습니다.</p>
+
+                <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  server <span class="o">{</span>
+          listen 80 default_server<span class="p">;</span>
+          listen <span class="o">[</span>::]:80 default_server<span class="p">;</span>
+                
+          server_name 도메인이름 www.도메인이름<span class="p">;</span>
+                
+          location ~ /<span class="se">\.</span>well-known/acme-challenge/ <span class="o">{</span>
+          allow all<span class="p">;</span>
+          root /var/www/letsencrypt<span class="p">;</span>
+          <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre></div>                </div>
+              </li>
+            </ul>
+          </li>
+          <li><strong>도메인에 A 레코드를 적용되어 있지 않았습니다.</strong>
+            <ul>
+              <li>A 레코드 적용을 위해 NCP에서 Global Domain에 도메인을 추가하고, A 레코드를 추가해주었습니다.
+  <img width="679" alt="https1" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/3abce503-be85-43fe-8531-612c95578743" /></li>
+              <li>하지만 이 Global Domain의 네임서버를 카페24의 도메인에 설정해주는 과정에서 24시간이 걸린다는 소식에 아주 멘탈이 탈탈 털릴 뻔 했지만… 다행히 12시간 정도 뒤에 사용이 가능했습니다😂
+  <img width="544" alt="https2" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/8f6df708-93fa-4e43-8709-e2ad85b0c689" /></li>
+            </ul>
+          </li>
+        </ol>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><img width="770" alt="https3" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/f52a2ee6-ea91-475c-ba0e-8252c28a2993" /></p>
+<ul>
+  <li>그리하여 드디어 간절히 기다리던 발급 성공 화면을 보게 되면 SSL 발급에 성공한 겁니다.</li>
+  <li>이제 <code class="language-plaintext highlighter-rouge">/etc/nginx/sites-available/도메인이름</code> 파일에 접근해보면 자동으로 SSL이 적용된 것을 확인할 수 있습니다.</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server <span class="o">{</span>
+        listen  443 ssl<span class="p">;</span>
+        server_name americanote.store www.americanote.store<span class="p">;</span>
+
+        <span class="c">#access_log /var/log/nginx/proxy/access.log;</span>
+        <span class="c">#error_log /var/log/nginx/proxy/error.log;</span>
+
+        ssl_certificate /etc/letsencrypt/live/americanote.store/fullchain.pem<span class="p">;</span>
+        ssl_certificate_key /etc/letsencrypt/live/americanote.store/privkey.pem<span class="p">;</span>
+
+        location / <span class="o">{</span> <span class="c"># 추가</span>
+                proxy_pass http://127.0.0.1:8009<span class="p">;</span>
+
+        <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>참고로 <code class="language-plaintext highlighter-rouge">location / { … }</code> 부분까지 설정해주어야 현재 서버의 8009로 실행되고 있는 프로세스로 프록시가 요청을 전달해줍니다.
+<br />
+<br /></li>
+</ul>
+
+<h4 id="참고">참고</h4>
+<ul>
+  <li><a href="https://velog.io/@curiosity806/nginx-Lets-Encrypt-SSL-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EB%B0%9C%EA%B8%89">https://velog.io/@curiosity806/nginx-Lets-Encrypt-SSL-인증서-발급</a></li>
+  <li><a href="https://jaehyeon48.github.io/nginx/configure-nginx-on-ubuntu-2004">Ubuntu 20.04에서 Nginx 설치 및 설정하기</a></li>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="NaverCloudPlatform" /><category term="Project" /><category term="MySQL" /><category term="DataBase" /><summary type="html"><![CDATA[이전 단계에서 진행했던 방화벽에서의 80, 443 포트 허용과 도메인이 있다면 이제 기간은 짧지만 무료로 받을 수 있는 Letsencrypt의 SSL 인증서를 발급 받아보겠습니다.]]></summary></entry><entry><title type="html">아메리카노트 서버 구성 &amp;lt;1&amp;gt; Linux 서버 생성</title><link href="http://localhost:4000/wiki/2024/04/28/americanote-server1-create-linux-server.html" rel="alternate" type="text/html" title="아메리카노트 서버 구성 &amp;lt;1&amp;gt; Linux 서버 생성" /><published>2024-04-28T00:00:00+09:00</published><updated>2024-04-28T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/04/28/americanote-server1-create-linux-server</id><content type="html" xml:base="http://localhost:4000/wiki/2024/04/28/americanote-server1-create-linux-server.html"><![CDATA[<h4 id="배경">배경</h4>
 <ul>
   <li>비사이드 포텐데이403 프로젝트를 진행하면서 Linux 서버를 생성하기 위해 순서대로 정리해봤습니다.
 <br />
@@ -419,275 +919,4 @@
 <ul>
   <li>https://devuna.tistory.com/22</li>
   <li>https://kwin0825.tistory.com/157</li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="DataStructure" /><category term="Queue" /><summary type="html"><![CDATA[Queue(선형 큐) 특징 줄 서있는 것처럼 선입선출(FIFO) 형태의 자료구조 정해진 한 곳(top)을 통해서 삽입, 삭제가 이루어지는 스택과 달리 큐는 한쪽 끝에서 삽입 작업, 다른 쪽에서 삭제 작업이 양쪽으로 이루어진다. 큐의 뒤(rear)에서만 삽입(enqueue)하고, 큐의 앞(front)에서는 삭제(dequeue)만 이루어진다. 자바에서는 스택을 Stack 클래스로 구현하여 제공하지만, 큐는 Queue 인터페이스만 있고 별도의 클래스가 없다. 그래서 Queue 인터페이스를 구현한 클래스를 사용해야 한다.]]></summary></entry><entry><title type="html">프로그래머스 - 같은 숫자는 싫어 풀이</title><link href="http://localhost:4000/wiki/2024/02/29/programmers-12906.html" rel="alternate" type="text/html" title="프로그래머스 - 같은 숫자는 싫어 풀이" /><published>2024-02-29T00:00:00+09:00</published><updated>2024-02-29T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/02/29/programmers-12906</id><content type="html" xml:base="http://localhost:4000/wiki/2024/02/29/programmers-12906.html"><![CDATA[<h3 id="문제">문제</h3>
-<p><img src="https://dajeongdev.github.io/assets/images/posts/programmers-12906.png" /></p>
-<ul>
-  <li>연속적으로 나타나는 숫자, 즉 앞의 숫자와 겹치면 제거하기 때문에 Stack을 사용해서 풀이를 해보려고 한다.</li>
-  <li>https://school.programmers.co.kr/learn/courses/30/lessons/12906
-<br /> <br />
-<br /></li>
-</ul>
-
-<h3 id="풀이">풀이</h3>
-<p><strong>첫번째</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">firstSolution</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span><span class="o">)</span> <span class="o">{</span>
-	<span class="nc">Stack</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">answer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Stack</span><span class="o">&lt;&gt;();</span>
-	<span class="n">answer</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">arr</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
-	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-		<span class="k">if</span> <span class="o">(</span><span class="n">answer</span><span class="o">.</span><span class="na">peek</span><span class="o">()</span> <span class="o">==</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">])</span> <span class="o">{</span>
-			<span class="k">continue</span><span class="o">;</span>
-		<span class="o">}</span>
-		<span class="n">answer</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
-	<span class="o">}</span>
-	<span class="k">return</span> <span class="n">answer</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">mapToInt</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">i</span><span class="o">).</span><span class="na">toArray</span><span class="o">();</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<ul>
-  <li>이렇게 했더니 33.7점 나옴…</li>
-  <li><code class="language-plaintext highlighter-rouge">arr.length - 1</code> 부분이 오답 → <code class="language-plaintext highlighter-rouge">arr.length</code>라고 해야 배열 끝까지 확인함</li>
-  <li>리턴값이 틀린 줄 알았는데 저 부분은 맞음
-<br /></li>
-</ul>
-
-<p><strong>두번째</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">secondSolution</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span><span class="o">)</span> <span class="o">{</span>
-	<span class="nc">Stack</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">answer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Stack</span><span class="o">&lt;&gt;();</span>
-	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">nun</span> <span class="o">:</span> <span class="n">arr</span><span class="o">)</span> <span class="o">{</span>
-		<span class="k">if</span> <span class="o">(</span><span class="n">answer</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">()</span> <span class="o">||</span> <span class="n">answer</span><span class="o">.</span><span class="na">peek</span><span class="o">()</span> <span class="o">!=</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
-			<span class="n">answer</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">num</span><span class="o">);</span>
-		<span class="o">}</span>
-	<span class="o">}</span>
-	<span class="k">return</span> <span class="n">answer</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">mapToInt</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">i</span><span class="o">).</span><span class="na">toArray</span><span class="o">();</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<ul>
-  <li>한 줄이라도 더 줄이기 위해 스택에 배열의 첫번째 값을 넣는 코드(<code class="language-plaintext highlighter-rouge">answer.add(arr[0]</code>)를 제거하고, if문에 <code class="language-plaintext highlighter-rouge">answer.isEmpty()</code>로 바꿈</li>
-  <li>따라서 index를 쓸 필요가 없기 때문에 향상된 for문으로 조금 더 가독성 있게 작성
-<br /></li>
-</ul>
-
-<h4 id="참고">참고</h4>
-<ul>
-  <li>다른 사람들 풀이를 보니 Stack을 사용하지 않은 사람도 많았다. Stack 클래스를 사용하는 것도 좋지만, 다른 클래스를 사용한 코드들도 많이 참고해서 이해력을 높여봐야겠다.
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">otherSolution</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span><span class="o">)</span> <span class="o">{</span>
-  <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">answer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
-  <span class="kt">int</span> <span class="n">prev</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span> <span class="c1">// 이전값 저장</span>
-  <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">num</span> <span class="o">:</span> <span class="n">arr</span><span class="o">)</span> <span class="o">{</span>
-      <span class="k">if</span> <span class="o">(</span><span class="n">prev</span> <span class="o">!=</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
-          <span class="n">answer</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">num</span><span class="o">);</span>
-      <span class="o">}</span>
-      <span class="n">prev</span> <span class="o">=</span> <span class="n">num</span><span class="o">;</span>
-  <span class="o">}</span>
-  <span class="k">return</span> <span class="n">answer</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">mapToInt</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">i</span><span class="o">).</span><span class="na">toArray</span><span class="o">();</span>
-<span class="o">}</span>
-</code></pre></div>    </div>
-  </li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="DataStructure" /><category term="Programmers" /><summary type="html"><![CDATA[문제 연속적으로 나타나는 숫자, 즉 앞의 숫자와 겹치면 제거하기 때문에 Stack을 사용해서 풀이를 해보려고 한다. https://school.programmers.co.kr/learn/courses/30/lessons/12906]]></summary></entry><entry><title type="html">String 배열 -&amp;gt; String</title><link href="http://localhost:4000/wiki/2024/02/26/string-array-to-string.html" rel="alternate" type="text/html" title="String 배열 -&amp;gt; String" /><published>2024-02-26T00:00:00+09:00</published><updated>2024-02-26T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/02/26/string-array-to-string</id><content type="html" xml:base="http://localhost:4000/wiki/2024/02/26/string-array-to-string.html"><![CDATA[<h3 id="배경">배경</h3>
-<ul>
-  <li>코딩테스트 문제를 풀면서 String 배열을 String으로 변환하는 작업이 자주 나와서 기록해두려고 한다. <br />
-<br /></li>
-</ul>
-
-<h3 id="1-stringjoincharsequence-delimiter-charsequence-elements">1. String.join(CharSequence delimiter, CharSequence… elements)</h3>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">join()</code> 메서드는 delimiter(구분자)를 사용하여 elements(대상 배열)을 문자열을 리턴할 수 있다.</li>
-  <li>String.join() 메서드는 Java 1.8 이상부터 사용 가능
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">strArr</span> <span class="o">=</span> <span class="o">{</span><span class="s">"hello"</span><span class="o">,</span> <span class="s">"java"</span><span class="o">};</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">join</span><span class="o">(</span><span class="s">","</span><span class="o">,</span> <span class="n">strArr</span><span class="o">));</span>
-<span class="c1">// 결과 : hello,java</span>
-</code></pre></div>    </div>
-    <p><br /></p>
-  </li>
-</ul>
-
-<h3 id="2-arraystostringobject-a">2. Arrays.toString(Object[] a)</h3>
-<ul>
-  <li>Arrays 클래스의 <code class="language-plaintext highlighter-rouge">toString()</code> 메서드를 사용하여 배열 모양의 문자열을 리턴할 수 있다.
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">strArr</span> <span class="o">=</span> <span class="o">{</span><span class="s">"hello"</span><span class="o">,</span> <span class="s">"java"</span><span class="o">};</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">strArr</span><span class="o">));</span>
-<span class="c1">// 결과 : [hello, java]</span>
-</code></pre></div>    </div>
-    <p><br /></p>
-  </li>
-</ul>
-
-<h3 id="3-stream---collectorsjoining">3. Stream - Collectors.joining()</h3>
-<ul>
-  <li>Stream의 <code class="language-plaintext highlighter-rouge">Collectors.joining()</code> 메서드를 사용하여 문자열을 리턴할 수 있다.</li>
-  <li>Stream은 Java 1.8 이상부터 사용 가능
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">strArr</span> <span class="o">=</span> <span class="o">{</span><span class="s">"hello"</span><span class="o">,</span> <span class="s">"java"</span><span class="o">};</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">strArr</span><span class="o">).</span><span class="na">collect</span><span class="o">(</span><span class="nc">Collectors</span><span class="o">.</span><span class="na">joining</span><span class="o">()));</span>
-<span class="c1">// 결과 : hellojava</span>
-</code></pre></div>    </div>
-    <p><br /></p>
-  </li>
-</ul>
-
-<h3 id="4-stringbuilderappendstring-str">4. StringBuilder.append(String str)</h3>
-<ul>
-  <li>가장 기본적인 방법 중에는 StringBuilder를 생성하여 <code class="language-plaintext highlighter-rouge">append()</code> 메서드를 사용하여 문자열을 리턴할 수 있다.</li>
-  <li>빠르지만 for문을 사용하기 때문에 코드가 조금 길어진다는 단점이 있다.
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">strArr</span> <span class="o">=</span> <span class="o">{</span><span class="s">"hello"</span><span class="o">,</span> <span class="s">"java"</span><span class="o">};</span>
-<span class="nc">StringBuilder</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span><span class="o">();</span>
-<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">strArr</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-  <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">strArr</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
-<span class="o">}</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sb</span><span class="o">);</span>
-<span class="c1">// 결과 : hellojava</span>
-</code></pre></div>    </div>
-    <p><br /></p>
-  </li>
-</ul>
-
-<h3 id="5-apache-commons-lang-3--라이브러리">5. Apache Commons Lang 3  라이브러리</h3>
-<ul>
-  <li><a href="https://commons.apache.org/proper/commons-lang">Apache Commons Lang 3</a> 라이브러리는 Java의 유틸리티 클래스 패키지로, 문자열, 배열, 숫자 등 매우 다양하고 편리한 기능을 제공한다.</li>
-  <li>그 중 StringUtils 클래스의 <code class="language-plaintext highlighter-rouge">join()</code> 메서드를 사용하여 문자열 배열을 문자열로 리턴할 수 있다.
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">strArr</span> <span class="o">=</span> <span class="o">{</span><span class="s">"hello"</span><span class="o">,</span> <span class="s">"java"</span><span class="o">};</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">StringUtils</span><span class="o">.</span><span class="na">join</span><span class="o">(</span><span class="n">strArr</span><span class="o">,</span> <span class="s">","</span><span class="o">));</span>
-<span class="c1">// 결과 : hello,java</span>
-</code></pre></div>    </div>
-  </li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="String" /><summary type="html"><![CDATA[배경 코딩테스트 문제를 풀면서 String 배열을 String으로 변환하는 작업이 자주 나와서 기록해두려고 한다.]]></summary></entry><entry><title type="html">SpringBoot 3.2부터 @PathVariable 이름 미지정 시 에러</title><link href="http://localhost:4000/wiki/2024/01/17/pathvariable-name-missing.html" rel="alternate" type="text/html" title="SpringBoot 3.2부터 @PathVariable 이름 미지정 시 에러" /><published>2024-01-17T00:00:00+09:00</published><updated>2024-01-17T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/01/17/pathvariable-name-missing</id><content type="html" xml:base="http://localhost:4000/wiki/2024/01/17/pathvariable-name-missing.html"><![CDATA[<h3 id="배경">배경</h3>
-<ul>
-  <li>팀원이 작업한 코드를 pull 받아서 실행시켰는데 아래처럼 에러가 발생했다. 그런데 팀원이 올리기 전에 실행시켰을 땐 발생하지 않았던 에러가 왜 내 로컬에서는 발생했을까?
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">IllegalArgumentException</span><span class="o">:</span> <span class="nc">Name</span> <span class="k">for</span> <span class="n">argument</span> <span class="n">of</span> <span class="n">type</span> <span class="o">[</span><span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">String</span><span class="o">]</span> <span class="n">not</span> <span class="n">specified</span><span class="o">,</span> <span class="n">and</span> <span class="n">parameter</span> <span class="n">name</span> <span class="n">information</span> <span class="n">not</span> <span class="n">found</span> <span class="n">in</span> <span class="kd">class</span> <span class="nc">file</span> <span class="n">either</span><span class="o">.</span>
-</code></pre></div>    </div>
-    <p><br /></p>
-  </li>
-</ul>
-
-<h3 id="원인">원인</h3>
-<ul>
-  <li>Spring Boot 3.2 이전에는 경로의 변수명와 @PathVariable의 변수명이 같을 때 생략할 수 있었다.
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/{id}"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="nc">String</span> <span class="nf">testMethod</span><span class="o">(</span><span class="nd">@PathVariable</span> <span class="nc">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{...}</span>
-</code></pre></div>    </div>
-    <p><img src="https://dajeongdev.github.io/assets/images/posts/parameter-name-retention.png" /></p>
-  </li>
-  <li>Spring Boot 3.2 전에는 바이트코드를 파싱해서 매개변수 이름을 추론하려고 시도했지만 3.2 부터는 이 부분이 사라져서 @PathVariable을 포함한 몇몇 어노테이션(@RequestParam, @Autowired, @ConfigurationProperties)에서 매개변수 인식 문제가 발생하고 있다.</li>
-  <li><a href="https://github.com/spring-projects/spring-framework/wiki/Upgrading-to-Spring-Framework-6.x#parameter-name-retention">공식 문서 참고</a>
-<br /></li>
-</ul>
-
-<h3 id="해결방법">해결방법</h3>
-<ol>
-  <li><strong>어노테이션에 이름을 생략하지 않고 항상 적는다.</strong>
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/{id}"</span><span class="o">)</span>
- <span class="kd">public</span> <span class="nc">String</span> <span class="nf">testMethod</span><span class="o">(</span><span class="nd">@PathVariable</span><span class="o">(</span><span class="s">"id"</span><span class="o">)</span> <span class="nc">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{...}</span>
-</code></pre></div>    </div>
-  </li>
-  <li><strong>컴파일 시점에 -parameters 옵션을 적용한다.</strong>
-    <ol>
-      <li>IntelliJ IDEA에서 File -&gt; Settings를 연다. (Mac은 IntelliJ IDEA -&gt; Settings)</li>
-      <li>Build, Execution, Deployment → Compiler → Java Compiler로 이동한다.</li>
-      <li>Additional command line parameters라는 항목에 다음을 추가한다. (<code class="language-plaintext highlighter-rouge">-parameters</code>)</li>
-      <li>out 폴더를 삭제하고 다시 실행한다. <strong>꼭 out 폴더를 삭제해야 다시 컴파일이 일어난다.</strong></li>
-    </ol>
-  </li>
-  <li><strong>Gradle로 빌드하고 실행한다.</strong>
-    <ul>
-      <li>참고로 이 문제는 Build, Execution, Deployment -&gt; Build Tools -&gt; Gradle에서 Build and run using를 IntelliJ IDEA로 선택한 경우에만 발생한다.</li>
-      <li>Gradle로 선택한 경우에는 Gradle이 컴파일 시점에 해당 옵션을 자동으로 적용해준다.
-<br /></li>
-    </ul>
-  </li>
-</ol>
-
-<h4 id="나의-의견">나의 의견</h4>
-<ul>
-  <li>결국 김영한님 강의를 많이 봤던 나는 프로젝트 초반에 Build and run using 설정을 IntelliJ로 바꾸고 사용 중이었고, 팀원은 Gradle로 빌드 및 실행을 하고 있어서 발생한 문제였다.</li>
-  <li>나 또한 설정을 바꿨지만, Spring Boot 3.2부터 이름을 붙이지 않으면 에러가 발생할 수도 있는 부분이기 때문에 우리 팀은 해결방법 1번을 선택하여 이름을 일관적이게 붙여주기로 결정했다.
-<br /></li>
-</ul>
-
-<h4 id="참고">참고</h4>
-<ul>
-  <li><a href="https://www.inflearn.com/questions/1088283/pathvariable-%EB%B3%80%EC%88%98%EB%AA%85-%EA%B0%99%EC%9D%84%EB%95%8C-%EC%83%9D%EB%9E%B5%EC%8B%9C-%EC%98%A4%EB%A5%98-%EB%B9%8C%EB%93%9C-%EC%84%A4%EC%A0%95%EC%9D%84-gradle%EB%A1%9C-%ED%95%98%EB%A9%B4-%ED%95%B4%EA%B2%B0%EB%90%98%EB%8A%94-%EA%B2%83-%EA%B0%99%EC%8A%B5%EB%8B%88%EB%8B%A4">https://www.inflearn.com/questions/1088283</a></li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Spring" /><category term="SpringBoot" /><summary type="html"><![CDATA[배경 팀원이 작업한 코드를 pull 받아서 실행시켰는데 아래처럼 에러가 발생했다. 그런데 팀원이 올리기 전에 실행시켰을 땐 발생하지 않았던 에러가 왜 내 로컬에서는 발생했을까? java.lang.IllegalArgumentException: Name for argument of type [java.lang.String] not specified, and parameter name information not found in class file either.]]></summary></entry><entry><title type="html">update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법</title><link href="http://localhost:4000/wiki/2024/01/12/jpa-created-date-column-null.html" rel="alternate" type="text/html" title="update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법" /><published>2024-01-12T00:00:00+09:00</published><updated>2024-01-12T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/01/12/jpa-created-date-column-null</id><content type="html" xml:base="http://localhost:4000/wiki/2024/01/12/jpa-created-date-column-null.html"><![CDATA[<h3 id="배경">배경</h3>
-<ul>
-  <li>update문의 결과를 확인하는데 생성일 컬럼이 null로 update 되는 문제를 발견했다. <br />
-<br /></li>
-</ul>
-
-<h3 id="원인">원인</h3>
-<ul>
-  <li>정확히는 생성일 컬럼에 이름을 설정하기 위해 붙인 @Column 어노테이션의 옵션 중 하나인 updatable의 기본값이 true라서 값을 설정해주지 않은 생성일 컬럼에 null이 update 된 것이다.</li>
-</ul>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Target</span><span class="o">({</span><span class="no">METHOD</span><span class="o">,</span> <span class="no">FIELD</span><span class="o">})</span> 
-<span class="nd">@Retention</span><span class="o">(</span><span class="no">RUNTIME</span><span class="o">)</span>
-<span class="kd">public</span> <span class="nd">@interface</span> <span class="nc">Column</span> <span class="o">{</span>
-	    <span class="cm">/**
-	     * (Optional) Whether the column is included in SQL UPDATE 
-	     * statements generated by the persistence provider.
-	     */</span>
-	    <span class="kt">boolean</span> <span class="nf">updatable</span><span class="o">()</span> <span class="k">default</span> <span class="kc">true</span><span class="o">;</span>
-  <span class="o">}</span>
-</code></pre></div></div>
-<p><br /></p>
-
-<h3 id="해결-방법">해결 방법</h3>
-<ul>
-  <li>그래서 @Column 어노테이션의 updatable 옵션을 false로 지정해주어야 한다.</li>
-</ul>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@CreatedDate</span>
-<span class="nd">@Column</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"created_date_time"</span><span class="o">,</span> <span class="o">**</span><span class="n">updatable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">**)</span>
-<span class="kd">private</span> <span class="nc">LocalDateTime</span> <span class="n">createdDateTime</span><span class="o">;</span>
-</code></pre></div></div>
-<p><br /></p>
-
-<h4 id="참고">참고</h4>
-<ul>
-  <li>https://wakestand.tistory.com/935</li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Spring" /><category term="JPA" /><summary type="html"><![CDATA[배경 update문의 결과를 확인하는데 생성일 컬럼이 null로 update 되는 문제를 발견했다.]]></summary></entry><entry><title type="html">hibernate6 custom function(MySQL Dialect)</title><link href="http://localhost:4000/wiki/2023/12/30/hibernate6-custom-function.html" rel="alternate" type="text/html" title="hibernate6 custom function(MySQL Dialect)" /><published>2023-12-30T00:00:00+09:00</published><updated>2023-12-30T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2023/12/30/hibernate6-custom-function</id><content type="html" xml:base="http://localhost:4000/wiki/2023/12/30/hibernate6-custom-function.html"><![CDATA[<h3 id="배경">배경</h3>
-<p>현재 프로젝트에서 QueryDSL을 사용 중인데 여기에 집계함수를 사용하고 싶어서 사용자 함수 추가를 위해 서치 후 적용해보려고 했다. 그런데 이게 웬일.. Spring boot 3점대에서는 hibernate 6.1을 기본으로 사용하고 있어서 당장 올해 3월까지 올라온 블로그 글의 코드도 적용되지 않았다.. 그래서 한시간을 고생해서 적용해보고 고치고 하다가 김영한님 JPA 강의의 커뮤니티에 어떤 친절한 분이 해결방안을 올려주셨다.. 정말 천사,,</p>
-
-<p><img src="https://dajeongdev.github.io/assets/images/posts/spring-boot-3.2-hibernate-version.png" />
-<a href="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0.0-M4-Release-Notes">https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0.0-M4-Release-Notes</a>
-<br />
-<br /></p>
-
-<h3 id="해결">해결</h3>
-<ol>
-  <li>FunctionContributor의 구현체를 만들어준다.
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomFunctionContributor</span> <span class="kd">implements</span> <span class="nc">FunctionContributor</span> <span class="o">{</span>
-    
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">contributeFunctions</span><span class="o">(</span><span class="nc">FunctionContributions</span> <span class="n">functionContributions</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">functionContributions</span><span class="o">.</span><span class="na">getFunctionRegistry</span><span class="o">()</span>
-            <span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="s">"group_concat"</span><span class="o">,</span> <span class="k">new</span> <span class="nc">StandardSQLFunction</span><span class="o">(</span><span class="s">"group_concat"</span><span class="o">,</span> <span class="nc">StandardBasicTypes</span><span class="o">.</span><span class="na">STRING</span><span class="o">));</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div>    </div>
-  </li>
-  <li>src/main/resources 하위에 META-INF/services/org.hibernate.boot.model.FunctionContributor 파일을 생성한다.</li>
-  <li>
-    <p>해당 파일에 1번의 구현체를 등록한다.</p>
-
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">패키지명.구현체</code> 이름의 형태로 등록</li>
-      <li>com.example.com.config.~Contributor
-      -   yml 파일의 dialect 변경은 필요없음
-<br /> <br />
-<br /></li>
-    </ul>
-  </li>
-</ol>
-
-<h3 id="시도">시도</h3>
-<ul>
-  <li><a href="https://discourse.hibernate.org/t/migrate-hibernate-5-to-6-with-spring-boot-2-7-x-to-3/7787/2">https://discourse.hibernate.org/t/migrate-hibernate-5-to-6-with-spring-boot-2-7-x-to-3/7787/2</a></li>
-  <li><a href="https://discourse.hibernate.org/t/migration-of-dialect-to-hibernate-6/6956/16">https://discourse.hibernate.org/t/migration-of-dialect-to-hibernate-6/6956/16</a></li>
-  <li><a href="https://thisiswoo.github.io/development/using-jpa-querydsl-groupconcat-func.html">https://thisiswoo.github.io/development/using-jpa-querydsl-groupconcat-func.html</a>
-<br />
-<br /></li>
-</ul>
-
-<p><strong>참고</strong></p>
-<ul>
-  <li><a href="https://www.inflearn.com/questions/1096265/hibernate-6-custom-%ED%95%A8%EC%88%98-%EB%93%B1%EB%A1%9D-%EB%B0%A9%EB%B2%95-%EA%B3%B5%EC%9C%A0"></a><a href="https://www.inflearn.com/questions/1096265/hibernate-6-custom-%ED%95%A8%EC%88%98-%EB%93%B1%EB%A1%9D-%EB%B0%A9%EB%B2%95-%EA%B3%B5%EC%9C%A0">https://www.inflearn.com/questions/1096265/hibernate-6-custom-함수-등록-방법-공유</a></li>
-  <li><a href="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0.0-M4-Release-Notes">https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0.0-M4-Release-Notes</a></li>
-  <li><a href="https://velog.io/@ttomy/%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%A0%95%EC%9D%98-dialectmatch-against%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0"></a><a href="https://velog.io/@ttomy/%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%A0%95%EC%9D%98-dialectmatch-against%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0">https://velog.io/@ttomy/사용자-정의-dialectmatch-against사용하기</a></li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Hibernate6" /><category term="MySQLDialect" /><category term="SpringBoot3" /><category term="QueryDSL" /><category term="JPQL" /><summary type="html"><![CDATA[배경 현재 프로젝트에서 QueryDSL을 사용 중인데 여기에 집계함수를 사용하고 싶어서 사용자 함수 추가를 위해 서치 후 적용해보려고 했다. 그런데 이게 웬일.. Spring boot 3점대에서는 hibernate 6.1을 기본으로 사용하고 있어서 당장 올해 3월까지 올라온 블로그 글의 코드도 적용되지 않았다.. 그래서 한시간을 고생해서 적용해보고 고치고 하다가 김영한님 JPA 강의의 커뮤니티에 어떤 친절한 분이 해결방안을 올려주셨다.. 정말 천사,,]]></summary></entry></feed>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="DataStructure" /><category term="Queue" /><summary type="html"><![CDATA[Queue(선형 큐) 특징 줄 서있는 것처럼 선입선출(FIFO) 형태의 자료구조 정해진 한 곳(top)을 통해서 삽입, 삭제가 이루어지는 스택과 달리 큐는 한쪽 끝에서 삽입 작업, 다른 쪽에서 삭제 작업이 양쪽으로 이루어진다. 큐의 뒤(rear)에서만 삽입(enqueue)하고, 큐의 앞(front)에서는 삭제(dequeue)만 이루어진다. 자바에서는 스택을 Stack 클래스로 구현하여 제공하지만, 큐는 Queue 인터페이스만 있고 별도의 클래스가 없다. 그래서 Queue 인터페이스를 구현한 클래스를 사용해야 한다.]]></summary></entry></feed>

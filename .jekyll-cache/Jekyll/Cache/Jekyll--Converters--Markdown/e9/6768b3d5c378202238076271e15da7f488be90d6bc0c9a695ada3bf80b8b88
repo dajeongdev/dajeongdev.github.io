@@ -1,0 +1,44 @@
+I"
+<ul>
+  <li>이번에는 NCP에서 MySQL DB Server를 생성하고 연결해보겠습니다.
+<br />
+<br /></li>
+</ul>
+
+<h4 id="db-server-생성">DB Server 생성</h4>
+<p><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/bcc4c7b1-121d-4c32-943b-3a693b3b970b/7de564e5-5f55-4240-a201-1a8ec80cdd48/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-09_01.22.41.png" alt="스크린샷 2024-04-09 01.22.41.png" /></p>
+<ul>
+  <li>고가용성까지는 필요 없기 때문에 해제를 해주고, 이전 단계에서 만들었던 VPC와 Subnet을 선택해주었습니다.
+<br />
+<br /></li>
+</ul>
+
+<p><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/bcc4c7b1-121d-4c32-943b-3a693b3b970b/16dbef7b-ef0f-4caf-985e-f4cb0390702d/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-09_01.23.44.png" alt="스크린샷 2024-04-09 01.23.44.png" /></p>
+<ul>
+  <li>기본 설정에서 거의 건드리지 않고 DB server와 서비스 이름만 지정해주었습니다.
+<br />
+<br /></li>
+</ul>
+
+<p><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/bcc4c7b1-121d-4c32-943b-3a693b3b970b/e24b95aa-2182-4ae2-baa6-7eb379bd4689/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-09_01.27.11.png" alt="스크린샷 2024-04-09 01.27.11.png" /></p>
+<ul>
+  <li>USER_ID와 USER 암호로 MySQL admin을 생성해줍니다.</li>
+  <li>HOST는 접속할 Client IP를 입력하는 건데 아래 예시처럼 전체 접속을 허용해주기 위해 %를 입력했습니다.
+<br />
+<br /></li>
+</ul>
+
+<p><img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/bcc4c7b1-121d-4c32-943b-3a693b3b970b/84c8682a-5e59-420e-b361-f31f1eb7fb57/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-09_01.29.56.png" alt="스크린샷 2024-04-09 01.29.56.png" /></p>
+<ul>
+  <li>또한 백업 설정은 추가 요금이 발생한다길래 과감히 포기했습니다^^..</li>
+  <li>다음을 누르고 최종 확인을 하면 몇 분 안에 DB 서버가 생성됩니다.
+<br />
+<br /></li>
+</ul>
+
+<h4 id="방화벽acg-설정">방화벽(ACG) 설정</h4>
+<ul>
+  <li>생성 후 끝이 아니라 DB에 접속하기 위해 방화벽을 설정해줍니다.</li>
+  <li>참고로 DB에 0.0.0.0으로 모두 허용해주는 게 위험하다고 생각해서 자주 쓰는 IP들만 등록해두었습니다.</li>
+</ul>
+:ET

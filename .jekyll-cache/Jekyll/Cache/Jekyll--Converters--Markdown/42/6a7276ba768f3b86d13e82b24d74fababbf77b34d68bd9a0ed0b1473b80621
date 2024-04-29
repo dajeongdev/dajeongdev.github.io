@@ -1,0 +1,80 @@
+I"�<p>서버와 데이터베이스를 생성했다면 이번에는 서버에 프로젝트를 배포해보겠습니다.
+<br />
+<br /></p>
+
+<h4 id="1-서버에-접근하기">1. 서버에 접근하기</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh username@public-ip <span class="nt">-p</span> 22<span class="o">(</span>허용 포트<span class="o">)</span>
+<span class="c"># password</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h4 id="2-서버에-java-설치">2. 서버에 JAVA 설치</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>openjdk-17-jdk
+java <span class="nt">--version</span> <span class="c"># 자바 버전 확인</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h4 id="3-프로젝트-가져오기">3. 프로젝트 가져오기</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone <span class="nt">--branch</span> 가져올브랜치 https://github.com/깃헙아이디/레포지토리명.git <span class="c"># 프로젝트 복제</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h4 id="4-별도로-필요한-yml-파일이-있다면-optional">4. 별도로 필요한 yml 파일이 있다면 (optional)</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>Americanote <span class="c"># 리포지토리로 들어가기</span>
+<span class="nb">cd </span>src/main/resources <span class="c"># yml 파일이 위치할 resources 폴더로 이동</span>
+<span class="nb">cat</span> <span class="o">&gt;</span> ~.yml <span class="c"># yml 파일 생성 및 편집</span>
+<span class="c"># yml 파일 내용 붙여넣기</span>
+<span class="c"># 필요한 yml 파일을 모두 만들었으면 다시 리포지토리 홈으로 돌아갑니다.</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h4 id="5-gradle-빌드-후-실행하기">5. Gradle 빌드 후 실행하기</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./gradlew clean build <span class="nt">-x</span> <span class="nb">test</span> <span class="c"># 테스트 없이 처음부터 빌드</span>
+<span class="nb">cd </span>build/libs <span class="c"># jar 파일이 존재하는 폴더로 이동</span>
+ll 혹은 <span class="nb">ls</span> <span class="c"># 폴더 보기</span>
+<span class="nb">nohup </span>java <span class="nt">-jar</span> <span class="o">[</span>이름-SNAPSHOT.jar] &amp;
+</code></pre></div></div>
+<ul>
+  <li>nohup
+    <ul>
+      <li>no hang up의 약자, 말그대로 끊지마!</li>
+      <li>사용자가 세션과 연결을 종료해도, 데몬 형태로 실행하게 하여 해당 프로세스가 종료되지 않습니다.</li>
+    </ul>
+  </li>
+  <li>&amp;
+    <ul>
+      <li>프로그램 실행 시 마지막에 붙여주면 백그라운드에서 해당 프로세스가 실행됩니다.
+<br />
+  → 어떤 프로그램을 종료없이 백그라운드에서 실행시킬 때 <code class="language-plaintext highlighter-rouge">nohup ~ &amp;</code> 조합을 사용하는 게 가장 확실하고 안전합니다.
+<br /></li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="6-로그-확인">6. 로그 확인</h4>
+<ul>
+  <li>제대로 실행되었는지 확인하기 위해 로그를 실행 후 로그를 반드시 확인하는 편입니다.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 실행 후 ll 이나 ls로 확인해보면 nohup.out이 생성됩니다.</span>
+<span class="nb">tail</span> <span class="nt">-f</span> nohup.out <span class="c"># 실시간 업데이트 로그</span>
+<span class="nb">cat </span>nohup.out     <span class="c"># 현재까지 로그</span>
+</code></pre></div>    </div>
+    <p><br /></p>
+  </li>
+</ul>
+
+<h4 id="7-만약-이미-프로젝트가-실행-중이라면-종료하고-실행하자">7. 만약 이미 프로젝트가 실행 중이라면? 종료하고 실행하자</h4>
+<ul>
+  <li>Gradle 빌드 후 실행하기 전에 한번쯤 확인하면 좋겠습니다.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>netstat <span class="nt">-tulpn</span> <span class="c"># 실행 중인 프로세스 확인</span>
+<span class="nb">kill</span> <span class="nt">-9</span> <span class="o">[</span>PID 번호]
+</code></pre></div>    </div>
+    <p><br /></p>
+  </li>
+</ul>
+
+<h4 id="참고">참고</h4>
+<ul>
+  <li><a href="https://1.theapplemango.com/entry/%EB%84%A4%EC%9D%B4%EB%B2%84-%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%ED%94%8C%EB%9E%AB%ED%8F%BCNCP-%EC%84%9C%EB%B2%84-%EA%B5%AC%EC%B6%95-%EB%B0%8F-%EC%8A%A4%ED%94%84%EB%A7%81-%EB%B0%B0%ED%8F%AC%EA%B9%8C%EC%A7%80-2">https://1.theapplemango.com/entry/네이버-클라우드-플랫폼NCP-서버-구축-및-스프링-배포까지-2</a></li>
+  <li><a href="https://joonyon.tistory.com/entry/%EC%89%BD%EA%B2%8C-%EC%84%A4%EB%AA%85%ED%95%9C-nohup-%EA%B3%BC-%EB%B0%B1%EA%B7%B8%EB%9D%BC%EC%9A%B4%EB%93%9C-%EB%AA%85%EB%A0%B9%EC%96%B4-%EC%82%AC%EC%9A%A9%EB%B2%95">https://joonyon.tistory.com/entry/쉽게-설명한-nohup-과-백그라운드-명령어-사용법</a></li>
+</ul>
+:ET

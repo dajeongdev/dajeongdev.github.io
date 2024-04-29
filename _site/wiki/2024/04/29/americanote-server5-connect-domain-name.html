@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>아메리카노트 서버 구성 &lt;5&gt; 도메인 연결 | Every Single Day</title>
+<meta name="generator" content="Jekyll v4.2.2">
+<meta property="og:title" content="아메리카노트 서버 구성 &lt;5&gt; 도메인 연결">
+<meta name="author" content="Dajeong Park">
+<meta property="og:locale" content="ko">
+<meta name="description" content='자동 배포까지 했으니 어느정도는 백엔드 코드를 서버에 올리는 것까지 했다고 할 수 있겠습니다. 저도 여기가 마지막인 줄 알았으나.. 첨부한 이미지는 프론트분이 API가 요청되지 않는다고 캡쳐해주신 에러 메세지입니다. 읽어보면 HTTPS인 프론트 도메인에서 HTTP인 백엔드 도메인으로 요청하는 부분에서 XMLHttpRequest 에러가 발생했습니다. 바로 CORS 문제입니다 ㅎㅎ 검색해보니 프론트 쪽에서 간단하게 &lt;meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"&gt; 같은 HTML 코드를 넣어서 해결하는 방법도 있었지만, 그래도 저희는 해결되지 않아서 결국 도메인을 구매하기로 결정했습니다. (심지어 마감 전날 토요일에 ㅎㅎ)'>
+<meta property="og:description" content='자동 배포까지 했으니 어느정도는 백엔드 코드를 서버에 올리는 것까지 했다고 할 수 있겠습니다. 저도 여기가 마지막인 줄 알았으나.. 첨부한 이미지는 프론트분이 API가 요청되지 않는다고 캡쳐해주신 에러 메세지입니다. 읽어보면 HTTPS인 프론트 도메인에서 HTTP인 백엔드 도메인으로 요청하는 부분에서 XMLHttpRequest 에러가 발생했습니다. 바로 CORS 문제입니다 ㅎㅎ 검색해보니 프론트 쪽에서 간단하게 &lt;meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"&gt; 같은 HTML 코드를 넣어서 해결하는 방법도 있었지만, 그래도 저희는 해결되지 않아서 결국 도메인을 구매하기로 결정했습니다. (심지어 마감 전날 토요일에 ㅎㅎ)'>
+<link rel="canonical" href="http://localhost:4000/wiki/2024/04/29/americanote-server5-connect-domain-name.html">
+<meta property="og:url" content="http://localhost:4000/wiki/2024/04/29/americanote-server5-connect-domain-name.html">
+<meta property="og:site_name" content="Every Single Day">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2024-04-29T00:00:00+09:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="아메리카노트 서버 구성 &lt;5&gt; 도메인 연결">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2024-04-29T00:00:00+09:00","datePublished":"2024-04-29T00:00:00+09:00","description":"자동 배포까지 했으니 어느정도는 백엔드 코드를 서버에 올리는 것까지 했다고 할 수 있겠습니다. 저도 여기가 마지막인 줄 알았으나.. 첨부한 이미지는 프론트분이 API가 요청되지 않는다고 캡쳐해주신 에러 메세지입니다. 읽어보면 HTTPS인 프론트 도메인에서 HTTP인 백엔드 도메인으로 요청하는 부분에서 XMLHttpRequest 에러가 발생했습니다. 바로 CORS 문제입니다 ㅎㅎ 검색해보니 프론트 쪽에서 간단하게 &lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;upgrade-insecure-requests&quot;&gt; 같은 HTML 코드를 넣어서 해결하는 방법도 있었지만, 그래도 저희는 해결되지 않아서 결국 도메인을 구매하기로 결정했습니다. (심지어 마감 전날 토요일에 ㅎㅎ)","headline":"아메리카노트 서버 구성 &lt;5&gt; 도메인 연결","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2024/04/29/americanote-server5-connect-domain-name.html"},"url":"http://localhost:4000/wiki/2024/04/29/americanote-server5-connect-domain-name.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="shortcut icon" href="">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Every Single Day">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="Every Single Day" src="" onerror="this.style.display='none'">
+  Every Single Day
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a>
+
+
+
+
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  (function() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  })();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<!--<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+-->
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">아메리카노트 서버 구성 &lt;5&gt; 도메인 연결</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2024-04-29T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Apr 29, 2024
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 11 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#Server">#Server</a><a class="post-tag" href="/tags.html#NaverCloudPlatform">#NaverCloudPlatform</a><a class="post-tag" href="/tags.html#Project">#Project</a><a class="post-tag" href="/tags.html#DNS">#DNS</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <ul>
+  <li>자동 배포까지 했으니 어느정도는 백엔드 코드를 서버에 올리는 것까지 했다고 할 수 있겠습니다.</li>
+  <li>저도 여기가 마지막인 줄 알았으나..
+<img src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/9ba32892-8688-4f23-aa75-806a8df95b37" alt="domain1">
+</li>
+  <li>첨부한 이미지는 프론트분이 API가 요청되지 않는다고 캡쳐해주신 에러 메세지입니다. 읽어보면 HTTPS인 프론트 도메인에서 HTTP인 백엔드 도메인으로 요청하는 부분에서 XMLHttpRequest 에러가 발생했습니다. 바로 CORS 문제입니다 ㅎㅎ</li>
+  <li>검색해보니 프론트 쪽에서 간단하게 <code class="language-plaintext highlighter-rouge">&lt;meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"&gt;</code> 같은 HTML 코드를 넣어서 해결하는 방법도 있었지만, 그래도 저희는 해결되지 않아서 결국 도메인을 구매하기로 결정했습니다. (심지어 마감 전날 토요일에 ㅎㅎ)
+<br>
+<br>
+</li>
+</ul>
+
+<h4 id="1-카페24에서-도메인-구매">1. 카페24에서 도메인 구매</h4>
+<ul>
+  <li>아주 익숙한 카페24에서 도메인을 구매하기로 결정했습니다.</li>
+  <li>좋은 이름이면 참 좋겠지만 프론트에서 API로 요청할 때만 필요하기 때문에 1년에 단돈 500원에 구매할 수 있는 <code class="language-plaintext highlighter-rouge">.store</code>를 선택했습니다.</li>
+</ul>
+
+<p><img width="875" alt="domain2" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/b015dcca-441f-4fe1-9067-0577379b6bc6">
+<br>
+<br></p>
+
+<h3 id="2-서버에-nginx-설치하기">2. 서버에 Nginx 설치하기</h3>
+<ul>
+  <li>이제 도메인과 서버를 연결해주기 위해서 서버에 nginx를 설치해보겠습니다.</li>
+  <li>먼저 설치하기 전에 패키지 목록을 업데이트 해줍니다.
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt update
+<span class="nb">sudo </span>apt upgrade
+</code></pre></div>    </div>
+  </li>
+  <li>그리고 nginx를 설치하겠습니다.
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>nginx
+</code></pre></div>    </div>
+  </li>
+  <li>계속할지 묻는 메시지가 표시되면 ‘Y’를 누르고 enter 키를 치다보면 설치가 완료됩니다.
+  <img width="970" alt="domain3" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/4943ca29-1701-4786-9015-11ec1efd5ed1">
+    <ul>
+      <li>저는 이렇게 하다가 중간에 에러가 발생했는데요, 이유는 IPV6 설정때문이었습니다. 해결해주기 위해 <code class="language-plaintext highlighter-rouge">/etc/nginx/sites-available/default</code> 파일에 접근해서 아래처럼 수정해줍니다.
+        <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>  server <span class="o">{</span>
+      listen 80 default_server<span class="p">;</span>
+      <span class="c"># listen [::]:80 default_server; # 이 부분 주석 처리</span>
+    
+      ...
+    
+      root /var/www/html<span class="p">;</span>
+    
+      <span class="c"># Add index.php to the list if you are using PHP</span>
+      index index.html index.htm index.nginx-debian.html<span class="p">;</span>
+    
+      server_name _<span class="p">;</span>
+    
+      location / <span class="o">{</span>
+              <span class="c"># First attempt to serve request as file, then</span>
+              <span class="c"># as directory, then fall back to displaying a 404.</span>
+              try_files <span class="nv">$uri</span> <span class="nv">$uri</span>/ <span class="o">=</span>404<span class="p">;</span>
+      <span class="o">}</span>
+  				...
+  <span class="o">}</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>이제 설치를 마쳤으면 nginx를 시작합니다.
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>service nginx start
+<span class="nb">sudo </span>service nginx status <span class="c"># nginx 상태 확인</span>
+</code></pre></div>    </div>
+    <p><img width="1045" alt="domain4" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/5447c65d-2df6-4850-945c-e19f8dd219b6">
+<br>
+<br></p>
+  </li>
+</ul>
+
+<h4 id="3-방화벽-설정">3. 방화벽 설정</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw app list
+</code></pre></div></div>
+<ul>
+  <li>위의 명령어를 입력하여 방화벽 설정을 확인하면 방화벽 설정이 가능한 애플리케이션 목록이 나옵니다.
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>Available applications:
+Nginx Full <span class="c"># 80, 443 포트 허용</span>
+Nginx HTTP <span class="c"># 80 포트만 허용</span>
+Nginx HTTPS <span class="c"># 443 포트만 허용</span>
+OpenSSH
+</code></pre></div>    </div>
+  </li>
+  <li>저희는 이 다음에 HTTPS까지 적용하기 위해서 ‘Nginx Full’ 방화벽을 허용해줍니다.
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw allow <span class="s1">'Nginx Full'</span>
+<span class="nb">sudo </span>ufw status <span class="c"># 상태 체크</span>
+</code></pre></div>    </div>
+    <p>```bash
+Status: inactive</p>
+  </li>
+</ul>
+
+<p>To                         Action      From
+–                         ——      —-
+Nginx HTTP                 ALLOW       Anywhere
+Nginx HTTP (v6)            ALLOW       Anywhere (v6)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- 그리고 위처럼 상태가 inactive로 되어있으면 아래 명령어를 입력하여 활성화 시켜줍니다.
+    - ***tip***: 아래 명령어를 입력하면 ssh 연결을 방해할 수도 있다는 경고 문구가 나오는데, 이때 y를 하기 전에 반드시 22번 포트를 허용하거나 제한해줍니다.
+    &lt;img width="608" alt="domain5" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/429317de-249e-49fb-b516-7ebe01647d45"&gt;
+    ```bash
+    sudo ufw limit/allow 22
+    ```
+    - 처음 설정할 때는 이 부분을 몰라서 ssh에 들어갈 수 없게 되는 사태가 벌어졌지만, NCP 서버 콘솔에 원격으로 접속하는 곳으로 들어가 22번 포트를 허용하는 방식으로 겨우 해결했습니다…💦💦💦
+```bash
+sudo ufw enable
+</code></pre></div></div>
+<ul>
+  <li>이제 public ip로 접근해보면 nginx 화면이 성공적으로 뜨는 것을 확인할 수 있습니다.</li>
+</ul>
+
+<p><img width="745" alt="domain6" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/d9ee761f-1926-4fce-82dd-85382f1eb292">
+<br>
+<br></p>
+
+<h4 id="4-도메인-연결">4. 도메인 연결</h4>
+<ul>
+  <li>public ip로 뜨는 걸 봤으니 이제 도메인과 연결해주겠습니다.</li>
+  <li>먼저 기본 nginx의 화면이 아닌 다른 화면으로 출력하기 위해 index.html 파일을 만들어줍니다.
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo mkdir</span> <span class="nt">-p</span> /var/www/도메인이름/html <span class="c"># 폴더 생성</span>
+<span class="nb">sudo chown</span> <span class="nt">-R</span> <span class="nv">$USER</span>:<span class="nv">$USER</span> /var/www/도메인이름/html <span class="c"># 소유자 설정</span>
+<span class="nb">sudo chmod</span> <span class="nt">-R</span> 755 /var/www/도메인이름 <span class="c">#권한 설정</span>
+<span class="nb">sudo </span>vi /var/www/도메인이름/html/index.html <span class="c"># index.html 파일 생성</span>
+</code></pre></div>    </div>
+  </li>
+  <li>위에서 수정했던 <code class="language-plaintext highlighter-rouge">/etc/nginx/sites-available/default</code> 파일 대신 이번에는 도메인 이름으로 된 파일을 만들어서 아래처럼 설정해줍니다.
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>vi /etc/nginx/sites-available/도메인이름
+<span class="c"># 위 파일로 자동으로 이동한 뒤 아래 내용 입력</span>
+server <span class="o">{</span>
+  listen 80<span class="p">;</span>
+
+  root /var/www/도메인 이름/html<span class="p">;</span> <span class="c"># 위에서 만든 html 폴더</span>
+  index index.html index.htm index.nginx-debian.html<span class="p">;</span>
+
+  server_name 도메인 이름 www.도메인 이름<span class="p">;</span>
+
+  location / <span class="o">{</span>
+      try_files <span class="nv">$uri</span> <span class="nv">$uri</span>/ <span class="o">=</span>404<span class="p">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>위 파일을 nginx에서 연결해주기 위해 해당 파일을 sites-enabled 폴더에 심볼릭 링크 설정을 해줍니다.
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo ln</span> <span class="nt">-s</span> /etc/nginx/sites-available/도메인이름 /etc/nginx/sites-enabled/
+</code></pre></div>    </div>
+  </li>
+  <li>이제 브라우저에서 도메인을 입력하면 위에서 생성한 index.html이 확인할 수 있습니다.
+<br>
+<br>
+</li>
+</ul>
+
+<h4 id="참고">참고</h4>
+<ul>
+  <li>https://jaehyeon48.github.io/nginx/configure-nginx-on-ubuntu-2004/</li>
+  <li><a href="https://velog.io/@xangj0ng/Linux-Ubuntu-Nginx-%EC%84%A4%EC%B9%98">https://velog.io/@xangj0ng/Linux-Ubuntu-Nginx-설치</a></li>
+</ul>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/wiki/2024/04/29/americanote-server4-automatical-deploy.html" title="아메리카노트 서버 구성 &lt;4&gt; 자동 배포">아메리카노트 서버 구성 &lt;4&gt; 자동 배포...</a><a class="next" href="/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain.html" title="아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용">아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용...</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/wiki/2024/04/28/americanote-server1-create-linux-server.html" title="아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용">아메리카노트 서버 구성 &lt;1&gt; Linux 서버 생성</a></li>
+<li><a class="post-link" href="/wiki/2024/02/26/string-array-to-string.html" title="아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용">String 배열 -&gt; String</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/default-method.html" title="아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용">default method</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/thymeleaf-rest-controller.html" title="아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용">Thymeleaf와 @RestController</a></li>
+</ul>
+    </div>
+<div class="post-comments"></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+      <div>Copyright © 2022 @Dajeong Park</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="http://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
