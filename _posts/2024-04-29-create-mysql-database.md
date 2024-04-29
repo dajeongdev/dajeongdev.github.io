@@ -1,0 +1,46 @@
+---
+layout: post
+title: 아메리카노트 서버 구성 <2> MySQL 데이터베이스 생성
+subtitle: 
+categories: wiki
+tags: [NaverCloudPlatform, Project, MySQL, DataBase]
+---
+이번에는 NCP에서 MySQL DB Server를 생성하고 연결해보겠습니다.
+<br/>
+<br/>
+
+
+#### DB Server 생성
+<img width="678" alt="create-mysql1" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/44d6bbc1-bc7a-46b8-ba8f-11681852aac9">
+- 고가용성까지는 필요 없기 때문에 해제를 해주고, 이전 단계에서 만들었던 VPC와 Subnet을 선택해주었습니다.
+<br/>
+<br/>
+<br/>
+
+
+<img width="551" alt="create-mysql2" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/a51e2e02-7af7-4614-a433-f81839ad3545">
+- 기본 설정에서 거의 건드리지 않고 DB server와 서비스 이름만 지정해주었습니다.
+<br/>
+<br/>
+<br/>
+
+
+<img width="682" alt="create-mysql3" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/c4d4c493-9ce9-45e5-94b3-54ee3004eec0">
+- USER_ID와 USER 암호로 MySQL admin을 생성해줍니다.
+- HOST는 접속할 Client IP를 입력하는 건데 아래 예시처럼 전체 접속을 허용해주기 위해 %를 입력했습니다.
+<br/>
+<br/>
+<br/>
+
+
+<img width="362" alt="create-mysql4" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/95182b3c-e4e8-4d00-8ed5-7061fd7667dd">
+- 또한 백업 설정은 추가 요금이 발생한다길래 과감히 포기했습니다^^..
+- 다음을 누르고 최종 확인을 하면 몇 분 안에 DB 서버가 생성됩니다.
+<br/>
+<br/>
+<br/>
+
+
+#### 방화벽(ACG) 설정
+- 생성 후 끝이 아니라 DB에 접속하기 위해 방화벽을 설정해줍니다.
+- 참고로 DB에 0.0.0.0으로 모두 허용해주는 게 위험하다고 생각해서 자주 쓰는 IP들만 등록해두었습니다.
