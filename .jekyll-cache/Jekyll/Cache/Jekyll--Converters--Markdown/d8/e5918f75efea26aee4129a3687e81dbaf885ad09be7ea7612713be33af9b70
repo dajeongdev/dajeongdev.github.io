@@ -1,0 +1,7 @@
+I"�<h3 id="string-tostringint-n-int-radix">String toString(int n, int radix)</h3>
+<ul>
+  <li>10진수를 N진수 형태의 문자열로 변환할 수 있다.
+<br />
+<br /></li>
+</ul>
+:ET
