@@ -1,4 +1,52 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2024-04-30T15:31:05+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">Integer Class</title><link href="http://localhost:4000/wiki/2024/04/30/integer-class.html" rel="alternate" type="text/html" title="Integer Class" /><published>2024-04-30T00:00:00+09:00</published><updated>2024-04-30T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/04/30/integer-class</id><content type="html" xml:base="http://localhost:4000/wiki/2024/04/30/integer-class.html"><![CDATA[<h4 id="string-tostringint-n-int-radix">String toString(int n, int radix)</h4>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2024-05-09T22:50:30+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">홈페이지 마이그레이션 회고</title><link href="http://localhost:4000/wiki/2024/05/09/hompage-migration-review.html" rel="alternate" type="text/html" title="홈페이지 마이그레이션 회고" /><published>2024-05-09T00:00:00+09:00</published><updated>2024-05-09T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/05/09/hompage-migration-review</id><content type="html" xml:base="http://localhost:4000/wiki/2024/05/09/hompage-migration-review.html"><![CDATA[<p>포트폴리오를 작성하다보니 생각보다 예전에 했던 프로젝트들이 회고해볼 만한 게 많아서 한 번 되짚어보려고 한다.
+<br />
+<br /></p>
+
+<p>입사 당시 첫 주는 거의 일이 없어서 심심했었는데, 2주차에는 드디어 첫 업무를 받았다.
+<br /></p>
+
+<p>Spring 4.3.3, Maven, JSP로 구성되어 있던 프로젝트를 Spring Boot, Gradle, Thymeleaf로 마이그레이션 하는 업무였는데, 마이그레이션 자체도 처음이고 Spring Boot와 Thymeleaf도 처음 써보는 거라 걱정반 기대반으로 조사부터 했었다.
+<br /></p>
+
+<p>다행스럽게도 마이그레이션에 대한 레퍼런스가 많아서 찬찬히 읽어보고 시작했다.
+<br /></p>
+
+<p>일단 Spring 4점대가 이미 개발 지원이 종료된 상태였고, 불필요한 중복 코드나 주석도 많아서 함께 리팩토링하기로 했다. 그리고 한꺼번에 바꾸게 되면 에러날 확률이 높다고 해서 하나씩 바꾸기로 했다.
+<br />
+<br /></p>
+
+<h4 id="1-spring--springboot">1. Spring → SpringBoot</h4>
+<p>spring boot 의존성도 추가하고, xml 파일들을 yml 혹은 config 파일로 분리했다.</p>
+
+<p>xml 파일이 적지 않아서 yml 문법에 맞게 옮기는 데 시간이 조금 걸렸고, java config 파일은 웬만하면 만들고 싶지 않아서 yml 문법으로 가능한 건 다 yml로 처리했었다.
+<br /></p>
+
+<h4 id="2-maven--gradle">2. Maven → Gradle</h4>
+<p>maven에서 gradle로 변경하는 건 생각보다 간단했는데, 일단 gradle을 설치하고 환경변수를 설정한 후 프로젝트 내에서 reload gradle project를 해주면 된다.</p>
+
+<p>그런데 빌드하면서 에러가 발생했는데 lombok 부분을 annotationProcessor로 변경해주니 금방 해결되었다.
+<br /></p>
+
+<h4 id="3-jsp--thymeleaf">3. JSP → Thymeleaf</h4>
+<p>당연하지만 3가지 순서 중에 가장 오래 걸린 부분이다.
+<br /></p>
+
+<p>사실 이 부분은 내가 하고 싶어서 한 부분인데, JSP를 지양하는 문화로 가기도 했고 Spring Boot를 사용할 때 Thyemelaf를 권고한다고 해서 써보고 싶었다. Thymeleaf는 성능면에서 JSP보다 조금 느리지만, Jar 파일로 빌드할 수 있다. 그리고 무엇보다 HTML과 자바 코드가 섞이지 않아도 되는 점이 가장 마음에 들었다.
+<br /></p>
+
+<p>Thymeleaf는 JSP와 인식되는 폴더 자체가 다르기 때문에 폴더 구조부터 수정한 뒤 jsp 파일을 html 파일로 변경했다.</p>
+
+<p>이후부터는 Thymeleaf 문법에 맞추는 수작업이었는데, Thymeleaf 설정에서 cache를 false로 설정해주면 브라우저에서 새로고침만으로도 바로 변경사항을 반영해볼 수 있어서 정말 편리했다.
+<br />
+<br /></p>
+
+<h4 id="소감">소감</h4>
+<p>사실 지금 생각해보면 아주 간단한 프로젝트였고, 모르는 게 있으면 질문을 정리해서 대리님께 물어봤기 때문에 금방 해낼 수 있었다.
+첫 업무를 생각보다 빠르게 끝내서 기분 좋기도 했고(당연하지만 지금 하면 더 잘할 수 있을텐데),
+회사에서도 뭔가 시켜도 되겠다 싶으셨는지 이후에 업무를 차근차근 받아서 진행하는 계기가 됐었다.
+<br /></p>
+
+<p>지금 생각해보면 일하느라 바빠서 말도 많이 안했던 것 같은데 ㅋㅋ 조용히 열심히 하는 직원으로 생각해주셨으려나~</p>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="Spring" /><category term="SpringBoot" /><category term="Maven" /><category term="Gradle" /><category term="JSP" /><category term="Thymeleaf Migration" /><category term="Review" /><summary type="html"><![CDATA[포트폴리오를 작성하다보니 생각보다 예전에 했던 프로젝트들이 회고해볼 만한 게 많아서 한 번 되짚어보려고 한다.]]></summary></entry><entry><title type="html">Integer Class</title><link href="http://localhost:4000/wiki/2024/04/30/integer-class.html" rel="alternate" type="text/html" title="Integer Class" /><published>2024-04-30T00:00:00+09:00</published><updated>2024-04-30T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/04/30/integer-class</id><content type="html" xml:base="http://localhost:4000/wiki/2024/04/30/integer-class.html"><![CDATA[<h4 id="string-tostringint-n-int-radix">String toString(int n, int radix)</h4>
 <ul>
   <li>10진수를 N진수 형태의 문자열로 변환할 수 있다.
 <br />
@@ -55,7 +103,86 @@
 <br /></li>
     </ul>
   </li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="Integer" /><category term="Method" /><summary type="html"><![CDATA[String toString(int n, int radix) 10진수를 N진수 형태의 문자열로 변환할 수 있다.]]></summary></entry><entry><title type="html">아메리카노트 서버 구성 &amp;lt;2&amp;gt; MySQL 데이터베이스 생성</title><link href="http://localhost:4000/wiki/2024/04/29/americanote-server2-create-mysql-database.html" rel="alternate" type="text/html" title="아메리카노트 서버 구성 &amp;lt;2&amp;gt; MySQL 데이터베이스 생성" /><published>2024-04-29T00:00:00+09:00</published><updated>2024-04-29T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/04/29/americanote-server2-create-mysql-database</id><content type="html" xml:base="http://localhost:4000/wiki/2024/04/29/americanote-server2-create-mysql-database.html"><![CDATA[<p>이번에는 NCP에서 MySQL DB Server를 생성하고 연결해보겠습니다.
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="Integer" /><category term="Method" /><summary type="html"><![CDATA[String toString(int n, int radix) 10진수를 N진수 형태의 문자열로 변환할 수 있다.]]></summary></entry><entry><title type="html">아메리카노트 서버 구성 &amp;lt;3&amp;gt; 프로젝트 배포</title><link href="http://localhost:4000/wiki/2024/04/29/americanote-server3-deploy-project.html" rel="alternate" type="text/html" title="아메리카노트 서버 구성 &amp;lt;3&amp;gt; 프로젝트 배포" /><published>2024-04-29T00:00:00+09:00</published><updated>2024-04-29T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/04/29/americanote-server3-deploy-project</id><content type="html" xml:base="http://localhost:4000/wiki/2024/04/29/americanote-server3-deploy-project.html"><![CDATA[<p>서버와 데이터베이스를 생성했다면 이번에는 서버에 프로젝트를 배포해보겠습니다.
+<br />
+<br /></p>
+
+<h4 id="1-서버에-접근하기">1. 서버에 접근하기</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh username@public-ip <span class="nt">-p</span> 22<span class="o">(</span>허용 포트<span class="o">)</span>
+<span class="c"># password</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h4 id="2-서버에-java-설치">2. 서버에 JAVA 설치</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>openjdk-17-jdk
+java <span class="nt">--version</span> <span class="c"># 자바 버전 확인</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h4 id="3-프로젝트-가져오기">3. 프로젝트 가져오기</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone <span class="nt">--branch</span> 가져올브랜치 https://github.com/깃헙아이디/레포지토리명.git <span class="c"># 프로젝트 복제</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h4 id="4-별도로-필요한-yml-파일이-있다면-optional">4. 별도로 필요한 yml 파일이 있다면 (optional)</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>Americanote <span class="c"># 리포지토리로 들어가기</span>
+<span class="nb">cd </span>src/main/resources <span class="c"># yml 파일이 위치할 resources 폴더로 이동</span>
+<span class="nb">cat</span> <span class="o">&gt;</span> ~.yml <span class="c"># yml 파일 생성 및 편집</span>
+<span class="c"># yml 파일 내용 붙여넣기</span>
+<span class="c"># 필요한 yml 파일을 모두 만들었으면 다시 리포지토리 홈으로 돌아갑니다.</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h4 id="5-gradle-빌드-후-실행하기">5. Gradle 빌드 후 실행하기</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./gradlew clean build <span class="nt">-x</span> <span class="nb">test</span> <span class="c"># 테스트 없이 처음부터 빌드</span>
+<span class="nb">cd </span>build/libs <span class="c"># jar 파일이 존재하는 폴더로 이동</span>
+ll 혹은 <span class="nb">ls</span> <span class="c"># 폴더 보기</span>
+<span class="nb">nohup </span>java <span class="nt">-jar</span> <span class="o">[</span>이름-SNAPSHOT.jar] &amp;
+</code></pre></div></div>
+<ul>
+  <li>nohup
+    <ul>
+      <li>no hang up의 약자, 말그대로 끊지마!</li>
+      <li>사용자가 세션과 연결을 종료해도, 데몬 형태로 실행하게 하여 해당 프로세스가 종료되지 않습니다.</li>
+    </ul>
+  </li>
+  <li>&amp;
+    <ul>
+      <li>프로그램 실행 시 마지막에 붙여주면 백그라운드에서 해당 프로세스가 실행됩니다.
+<br />
+  → 어떤 프로그램을 종료없이 백그라운드에서 실행시킬 때 <code class="language-plaintext highlighter-rouge">nohup ~ &amp;</code> 조합을 사용하는 게 가장 확실하고 안전합니다.
+<br />
+<br /></li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="6-로그-확인">6. 로그 확인</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 실행 후 ll 이나 ls로 확인해보면 nohup.out이 생성됩니다.</span>
+<span class="nb">tail</span> <span class="nt">-f</span> nohup.out <span class="c"># 실시간 업데이트 로그</span>
+<span class="nb">cat </span>nohup.out     <span class="c"># 현재까지 로그</span>
+</code></pre></div></div>
+<ul>
+  <li>제대로 실행되었는지 확인하기 위해 로그를 실행 후 로그를 반드시 확인하는 편입니다.
+<br />
+<br /></li>
+</ul>
+
+<h4 id="7-만약-이미-프로젝트가-실행-중이라면-종료하고-실행하자">7. 만약 이미 프로젝트가 실행 중이라면? 종료하고 실행하자</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>netstat <span class="nt">-tulpn</span> <span class="c"># 실행 중인 프로세스 확인</span>
+<span class="nb">kill</span> <span class="nt">-9</span> <span class="o">[</span>PID 번호]
+</code></pre></div></div>
+<ul>
+  <li>Gradle 빌드 후 실행하기 전에 한번쯤 확인하면 좋겠습니다.
+<br />
+<br /></li>
+</ul>
+
+<h4 id="참고">참고</h4>
+<ul>
+  <li><a href="https://1.theapplemango.com/entry/%EB%84%A4%EC%9D%B4%EB%B2%84-%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%ED%94%8C%EB%9E%AB%ED%8F%BCNCP-%EC%84%9C%EB%B2%84-%EA%B5%AC%EC%B6%95-%EB%B0%8F-%EC%8A%A4%ED%94%84%EB%A7%81-%EB%B0%B0%ED%8F%AC%EA%B9%8C%EC%A7%80-2">https://1.theapplemango.com/entry/네이버-클라우드-플랫폼NCP-서버-구축-및-스프링-배포까지-2</a></li>
+  <li><a href="https://joonyon.tistory.com/entry/%EC%89%BD%EA%B2%8C-%EC%84%A4%EB%AA%85%ED%95%9C-nohup-%EA%B3%BC-%EB%B0%B1%EA%B7%B8%EB%9D%BC%EC%9A%B4%EB%93%9C-%EB%AA%85%EB%A0%B9%EC%96%B4-%EC%82%AC%EC%9A%A9%EB%B2%95">https://joonyon.tistory.com/entry/쉽게-설명한-nohup-과-백그라운드-명령어-사용법</a></li>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Server" /><category term="NaverCloudPlatform" /><category term="Project" /><category term="Deploy" /><summary type="html"><![CDATA[서버와 데이터베이스를 생성했다면 이번에는 서버에 프로젝트를 배포해보겠습니다.]]></summary></entry><entry><title type="html">아메리카노트 서버 구성 &amp;lt;2&amp;gt; MySQL 데이터베이스 생성</title><link href="http://localhost:4000/wiki/2024/04/29/americanote-server2-create-mysql-database.html" rel="alternate" type="text/html" title="아메리카노트 서버 구성 &amp;lt;2&amp;gt; MySQL 데이터베이스 생성" /><published>2024-04-29T00:00:00+09:00</published><updated>2024-04-29T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/04/29/americanote-server2-create-mysql-database</id><content type="html" xml:base="http://localhost:4000/wiki/2024/04/29/americanote-server2-create-mysql-database.html"><![CDATA[<p>이번에는 NCP에서 MySQL DB Server를 생성하고 연결해보겠습니다.
 <br />
 <br /></p>
 
@@ -98,96 +225,7 @@
 <ul>
   <li>생성 후 끝이 아니라 DB에 접속하기 위해 방화벽을 설정해줍니다.</li>
   <li>참고로 DB에 0.0.0.0으로 모두 허용해주는 게 위험하다고 생각해서 자주 쓰는 IP들만 등록해두었습니다.</li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="NaverCloudPlatform" /><category term="Project" /><category term="MySQL" /><category term="DataBase" /><summary type="html"><![CDATA[이번에는 NCP에서 MySQL DB Server를 생성하고 연결해보겠습니다.]]></summary></entry><entry><title type="html">아메리카노트 서버 구성 &amp;lt;6&amp;gt; HTTPS 적용</title><link href="http://localhost:4000/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain.html" rel="alternate" type="text/html" title="아메리카노트 서버 구성 &amp;lt;6&amp;gt; HTTPS 적용" /><published>2024-04-29T00:00:00+09:00</published><updated>2024-04-29T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain</id><content type="html" xml:base="http://localhost:4000/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain.html"><![CDATA[<ul>
-  <li>이전 단계에서 진행했던 방화벽에서의 80, 443 포트 허용과 도메인이 있다면 이제 기간은 짧지만 무료로 받을 수 있는 Letsencrypt의 SSL 인증서를 발급 받아보겠습니다.
-<br />
-<br /></li>
-</ul>
-
-<h4 id="ssl-인증서-발급받기">SSL 인증서 발급받기</h4>
-<ul>
-  <li>인증서를 발급받기 위해 letsencrypt의 certbot을 설치해주고, 인증서를 발급받습니다.</li>
-</ul>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt update <span class="c"># 패키지 업데이트</span>
-<span class="nb">sudo </span>apt <span class="nb">install </span>certbot python3-certbot-nginx
-<span class="nb">sudo </span>certbot <span class="nt">--nginx</span> <span class="nt">-d</span> 도메인이름 <span class="nt">-d</span> www.도메인이름
-</code></pre></div></div>
-
-<ul>
-  <li>첫 실행 시에는 이메일을 입력하고 약관에 동의해야 합니다.</li>
-  <li>이후 certbot이 letsencrypt 서버와 통신 중 도메인이 유효한치 확인하는 과정을 거칩니다.
-    <ul>
-      <li>저는 이 부분에서 에러가 참 많이 발생했는데요 ㅎㅎ 하나씩 살펴보겠습니다.
-        <ol>
-          <li><strong>/well-known/acme-challenge/ 폴더가 허용되지 않았습니다.</strong>
-            <ul>
-              <li>
-                <p>이 부분은 Nginx에서 적용하는 부분이라 이전 단계에서 만들었던 <code class="language-plaintext highlighter-rouge">/etc/nginx/sites-available/도메인이름</code> 파일에서 추가해주었습니다.</p>
-
-                <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  server <span class="o">{</span>
-          listen 80 default_server<span class="p">;</span>
-          listen <span class="o">[</span>::]:80 default_server<span class="p">;</span>
-                
-          server_name 도메인이름 www.도메인이름<span class="p">;</span>
-                
-          location ~ /<span class="se">\.</span>well-known/acme-challenge/ <span class="o">{</span>
-          allow all<span class="p">;</span>
-          root /var/www/letsencrypt<span class="p">;</span>
-          <span class="o">}</span>
-  <span class="o">}</span>
-</code></pre></div>                </div>
-              </li>
-            </ul>
-          </li>
-          <li><strong>도메인에 A 레코드를 적용되어 있지 않았습니다.</strong>
-            <ul>
-              <li>A 레코드 적용을 위해 NCP에서 Global Domain에 도메인을 추가하고, A 레코드를 추가해주었습니다.
-  <img width="679" alt="https1" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/3abce503-be85-43fe-8531-612c95578743" /></li>
-              <li>하지만 이 Global Domain의 네임서버를 카페24의 도메인에 설정해주는 과정에서 24시간이 걸린다는 소식에 아주 멘탈이 탈탈 털릴 뻔 했지만… 다행히 12시간 정도 뒤에 사용이 가능했습니다😂
-  <img width="544" alt="https2" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/8f6df708-93fa-4e43-8709-e2ad85b0c689" /></li>
-            </ul>
-          </li>
-        </ol>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<p><img width="770" alt="https3" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/f52a2ee6-ea91-475c-ba0e-8252c28a2993" /></p>
-<ul>
-  <li>그리하여 드디어 간절히 기다리던 발급 성공 화면을 보게 되면 SSL 발급에 성공한 겁니다.</li>
-  <li>이제 <code class="language-plaintext highlighter-rouge">/etc/nginx/sites-available/도메인이름</code> 파일에 접근해보면 자동으로 SSL이 적용된 것을 확인할 수 있습니다.</li>
-</ul>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server <span class="o">{</span>
-        listen  443 ssl<span class="p">;</span>
-        server_name americanote.store www.americanote.store<span class="p">;</span>
-
-        <span class="c">#access_log /var/log/nginx/proxy/access.log;</span>
-        <span class="c">#error_log /var/log/nginx/proxy/error.log;</span>
-
-        ssl_certificate /etc/letsencrypt/live/americanote.store/fullchain.pem<span class="p">;</span>
-        ssl_certificate_key /etc/letsencrypt/live/americanote.store/privkey.pem<span class="p">;</span>
-
-        location / <span class="o">{</span> <span class="c"># 추가</span>
-                proxy_pass http://127.0.0.1:8009<span class="p">;</span>
-
-        <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<ul>
-  <li>참고로 <code class="language-plaintext highlighter-rouge">location / { … }</code> 부분까지 설정해주어야 현재 서버의 8009로 실행되고 있는 프로세스로 프록시가 요청을 전달해줍니다.
-<br />
-<br /></li>
-</ul>
-
-<h4 id="참고">참고</h4>
-<ul>
-  <li><a href="https://velog.io/@curiosity806/nginx-Lets-Encrypt-SSL-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EB%B0%9C%EA%B8%89">https://velog.io/@curiosity806/nginx-Lets-Encrypt-SSL-인증서-발급</a></li>
-  <li><a href="https://jaehyeon48.github.io/nginx/configure-nginx-on-ubuntu-2004">Ubuntu 20.04에서 Nginx 설치 및 설정하기</a></li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="NaverCloudPlatform" /><category term="Project" /><category term="MySQL" /><category term="DataBase" /><summary type="html"><![CDATA[이전 단계에서 진행했던 방화벽에서의 80, 443 포트 허용과 도메인이 있다면 이제 기간은 짧지만 무료로 받을 수 있는 Letsencrypt의 SSL 인증서를 발급 받아보겠습니다.]]></summary></entry><entry><title type="html">아메리카노트 서버 구성 &amp;lt;5&amp;gt; 도메인 연결</title><link href="http://localhost:4000/wiki/2024/04/29/americanote-server5-connect-domain-name.html" rel="alternate" type="text/html" title="아메리카노트 서버 구성 &amp;lt;5&amp;gt; 도메인 연결" /><published>2024-04-29T00:00:00+09:00</published><updated>2024-04-29T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/04/29/americanote-server5-connect-domain-name</id><content type="html" xml:base="http://localhost:4000/wiki/2024/04/29/americanote-server5-connect-domain-name.html"><![CDATA[<ul>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="NaverCloudPlatform" /><category term="Project" /><category term="MySQL" /><category term="DataBase" /><summary type="html"><![CDATA[이번에는 NCP에서 MySQL DB Server를 생성하고 연결해보겠습니다.]]></summary></entry><entry><title type="html">아메리카노트 서버 구성 &amp;lt;5&amp;gt; 도메인 연결</title><link href="http://localhost:4000/wiki/2024/04/29/americanote-server5-connect-domain-name.html" rel="alternate" type="text/html" title="아메리카노트 서버 구성 &amp;lt;5&amp;gt; 도메인 연결" /><published>2024-04-29T00:00:00+09:00</published><updated>2024-04-29T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/04/29/americanote-server5-connect-domain-name</id><content type="html" xml:base="http://localhost:4000/wiki/2024/04/29/americanote-server5-connect-domain-name.html"><![CDATA[<ul>
   <li>자동 배포까지 했으니 어느정도는 백엔드 코드를 서버에 올리는 것까지 했다고 할 수 있겠습니다.</li>
   <li>저도 여기가 마지막인 줄 알았으나..
 <img src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/9ba32892-8688-4f23-aa75-806a8df95b37" alt="domain1" /></li>
@@ -340,7 +378,96 @@ server <span class="o">{</span>
 <ul>
   <li>https://jaehyeon48.github.io/nginx/configure-nginx-on-ubuntu-2004/</li>
   <li><a href="https://velog.io/@xangj0ng/Linux-Ubuntu-Nginx-%EC%84%A4%EC%B9%98">https://velog.io/@xangj0ng/Linux-Ubuntu-Nginx-설치</a></li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Server" /><category term="NaverCloudPlatform" /><category term="Project" /><category term="DNS" /><summary type="html"><![CDATA[자동 배포까지 했으니 어느정도는 백엔드 코드를 서버에 올리는 것까지 했다고 할 수 있겠습니다. 저도 여기가 마지막인 줄 알았으나.. 첨부한 이미지는 프론트분이 API가 요청되지 않는다고 캡쳐해주신 에러 메세지입니다. 읽어보면 HTTPS인 프론트 도메인에서 HTTP인 백엔드 도메인으로 요청하는 부분에서 XMLHttpRequest 에러가 발생했습니다. 바로 CORS 문제입니다 ㅎㅎ 검색해보니 프론트 쪽에서 간단하게 &lt;meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"&gt; 같은 HTML 코드를 넣어서 해결하는 방법도 있었지만, 그래도 저희는 해결되지 않아서 결국 도메인을 구매하기로 결정했습니다. (심지어 마감 전날 토요일에 ㅎㅎ)]]></summary></entry><entry><title type="html">아메리카노트 서버 구성 &amp;lt;4&amp;gt; 자동 배포</title><link href="http://localhost:4000/wiki/2024/04/29/americanote-server4-automatical-deploy.html" rel="alternate" type="text/html" title="아메리카노트 서버 구성 &amp;lt;4&amp;gt; 자동 배포" /><published>2024-04-29T00:00:00+09:00</published><updated>2024-04-29T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/04/29/americanote-server4-automatical-deploy</id><content type="html" xml:base="http://localhost:4000/wiki/2024/04/29/americanote-server4-automatical-deploy.html"><![CDATA[<hr />
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Server" /><category term="NaverCloudPlatform" /><category term="Project" /><category term="DNS" /><summary type="html"><![CDATA[자동 배포까지 했으니 어느정도는 백엔드 코드를 서버에 올리는 것까지 했다고 할 수 있겠습니다. 저도 여기가 마지막인 줄 알았으나.. 첨부한 이미지는 프론트분이 API가 요청되지 않는다고 캡쳐해주신 에러 메세지입니다. 읽어보면 HTTPS인 프론트 도메인에서 HTTP인 백엔드 도메인으로 요청하는 부분에서 XMLHttpRequest 에러가 발생했습니다. 바로 CORS 문제입니다 ㅎㅎ 검색해보니 프론트 쪽에서 간단하게 &lt;meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"&gt; 같은 HTML 코드를 넣어서 해결하는 방법도 있었지만, 그래도 저희는 해결되지 않아서 결국 도메인을 구매하기로 결정했습니다. (심지어 마감 전날 토요일에 ㅎㅎ)]]></summary></entry><entry><title type="html">아메리카노트 서버 구성 &amp;lt;6&amp;gt; HTTPS 적용</title><link href="http://localhost:4000/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain.html" rel="alternate" type="text/html" title="아메리카노트 서버 구성 &amp;lt;6&amp;gt; HTTPS 적용" /><published>2024-04-29T00:00:00+09:00</published><updated>2024-04-29T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain</id><content type="html" xml:base="http://localhost:4000/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain.html"><![CDATA[<ul>
+  <li>이전 단계에서 진행했던 방화벽에서의 80, 443 포트 허용과 도메인이 있다면 이제 기간은 짧지만 무료로 받을 수 있는 Letsencrypt의 SSL 인증서를 발급 받아보겠습니다.
+<br />
+<br /></li>
+</ul>
+
+<h4 id="ssl-인증서-발급받기">SSL 인증서 발급받기</h4>
+<ul>
+  <li>인증서를 발급받기 위해 letsencrypt의 certbot을 설치해주고, 인증서를 발급받습니다.</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt update <span class="c"># 패키지 업데이트</span>
+<span class="nb">sudo </span>apt <span class="nb">install </span>certbot python3-certbot-nginx
+<span class="nb">sudo </span>certbot <span class="nt">--nginx</span> <span class="nt">-d</span> 도메인이름 <span class="nt">-d</span> www.도메인이름
+</code></pre></div></div>
+
+<ul>
+  <li>첫 실행 시에는 이메일을 입력하고 약관에 동의해야 합니다.</li>
+  <li>이후 certbot이 letsencrypt 서버와 통신 중 도메인이 유효한치 확인하는 과정을 거칩니다.
+    <ul>
+      <li>저는 이 부분에서 에러가 참 많이 발생했는데요 ㅎㅎ 하나씩 살펴보겠습니다.
+        <ol>
+          <li><strong>/well-known/acme-challenge/ 폴더가 허용되지 않았습니다.</strong>
+            <ul>
+              <li>
+                <p>이 부분은 Nginx에서 적용하는 부분이라 이전 단계에서 만들었던 <code class="language-plaintext highlighter-rouge">/etc/nginx/sites-available/도메인이름</code> 파일에서 추가해주었습니다.</p>
+
+                <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  server <span class="o">{</span>
+          listen 80 default_server<span class="p">;</span>
+          listen <span class="o">[</span>::]:80 default_server<span class="p">;</span>
+                
+          server_name 도메인이름 www.도메인이름<span class="p">;</span>
+                
+          location ~ /<span class="se">\.</span>well-known/acme-challenge/ <span class="o">{</span>
+          allow all<span class="p">;</span>
+          root /var/www/letsencrypt<span class="p">;</span>
+          <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre></div>                </div>
+              </li>
+            </ul>
+          </li>
+          <li><strong>도메인에 A 레코드를 적용되어 있지 않았습니다.</strong>
+            <ul>
+              <li>A 레코드 적용을 위해 NCP에서 Global Domain에 도메인을 추가하고, A 레코드를 추가해주었습니다.
+  <img width="679" alt="https1" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/3abce503-be85-43fe-8531-612c95578743" /></li>
+              <li>하지만 이 Global Domain의 네임서버를 카페24의 도메인에 설정해주는 과정에서 24시간이 걸린다는 소식에 아주 멘탈이 탈탈 털릴 뻔 했지만… 다행히 12시간 정도 뒤에 사용이 가능했습니다😂
+  <img width="544" alt="https2" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/8f6df708-93fa-4e43-8709-e2ad85b0c689" /></li>
+            </ul>
+          </li>
+        </ol>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><img width="770" alt="https3" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/f52a2ee6-ea91-475c-ba0e-8252c28a2993" /></p>
+<ul>
+  <li>그리하여 드디어 간절히 기다리던 발급 성공 화면을 보게 되면 SSL 발급에 성공한 겁니다.</li>
+  <li>이제 <code class="language-plaintext highlighter-rouge">/etc/nginx/sites-available/도메인이름</code> 파일에 접근해보면 자동으로 SSL이 적용된 것을 확인할 수 있습니다.</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server <span class="o">{</span>
+        listen  443 ssl<span class="p">;</span>
+        server_name americanote.store www.americanote.store<span class="p">;</span>
+
+        <span class="c">#access_log /var/log/nginx/proxy/access.log;</span>
+        <span class="c">#error_log /var/log/nginx/proxy/error.log;</span>
+
+        ssl_certificate /etc/letsencrypt/live/americanote.store/fullchain.pem<span class="p">;</span>
+        ssl_certificate_key /etc/letsencrypt/live/americanote.store/privkey.pem<span class="p">;</span>
+
+        location / <span class="o">{</span> <span class="c"># 추가</span>
+                proxy_pass http://127.0.0.1:8009<span class="p">;</span>
+
+        <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>참고로 <code class="language-plaintext highlighter-rouge">location / { … }</code> 부분까지 설정해주어야 현재 서버의 8009로 실행되고 있는 프로세스로 프록시가 요청을 전달해줍니다.
+<br />
+<br /></li>
+</ul>
+
+<h4 id="참고">참고</h4>
+<ul>
+  <li><a href="https://velog.io/@curiosity806/nginx-Lets-Encrypt-SSL-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EB%B0%9C%EA%B8%89">https://velog.io/@curiosity806/nginx-Lets-Encrypt-SSL-인증서-발급</a></li>
+  <li><a href="https://jaehyeon48.github.io/nginx/configure-nginx-on-ubuntu-2004">Ubuntu 20.04에서 Nginx 설치 및 설정하기</a></li>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="NaverCloudPlatform" /><category term="Project" /><category term="MySQL" /><category term="DataBase" /><summary type="html"><![CDATA[이전 단계에서 진행했던 방화벽에서의 80, 443 포트 허용과 도메인이 있다면 이제 기간은 짧지만 무료로 받을 수 있는 Letsencrypt의 SSL 인증서를 발급 받아보겠습니다.]]></summary></entry><entry><title type="html">아메리카노트 서버 구성 &amp;lt;4&amp;gt; 자동 배포</title><link href="http://localhost:4000/wiki/2024/04/29/americanote-server4-automatical-deploy.html" rel="alternate" type="text/html" title="아메리카노트 서버 구성 &amp;lt;4&amp;gt; 자동 배포" /><published>2024-04-29T00:00:00+09:00</published><updated>2024-04-29T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/04/29/americanote-server4-automatical-deploy</id><content type="html" xml:base="http://localhost:4000/wiki/2024/04/29/americanote-server4-automatical-deploy.html"><![CDATA[<hr />
 <p>layout: post
 title: 아메리카노트 서버 구성 &lt;4&gt; 자동 배포
 subtitle: 
@@ -476,86 +603,7 @@ on:
   <li><a href="https://velog.io/@bjk1649/github-Action-%EB%A7%8C%EC%9C%BC%EB%A1%9C-%EC%A7%80%EC%86%8D%EC%A0%81-%EB%B0%B0%ED%8F%ACCD-%EB%AA%BB%ED%95%98%EB%82%98">https://velog.io/@bjk1649/github-Action-만으로-지속적-배포CD-못하나</a></li>
   <li>https://green-joo.tistory.com/26</li>
   <li><a href="https://velog.io/@chlee4858/20211205-github%EC%97%90%EC%84%9C-CICD-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0-github-action">https://velog.io/@chlee4858/20211205-github에서-CICD-적용하기-github-action</a></li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Server" /><category term="NaverCloudPlatform" /><category term="Project" /><category term="Deploy" /><summary type="html"><![CDATA[layout: post title: 아메리카노트 서버 구성 &lt;4&gt; 자동 배포 subtitle: categories: wiki tags: [Server, NaverCloudPlatform, Project, Deploy, GithubActions] — 프로젝트를 서버에 배포해봤다면 번거롭다는 생각을 한번쯤 해봤을 것 같습니다. 그래서 이번에는 그 배포를 자동으로 진행해보겠습니다. 자동 배포는 Github Actions의 self-hosted runner를 사용했습니다.]]></summary></entry><entry><title type="html">아메리카노트 서버 구성 &amp;lt;3&amp;gt; 프로젝트 배포</title><link href="http://localhost:4000/wiki/2024/04/29/americanote-server3-deploy-project.html" rel="alternate" type="text/html" title="아메리카노트 서버 구성 &amp;lt;3&amp;gt; 프로젝트 배포" /><published>2024-04-29T00:00:00+09:00</published><updated>2024-04-29T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/04/29/americanote-server3-deploy-project</id><content type="html" xml:base="http://localhost:4000/wiki/2024/04/29/americanote-server3-deploy-project.html"><![CDATA[<p>서버와 데이터베이스를 생성했다면 이번에는 서버에 프로젝트를 배포해보겠습니다.
-<br />
-<br /></p>
-
-<h4 id="1-서버에-접근하기">1. 서버에 접근하기</h4>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh username@public-ip <span class="nt">-p</span> 22<span class="o">(</span>허용 포트<span class="o">)</span>
-<span class="c"># password</span>
-</code></pre></div></div>
-<p><br /></p>
-
-<h4 id="2-서버에-java-설치">2. 서버에 JAVA 설치</h4>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>openjdk-17-jdk
-java <span class="nt">--version</span> <span class="c"># 자바 버전 확인</span>
-</code></pre></div></div>
-<p><br /></p>
-
-<h4 id="3-프로젝트-가져오기">3. 프로젝트 가져오기</h4>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone <span class="nt">--branch</span> 가져올브랜치 https://github.com/깃헙아이디/레포지토리명.git <span class="c"># 프로젝트 복제</span>
-</code></pre></div></div>
-<p><br /></p>
-
-<h4 id="4-별도로-필요한-yml-파일이-있다면-optional">4. 별도로 필요한 yml 파일이 있다면 (optional)</h4>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>Americanote <span class="c"># 리포지토리로 들어가기</span>
-<span class="nb">cd </span>src/main/resources <span class="c"># yml 파일이 위치할 resources 폴더로 이동</span>
-<span class="nb">cat</span> <span class="o">&gt;</span> ~.yml <span class="c"># yml 파일 생성 및 편집</span>
-<span class="c"># yml 파일 내용 붙여넣기</span>
-<span class="c"># 필요한 yml 파일을 모두 만들었으면 다시 리포지토리 홈으로 돌아갑니다.</span>
-</code></pre></div></div>
-<p><br /></p>
-
-<h4 id="5-gradle-빌드-후-실행하기">5. Gradle 빌드 후 실행하기</h4>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./gradlew clean build <span class="nt">-x</span> <span class="nb">test</span> <span class="c"># 테스트 없이 처음부터 빌드</span>
-<span class="nb">cd </span>build/libs <span class="c"># jar 파일이 존재하는 폴더로 이동</span>
-ll 혹은 <span class="nb">ls</span> <span class="c"># 폴더 보기</span>
-<span class="nb">nohup </span>java <span class="nt">-jar</span> <span class="o">[</span>이름-SNAPSHOT.jar] &amp;
-</code></pre></div></div>
-<ul>
-  <li>nohup
-    <ul>
-      <li>no hang up의 약자, 말그대로 끊지마!</li>
-      <li>사용자가 세션과 연결을 종료해도, 데몬 형태로 실행하게 하여 해당 프로세스가 종료되지 않습니다.</li>
-    </ul>
-  </li>
-  <li>&amp;
-    <ul>
-      <li>프로그램 실행 시 마지막에 붙여주면 백그라운드에서 해당 프로세스가 실행됩니다.
-<br />
-  → 어떤 프로그램을 종료없이 백그라운드에서 실행시킬 때 <code class="language-plaintext highlighter-rouge">nohup ~ &amp;</code> 조합을 사용하는 게 가장 확실하고 안전합니다.
-<br />
-<br /></li>
-    </ul>
-  </li>
-</ul>
-
-<h4 id="6-로그-확인">6. 로그 확인</h4>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 실행 후 ll 이나 ls로 확인해보면 nohup.out이 생성됩니다.</span>
-<span class="nb">tail</span> <span class="nt">-f</span> nohup.out <span class="c"># 실시간 업데이트 로그</span>
-<span class="nb">cat </span>nohup.out     <span class="c"># 현재까지 로그</span>
-</code></pre></div></div>
-<ul>
-  <li>제대로 실행되었는지 확인하기 위해 로그를 실행 후 로그를 반드시 확인하는 편입니다.
-<br />
-<br /></li>
-</ul>
-
-<h4 id="7-만약-이미-프로젝트가-실행-중이라면-종료하고-실행하자">7. 만약 이미 프로젝트가 실행 중이라면? 종료하고 실행하자</h4>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>netstat <span class="nt">-tulpn</span> <span class="c"># 실행 중인 프로세스 확인</span>
-<span class="nb">kill</span> <span class="nt">-9</span> <span class="o">[</span>PID 번호]
-</code></pre></div></div>
-<ul>
-  <li>Gradle 빌드 후 실행하기 전에 한번쯤 확인하면 좋겠습니다.
-<br />
-<br /></li>
-</ul>
-
-<h4 id="참고">참고</h4>
-<ul>
-  <li><a href="https://1.theapplemango.com/entry/%EB%84%A4%EC%9D%B4%EB%B2%84-%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%ED%94%8C%EB%9E%AB%ED%8F%BCNCP-%EC%84%9C%EB%B2%84-%EA%B5%AC%EC%B6%95-%EB%B0%8F-%EC%8A%A4%ED%94%84%EB%A7%81-%EB%B0%B0%ED%8F%AC%EA%B9%8C%EC%A7%80-2">https://1.theapplemango.com/entry/네이버-클라우드-플랫폼NCP-서버-구축-및-스프링-배포까지-2</a></li>
-  <li><a href="https://joonyon.tistory.com/entry/%EC%89%BD%EA%B2%8C-%EC%84%A4%EB%AA%85%ED%95%9C-nohup-%EA%B3%BC-%EB%B0%B1%EA%B7%B8%EB%9D%BC%EC%9A%B4%EB%93%9C-%EB%AA%85%EB%A0%B9%EC%96%B4-%EC%82%AC%EC%9A%A9%EB%B2%95">https://joonyon.tistory.com/entry/쉽게-설명한-nohup-과-백그라운드-명령어-사용법</a></li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Server" /><category term="NaverCloudPlatform" /><category term="Project" /><category term="Deploy" /><summary type="html"><![CDATA[서버와 데이터베이스를 생성했다면 이번에는 서버에 프로젝트를 배포해보겠습니다.]]></summary></entry><entry><title type="html">아메리카노트 서버 구성 &amp;lt;1&amp;gt; Linux 서버 생성</title><link href="http://localhost:4000/wiki/2024/04/28/americanote-server1-create-linux-server.html" rel="alternate" type="text/html" title="아메리카노트 서버 구성 &amp;lt;1&amp;gt; Linux 서버 생성" /><published>2024-04-28T00:00:00+09:00</published><updated>2024-04-28T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/04/28/americanote-server1-create-linux-server</id><content type="html" xml:base="http://localhost:4000/wiki/2024/04/28/americanote-server1-create-linux-server.html"><![CDATA[<h4 id="배경">배경</h4>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Server" /><category term="NaverCloudPlatform" /><category term="Project" /><category term="Deploy" /><summary type="html"><![CDATA[layout: post title: 아메리카노트 서버 구성 &lt;4&gt; 자동 배포 subtitle: categories: wiki tags: [Server, NaverCloudPlatform, Project, Deploy, GithubActions] — 프로젝트를 서버에 배포해봤다면 번거롭다는 생각을 한번쯤 해봤을 것 같습니다. 그래서 이번에는 그 배포를 자동으로 진행해보겠습니다. 자동 배포는 Github Actions의 self-hosted runner를 사용했습니다.]]></summary></entry><entry><title type="html">아메리카노트 서버 구성 &amp;lt;1&amp;gt; Linux 서버 생성</title><link href="http://localhost:4000/wiki/2024/04/28/americanote-server1-create-linux-server.html" rel="alternate" type="text/html" title="아메리카노트 서버 구성 &amp;lt;1&amp;gt; Linux 서버 생성" /><published>2024-04-28T00:00:00+09:00</published><updated>2024-04-28T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/04/28/americanote-server1-create-linux-server</id><content type="html" xml:base="http://localhost:4000/wiki/2024/04/28/americanote-server1-create-linux-server.html"><![CDATA[<h4 id="배경">배경</h4>
 <ul>
   <li>비사이드 포텐데이403 프로젝트를 진행하면서 Linux 서버를 생성하기 위해 순서대로 정리해봤습니다.
 <br />
@@ -720,78 +768,4 @@ ll 혹은 <span class="nb">ls</span> <span class="c"># 폴더 보기</span>
 <br /><br /></p>
 
 <h4 id="q-green-developers-프로그램-참여-소감">Q. Green Developers 프로그램 참여 소감</h4>
-<p>AWS 프리티어처럼 제한된 용량 안에서 개발하는 것보다 진짜 실무를 경험할 수 있도록 다양한 Naver Cloud 서비스를 사용해 볼 수 있어서 정말 좋은 경험을 한 것 같습니다. 앞으로도 Naver Cloud에 대해 더 공부해 보고 싶은 계기가 되었습니다. 이런 프로그램 만들어주셔서 감사합니다!</p>]]></content><author><name>Dajeong Park</name></author><category term="blog" /><category term="NaverCloud" /><category term="NaverCloudPlatform" /><category term="프로젝트" /><category term="후기" /><summary type="html"><![CDATA[Q. 프로젝트를 소개해 주세요. 내 취향에 딱 맞는 아메리카노 카페 찾기 서비스 Americanote(아메리카노트)입니다. “카페 리뷰는 많은데 정작 커피 맛은 어떤지 모르겠어💦” “꼭 방문해서 먹어보고 커피 맛을 알아야 할까?” “내 취향에 딱 맞는 아메리카노를 먹고싶어!” 그래서 만들었습니다! Americanote는 카페를 방문하지 않고도 커피의 향, 강도, 산미를 알 수 있어요!]]></summary></entry><entry><title type="html">문자열 대치</title><link href="http://localhost:4000/wiki/2024/03/17/string-replacement.html" rel="alternate" type="text/html" title="문자열 대치" /><published>2024-03-17T00:00:00+09:00</published><updated>2024-03-17T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/03/17/string-replacement</id><content type="html" xml:base="http://localhost:4000/wiki/2024/03/17/string-replacement.html"><![CDATA[<h3 id="종류">종류</h3>
-<ol>
-  <li><code class="language-plaintext highlighter-rouge">replace()</code></li>
-  <li><code class="language-plaintext highlighter-rouge">replaceAll()</code></li>
-  <li><code class="language-plaintext highlighter-rouge">replaceFirst()</code>
-<br />
-<br /></li>
-</ol>
-
-<h3 id="replacecharsequence-target-charsequence-replacement">replace(CharSequence target, CharSequence replacement)</h3>
-<ul>
-  <li>일치하는 문자열(target)을 새로운 문자열(replacement)로 치환한다.
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"가/나/다/라/마/바/사"</span><span class="o">;</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"/"</span><span class="o">,</span> <span class="s">","</span><span class="o">));</span> <span class="c1">// 가,나,다,라,마,바,사</span>
-</code></pre></div>    </div>
-    <p><br /></p>
-  </li>
-</ul>
-
-<h3 id="replaceallstring-regex-string-replacement">replaceAll(String regex, String replacement)</h3>
-<ul>
-  <li>일치하는 정규 표현식(regex)을 새로운 문자열(replacement)로 <strong>전부</strong> 치환한다.
-    <ul>
-      <li>replace()와 유사하지만, <code class="language-plaintext highlighter-rouge">.</code>(온점) 같은 경우 정규 표현식으로 모든 문자를 의미하기 때문에 모든 문자열이 치환될 수 있다.
-        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"가.나.다.라.마.바.사"</span><span class="o">;</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str2</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"."</span><span class="o">,</span> <span class="s">","</span><span class="o">));</span> <span class="c1">// 가,나,다,라,마,바,사</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str2</span><span class="o">.</span><span class="na">replaceAll</span><span class="o">(</span><span class="s">"."</span><span class="o">,</span> <span class="s">","</span><span class="o">));</span> <span class="c1">// ,,,,,,,,,,,,,</span>
-</code></pre></div>        </div>
-        <p><br /></p>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="replace와-replaceall">replace()와 replaceAll()</h3>
-<ul>
-  <li>두 메소드는 일반 문자열 리터럴을 비교할 땐 실행 결과에 차이가 없다.</li>
-  <li>하지만 replaceAll()은 문자열 대치에 정규식을 사용하여 조금 더 구체적인 검증이 가능하다.
-<br />
-<br /></li>
-</ul>
-
-<h3 id="replacefirststring-target-string-replacement">replaceFirst(String target, String replacement)</h3>
-<ul>
-  <li>첫번째로 일치하는 문자열(target)를 대체할 문자(replacement)로 치환한다.
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"가/나/다/라/마/바/사"</span><span class="o">;</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"/"</span><span class="o">,</span> <span class="s">","</span><span class="o">));</span> <span class="c1">// 가,나/다/라/마/바/사</span>
-</code></pre></div>    </div>
-    <p><br /></p>
-  </li>
-</ul>
-
-<h3 id="실무-사용-예시">실무 사용 예시</h3>
-<ul>
-  <li>해시태그가 포함되어 있는 내용에 바꾸고 싶은 내용이 해시태그마다 다를 때 사용한다.
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">contents</span> <span class="o">=</span> <span class="n">reportMapper</span><span class="o">.</span><span class="na">findReportTemplate</span><span class="o">(</span><span class="mi">60001</span><span class="o">);</span>
-<span class="n">contents</span> <span class="o">=</span> <span class="n">contents</span><span class="o">.</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"#"</span><span class="o">,</span> <span class="n">childName</span><span class="o">)</span>
-              <span class="o">.</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"#"</span><span class="o">,</span> <span class="nc">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">progress</span><span class="o">.</span><span class="na">getCount</span><span class="o">()))</span>
-              <span class="o">.</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"#"</span><span class="o">,</span> <span class="n">progress</span><span class="o">.</span><span class="na">getPercent</span><span class="o">())</span>
-              <span class="o">.</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"#"</span><span class="o">,</span> <span class="n">previous</span><span class="o">)</span>
-              <span class="o">.</span><span class="na">replaceFirst</span><span class="o">(</span><span class="s">"#"</span><span class="o">,</span> <span class="n">average</span><span class="o">);</span>
-</code></pre></div>    </div>
-    <p><br /></p>
-  </li>
-</ul>
-
-<h4 id="참고">참고</h4>
-<ul>
-  <li>https://coding-factory.tistory.com/128</li>
-  <li>031724 추가
-    <ul>
-      <li>https://bada744.tistory.com/16</li>
-    </ul>
-  </li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="String" /><category term="Method" /><summary type="html"><![CDATA[종류 replace() replaceAll() replaceFirst()]]></summary></entry></feed>
+<p>AWS 프리티어처럼 제한된 용량 안에서 개발하는 것보다 진짜 실무를 경험할 수 있도록 다양한 Naver Cloud 서비스를 사용해 볼 수 있어서 정말 좋은 경험을 한 것 같습니다. 앞으로도 Naver Cloud에 대해 더 공부해 보고 싶은 계기가 되었습니다. 이런 프로그램 만들어주셔서 감사합니다!</p>]]></content><author><name>Dajeong Park</name></author><category term="blog" /><category term="NaverCloud" /><category term="NaverCloudPlatform" /><category term="프로젝트" /><category term="후기" /><summary type="html"><![CDATA[Q. 프로젝트를 소개해 주세요. 내 취향에 딱 맞는 아메리카노 카페 찾기 서비스 Americanote(아메리카노트)입니다. “카페 리뷰는 많은데 정작 커피 맛은 어떤지 모르겠어💦” “꼭 방문해서 먹어보고 커피 맛을 알아야 할까?” “내 취향에 딱 맞는 아메리카노를 먹고싶어!” 그래서 만들었습니다! Americanote는 카페를 방문하지 않고도 커피의 향, 강도, 산미를 알 수 있어요!]]></summary></entry></feed>
