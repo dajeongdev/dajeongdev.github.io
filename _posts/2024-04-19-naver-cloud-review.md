@@ -27,8 +27,6 @@ tags: [NaverCloud,NaverCloudPlatform,프로젝트,후기]
 비사이드 포텐데이에서는 Green Developers 프로그램에 참여하면서 Naver Cloud로부터 크레딧 지원을 받아 다양한 서비스를 이용할 수 있었습니다. 
 저희 프로젝트에서는 그중 Server와 Cloud DB 그리고 Global Domain을 사용하여 아주 간단한 인프라를 구축했습니다.
 <br/><br/>
-🌐 &nbsp;&nbsp;[자세한 서버 구축 과정 보러가기](https://night-geography-507.notion.site/1-Linux-18bf283cbe204de5aa9f60d93f579867?pvs=4) 
-<br/><br/>
 
 
 #### Q. Ncloud 사용 중 특히 만족했던 점과, 아쉬웠던 점은 무엇인가요?

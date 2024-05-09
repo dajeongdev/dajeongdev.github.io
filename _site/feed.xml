@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2024-05-09T22:50:30+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">홈페이지 마이그레이션 회고</title><link href="http://localhost:4000/wiki/2024/05/09/hompage-migration-review.html" rel="alternate" type="text/html" title="홈페이지 마이그레이션 회고" /><published>2024-05-09T00:00:00+09:00</published><updated>2024-05-09T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/05/09/hompage-migration-review</id><content type="html" xml:base="http://localhost:4000/wiki/2024/05/09/hompage-migration-review.html"><![CDATA[<p>포트폴리오를 작성하다보니 생각보다 예전에 했던 프로젝트들이 회고해볼 만한 게 많아서 한 번 되짚어보려고 한다.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2024-05-09T23:02:38+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">홈페이지 마이그레이션 회고</title><link href="http://localhost:4000/wiki/2024/05/09/hompage-migration-review.html" rel="alternate" type="text/html" title="홈페이지 마이그레이션 회고" /><published>2024-05-09T00:00:00+09:00</published><updated>2024-05-09T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/05/09/hompage-migration-review</id><content type="html" xml:base="http://localhost:4000/wiki/2024/05/09/hompage-migration-review.html"><![CDATA[<p>포트폴리오를 작성하다보니 생각보다 예전에 했던 프로젝트들이 회고해볼 만한 게 많아서 한 번 되짚어보려고 한다.
 <br />
 <br /></p>
 
@@ -758,8 +758,6 @@ on:
 <p><img width="769" alt="service-architecture" src="https://github.com/dajeongdev/Americanote/assets/61612976/f1a16aab-bf3c-4206-8b0b-79e581bc2768" /><br />
 비사이드 포텐데이에서는 Green Developers 프로그램에 참여하면서 Naver Cloud로부터 크레딧 지원을 받아 다양한 서비스를 이용할 수 있었습니다. 
 저희 프로젝트에서는 그중 Server와 Cloud DB 그리고 Global Domain을 사용하여 아주 간단한 인프라를 구축했습니다.
-<br /><br />
-🌐   <a href="https://night-geography-507.notion.site/1-Linux-18bf283cbe204de5aa9f60d93f579867?pvs=4">자세한 서버 구축 과정 보러가기</a> 
 <br /><br /></p>
 
 <h4 id="q-ncloud-사용-중-특히-만족했던-점과-아쉬웠던-점은-무엇인가요">Q. Ncloud 사용 중 특히 만족했던 점과, 아쉬웠던 점은 무엇인가요?</h4>
