@@ -7,22 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>독서 관리 서비스의 Admin 개발 회고 | Every Single Day</title>
+<title>도서 등록 API 속도 개선 회고 | Every Single Day</title>
 <meta name="generator" content="Jekyll v4.2.2">
-<meta property="og:title" content="독서 관리 서비스의 Admin 개발 회고">
+<meta property="og:title" content="도서 등록 API 속도 개선 회고">
 <meta name="author" content="Dajeong Park">
 <meta property="og:locale" content="ko">
-<meta name="description" content="홈페이지 마이그레이션, 도서 단행본 API 구현 업무를 마치고 나니 협력사와 아이가 도서를 읽고 독후감을 쓰면 첨삭해주는 서비스를 만들게 됐는데, 당시 일손이 부족해서 내가 관리자를 통으로 담당하게 되었다.">
-<meta property="og:description" content="홈페이지 마이그레이션, 도서 단행본 API 구현 업무를 마치고 나니 협력사와 아이가 도서를 읽고 독후감을 쓰면 첨삭해주는 서비스를 만들게 됐는데, 당시 일손이 부족해서 내가 관리자를 통으로 담당하게 되었다.">
-<link rel="canonical" href="http://localhost:4000/wiki/2024/05/10/book-service-admin-review.html">
-<meta property="og:url" content="http://localhost:4000/wiki/2024/05/10/book-service-admin-review.html">
+<meta name="description" content="홈페이지 마이그레이션 이후 새로운 업무를 받았다.">
+<meta property="og:description" content="홈페이지 마이그레이션 이후 새로운 업무를 받았다.">
+<link rel="canonical" href="http://localhost:4000/blog/2024/05/10/book-insert-api-speed-improvement-review.html">
+<meta property="og:url" content="http://localhost:4000/blog/2024/05/10/book-insert-api-speed-improvement-review.html">
 <meta property="og:site_name" content="Every Single Day">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2024-05-10T00:00:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="독서 관리 서비스의 Admin 개발 회고">
+<meta property="twitter:title" content="도서 등록 API 속도 개선 회고">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2024-05-10T00:00:00+09:00","datePublished":"2024-05-10T00:00:00+09:00","description":"홈페이지 마이그레이션, 도서 단행본 API 구현 업무를 마치고 나니 협력사와 아이가 도서를 읽고 독후감을 쓰면 첨삭해주는 서비스를 만들게 됐는데, 당시 일손이 부족해서 내가 관리자를 통으로 담당하게 되었다.","headline":"독서 관리 서비스의 Admin 개발 회고","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2024/05/10/book-service-admin-review.html"},"url":"http://localhost:4000/wiki/2024/05/10/book-service-admin-review.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2024-05-10T00:00:00+09:00","datePublished":"2024-05-10T00:00:00+09:00","description":"홈페이지 마이그레이션 이후 새로운 업무를 받았다.","headline":"도서 등록 API 속도 개선 회고","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2024/05/10/book-insert-api-speed-improvement-review.html"},"url":"http://localhost:4000/blog/2024/05/10/book-insert-api-speed-improvement-review.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -617,7 +617,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">독서 관리 서비스의 Admin 개발 회고</h1>
+  <h1 class="post-title p-name" itemprop="name headline">도서 등록 API 속도 개선 회고</h1>
   <h2 class="post-subtitle"></h2>
 
   <p class="post-meta">
@@ -658,69 +658,68 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
   </p>
 <div class="post-tags">
-<a class="post-tag" href="/tags.html#Project">#Project</a><a class="post-tag" href="/tags.html#Admin">#Admin</a><a class="post-tag" href="/tags.html#Review">#Review</a>
+<a class="post-tag" href="/tags.html#Project">#Project</a><a class="post-tag" href="/tags.html#Review">#Review</a>
 </div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <p>홈페이지 마이그레이션, 도서 단행본 API 구현 업무를 마치고 나니 협력사와 아이가 도서를 읽고 독후감을 쓰면 첨삭해주는 서비스를 만들게 됐는데, 당시 일손이 부족해서 내가 관리자를 통으로 담당하게 되었다.
+      <p>홈페이지 마이그레이션 이후 새로운 업무를 받았다.</p>
+
+<p>당시 자사 서비스인 도서 플랫폼에서는 사용자로부터 도서 등록 문의를 받아 등록해줬었다.</p>
+
+<p>문의한 도서가 ‘전집’일 때는 운영팀에서 도서를 검색해서 개발팀에게 전달해 데이터베이스에 등록하는 과정을 거쳤지만,<br>
+‘단행본’일 때는 운영팀에서 관리자 페이지에서 직접 등록하기도 했다.<br>
+하지만 점점 요청이 많아지기도 해서 내가 ‘단행본’ 등록하는 API를 개발하게 되었다.
 <br>
 <br></p>
 
-<p>사수분들께서 바빠서 잘 봐줄 수 없을 것 같다고 하셔서 (ㅎㅎ) 기획서를 받기 전부터 조금 긴장했던 것 같다.
-기초 설정은 차장님께서 해주셔서 Spring Boot 2.4.1 버전에 Maven을 사용한 프로젝트를 생성해주셨고, 홈페이지 마이그레이션 때처럼 Thymeleaf를 사용하기로 했는데, 마이그레이션 때 사용해봐서 걱정은 조금 덜었었다.
+<p>기존 전집 등록 API를 이용하면 금방 만들 수 있겠다고 생각했지만, 도서 플랫폼의 백단 프로젝트가 거대한 레거시 프로젝트라는 한 가지 복병이 있었다.</p>
+
+<p>레거시 프로젝트는 JPA로 구성되어 있었지만, JPA의 장점을 하나도 사용하지 않는 데다 특정 메소드만 사용하고 있었고,<br>
+사용하고 있는 특정 메소드 또한 방대한 중복 및 로깅 코드에 클래스와 메소드 이름이 중구난방에 의미도 불분명했다.<br>
+게다가 데이터베이스도 테이블이 엄청나게 얽혀 있어 함부로 수정할 수 없는 상태였다.
 <br>
 <br></p>
 
-<p>관리자 페이지답게 엑셀 다운로드부터 Push(FCM) 발송, 첨삭 수동 매칭, 첨삭 교사의 라이센스 확인, 관리자 권한 설정 그리고 사용자 통계까지 정말 다양한 기능을 8월 중순부터 1월 초까지 작업했으니 약 5개월동안 정말 열심히 했었다. 그래서 힘들다기보다는 해보지 못했던 기능을 만들어봐서 정말 재미있게 개발했다.
+<p>이런 상태에서 그대로 단행본 API만 만들 수도 있었지만, 왠지 마음이 찝찝해서 기존 전집 등록 API부터 개선해보기로 했다. 그리고 이때 속도를 비교해보면 좋을 것 같아서 <code class="language-plaintext highlighter-rouge">System.currentTimeMillis</code> 메소드를 사용해서 이전 코드의 속도를 측정해보니 50권의 전집을 등록할 때 5.56초가 걸렸다.
 <br>
 <br></p>
 
-<p>이번 프로젝트에서는 기획서가 있었는데, 미리 주신 덕분에 보면서 “내가 관리자라면 검색할 때 이 조건을 불편하지 않을까?”라고 관리자의 입장에서 생각해보면서 추가하거나 삭제해도 괜찮을 것 같은 기능들을 정리해서 운영팀 과장님과 상의하면서 작업했더니 확실히 완성도가 올라간다는 느낌이 들었다. 이때부터 기획서나 피그마를 잘 분석해서 의사소통하는 게 팀워크에 좋은 영향을 끼친다고 생각했다.
+<p>일단 이리갔다 저리갔다 코드가 너무 보기 불편했기 때문에 클래스와 메서드부터 연관성에 따라서 재배치하거나 분리했다.<br>
+그리고 불명확하게 작성되어 있던 메소드 이름도 가독성 있는 이름으로 바꿨다.<br>
+마지막으로는 수많은 로깅 및 주석 코드를 정리했고, 중간중간 중복 코드도 찾아내어 삭제했다.</p>
+
+<p>이후 코드 속도를 다시 측정해보니 같은 전집을 등록할 때 3.27초로 속도가 개선되었다.
 <br>
 <br></p>
 
-<h4 id="프론트단">프론트단</h4>
-<p>관리자 페이지의 프론트 부분을 제대로 작업해본 건 처음이었는데, 디자인에 너무 신경쓰지 않아도 된다고 하셨지만 그래도 어느정도는 깔끔하게 보이고 싶었다.</p>
-
-<p>아무래도 관리자 페이지는 비슷한 페이지들이 많다보니 모달이나 글자수 카운팅, 페이징, 이미지 탭 같은 부분을 공통적으로 사용하는 게 좋을 것 같다고 판단해서 그런 기능들은 컴포넌트화 시켜서 사용하기 시작했다.</p>
-
-<p>그리고 개발 트렌드에 맞게 jQuery 대신 Javascript만 사용하고 싶다는 목표도 세웠기 때문에 작업 중에 드림코딩이나 노마드코더 같은 Javascript 강의를 들어보니 Java랑 조금 다른 부분들이 재미있게 느껴졌다.
-<br>
-<br></p>
-
-<h4 id="백단">백단</h4>
-<p>백단 작업도 이전 프로젝트보다 더 발전하고 싶다는 생각이 들었다. 김영한님의 Spring 강의를 들으면서 @Autowired 대신 생성자 주입을 위해 @RequiredArgument 사용하는 것처럼 더 나은 코드를 위해 필요한 부분들을 체크해서 실무에 적용해보기도 했다.</p>
-
-<p>백단 부분은 계속 MyBatis를 사용했기 때문에 입사 전에 했던 팀프로젝트 때랑 많이 다르지 않아서 편했지만, 통계나 여러 테이블을 조인하는 과정이 어려웠기 때문에 대리님께 질문도 드리고, 개인적으로도 검색을 통해 많이 배웠다. 최근에는 JPA만 써서 MyBatis도 한 번 제대로 정리해봐야겠다..</p>
-
-<p>그리고 이때 처음으로 프로젝트를 서버에 배포하는 것도 알려주셔서 해봤는데 생각보다 어려워서 공부를 많이 해야겠다고 생각했다. 실서버가 2개라는 것도 차장님이 말씀을 안 해주셔서 막바지에 알게 된 해프닝도 있었다. ㅋㅋ
+<p>이후 단행본 API를 구현하는 건 정말 간단했다.<br>
+원래는 같은 API를 쓰고 싶었지만, 운영팀에서 주시는 전집과 단행본의 엑셀 컬럼이 달라서 다른 API로 분리를 한 다음<br>
+엑셀을 읽어들이는 부분만 다르게 설정하고, 내부 로직은 동일한 메소드를 사용하도록 조정했다.
 <br>
 <br></p>
 
 <h4 id="소감">소감</h4>
-<p>중간중간 운영팀 과장님과 대리님께 피드백도 받아가면서 프로젝트를 마무리했더니 의사소통도 잘하고 손이 빠르다는 평을 들었다. 새로운 기능도 많이 개발해보고, 프론트단도 처음이지만 이리저리 공부하면서 작업한 부분도 정말 뿌듯했다. 이 프로젝트를 통해서 팀원들과의 의사소통과 사용자 입장에서 개발하는 것의 중요성을 뼈저리게 깨달았다.</p>
-
-<p>그리고 공부해서 바로 실무에 적용해보는 게 정말 재미있기도 했는데, 실제로 다음 프로젝트부터는 VO를 보호하기 위해 DTO와 Builder 패턴을 사용하는 등 김영한님의 강의가 정말 하나하나 피가 되고 살이 되어서 모든 강의를 다 수강해서 열심히 공부하기도 했다.</p>
+<p>단행본 API를 구현하라는 업무에서 사실상 전집 API를 개선하는 데 더 시간을 많이 보냈지만 개인적으로 정말 뿌듯한 업무였다. ㅎㅎ 주니어 때 해보기 힘든 속도도 개선도 해보고, 데이터에 영향이 가지 않도록 고민하는 과정들이 개발자라는 직업에 대해 깊이 있게 생각하게 만들어 준 것 같다~!</p>
 
 
     </div>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/wiki/2024/05/10/book-insert-api-speed-improvement-review.html" title="도서 등록 API 속도 개선 회고">도서 등록 API 속도 개선 회고...</a><span></span>
+<a class="previous" href="/blog/2024/05/09/hompage-migration-review.html" title="홈페이지 마이그레이션 회고">홈페이지 마이그레이션 회고</a><a class="next" href="/blog/2024/05/10/book-service-admin-review.html" title="독서 관리 서비스의 Admin 개발 회고">독서 관리 서비스의 Admin 개발 회고...</a>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/wiki/2024/04/29/americanote-server2-create-mysql-database.html" title="">아메리카노트 서버 구성 &lt;2&gt; MySQL 데이터베이스 생성</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/array-slice-method.html" title="">배열 자르기</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/prime-number.html" title="">자바로 소수 판별</a></li>
-<li><a class="post-link" href="/wiki/2024/02/29/programmers-12906.html" title="">프로그래머스 - 같은 숫자는 싫어 풀이</a></li>
+        <li><a class="post-link" href="/wiki/2024/03/17/string-replacement.html" title="독서 관리 서비스의 Admin 개발 회고">문자열 대치</a></li>
+<li><a class="post-link" href="/blog/2024/05/10/book-service-admin-review.html" title="독서 관리 서비스의 Admin 개발 회고">독서 관리 서비스의 Admin 개발 회고</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/default-method.html" title="독서 관리 서비스의 Admin 개발 회고">default method</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/intellij-shortcut.html" title="독서 관리 서비스의 Admin 개발 회고">IntelliJ 단축키 정리</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>

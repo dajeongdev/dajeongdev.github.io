@@ -2,7 +2,7 @@
 layout: post
 title: 독서 관리 서비스의 Admin 개발 회고
 subtitle: 
-categories: wiki
+categories: blog
 tags: [Project, Admin, Review]
 ---
 홈페이지 마이그레이션, 도서 단행본 API 구현 업무를 마치고 나니 협력사와 아이가 도서를 읽고 독후감을 쓰면 첨삭해주는 서비스를 만들게 됐는데, 당시 일손이 부족해서 내가 관리자를 통으로 담당하게 되었다.

@@ -7,22 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>도서 등록 API 속도 개선 회고 | Every Single Day</title>
+<title>홈페이지 마이그레이션 회고 | Every Single Day</title>
 <meta name="generator" content="Jekyll v4.2.2">
-<meta property="og:title" content="도서 등록 API 속도 개선 회고">
+<meta property="og:title" content="홈페이지 마이그레이션 회고">
 <meta name="author" content="Dajeong Park">
 <meta property="og:locale" content="ko">
-<meta name="description" content="홈페이지 마이그레이션 이후 새로운 업무를 받았다.">
-<meta property="og:description" content="홈페이지 마이그레이션 이후 새로운 업무를 받았다.">
-<link rel="canonical" href="http://localhost:4000/wiki/2024/05/10/book-insert-api-speed-improvement-review.html">
-<meta property="og:url" content="http://localhost:4000/wiki/2024/05/10/book-insert-api-speed-improvement-review.html">
+<meta name="description" content="포트폴리오를 작성하다보니 생각보다 예전에 했던 프로젝트들이 회고해볼 만한 게 많아서 한 번 되짚어보려고 한다.">
+<meta property="og:description" content="포트폴리오를 작성하다보니 생각보다 예전에 했던 프로젝트들이 회고해볼 만한 게 많아서 한 번 되짚어보려고 한다.">
+<link rel="canonical" href="http://localhost:4000/blog/2024/05/09/hompage-migration-review.html">
+<meta property="og:url" content="http://localhost:4000/blog/2024/05/09/hompage-migration-review.html">
 <meta property="og:site_name" content="Every Single Day">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2024-05-10T00:00:00+09:00">
+<meta property="article:published_time" content="2024-05-09T00:00:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="도서 등록 API 속도 개선 회고">
+<meta property="twitter:title" content="홈페이지 마이그레이션 회고">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2024-05-10T00:00:00+09:00","datePublished":"2024-05-10T00:00:00+09:00","description":"홈페이지 마이그레이션 이후 새로운 업무를 받았다.","headline":"도서 등록 API 속도 개선 회고","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2024/05/10/book-insert-api-speed-improvement-review.html"},"url":"http://localhost:4000/wiki/2024/05/10/book-insert-api-speed-improvement-review.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2024-05-09T00:00:00+09:00","datePublished":"2024-05-09T00:00:00+09:00","description":"포트폴리오를 작성하다보니 생각보다 예전에 했던 프로젝트들이 회고해볼 만한 게 많아서 한 번 되짚어보려고 한다.","headline":"홈페이지 마이그레이션 회고","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2024/05/09/hompage-migration-review.html"},"url":"http://localhost:4000/blog/2024/05/09/hompage-migration-review.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -617,11 +617,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">도서 등록 API 속도 개선 회고</h1>
+  <h1 class="post-title p-name" itemprop="name headline">홈페이지 마이그레이션 회고</h1>
   <h2 class="post-subtitle"></h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2024-05-10T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> May 10, 2024
+    <time class="dt-published" datetime="2024-05-09T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> May 09, 2024
     </time>
 
     
@@ -658,68 +658,85 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
   </p>
 <div class="post-tags">
-<a class="post-tag" href="/tags.html#Project">#Project</a><a class="post-tag" href="/tags.html#Review">#Review</a>
+<a class="post-tag" href="/tags.html#Java">#Java</a><a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#SpringBoot">#SpringBoot</a><a class="post-tag" href="/tags.html#Maven">#Maven</a><a class="post-tag" href="/tags.html#Gradle">#Gradle</a><a class="post-tag" href="/tags.html#JSP">#JSP</a><a class="post-tag" href="/tags.html#Thymeleaf%20Migration">#Thymeleaf Migration</a><a class="post-tag" href="/tags.html#Review">#Review</a>
 </div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <p>홈페이지 마이그레이션 이후 새로운 업무를 받았다.</p>
-
-<p>당시 자사 서비스인 도서 플랫폼에서는 사용자로부터 도서 등록 문의를 받아 등록해줬었다.</p>
-
-<p>문의한 도서가 ‘전집’일 때는 운영팀에서 도서를 검색해서 개발팀에게 전달해 데이터베이스에 등록하는 과정을 거쳤지만,<br>
-‘단행본’일 때는 운영팀에서 관리자 페이지에서 직접 등록하기도 했다.<br>
-하지만 점점 요청이 많아지기도 해서 내가 ‘단행본’ 등록하는 API를 개발하게 되었다.
+      <p>포트폴리오를 작성하다보니 생각보다 예전에 했던 프로젝트들이 회고해볼 만한 게 많아서 한 번 되짚어보려고 한다.
 <br>
 <br></p>
 
-<p>기존 전집 등록 API를 이용하면 금방 만들 수 있겠다고 생각했지만, 도서 플랫폼의 백단 프로젝트가 거대한 레거시 프로젝트라는 한 가지 복병이 있었다.</p>
+<p>입사 당시 첫 주는 거의 일이 없어서 심심했었는데, 2주차에는 드디어 첫 업무를 받았다.
+<br></p>
 
-<p>레거시 프로젝트는 JPA로 구성되어 있었지만, JPA의 장점을 하나도 사용하지 않는 데다 특정 메소드만 사용하고 있었고,<br>
-사용하고 있는 특정 메소드 또한 방대한 중복 및 로깅 코드에 클래스와 메소드 이름이 중구난방에 의미도 불분명했다.<br>
-게다가 데이터베이스도 테이블이 엄청나게 얽혀 있어 함부로 수정할 수 없는 상태였다.
+<p>Spring 4.3.3, Maven, JSP로 구성되어 있던 프로젝트를 Spring Boot, Gradle, Thymeleaf로 마이그레이션 하는 업무였는데, 마이그레이션 자체도 처음이고 Spring Boot와 Thymeleaf도 처음 써보는 거라 걱정반 기대반으로 조사부터 했었다.
+<br></p>
+
+<p>다행스럽게도 마이그레이션에 대한 레퍼런스가 많아서 찬찬히 읽어보고 시작했다.
+<br></p>
+
+<p>일단 Spring 4점대가 이미 개발 지원이 종료된 상태였고, 불필요한 중복 코드나 주석도 많아서 함께 리팩토링하기로 했다. 그리고 한꺼번에 바꾸게 되면 에러날 확률이 높다고 해서 하나씩 바꾸기로 했다.
 <br>
 <br></p>
 
-<p>이런 상태에서 그대로 단행본 API만 만들 수도 있었지만, 왠지 마음이 찝찝해서 기존 전집 등록 API부터 개선해보기로 했다. 그리고 이때 속도를 비교해보면 좋을 것 같아서 <code class="language-plaintext highlighter-rouge">System.currentTimeMillis</code> 메소드를 사용해서 이전 코드의 속도를 측정해보니 50권의 전집을 등록할 때 5.56초가 걸렸다.
+<h4 id="1-spring--springboot">1. Spring → SpringBoot</h4>
+<p>spring boot 의존성도 추가하고, xml 파일들을 yml 혹은 config 파일로 분리했다.</p>
+
+<p>xml 파일이 적지 않아서 yml 문법에 맞게 옮기는 데 시간이 조금 걸렸고, java config 파일은 웬만하면 만들고 싶지 않아서 yml 문법으로 가능한 건 다 yml로 처리했었다.
+<br></p>
+
+<h4 id="2-maven--gradle">2. Maven → Gradle</h4>
+<p>maven에서 gradle로 변경하는 건 생각보다 간단했는데, 일단 gradle을 설치하고 환경변수를 설정한 후 프로젝트 내에서 reload gradle project를 해주면 된다.</p>
+
+<p>그런데 빌드하면서 에러가 발생했는데 lombok 부분을 annotationProcessor로 변경해주니 금방 해결되었다.
+<br></p>
+
+<h4 id="3-jsp--thymeleaf">3. JSP → Thymeleaf</h4>
+<p>당연하지만 3가지 순서 중에 가장 오래 걸린 부분이다.
+<br></p>
+
+<p>사실 이 부분은 내가 하고 싶어서 한 부분인데, JSP를 지양하는 문화로 가기도 했고 Spring Boot를 사용할 때 Thyemelaf를 권고한다고 해서 써보고 싶었다. Thymeleaf는 성능면에서 JSP보다 조금 느리지만, Jar 파일로 빌드할 수 있다. 그리고 무엇보다 HTML과 자바 코드가 섞이지 않아도 되는 점이 가장 마음에 들었다.
+<br></p>
+
+<p>Thymeleaf는 JSP와 인식되는 폴더 자체가 다르기 때문에 폴더 구조부터 수정한 뒤 jsp 파일을 html 파일로 변경했다.</p>
+
+<p>이후부터는 Thymeleaf 문법에 맞추는 수작업이었는데, Thymeleaf 설정에서 cache를 false로 설정해주면 브라우저에서 새로고침만으로도 바로 변경사항을 반영해볼 수 있어서 정말 편리했다.
 <br>
 <br></p>
 
-<p>일단 이리갔다 저리갔다 코드가 너무 보기 불편했기 때문에 클래스와 메서드부터 연관성에 따라서 재배치하거나 분리했다.<br>
-그리고 불명확하게 작성되어 있던 메소드 이름도 가독성 있는 이름으로 바꿨다.<br>
-마지막으로는 수많은 로깅 및 주석 코드를 정리했고, 중간중간 중복 코드도 찾아내어 삭제했다.</p>
-
-<p>이후 코드 속도를 다시 측정해보니 같은 전집을 등록할 때 3.27초로 속도가 개선되었다.
-<br>
-<br></p>
-
-<p>이후 단행본 API를 구현하는 건 정말 간단했다.<br>
-원래는 같은 API를 쓰고 싶었지만, 운영팀에서 주시는 전집과 단행본의 엑셀 컬럼이 달라서 다른 API로 분리를 한 다음<br>
-엑셀을 읽어들이는 부분만 다르게 설정하고, 내부 로직은 동일한 메소드를 사용하도록 조정했다.
+<h4 id="ps-css하">P.S. CSS..하..</h4>
+<p>진짜 여러모로 CSS 덕분에 아주 눈물이 날 뻔 했다. Thymeleaf까지만 해도 재미있었는데, 확신의 백엔드인건지 CSS 부분 수정하는 데 더 오래 걸려서 아주 미치는 줄 알았다.
+이미지인 줄 알았는데 하드 코딩된 거라는 것도… ㅋㅋㅋㅋ 그래도 실무에서 이런 경험 해보는 것도 나쁘지 않았다.. 이후 관리자 개발할 때도 많이 도움되기도 했고!
 <br>
 <br></p>
 
 <h4 id="소감">소감</h4>
-<p>단행본 API를 구현하라는 업무에서 사실상 전집 API를 개선하는 데 더 시간을 많이 보냈지만 개인적으로 정말 뿌듯한 업무였다. ㅎㅎ 주니어 때 해보기 힘든 속도도 개선도 해보고, 데이터에 영향이 가지 않도록 고민하는 과정들이 개발자라는 직업에 대해 깊이 있게 생각하게 만들어 준 것 같다~!</p>
+<p>사실 지금 생각해보면 아주 간단한 프로젝트였고, 모르는 게 있으면 질문을 정리해서 대리님께 물어봤기 때문에 금방 해낼 수 있었다.
+첫 업무를 생각보다 빠르게 끝내서 기분 좋기도 했고(당연하지만 지금 하면 더 잘할 수 있을텐데),
+회사에서도 뭔가 시켜도 되겠다 싶으셨는지 이후에 업무를 차근차근 받아서 진행하는 계기가 됐었다.
+<br></p>
+
+<p>지금 생각해보면 일하느라 바빠서 말도 많이 안했던 것 같은데 ㅋㅋ 조용히 열심히 하는 직원으로 생각해주셨으려나~</p>
 
 
     </div>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/wiki/2024/05/09/hompage-migration-review.html" title="홈페이지 마이그레이션 회고">홈페이지 마이그레이션 회고</a><a class="next" href="/wiki/2024/05/10/book-service-admin-review.html" title="독서 관리 서비스의 Admin 개발 회고">독서 관리 서비스의 Admin 개발 회고...</a>
+<a class="previous" href="/wiki/2024/04/30/integer-class.html" title="Integer Class">Integer Class</a><a class="next" href="/blog/2024/05/10/book-insert-api-speed-improvement-review.html" title="도서 등록 API 속도 개선 회고">도서 등록 API 속도 개선 회고...</a>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/wiki/2023/11/13/stack.html" title="독서 관리 서비스의 Admin 개발 회고">Stack</a></li>
-<li><a class="post-link" href="/wiki/2024/01/12/jpa-created-date-column-null.html" title="독서 관리 서비스의 Admin 개발 회고">update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법</a></li>
-<li><a class="post-link" href="/wiki/2024/04/28/americanote-server1-create-linux-server.html" title="독서 관리 서비스의 Admin 개발 회고">아메리카노트 서버 구성 &lt;1&gt; Linux 서버 생성</a></li>
-<li><a class="post-link" href="/wiki/2024/03/17/string-replacement.html" title="독서 관리 서비스의 Admin 개발 회고">문자열 대치</a></li>
+        <li><a class="post-link" href="/wiki/2024/02/26/string-array-to-string.html" title="도서 등록 API 속도 개선 회고">String 배열 -&gt; String</a></li>
+<li><a class="post-link" href="/blog/2024/05/10/book-service-admin-review.html" title="도서 등록 API 속도 개선 회고">독서 관리 서비스의 Admin 개발 회고</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/array-slice-method.html" title="도서 등록 API 속도 개선 회고">배열 자르기</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/thymeleaf-rest-controller.html" title="도서 등록 API 속도 개선 회고">Thymeleaf와 @RestController</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>

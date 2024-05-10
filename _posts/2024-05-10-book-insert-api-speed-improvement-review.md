@@ -2,7 +2,7 @@
 layout: post
 title: 도서 등록 API 속도 개선 회고
 subtitle: 
-categories: wiki
+categories: blog
 tags: [Project, Review]
 ---
 홈페이지 마이그레이션 이후 새로운 업무를 받았다.
