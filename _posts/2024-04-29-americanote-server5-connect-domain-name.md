@@ -87,14 +87,15 @@ Available applications:
 sudo ufw allow 'Nginx Full'
 sudo ufw status # 상태 체크
 ```
-```bash
-Status: inactive
 
-To                         Action      From
---                         ------      ----
-Nginx HTTP                 ALLOW       Anywhere
-Nginx HTTP (v6)            ALLOW       Anywhere (v6)
-```
+    ```bash
+    Status: inactive
+
+    To                         Action      From
+    --                         ------      ----
+    Nginx HTTP                 ALLOW       Anywhere
+    Nginx HTTP (v6)            ALLOW       Anywhere (v6)
+    ```
 - 그리고 위처럼 상태가 inactive로 되어있으면 아래 명령어를 입력하여 활성화 시켜줍니다.
     - ***tip***: 아래 명령어를 입력하면 ssh 연결을 방해할 수도 있다는 경고 문구가 나오는데, 이때 y를 하기 전에 반드시 22번 포트를 허용하거나 제한해줍니다.
     <img width="608" alt="domain5" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/429317de-249e-49fb-b516-7ebe01647d45">
@@ -148,5 +149,5 @@ sudo ln -s /etc/nginx/sites-available/도메인이름 /etc/nginx/sites-enabled/
 
 
 #### 참고
-- https://jaehyeon48.github.io/nginx/configure-nginx-on-ubuntu-2004/
+- [Ubuntu 20.04에서 Nginx 설치 및 설정하기](https://jaehyeon48.github.io/nginx/configure-nginx-on-ubuntu-2004)
 - [https://velog.io/@xangj0ng/Linux-Ubuntu-Nginx-설치](https://velog.io/@xangj0ng/Linux-Ubuntu-Nginx-%EC%84%A4%EC%B9%98)
