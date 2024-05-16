@@ -761,26 +761,32 @@ OpenSSH
 <div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw allow <span class="s1">'Nginx Full'</span>
 <span class="nb">sudo </span>ufw status <span class="c"># 상태 체크</span>
 </code></pre></div>    </div>
-    <p>```bash
-Status: inactive</p>
-  </li>
-</ul>
 
-<p>To                         Action      From
-–                         ——      —-
-Nginx HTTP                 ALLOW       Anywhere
-Nginx HTTP (v6)            ALLOW       Anywhere (v6)</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- 그리고 위처럼 상태가 inactive로 되어있으면 아래 명령어를 입력하여 활성화 시켜줍니다.
-    - ***tip***: 아래 명령어를 입력하면 ssh 연결을 방해할 수도 있다는 경고 문구가 나오는데, 이때 y를 하기 전에 반드시 22번 포트를 허용하거나 제한해줍니다.
-    &lt;img width="608" alt="domain5" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/429317de-249e-49fb-b516-7ebe01647d45"&gt;
-    ```bash
-    sudo ufw limit/allow 22
-    ```
-    - 처음 설정할 때는 이 부분을 몰라서 ssh에 들어갈 수 없게 되는 사태가 벌어졌지만, NCP 서버 콘솔에 원격으로 접속하는 곳으로 들어가 22번 포트를 허용하는 방식으로 겨우 해결했습니다…💦💦💦
-```bash
-sudo ufw enable
-</code></pre></div></div>
-<ul>
+    <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>  Status: inactive
+
+  To                         Action      From
+  <span class="nt">--</span>                         <span class="nt">------</span>      <span class="nt">----</span>
+  Nginx HTTP                 ALLOW       Anywhere
+  Nginx HTTP <span class="o">(</span>v6<span class="o">)</span>            ALLOW       Anywhere <span class="o">(</span>v6<span class="o">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>그리고 위처럼 상태가 inactive로 되어있으면 아래 명령어를 입력하여 활성화 시켜줍니다.
+    <ul>
+      <li>
+<strong><em>tip</em></strong>: 아래 명령어를 입력하면 ssh 연결을 방해할 수도 있다는 경고 문구가 나오는데, 이때 y를 하기 전에 반드시 22번 포트를 허용하거나 제한해줍니다.
+  <img width="608" alt="domain5" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/429317de-249e-49fb-b516-7ebe01647d45">
+        <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>  <span class="nb">sudo </span>ufw limit/allow 22
+</code></pre></div>        </div>
+      </li>
+      <li>처음 설정할 때는 이 부분을 몰라서 ssh에 들어갈 수 없게 되는 사태가 벌어졌지만, NCP 서버 콘솔에 원격으로 접속하는 곳으로 들어가 22번 포트를 허용하는 방식으로 겨우 해결했습니다…💦💦💦
+        <div class="language-bash highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw <span class="nb">enable</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
   <li>이제 public ip로 접근해보면 nginx 화면이 성공적으로 뜨는 것을 확인할 수 있습니다.</li>
 </ul>
 
@@ -830,7 +836,7 @@ server <span class="o">{</span>
 
 <h4 id="참고">참고</h4>
 <ul>
-  <li>https://jaehyeon48.github.io/nginx/configure-nginx-on-ubuntu-2004/</li>
+  <li><a href="https://jaehyeon48.github.io/nginx/configure-nginx-on-ubuntu-2004">Ubuntu 20.04에서 Nginx 설치 및 설정하기</a></li>
   <li><a href="https://velog.io/@xangj0ng/Linux-Ubuntu-Nginx-%EC%84%A4%EC%B9%98">https://velog.io/@xangj0ng/Linux-Ubuntu-Nginx-설치</a></li>
 </ul>
 
@@ -844,10 +850,10 @@ server <span class="o">{</span>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/wiki/2024/03/17/string-replacement.html" title="아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용">문자열 대치</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/mybatis-jpa.html" title="아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용">MyBatis와 JPA</a></li>
+        <li><a class="post-link" href="/wiki/2024/01/12/jpa-created-date-column-null.html" title="아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용">update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/stack.html" title="아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용">Stack</a></li>
+<li><a class="post-link" href="/wiki/2024/02/29/programmers-12906.html" title="아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용">프로그래머스 - 같은 숫자는 싫어 풀이</a></li>
 <li><a class="post-link" href="/wiki/2024/02/26/string-array-to-string.html" title="아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용">String 배열 -&gt; String</a></li>
-<li><a class="post-link" href="/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain.html" title="아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용">아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>
