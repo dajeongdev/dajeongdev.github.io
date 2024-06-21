@@ -1,0 +1,55 @@
+I"`<h4 id="배경">배경</h4>
+<ul>
+  <li>지난 프로젝트에서도 CORS 문제가 발생해서 하루만에 도메인도 구매하고 Nginx로 연결한 다음 Spring Boot 프로젝트에서 CORS 설정도 해줬었는데, 이번 프로젝트에서도 동일한 방법을 실행했지만 CORS가 해결되지 않는 문제가 발생했다. <del>(이 문제로 서버도 몇 번이나 다시 만들고 nginx 파일을 몇 십번이나 했었다..)</del>
+<br />
+<br /></li>
+</ul>
+
+<h4 id="원인-및-결과">원인 및 결과</h4>
+<p>Nginx에서 proxy_pass를 127.0.0.1(localhost)로 연결해줬다. 이 부분이 https로 연결된 도메인과 함께 사용돼서 Mixed Content 에러가 발생한 것이다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">server</span> <span class="o">{</span>
+    <span class="n">listen</span> <span class="mi">443</span> <span class="n">ssl</span><span class="o">;</span> <span class="err">#</span> <span class="n">managed</span> <span class="n">by</span> <span class="nc">Certbot</span>
+
+    <span class="o">...</span>
+
+    <span class="n">location</span> <span class="o">/</span> <span class="o">{</span>
+        <span class="n">proxy_pass</span> <span class="nl">http:</span><span class="c1">//127.0.0.1:8008;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>구글이나 GPT에 아무리 검색을 해봐도 이렇게 사용하는 게 맞는데 대체 뭐가 문제인지 찾아보다가 정말 많은 시간을 보냈다. 
+<br /></p>
+
+<p>그러다가 CORS 해결 방법 중에 meta 태그를 추가하는 방법에서 생각해봤다. 이 태그를 Nginx에 적용할 수 없을까?
+검색해보니 <code class="language-plaintext highlighter-rouge">add_header Content-Security-Policy "upgrade-insecure-requests";</code>를 추가하면 된대서 적용해보니 바로 해결되었다.<br />
+결국 서버 내에서 HTTP 보안 정책 중 하나인 CPS를 위반해서 발생한 문제였다..</p>
+
+<h4 id="해결한-코드">해결한 코드</h4>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">server</span> <span class="o">{</span>
+    <span class="n">listen</span> <span class="mi">443</span> <span class="n">ssl</span><span class="o">;</span> <span class="err">#</span> <span class="n">managed</span> <span class="n">by</span> <span class="nc">Certbot</span>
+
+    <span class="o">...</span>
+
+    <span class="n">location</span> <span class="o">/</span> <span class="o">{</span>
+        <span class="n">proxy_pass</span> <span class="nl">http:</span><span class="c1">//127.0.0.1:8008;</span>
+        <span class="n">add_header</span> <span class="nc">Content</span><span class="o">-</span><span class="nc">Security</span><span class="o">-</span><span class="nc">Policy</span> <span class="s">"upgrade-insecure-requests"</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h4 id="content-security-policycsp">Content-Security-Policy(CSP)?</h4>
+<ul>
+  <li>위에서 추가해준 <strong>Content-Security-Policy(CSP)</strong>는 콘텐츠 보안 정책으로, 웹 애플리케이션이 웹 페이지에서 로드할 수 있는 리소스의 종류를 제어하는 보안 기능이다. CSP는 보통 XSS나 Injection 공격을 방지하는 데 사용한다.</li>
+  <li>Content-Security-Policy에 추가해준 <strong>upgrade-insecure-request</strong>는 HTTP로 요청된 리소스를 자동으로 HTTPS로 업그레이드하도록 브라우저에 지시한다. 즉, HTTPS를 지원하는 모든 리소스를 보안 연결을 통해 업로드할 수 있게 되어 데이터를 보호할 수 있는 것이다.a
+<br />
+<br /></li>
+</ul>
+
+<p><strong>참고</strong></p>
+<ul>
+  <li>https://blog.harampark.com/blog/mixed-content-error/</li>
+</ul>
+:ET

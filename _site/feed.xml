@@ -1,4 +1,56 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2024-05-17T02:25:43+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">비사이드 403 포텐데이 Americanote 회고</title><link href="http://localhost:4000/blog/2024/05/16/americanote-review.html" rel="alternate" type="text/html" title="비사이드 403 포텐데이 Americanote 회고" /><published>2024-05-16T00:00:00+09:00</published><updated>2024-05-16T00:00:00+09:00</updated><id>http://localhost:4000/blog/2024/05/16/americanote-review</id><content type="html" xml:base="http://localhost:4000/blog/2024/05/16/americanote-review.html"><![CDATA[<h2 id="americanote-️">Americanote ☕️</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2024-06-21T21:34:36+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">Mixed Content The page at ‘…’ was loaded over HTTPS, but requested an insecure XMLHttpRequest endpoint ‘…’. This request has been blocked; the content must be served over HTTPS 에러를 Nginx에서 해결하기</title><link href="http://localhost:4000/wiki/2024/06/21/csp.html" rel="alternate" type="text/html" title="Mixed Content The page at ‘…’ was loaded over HTTPS, but requested an insecure XMLHttpRequest endpoint ‘…’. This request has been blocked; the content must be served over HTTPS 에러를 Nginx에서 해결하기" /><published>2024-06-21T00:00:00+09:00</published><updated>2024-06-21T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/06/21/csp</id><content type="html" xml:base="http://localhost:4000/wiki/2024/06/21/csp.html"><![CDATA[<h4 id="배경">배경</h4>
+<p><img width="758" alt="스크린샷 2024-06-20 16 16 48" src="https://github.com/dabeann/dorandoran/assets/61612976/7066d92c-1dbc-4b89-8b71-5813cfd575d7" />
+지난 프로젝트에서도 CORS 문제가 발생해서 하루만에 도메인도 구매하고 Nginx로 연결한 다음 Spring Boot 프로젝트에서 CORS 설정도 해줬었는데, 이번 프로젝트에서도 동일한 방법을 실행했지만 CORS가 해결되지 않는 문제가 발생했다. <del>(이 문제로 서버도 몇 번이나 다시 만들고 nginx 파일을 몇 십번이나 했었다..)</del><br />
+<br />
+<br /></p>
+
+<h4 id="원인-및-결과">원인 및 결과</h4>
+<p>Nginx에서 proxy_pass를 127.0.0.1(localhost)로 연결해줬다. 이 부분이 https로 연결된 도메인과 함께 사용돼서 Mixed Content 에러가 발생한 것이다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server <span class="o">{</span>
+    listen 443 ssl<span class="p">;</span> <span class="c"># managed by Certbot</span>
+
+    ...
+
+    location / <span class="o">{</span>
+        proxy_pass http://127.0.0.1:8008<span class="p">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>구글이나 GPT에 아무리 검색을 해봐도 이렇게 사용하는 게 맞는데 대체 뭐가 문제인지 찾아보다가 정말 많은 시간을 보냈다. 
+<br /></p>
+
+<p>그러다가 CORS 해결 방법 중에 meta 태그를 추가하는 방법에서 생각해봤다. 이 태그를 Nginx에 적용할 수 없을까?
+검색해보니 <code class="language-plaintext highlighter-rouge">add_header Content-Security-Policy "upgrade-insecure-requests";</code>를 추가하면 된대서 적용해보니 바로 해결되었다.<br />
+결국 서버 내에서 HTTP 보안 정책 중 하나인 CPS를 위반해서 발생한 문제였다..</p>
+
+<h4 id="완성한-코드">완성한 코드</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server <span class="o">{</span>
+    listen 443 ssl<span class="p">;</span> <span class="c"># managed by Certbot</span>
+
+    ...
+
+    location / <span class="o">{</span>
+        proxy_pass http://127.0.0.1:8008<span class="p">;</span>
+        add_header Content-Security-Policy <span class="s2">"upgrade-insecure-requests"</span><span class="p">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h4 id="content-security-policycsp">Content-Security-Policy(CSP)?</h4>
+<ul>
+  <li>위에서 추가해준 <strong>Content-Security-Policy(CSP)</strong>는 콘텐츠 보안 정책으로, 웹 애플리케이션이 웹 페이지에서 로드할 수 있는 리소스의 종류를 제어하는 보안 기능이다. CSP는 보통 XSS나 Injection 공격을 방지하는 데 사용한다.</li>
+  <li>Content-Security-Policy에 추가해준 <strong>upgrade-insecure-request</strong>는 HTTP로 요청된 리소스를 자동으로 HTTPS로 업그레이드하도록 브라우저에 지시한다. 즉, HTTPS를 지원하는 모든 리소스를 보안 연결을 통해 업로드할 수 있게 되어 데이터를 보호할 수 있는 것이다.a
+<br />
+<br /></li>
+</ul>
+
+<h4 id="참고">참고</h4>
+<ul>
+  <li>https://blog.harampark.com/blog/mixed-content-error/</li>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="CPS" /><category term="Server" /><category term="Error" /><category term="TroubleShooting" /><summary type="html"><![CDATA[배경 지난 프로젝트에서도 CORS 문제가 발생해서 하루만에 도메인도 구매하고 Nginx로 연결한 다음 Spring Boot 프로젝트에서 CORS 설정도 해줬었는데, 이번 프로젝트에서도 동일한 방법을 실행했지만 CORS가 해결되지 않는 문제가 발생했다. (이 문제로 서버도 몇 번이나 다시 만들고 nginx 파일을 몇 십번이나 했었다..)]]></summary></entry><entry><title type="html">비사이드 403 포텐데이 Americanote 회고</title><link href="http://localhost:4000/blog/2024/05/16/americanote-review.html" rel="alternate" type="text/html" title="비사이드 403 포텐데이 Americanote 회고" /><published>2024-05-16T00:00:00+09:00</published><updated>2024-05-16T00:00:00+09:00</updated><id>http://localhost:4000/blog/2024/05/16/americanote-review</id><content type="html" xml:base="http://localhost:4000/blog/2024/05/16/americanote-review.html"><![CDATA[<h2 id="americanote-️">Americanote ☕️</h2>
 <blockquote>
   <p><em>프로젝트:</em> 아메리카노트 (내 취향에 딱 맞는 아메리카노 카페 찾기 서비스)<br />
 <em>프로젝트 기간:</em> 2024.03.21 ~ 2024.03.30, 리팩토링 2024.04</p>
@@ -153,44 +205,7 @@ QueryDSL에 관련해서는 나도 많이 부족했지만, 실무에서의 경�
 
 <p>입사하면 신입이나 주니어는 보통 세팅된 환경에서만 개발을 하기 때문에 나 또한 전회사에서 기초 설정에 대한 부분을 사수나 다른 팀원들이 해줬었는데, 이번 프로젝트로 Swagger 설정이나 서버, JWT 같은 기본이라고 하면 할 수 있는 중요한 부분을 작업하면서 개발자로서 조금 더 나아가는 느낌을 받았다.</p>
 
-<p>또한, 기획이나 프론트 팀원과도 의사소통하면서 내가 알고 있는 지식을 상대방의 설명하는 게 정말 힘들었기 때문에, 앞으로 의미가 잘 전달될 수 있도록 말을 조금 더 잘 고르고 상대의 입장을 생각해 봐야겠다.</p>]]></content><author><name>Dajeong Park</name></author><category term="blog" /><category term="TeamProject" /><category term="Project" /><category term="Americanote" /><category term="Review" /><summary type="html"><![CDATA[Americanote ☕️ 프로젝트: 아메리카노트 (내 취향에 딱 맞는 아메리카노 카페 찾기 서비스) 프로젝트 기간: 2024.03.21 ~ 2024.03.30, 리팩토링 2024.04]]></summary></entry><entry><title type="html">도서 등록 API 속도 개선 회고</title><link href="http://localhost:4000/blog/2024/05/10/book-insert-api-speed-improvement-review.html" rel="alternate" type="text/html" title="도서 등록 API 속도 개선 회고" /><published>2024-05-10T00:00:00+09:00</published><updated>2024-05-10T00:00:00+09:00</updated><id>http://localhost:4000/blog/2024/05/10/book-insert-api-speed-improvement-review</id><content type="html" xml:base="http://localhost:4000/blog/2024/05/10/book-insert-api-speed-improvement-review.html"><![CDATA[<p>홈페이지 마이그레이션 이후 새로운 업무를 받았다.</p>
-
-<p>당시 자사 서비스인 도서 플랫폼에서는 사용자로부터 도서 등록 문의를 받아 등록해줬었다.</p>
-
-<p>문의한 도서가 ‘전집’일 때는 운영팀에서 도서를 검색해서 개발팀에게 전달해 데이터베이스에 등록하는 과정을 거쳤지만,<br />
-‘단행본’일 때는 운영팀에서 관리자 페이지에서 직접 등록하기도 했다.<br />
-하지만 점점 요청이 많아지기도 해서 내가 ‘단행본’ 등록하는 API를 개발하게 되었다.
-<br />
-<br /></p>
-
-<p>기존 전집 등록 API를 이용하면 금방 만들 수 있겠다고 생각했지만, 도서 플랫폼의 백단 프로젝트가 거대한 레거시 프로젝트라는 한 가지 복병이 있었다.</p>
-
-<p>레거시 프로젝트는 JPA로 구성되어 있었지만, JPA의 장점을 하나도 사용하지 않는 데다 특정 메소드만 사용하고 있었고,<br />
-사용하고 있는 특정 메소드 또한 방대한 중복 및 로깅 코드에 클래스와 메소드 이름이 중구난방에 의미도 불분명했다.<br />
-게다가 데이터베이스도 테이블이 엄청나게 얽혀 있어 함부로 수정할 수 없는 상태였다.
-<br />
-<br /></p>
-
-<p>이런 상태에서 그대로 단행본 API만 만들 수도 있었지만, 왠지 마음이 찝찝해서 기존 전집 등록 API부터 개선해보기로 했다. 그리고 이때 속도를 비교해보면 좋을 것 같아서 <code class="language-plaintext highlighter-rouge">System.currentTimeMillis</code> 메소드를 사용해서 이전 코드의 속도를 측정해보니 50권의 전집을 등록할 때 5.56초가 걸렸다.
-<br />
-<br /></p>
-
-<p>일단 이리갔다 저리갔다 코드가 너무 보기 불편했기 때문에 클래스와 메서드부터 연관성에 따라서 재배치하거나 분리했다.<br />
-그리고 불명확하게 작성되어 있던 메소드 이름도 가독성 있는 이름으로 바꿨다.<br />
-마지막으로는 수많은 로깅 및 주석 코드를 정리했고, 중간중간 중복 코드도 찾아내어 삭제했다.</p>
-
-<p>이후 코드 속도를 다시 측정해보니 같은 전집을 등록할 때 3.27초로 속도가 개선되었다.
-<br />
-<br /></p>
-
-<p>이후 단행본 API를 구현하는 건 정말 간단했다.<br />
-원래는 같은 API를 쓰고 싶었지만, 운영팀에서 주시는 전집과 단행본의 엑셀 컬럼이 달라서 다른 API로 분리를 한 다음<br />
-엑셀을 읽어들이는 부분만 다르게 설정하고, 내부 로직은 동일한 메소드를 사용하도록 조정했다.
-<br />
-<br /></p>
-
-<h4 id="소감">소감</h4>
-<p>단행본 API를 구현하라는 업무에서 사실상 전집 API를 개선하는 데 더 시간을 많이 보냈지만 개인적으로 정말 뿌듯한 업무였다. ㅎㅎ 주니어 때 해보기 힘든 속도도 개선도 해보고, 데이터에 영향이 가지 않도록 고민하는 과정들이 개발자라는 직업에 대해 깊이 있게 생각하게 만들어 준 것 같다~!</p>]]></content><author><name>Dajeong Park</name></author><category term="blog" /><category term="Project" /><category term="Review" /><summary type="html"><![CDATA[홈페이지 마이그레이션 이후 새로운 업무를 받았다.]]></summary></entry><entry><title type="html">독서 관리 서비스의 Admin 개발 회고</title><link href="http://localhost:4000/blog/2024/05/10/book-service-admin-review.html" rel="alternate" type="text/html" title="독서 관리 서비스의 Admin 개발 회고" /><published>2024-05-10T00:00:00+09:00</published><updated>2024-05-10T00:00:00+09:00</updated><id>http://localhost:4000/blog/2024/05/10/book-service-admin-review</id><content type="html" xml:base="http://localhost:4000/blog/2024/05/10/book-service-admin-review.html"><![CDATA[<p>홈페이지 마이그레이션, 도서 단행본 API 구현 업무를 마치고 나니 협력사와 아이가 도서를 읽고 독후감을 쓰면 첨삭해주는 서비스를 만들게 됐는데, 당시 일손이 부족해서 내가 관리자를 통으로 담당하게 되었다.
+<p>또한, 기획이나 프론트 팀원과도 의사소통하면서 내가 알고 있는 지식을 상대방의 설명하는 게 정말 힘들었기 때문에, 앞으로 의미가 잘 전달될 수 있도록 말을 조금 더 잘 고르고 상대의 입장을 생각해 봐야겠다.</p>]]></content><author><name>Dajeong Park</name></author><category term="blog" /><category term="TeamProject" /><category term="Project" /><category term="Americanote" /><category term="Review" /><summary type="html"><![CDATA[Americanote ☕️ 프로젝트: 아메리카노트 (내 취향에 딱 맞는 아메리카노 카페 찾기 서비스) 프로젝트 기간: 2024.03.21 ~ 2024.03.30, 리팩토링 2024.04]]></summary></entry><entry><title type="html">독서 관리 서비스의 Admin 개발 회고</title><link href="http://localhost:4000/blog/2024/05/10/book-service-admin-review.html" rel="alternate" type="text/html" title="독서 관리 서비스의 Admin 개발 회고" /><published>2024-05-10T00:00:00+09:00</published><updated>2024-05-10T00:00:00+09:00</updated><id>http://localhost:4000/blog/2024/05/10/book-service-admin-review</id><content type="html" xml:base="http://localhost:4000/blog/2024/05/10/book-service-admin-review.html"><![CDATA[<p>홈페이지 마이그레이션, 도서 단행본 API 구현 업무를 마치고 나니 협력사와 아이가 도서를 읽고 독후감을 쓰면 첨삭해주는 서비스를 만들게 됐는데, 당시 일손이 부족해서 내가 관리자를 통으로 담당하게 되었다.
 <br />
 <br /></p>
 
@@ -228,7 +243,44 @@ QueryDSL에 관련해서는 나도 많이 부족했지만, 실무에서의 경�
 <h4 id="소감">소감</h4>
 <p>중간중간 운영팀 과장님과 대리님께 피드백도 받아가면서 프로젝트를 마무리했더니 의사소통도 잘하고 손이 빠르다는 평을 들었다. 새로운 기능도 많이 개발해보고, 프론트단도 처음이지만 이리저리 공부하면서 작업한 부분도 정말 뿌듯했다. 이 프로젝트를 통해서 팀원들과의 의사소통과 사용자 입장에서 개발하는 것의 중요성을 뼈저리게 깨달았다.</p>
 
-<p>그리고 공부해서 바로 실무에 적용해보는 게 정말 재미있기도 했는데, 실제로 다음 프로젝트부터는 VO를 보호하기 위해 DTO와 Builder 패턴을 사용하는 등 김영한님의 강의가 정말 하나하나 피가 되고 살이 되어서 모든 강의를 다 수강해서 열심히 공부하기도 했다.</p>]]></content><author><name>Dajeong Park</name></author><category term="blog" /><category term="Project" /><category term="Admin" /><category term="Review" /><summary type="html"><![CDATA[홈페이지 마이그레이션, 도서 단행본 API 구현 업무를 마치고 나니 협력사와 아이가 도서를 읽고 독후감을 쓰면 첨삭해주는 서비스를 만들게 됐는데, 당시 일손이 부족해서 내가 관리자를 통으로 담당하게 되었다.]]></summary></entry><entry><title type="html">홈페이지 마이그레이션 회고</title><link href="http://localhost:4000/blog/2024/05/09/hompage-migration-review.html" rel="alternate" type="text/html" title="홈페이지 마이그레이션 회고" /><published>2024-05-09T00:00:00+09:00</published><updated>2024-05-09T00:00:00+09:00</updated><id>http://localhost:4000/blog/2024/05/09/hompage-migration-review</id><content type="html" xml:base="http://localhost:4000/blog/2024/05/09/hompage-migration-review.html"><![CDATA[<p>포트폴리오를 작성하다보니 생각보다 예전에 했던 프로젝트들이 회고해볼 만한 게 많아서 한 번 되짚어보려고 한다.
+<p>그리고 공부해서 바로 실무에 적용해보는 게 정말 재미있기도 했는데, 실제로 다음 프로젝트부터는 VO를 보호하기 위해 DTO와 Builder 패턴을 사용하는 등 김영한님의 강의가 정말 하나하나 피가 되고 살이 되어서 모든 강의를 다 수강해서 열심히 공부하기도 했다.</p>]]></content><author><name>Dajeong Park</name></author><category term="blog" /><category term="Project" /><category term="Admin" /><category term="Review" /><summary type="html"><![CDATA[홈페이지 마이그레이션, 도서 단행본 API 구현 업무를 마치고 나니 협력사와 아이가 도서를 읽고 독후감을 쓰면 첨삭해주는 서비스를 만들게 됐는데, 당시 일손이 부족해서 내가 관리자를 통으로 담당하게 되었다.]]></summary></entry><entry><title type="html">도서 등록 API 속도 개선 회고</title><link href="http://localhost:4000/blog/2024/05/10/book-insert-api-speed-improvement-review.html" rel="alternate" type="text/html" title="도서 등록 API 속도 개선 회고" /><published>2024-05-10T00:00:00+09:00</published><updated>2024-05-10T00:00:00+09:00</updated><id>http://localhost:4000/blog/2024/05/10/book-insert-api-speed-improvement-review</id><content type="html" xml:base="http://localhost:4000/blog/2024/05/10/book-insert-api-speed-improvement-review.html"><![CDATA[<p>홈페이지 마이그레이션 이후 새로운 업무를 받았다.</p>
+
+<p>당시 자사 서비스인 도서 플랫폼에서는 사용자로부터 도서 등록 문의를 받아 등록해줬었다.</p>
+
+<p>문의한 도서가 ‘전집’일 때는 운영팀에서 도서를 검색해서 개발팀에게 전달해 데이터베이스에 등록하는 과정을 거쳤지만,<br />
+‘단행본’일 때는 운영팀에서 관리자 페이지에서 직접 등록하기도 했다.<br />
+하지만 점점 요청이 많아지기도 해서 내가 ‘단행본’ 등록하는 API를 개발하게 되었다.
+<br />
+<br /></p>
+
+<p>기존 전집 등록 API를 이용하면 금방 만들 수 있겠다고 생각했지만, 도서 플랫폼의 백단 프로젝트가 거대한 레거시 프로젝트라는 한 가지 복병이 있었다.</p>
+
+<p>레거시 프로젝트는 JPA로 구성되어 있었지만, JPA의 장점을 하나도 사용하지 않는 데다 특정 메소드만 사용하고 있었고,<br />
+사용하고 있는 특정 메소드 또한 방대한 중복 및 로깅 코드에 클래스와 메소드 이름이 중구난방에 의미도 불분명했다.<br />
+게다가 데이터베이스도 테이블이 엄청나게 얽혀 있어 함부로 수정할 수 없는 상태였다.
+<br />
+<br /></p>
+
+<p>이런 상태에서 그대로 단행본 API만 만들 수도 있었지만, 왠지 마음이 찝찝해서 기존 전집 등록 API부터 개선해보기로 했다. 그리고 이때 속도를 비교해보면 좋을 것 같아서 <code class="language-plaintext highlighter-rouge">System.currentTimeMillis</code> 메소드를 사용해서 이전 코드의 속도를 측정해보니 50권의 전집을 등록할 때 5.56초가 걸렸다.
+<br />
+<br /></p>
+
+<p>일단 이리갔다 저리갔다 코드가 너무 보기 불편했기 때문에 클래스와 메서드부터 연관성에 따라서 재배치하거나 분리했다.<br />
+그리고 불명확하게 작성되어 있던 메소드 이름도 가독성 있는 이름으로 바꿨다.<br />
+마지막으로는 수많은 로깅 및 주석 코드를 정리했고, 중간중간 중복 코드도 찾아내어 삭제했다.</p>
+
+<p>이후 코드 속도를 다시 측정해보니 같은 전집을 등록할 때 3.27초로 속도가 개선되었다.
+<br />
+<br /></p>
+
+<p>이후 단행본 API를 구현하는 건 정말 간단했다.<br />
+원래는 같은 API를 쓰고 싶었지만, 운영팀에서 주시는 전집과 단행본의 엑셀 컬럼이 달라서 다른 API로 분리를 한 다음<br />
+엑셀을 읽어들이는 부분만 다르게 설정하고, 내부 로직은 동일한 메소드를 사용하도록 조정했다.
+<br />
+<br /></p>
+
+<h4 id="소감">소감</h4>
+<p>단행본 API를 구현하라는 업무에서 사실상 전집 API를 개선하는 데 더 시간을 많이 보냈지만 개인적으로 정말 뿌듯한 업무였다. ㅎㅎ 주니어 때 해보기 힘든 속도도 개선도 해보고, 데이터에 영향이 가지 않도록 고민하는 과정들이 개발자라는 직업에 대해 깊이 있게 생각하게 만들어 준 것 같다~!</p>]]></content><author><name>Dajeong Park</name></author><category term="blog" /><category term="Project" /><category term="Review" /><summary type="html"><![CDATA[홈페이지 마이그레이션 이후 새로운 업무를 받았다.]]></summary></entry><entry><title type="html">홈페이지 마이그레이션 회고</title><link href="http://localhost:4000/blog/2024/05/09/hompage-migration-review.html" rel="alternate" type="text/html" title="홈페이지 마이그레이션 회고" /><published>2024-05-09T00:00:00+09:00</published><updated>2024-05-09T00:00:00+09:00</updated><id>http://localhost:4000/blog/2024/05/09/hompage-migration-review</id><content type="html" xml:base="http://localhost:4000/blog/2024/05/09/hompage-migration-review.html"><![CDATA[<p>포트폴리오를 작성하다보니 생각보다 예전에 했던 프로젝트들이 회고해볼 만한 게 많아서 한 번 되짚어보려고 한다.
 <br />
 <br /></p>
 
@@ -339,7 +391,96 @@ QueryDSL에 관련해서는 나도 많이 부족했지만, 실무에서의 경�
 <br /></li>
     </ul>
   </li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="Integer" /><category term="Method" /><summary type="html"><![CDATA[String toString(int n, int radix) 10진수를 N진수 형태의 문자열로 변환할 수 있다.]]></summary></entry><entry><title type="html">아메리카노트 서버 구성 &amp;lt;5&amp;gt; 도메인 연결</title><link href="http://localhost:4000/wiki/2024/04/29/americanote-server5-connect-domain-name.html" rel="alternate" type="text/html" title="아메리카노트 서버 구성 &amp;lt;5&amp;gt; 도메인 연결" /><published>2024-04-29T00:00:00+09:00</published><updated>2024-04-29T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/04/29/americanote-server5-connect-domain-name</id><content type="html" xml:base="http://localhost:4000/wiki/2024/04/29/americanote-server5-connect-domain-name.html"><![CDATA[<ul>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="Integer" /><category term="Method" /><summary type="html"><![CDATA[String toString(int n, int radix) 10진수를 N진수 형태의 문자열로 변환할 수 있다.]]></summary></entry><entry><title type="html">아메리카노트 서버 구성 &amp;lt;6&amp;gt; HTTPS 적용</title><link href="http://localhost:4000/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain.html" rel="alternate" type="text/html" title="아메리카노트 서버 구성 &amp;lt;6&amp;gt; HTTPS 적용" /><published>2024-04-29T00:00:00+09:00</published><updated>2024-04-29T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain</id><content type="html" xml:base="http://localhost:4000/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain.html"><![CDATA[<ul>
+  <li>이전 단계에서 진행했던 방화벽에서의 80, 443 포트 허용과 도메인이 있다면 이제 기간은 짧지만 무료로 받을 수 있는 Letsencrypt의 SSL 인증서를 발급 받아보겠습니다.
+<br />
+<br /></li>
+</ul>
+
+<h4 id="ssl-인증서-발급받기">SSL 인증서 발급받기</h4>
+<ul>
+  <li>인증서를 발급받기 위해 letsencrypt의 certbot을 설치해주고, 인증서를 발급받습니다.</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt update <span class="c"># 패키지 업데이트</span>
+<span class="nb">sudo </span>apt <span class="nb">install </span>certbot python3-certbot-nginx
+<span class="nb">sudo </span>certbot <span class="nt">--nginx</span> <span class="nt">-d</span> 도메인이름 <span class="nt">-d</span> www.도메인이름
+</code></pre></div></div>
+
+<ul>
+  <li>첫 실행 시에는 이메일을 입력하고 약관에 동의해야 합니다.</li>
+  <li>이후 certbot이 letsencrypt 서버와 통신 중 도메인이 유효한치 확인하는 과정을 거칩니다.
+    <ul>
+      <li>저는 이 부분에서 에러가 참 많이 발생했는데요 ㅎㅎ 하나씩 살펴보겠습니다.
+        <ol>
+          <li><strong>/well-known/acme-challenge/ 폴더가 허용되지 않았습니다.</strong>
+            <ul>
+              <li>
+                <p>이 부분은 Nginx에서 적용하는 부분이라 이전 단계에서 만들었던 <code class="language-plaintext highlighter-rouge">/etc/nginx/sites-available/도메인이름</code> 파일에서 추가해주었습니다.</p>
+
+                <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  server <span class="o">{</span>
+          listen 80 default_server<span class="p">;</span>
+          listen <span class="o">[</span>::]:80 default_server<span class="p">;</span>
+                
+          server_name 도메인이름 www.도메인이름<span class="p">;</span>
+                
+          location ~ /<span class="se">\.</span>well-known/acme-challenge/ <span class="o">{</span>
+          allow all<span class="p">;</span>
+          root /var/www/letsencrypt<span class="p">;</span>
+          <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre></div>                </div>
+              </li>
+            </ul>
+          </li>
+          <li><strong>도메인에 A 레코드를 적용되어 있지 않았습니다.</strong>
+            <ul>
+              <li>A 레코드 적용을 위해 NCP에서 Global Domain에 도메인을 추가하고, A 레코드를 추가해주었습니다.
+  <img width="679" alt="https1" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/3abce503-be85-43fe-8531-612c95578743" /></li>
+              <li>하지만 이 Global Domain의 네임서버를 카페24의 도메인에 설정해주는 과정에서 24시간이 걸린다는 소식에 아주 멘탈이 탈탈 털릴 뻔 했지만… 다행히 12시간 정도 뒤에 사용이 가능했습니다😂
+  <img width="544" alt="https2" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/8f6df708-93fa-4e43-8709-e2ad85b0c689" /></li>
+            </ul>
+          </li>
+        </ol>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><img width="770" alt="https3" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/f52a2ee6-ea91-475c-ba0e-8252c28a2993" /></p>
+<ul>
+  <li>그리하여 드디어 간절히 기다리던 발급 성공 화면을 보게 되면 SSL 발급에 성공한 겁니다.</li>
+  <li>이제 <code class="language-plaintext highlighter-rouge">/etc/nginx/sites-available/도메인이름</code> 파일에 접근해보면 자동으로 SSL이 적용된 것을 확인할 수 있습니다.</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server <span class="o">{</span>
+        listen  443 ssl<span class="p">;</span>
+        server_name americanote.store www.americanote.store<span class="p">;</span>
+
+        <span class="c">#access_log /var/log/nginx/proxy/access.log;</span>
+        <span class="c">#error_log /var/log/nginx/proxy/error.log;</span>
+
+        ssl_certificate /etc/letsencrypt/live/americanote.store/fullchain.pem<span class="p">;</span>
+        ssl_certificate_key /etc/letsencrypt/live/americanote.store/privkey.pem<span class="p">;</span>
+
+        location / <span class="o">{</span> <span class="c"># 추가</span>
+                proxy_pass http://127.0.0.1:8009<span class="p">;</span>
+
+        <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>참고로 <code class="language-plaintext highlighter-rouge">location / { … }</code> 부분까지 설정해주어야 현재 서버의 8009로 실행되고 있는 프로세스로 프록시가 요청을 전달해줍니다.
+<br />
+<br /></li>
+</ul>
+
+<h4 id="참고">참고</h4>
+<ul>
+  <li><a href="https://velog.io/@curiosity806/nginx-Lets-Encrypt-SSL-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EB%B0%9C%EA%B8%89">https://velog.io/@curiosity806/nginx-Lets-Encrypt-SSL-인증서-발급</a></li>
+  <li><a href="https://jaehyeon48.github.io/nginx/configure-nginx-on-ubuntu-2004">Ubuntu 20.04에서 Nginx 설치 및 설정하기</a></li>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="NaverCloudPlatform" /><category term="Project" /><category term="MySQL" /><category term="DataBase" /><summary type="html"><![CDATA[이전 단계에서 진행했던 방화벽에서의 80, 443 포트 허용과 도메인이 있다면 이제 기간은 짧지만 무료로 받을 수 있는 Letsencrypt의 SSL 인증서를 발급 받아보겠습니다.]]></summary></entry><entry><title type="html">아메리카노트 서버 구성 &amp;lt;5&amp;gt; 도메인 연결</title><link href="http://localhost:4000/wiki/2024/04/29/americanote-server5-connect-domain-name.html" rel="alternate" type="text/html" title="아메리카노트 서버 구성 &amp;lt;5&amp;gt; 도메인 연결" /><published>2024-04-29T00:00:00+09:00</published><updated>2024-04-29T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/04/29/americanote-server5-connect-domain-name</id><content type="html" xml:base="http://localhost:4000/wiki/2024/04/29/americanote-server5-connect-domain-name.html"><![CDATA[<ul>
   <li>자동 배포까지 했으니 어느정도는 백엔드 코드를 서버에 올리는 것까지 했다고 할 수 있겠습니다.</li>
   <li>저도 여기가 마지막인 줄 알았으나..
 <img src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/9ba32892-8688-4f23-aa75-806a8df95b37" alt="domain1" /></li>
@@ -709,136 +850,4 @@ ll 혹은 <span class="nb">ls</span> <span class="c"># 폴더 보기</span>
 <ul>
   <li><a href="https://1.theapplemango.com/entry/%EB%84%A4%EC%9D%B4%EB%B2%84-%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%ED%94%8C%EB%9E%AB%ED%8F%BCNCP-%EC%84%9C%EB%B2%84-%EA%B5%AC%EC%B6%95-%EB%B0%8F-%EC%8A%A4%ED%94%84%EB%A7%81-%EB%B0%B0%ED%8F%AC%EA%B9%8C%EC%A7%80-2">https://1.theapplemango.com/entry/네이버-클라우드-플랫폼NCP-서버-구축-및-스프링-배포까지-2</a></li>
   <li><a href="https://joonyon.tistory.com/entry/%EC%89%BD%EA%B2%8C-%EC%84%A4%EB%AA%85%ED%95%9C-nohup-%EA%B3%BC-%EB%B0%B1%EA%B7%B8%EB%9D%BC%EC%9A%B4%EB%93%9C-%EB%AA%85%EB%A0%B9%EC%96%B4-%EC%82%AC%EC%9A%A9%EB%B2%95">https://joonyon.tistory.com/entry/쉽게-설명한-nohup-과-백그라운드-명령어-사용법</a></li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Server" /><category term="NaverCloudPlatform" /><category term="Project" /><category term="Deploy" /><summary type="html"><![CDATA[서버와 데이터베이스를 생성했다면 이번에는 서버에 프로젝트를 배포해보겠습니다.]]></summary></entry><entry><title type="html">아메리카노트 서버 구성 &amp;lt;2&amp;gt; MySQL 데이터베이스 생성</title><link href="http://localhost:4000/wiki/2024/04/29/americanote-server2-create-mysql-database.html" rel="alternate" type="text/html" title="아메리카노트 서버 구성 &amp;lt;2&amp;gt; MySQL 데이터베이스 생성" /><published>2024-04-29T00:00:00+09:00</published><updated>2024-04-29T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/04/29/americanote-server2-create-mysql-database</id><content type="html" xml:base="http://localhost:4000/wiki/2024/04/29/americanote-server2-create-mysql-database.html"><![CDATA[<p>이번에는 NCP에서 MySQL DB Server를 생성하고 연결해보겠습니다.
-<br />
-<br /></p>
-
-<h4 id="db-server-생성">DB Server 생성</h4>
-<p><img width="678" alt="create-mysql1" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/44d6bbc1-bc7a-46b8-ba8f-11681852aac9" /></p>
-<ul>
-  <li>고가용성까지는 필요 없기 때문에 해제를 해주고, 이전 단계에서 만들었던 VPC와 Subnet을 선택해주었습니다.
-<br />
-<br />
-<br /></li>
-</ul>
-
-<p><img width="551" alt="create-mysql2" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/a51e2e02-7af7-4614-a433-f81839ad3545" /></p>
-<ul>
-  <li>기본 설정에서 거의 건드리지 않고 DB server와 서비스 이름만 지정해주었습니다.
-<br />
-<br />
-<br /></li>
-</ul>
-
-<p><img width="682" alt="create-mysql3" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/c4d4c493-9ce9-45e5-94b3-54ee3004eec0" /></p>
-<ul>
-  <li>USER_ID와 USER 암호로 MySQL admin을 생성해줍니다.</li>
-  <li>HOST는 접속할 Client IP를 입력하는 건데 아래 예시처럼 전체 접속을 허용해주기 위해 %를 입력했습니다.
-<br />
-<br />
-<br /></li>
-</ul>
-
-<p><img width="362" alt="create-mysql4" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/95182b3c-e4e8-4d00-8ed5-7061fd7667dd" /></p>
-<ul>
-  <li>또한 백업 설정은 추가 요금이 발생한다길래 과감히 포기했습니다^^..</li>
-  <li>다음을 누르고 최종 확인을 하면 몇 분 안에 DB 서버가 생성됩니다.
-<br />
-<br />
-<br /></li>
-</ul>
-
-<h4 id="방화벽acg-설정">방화벽(ACG) 설정</h4>
-<ul>
-  <li>생성 후 끝이 아니라 DB에 접속하기 위해 방화벽을 설정해줍니다.</li>
-  <li>참고로 DB에 0.0.0.0으로 모두 허용해주는 게 위험하다고 생각해서 자주 쓰는 IP들만 등록해두었습니다.</li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="NaverCloudPlatform" /><category term="Project" /><category term="MySQL" /><category term="DataBase" /><summary type="html"><![CDATA[이번에는 NCP에서 MySQL DB Server를 생성하고 연결해보겠습니다.]]></summary></entry><entry><title type="html">아메리카노트 서버 구성 &amp;lt;6&amp;gt; HTTPS 적용</title><link href="http://localhost:4000/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain.html" rel="alternate" type="text/html" title="아메리카노트 서버 구성 &amp;lt;6&amp;gt; HTTPS 적용" /><published>2024-04-29T00:00:00+09:00</published><updated>2024-04-29T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain</id><content type="html" xml:base="http://localhost:4000/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain.html"><![CDATA[<ul>
-  <li>이전 단계에서 진행했던 방화벽에서의 80, 443 포트 허용과 도메인이 있다면 이제 기간은 짧지만 무료로 받을 수 있는 Letsencrypt의 SSL 인증서를 발급 받아보겠습니다.
-<br />
-<br /></li>
-</ul>
-
-<h4 id="ssl-인증서-발급받기">SSL 인증서 발급받기</h4>
-<ul>
-  <li>인증서를 발급받기 위해 letsencrypt의 certbot을 설치해주고, 인증서를 발급받습니다.</li>
-</ul>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt update <span class="c"># 패키지 업데이트</span>
-<span class="nb">sudo </span>apt <span class="nb">install </span>certbot python3-certbot-nginx
-<span class="nb">sudo </span>certbot <span class="nt">--nginx</span> <span class="nt">-d</span> 도메인이름 <span class="nt">-d</span> www.도메인이름
-</code></pre></div></div>
-
-<ul>
-  <li>첫 실행 시에는 이메일을 입력하고 약관에 동의해야 합니다.</li>
-  <li>이후 certbot이 letsencrypt 서버와 통신 중 도메인이 유효한치 확인하는 과정을 거칩니다.
-    <ul>
-      <li>저는 이 부분에서 에러가 참 많이 발생했는데요 ㅎㅎ 하나씩 살펴보겠습니다.
-        <ol>
-          <li><strong>/well-known/acme-challenge/ 폴더가 허용되지 않았습니다.</strong>
-            <ul>
-              <li>
-                <p>이 부분은 Nginx에서 적용하는 부분이라 이전 단계에서 만들었던 <code class="language-plaintext highlighter-rouge">/etc/nginx/sites-available/도메인이름</code> 파일에서 추가해주었습니다.</p>
-
-                <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  server <span class="o">{</span>
-          listen 80 default_server<span class="p">;</span>
-          listen <span class="o">[</span>::]:80 default_server<span class="p">;</span>
-                
-          server_name 도메인이름 www.도메인이름<span class="p">;</span>
-                
-          location ~ /<span class="se">\.</span>well-known/acme-challenge/ <span class="o">{</span>
-          allow all<span class="p">;</span>
-          root /var/www/letsencrypt<span class="p">;</span>
-          <span class="o">}</span>
-  <span class="o">}</span>
-</code></pre></div>                </div>
-              </li>
-            </ul>
-          </li>
-          <li><strong>도메인에 A 레코드를 적용되어 있지 않았습니다.</strong>
-            <ul>
-              <li>A 레코드 적용을 위해 NCP에서 Global Domain에 도메인을 추가하고, A 레코드를 추가해주었습니다.
-  <img width="679" alt="https1" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/3abce503-be85-43fe-8531-612c95578743" /></li>
-              <li>하지만 이 Global Domain의 네임서버를 카페24의 도메인에 설정해주는 과정에서 24시간이 걸린다는 소식에 아주 멘탈이 탈탈 털릴 뻔 했지만… 다행히 12시간 정도 뒤에 사용이 가능했습니다😂
-  <img width="544" alt="https2" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/8f6df708-93fa-4e43-8709-e2ad85b0c689" /></li>
-            </ul>
-          </li>
-        </ol>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<p><img width="770" alt="https3" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/f52a2ee6-ea91-475c-ba0e-8252c28a2993" /></p>
-<ul>
-  <li>그리하여 드디어 간절히 기다리던 발급 성공 화면을 보게 되면 SSL 발급에 성공한 겁니다.</li>
-  <li>이제 <code class="language-plaintext highlighter-rouge">/etc/nginx/sites-available/도메인이름</code> 파일에 접근해보면 자동으로 SSL이 적용된 것을 확인할 수 있습니다.</li>
-</ul>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server <span class="o">{</span>
-        listen  443 ssl<span class="p">;</span>
-        server_name americanote.store www.americanote.store<span class="p">;</span>
-
-        <span class="c">#access_log /var/log/nginx/proxy/access.log;</span>
-        <span class="c">#error_log /var/log/nginx/proxy/error.log;</span>
-
-        ssl_certificate /etc/letsencrypt/live/americanote.store/fullchain.pem<span class="p">;</span>
-        ssl_certificate_key /etc/letsencrypt/live/americanote.store/privkey.pem<span class="p">;</span>
-
-        location / <span class="o">{</span> <span class="c"># 추가</span>
-                proxy_pass http://127.0.0.1:8009<span class="p">;</span>
-
-        <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<ul>
-  <li>참고로 <code class="language-plaintext highlighter-rouge">location / { … }</code> 부분까지 설정해주어야 현재 서버의 8009로 실행되고 있는 프로세스로 프록시가 요청을 전달해줍니다.
-<br />
-<br /></li>
-</ul>
-
-<h4 id="참고">참고</h4>
-<ul>
-  <li><a href="https://velog.io/@curiosity806/nginx-Lets-Encrypt-SSL-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EB%B0%9C%EA%B8%89">https://velog.io/@curiosity806/nginx-Lets-Encrypt-SSL-인증서-발급</a></li>
-  <li><a href="https://jaehyeon48.github.io/nginx/configure-nginx-on-ubuntu-2004">Ubuntu 20.04에서 Nginx 설치 및 설정하기</a></li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="NaverCloudPlatform" /><category term="Project" /><category term="MySQL" /><category term="DataBase" /><summary type="html"><![CDATA[이전 단계에서 진행했던 방화벽에서의 80, 443 포트 허용과 도메인이 있다면 이제 기간은 짧지만 무료로 받을 수 있는 Letsencrypt의 SSL 인증서를 발급 받아보겠습니다.]]></summary></entry></feed>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Server" /><category term="NaverCloudPlatform" /><category term="Project" /><category term="Deploy" /><summary type="html"><![CDATA[서버와 데이터베이스를 생성했다면 이번에는 서버에 프로젝트를 배포해보겠습니다.]]></summary></entry></feed>
