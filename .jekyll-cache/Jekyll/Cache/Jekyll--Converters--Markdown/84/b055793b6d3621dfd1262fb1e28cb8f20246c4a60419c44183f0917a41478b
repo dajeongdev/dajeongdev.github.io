@@ -1,4 +1,4 @@
-I"B<h4 id="배경">배경</h4>
+I" <h4 id="배경">배경</h4>
 <p><img width="758" alt="스크린샷 2024-06-20 16 16 48" src="https://github.com/dabeann/dorandoran/assets/61612976/7066d92c-1dbc-4b89-8b71-5813cfd575d7" />
 지난 프로젝트에서도 CORS 문제가 발생해서 하루만에 도메인도 구매하고 Nginx로 연결한 다음 Spring Boot 프로젝트에서 CORS 설정도 해줬었는데, 이번 프로젝트에서도 동일한 방법을 실행했지만 CORS가 해결되지 않는 문제가 발생했다. <del>(이 문제로 서버도 몇 번이나 다시 만들고 nginx 파일을 몇 십번이나 했었다..)</del><br />
 <br />
@@ -49,6 +49,6 @@
 
 <h4 id="참고">참고</h4>
 <ul>
-  <li>https://blog.harampark.com/blog/mixed-content-error/</li>
+  <li><a href="https://blog.harampark.com/blog/mixed-content-error">Mixed Content The page at ‘xxx’ was loaded over HTTPS, but requested an insecure XMLHttpRequest endpoint ‘yyy’. This request has been blocked; the content must be served over HTTPS 에러 해결하기</a></li>
 </ul>
 :ET
