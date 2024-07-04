@@ -6,12 +6,6 @@ categories: wiki
 tags: [Java, Arrays, Sort]
 ---
 ### 배열 오름차순/내림차순 정렬
-#### 배경
-코딩테스트 문제로 자주 등장하는 배열의 오름차순/내림차순 정렬에 대해 정리해두겠습니다.
-<br/>
-<br/>
-
-
 #### <1> 오름차순 정렬
 <img src="https://dajeongdev.github.io/assets/images/posts/arrays-sort.png">
 - 오름차순 정렬은 아주 간단하다. Arrays 클래스의 sort() 메소드를 사용하면 된다.

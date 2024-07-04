@@ -10,7 +10,7 @@ tags: [Java, String]
 <br/>  
    
 
-### 1. String.join(CharSequence delimiter, CharSequence... elements)
+#### 1. String.join(CharSequence delimiter, CharSequence... elements)
 - `join()` 메서드는 delimiter(구분자)를 사용하여 elements(대상 배열)을 문자열을 리턴할 수 있다.
 - String.join() 메서드는 Java 1.8 이상부터 사용 가능
 ```java
@@ -20,7 +20,7 @@ System.out.println(String.join(",", strArr));
 ```
 <br/> 
 
-### 2. Arrays.toString(Object[] a)
+#### 2. Arrays.toString(Object[] a)
 - Arrays 클래스의 `toString()` 메서드를 사용하여 배열 모양의 문자열을 리턴할 수 있다.
 ```java
 String[] strArr = {"hello", "java"};
@@ -29,7 +29,7 @@ System.out.println(Arrays.toString(strArr));
 ```
 <br/> 
 
-### 3. Stream - Collectors.joining()
+#### 3. Stream - Collectors.joining()
 - Stream의 `Collectors.joining()` 메서드를 사용하여 문자열을 리턴할 수 있다.
 - Stream은 Java 1.8 이상부터 사용 가능
 ```java
@@ -39,7 +39,7 @@ System.out.println(Arrays.stream(strArr).collect(Collectors.joining()));
 ```
 <br/> 
 
-### 4. StringBuilder.append(String str)
+#### 4. StringBuilder.append(String str)
 - 가장 기본적인 방법 중에는 StringBuilder를 생성하여 `append()` 메서드를 사용하여 문자열을 리턴할 수 있다.
 - 빠르지만 for문을 사용하기 때문에 코드가 조금 길어진다는 단점이 있다.
 ```java
@@ -53,7 +53,7 @@ System.out.println(sb);
 ```
 <br/> 
 
-### 5. Apache Commons Lang 3  라이브러리
+#### 5. Apache Commons Lang 3  라이브러리
 - [Apache Commons Lang 3](https://commons.apache.org/proper/commons-lang) 라이브러리는 Java의 유틸리티 클래스 패키지로, 문자열, 배열, 숫자 등 매우 다양하고 편리한 기능을 제공한다.
 - 그 중 StringUtils 클래스의 `join()` 메서드를 사용하여 문자열 배열을 문자열로 리턴할 수 있다.
 ```java

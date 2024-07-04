@@ -1,0 +1,67 @@
+I"�<h3 id="피보나치">피보나치</h3>
+<ul>
+  <li>피보나치 수열은 재귀 함수의 대표적인 예시로, 첫째 및 둘째 항이 1이며 그 뒤의 모든 항은 바로 앞 두 항의 합인 수열이다.
+    <ul>
+      <li>F(0) = 0, F(1) = 1일 때, 1 이상의 n에 대하여 F(n) = F(n-1) + F(n-2)</li>
+      <li><strong>재귀 함수</strong>: 자기 자신을 다시 호출해 작업을 수행하는 함수</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span> <span class="nf">fibonacci</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">if</span><span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">||</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
+		<span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="o">)</span> <span class="o">{</span>			
+			<span class="k">return</span> <span class="nf">fibonacci</span><span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="o">)</span> <span class="o">+</span> <span class="n">fibonacci</span><span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span>
+		<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="프로그래머스-피보나치-수-풀이">프로그래머스 피보나치 수 풀이</h3>
+
+<h4 id="원래-코드">원래 코드</h4>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kt">int</span> <span class="n">answer</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+	<span class="kt">int</span> <span class="n">first</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+	<span class="kt">int</span> <span class="n">second</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+	<span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+			<span class="n">answer</span> <span class="o">=</span> <span class="o">(</span><span class="n">first</span> <span class="o">+</span> <span class="n">second</span><span class="o">);</span>
+			<span class="n">first</span> <span class="o">=</span> <span class="n">second</span><span class="o">;</span>
+			<span class="n">second</span> <span class="o">=</span> <span class="n">answer</span><span class="o">;</span>
+		<span class="o">}</span>
+	<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
+  <span class="o">}</span>
+	<span class="k">return</span> <span class="n">answer</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>이 코드를 제출했더니 7번부터 오답이 나왔다.. 그래서 한참 고민하다가 질문하기 페이지를 봤는데 좋은 답변을 달아주셔서 참고했다.
+  <img src="https://dajeongdev.github.io/assets/images/posts/fibonacci-reference.png" />
+    <ul>
+      <li><strong>정리</strong>: 자료형의 크기에 제한이 있는 언어를 사용할 경우 (A + B) % C == ((A % C) + (B % C)) % C라는 모듈러 연산의 성질을 이용하여, 계산 결과에 1234567으로 나눈 나머지를 대신 넣는 것으로 int 범위 내에 항상 값이 존재하도록 보장할 수 있다. <br />
+<br /></li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="수정-코드">수정 코드</h4>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kt">int</span> <span class="n">answer</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+	<span class="kt">int</span> <span class="n">first</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+	<span class="kt">int</span> <span class="n">second</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+	<span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+			<span class="n">answer</span> <span class="o">=</span> <span class="o">(</span><span class="n">first</span> <span class="o">+</span> <span class="n">second</span><span class="o">)</span> <span class="o">%</span> <span class="mi">1234567</span><span class="o">;</span>
+			<span class="n">first</span> <span class="o">=</span> <span class="n">second</span><span class="o">;</span>
+			<span class="n">second</span> <span class="o">=</span> <span class="n">answer</span><span class="o">;</span>
+		<span class="o">}</span>
+	<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
+  <span class="o">}</span>
+	<span class="k">return</span> <span class="n">answer</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+:ET

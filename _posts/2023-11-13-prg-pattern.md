@@ -12,7 +12,7 @@ tags: [Java,Spring,HTTP]
 ### 해결 방안 (=PRG 패턴)
 ```java
 @PostMapping("/add")
-public String addItemV5(Item item) {
+public String addItem(Item item) {
       itemRepository.save(item);
       return "redirect:/basic/items/" + item.getId();
 }
@@ -26,7 +26,7 @@ public String addItemV5(Item item) {
 ### RedirectAttributes
 ```java
 @PostMapping("/add")
-public String addItemV6(Item item, RedirectAttributes redirectAttributes) {
+public String addItem(Item item, RedirectAttributes redirectAttributes) {
       Item saveItem = itemRepository.save(item);
       redirectAttributes.addAttribute("itemId", saveItem.getId());
       redirectAttributes.addAttribute("status", true);

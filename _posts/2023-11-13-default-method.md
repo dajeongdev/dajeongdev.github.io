@@ -29,12 +29,12 @@ public interface TestInterface {
 ```
 <br>
 
-### 추가
+#### 추가
 자바 8부터는 이전 버전과는 다르게 추상 클래스를 그렇게 많이 쓰지 않고, 추상 클래스가 하던 일을 많은 부분 인터페이스가 하게 되었기 때문에 정말 필요한 경우가 아니라면 인터페이스에 있는 default 메소드를 사용해서 시도해보는 것이 좋다.
 <br>
 <br>
 
-## 참고
+#### 참고
 - [https://velog.io/@heoseungyeon/디폴트-메서드Default-Method](https://velog.io/@heoseungyeon%EB%94%94%ED%8F%B4%ED%8A%B8-%EB%A9%94%EC%84%9C%EB%93%9CDefault-Method)
 - [https://www.inflearn.com/course/디자인-패턴/dashboard](https://www.inflearn.com/course/%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/dashboard)
 ```

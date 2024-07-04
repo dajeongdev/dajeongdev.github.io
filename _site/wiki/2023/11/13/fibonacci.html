@@ -12,8 +12,8 @@
 <meta property="og:title" content="자바로 피보나치 수열 이해하기">
 <meta name="author" content="Dajeong Park">
 <meta property="og:locale" content="ko">
-<meta name="description" content="피보나치 수열은 재귀 함수의 대표적인 예시로, 첫째 및 둘째 항이 1이며 그 뒤의 모든 항은 바로 앞 두 항의 합인 수열이다. F(0) = 0, F(1) = 1일 때, 1 이상의 n에 대하여 F(n) = F(n-1) + F(n-2) 재귀 함수: 자기 자신을 다시 호출해 작업을 수행하는 함수">
-<meta property="og:description" content="피보나치 수열은 재귀 함수의 대표적인 예시로, 첫째 및 둘째 항이 1이며 그 뒤의 모든 항은 바로 앞 두 항의 합인 수열이다. F(0) = 0, F(1) = 1일 때, 1 이상의 n에 대하여 F(n) = F(n-1) + F(n-2) 재귀 함수: 자기 자신을 다시 호출해 작업을 수행하는 함수">
+<meta name="description" content="피보나치 피보나치 수열은 재귀 함수의 대표적인 예시로, 첫째 및 둘째 항이 1이며 그 뒤의 모든 항은 바로 앞 두 항의 합인 수열이다. F(0) = 0, F(1) = 1일 때, 1 이상의 n에 대하여 F(n) = F(n-1) + F(n-2) 재귀 함수: 자기 자신을 다시 호출해 작업을 수행하는 함수">
+<meta property="og:description" content="피보나치 피보나치 수열은 재귀 함수의 대표적인 예시로, 첫째 및 둘째 항이 1이며 그 뒤의 모든 항은 바로 앞 두 항의 합인 수열이다. F(0) = 0, F(1) = 1일 때, 1 이상의 n에 대하여 F(n) = F(n-1) + F(n-2) 재귀 함수: 자기 자신을 다시 호출해 작업을 수행하는 함수">
 <link rel="canonical" href="http://localhost:4000/wiki/2023/11/13/fibonacci.html">
 <meta property="og:url" content="http://localhost:4000/wiki/2023/11/13/fibonacci.html">
 <meta property="og:site_name" content="Every Single Day">
@@ -22,7 +22,7 @@
 <meta name="twitter:card" content="summary">
 <meta property="twitter:title" content="자바로 피보나치 수열 이해하기">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2023-11-13T00:00:00+09:00","datePublished":"2023-11-13T00:00:00+09:00","description":"피보나치 수열은 재귀 함수의 대표적인 예시로, 첫째 및 둘째 항이 1이며 그 뒤의 모든 항은 바로 앞 두 항의 합인 수열이다. F(0) = 0, F(1) = 1일 때, 1 이상의 n에 대하여 F(n) = F(n-1) + F(n-2) 재귀 함수: 자기 자신을 다시 호출해 작업을 수행하는 함수","headline":"자바로 피보나치 수열 이해하기","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2023/11/13/fibonacci.html"},"url":"http://localhost:4000/wiki/2023/11/13/fibonacci.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2023-11-13T00:00:00+09:00","datePublished":"2023-11-13T00:00:00+09:00","description":"피보나치 피보나치 수열은 재귀 함수의 대표적인 예시로, 첫째 및 둘째 항이 1이며 그 뒤의 모든 항은 바로 앞 두 항의 합인 수열이다. F(0) = 0, F(1) = 1일 때, 1 이상의 n에 대하여 F(n) = F(n-1) + F(n-2) 재귀 함수: 자기 자신을 다시 호출해 작업을 수행하는 함수","headline":"자바로 피보나치 수열 이해하기","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2023/11/13/fibonacci.html"},"url":"http://localhost:4000/wiki/2023/11/13/fibonacci.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -667,7 +667,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <ul>
+      <h3 id="피보나치">피보나치</h3>
+<ul>
   <li>피보나치 수열은 재귀 함수의 대표적인 예시로, 첫째 및 둘째 항이 1이며 그 뒤의 모든 항은 바로 앞 두 항의 합인 수열이다.
     <ul>
       <li>F(0) = 0, F(1) = 1일 때, 1 이상의 n에 대하여 F(n) = F(n-1) + F(n-2)</li>
@@ -678,11 +679,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 </ul>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span> <span class="nf">fibonacci</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-		<span class="k">if</span><span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">||</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
-			<span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
-		<span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="o">)</span> <span class="o">{</span>			
-			<span class="k">return</span> <span class="nf">fibonacci</span><span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="o">)</span> <span class="o">+</span> <span class="n">fibonacci</span><span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span>
-		<span class="o">}</span>
+	<span class="k">if</span><span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">||</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
+	<span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="o">)</span> <span class="o">{</span>			
+		<span class="k">return</span> <span class="nf">fibonacci</span><span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="o">)</span> <span class="o">+</span> <span class="n">fibonacci</span><span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span>
+	<span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 <p><br></p>
@@ -702,7 +703,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 		<span class="o">}</span>
 	<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
-  <span class="o">}</span>
+  	<span class="o">}</span>
 	<span class="k">return</span> <span class="n">answer</span><span class="o">;</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -731,7 +732,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 		<span class="o">}</span>
 	<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
-  <span class="o">}</span>
+  	<span class="o">}</span>
 	<span class="k">return</span> <span class="n">answer</span><span class="o">;</span>
 <span class="o">}</span>
 </code></pre></div></div>
@@ -746,10 +747,10 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/wiki/2023/11/13/prg-pattern.html" title="IntelliJ 단축키 정리">PRG 패턴과 RedirectAttributes</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/stack.html" title="IntelliJ 단축키 정리">Stack</a></li>
-<li><a class="post-link" href="/blog/2024/05/10/book-service-admin-review.html" title="IntelliJ 단축키 정리">독서 관리 서비스의 Admin 개발 회고</a></li>
-<li><a class="post-link" href="/blog/2024/05/09/hompage-migration-review.html" title="IntelliJ 단축키 정리">홈페이지 마이그레이션 회고</a></li>
+        <li><a class="post-link" href="/wiki/2023/11/13/array-slice-method.html" title="IntelliJ 단축키 정리">배열 자르기</a></li>
+<li><a class="post-link" href="/wiki/2023/12/30/hibernate6-custom-function.html" title="IntelliJ 단축키 정리">hibernate6 custom function(MySQL Dialect)</a></li>
+<li><a class="post-link" href="/wiki/2024/03/05/queue.html" title="IntelliJ 단축키 정리">Queue</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/cut-string-method.html" title="IntelliJ 단축키 정리">문자열 자르기</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>

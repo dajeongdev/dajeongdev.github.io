@@ -7,10 +7,10 @@ tags: [Java,Array,Method]
 ---
 ### 1. Stream의 skip과 limit
 
-#### Arrays.stream.skip(num)**
+#### Arrays.stream.skip(num)
 - skip은 숫자(num)만큼 아이템을 건너뛴 다음 그 뒤의 아이템으로 새로운 스트림을 생성한다.
 
-#### Arrays.stream.limit(num)**
+#### Arrays.stream.limit(num)
 - limit은 지정한 개수(num)만큼 가져와서 새로운 스트림을 리턴한다.
 
 ```java

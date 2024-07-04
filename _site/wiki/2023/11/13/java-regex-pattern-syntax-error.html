@@ -667,16 +667,16 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <h3 id="에러">에러</h3>
+      <h4 id="에러">에러</h4>
 <p><img src="https://dajeongdev.github.io/assets/images/posts/java-regex-pattern-syntax-error.png" alt="error_image">
 <br></p>
 
-<h3 id="코드">코드</h3>
+<h4 id="코드">코드</h4>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">split</span> <span class="o">=</span> <span class="n">question</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">"?"</span><span class="o">);</span>
 </code></pre></div></div>
 <p><br></p>
 
-<h3 id="원인">원인</h3>
+<h4 id="원인">원인</h4>
 <ul>
   <li>split() 메소드 사용시 특정한 문자를 regex로 사용하는 경우 동작하지 않는다.
   * 특정한 문자: 이미 문법 상 사용 중인 특수문자 (|, &amp;, ^, *, ?, . 등) <br>
@@ -684,7 +684,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 </li>
 </ul>
 
-<h3 id="해결-방법">해결 방법</h3>
+<h4 id="해결-방법">해결 방법</h4>
 <ul>
   <li>regex 앞에 <strong>백슬래시(\)</strong>를 <strong>두 번</strong> 넣어주면 코드가 정상적으로 동작한다.</li>
 </ul>
@@ -702,10 +702,10 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/wiki/2024/04/28/americanote-server1-create-linux-server.html" title="Map - getOrDefault(Object key, V defaultValue)">아메리카노트 서버 구성 &lt;1&gt; Linux 서버 생성</a></li>
-<li><a class="post-link" href="/wiki/2024/04/29/americanote-server4-automatical-deploy.html" title="Map - getOrDefault(Object key, V defaultValue)">아메리카노트 서버 구성 &lt;4&gt; 자동 배포</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/n-number-convert.html" title="Map - getOrDefault(Object key, V defaultValue)">진수 변환</a></li>
-<li><a class="post-link" href="/blog/2024/04/19/naver-cloud-review.html" title="Map - getOrDefault(Object key, V defaultValue)">비사이드 포텐데이 403 프로젝트에서 Naver Cloud Platform 사용 후기</a></li>
+        <li><a class="post-link" href="/wiki/2023/11/13/java-regex-pattern-syntax-error.html" title="Map - getOrDefault(Object key, V defaultValue)">Dangling meta character '?' near index 0</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/prg-pattern.html" title="Map - getOrDefault(Object key, V defaultValue)">PRG 패턴과 RedirectAttributes</a></li>
+<li><a class="post-link" href="/wiki/2024/02/26/string-array-to-string.html" title="Map - getOrDefault(Object key, V defaultValue)">String 배열 -&gt; String</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/fibonacci.html" title="Map - getOrDefault(Object key, V defaultValue)">자바로 피보나치 수열 이해하기</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>

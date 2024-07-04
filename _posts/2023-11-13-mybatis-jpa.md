@@ -51,8 +51,8 @@ JPA는 인터페이스이기 때문에, 구현체로는 Hibernate, EclipseLink, 
 
 ---
 #### 참고
-- <https://mybatis.org/mybatis-3/ko/index.html>
-- <https://dreaming-soohyun.tistory.com/entry/JPA%EC%99%80-MyBatis%EC%9D%98-%EC%B0%A8%EC%9D%B4-ORM%EA%B3%BC-SQL-Mapper>
-- <https://incheol-jung.gitbook.io/docs/q-and-a/spring/jpa-vs-mybatis>
+- [MyBatis 공식 홈페이지](https://mybatis.org/mybatis-3/ko/index.html)
+- [JPA와 MyBatis의 차이 (ORM과 SQL Mapper)](https://dreaming-soohyun.tistory.com/entry/JPA%EC%99%80-MyBatis%EC%9D%98-%EC%B0%A8%EC%9D%B4-ORM%EA%B3%BC-SQL-Mapper)
+- [JPA vs MyBatis](https://incheol-jung.gitbook.io/docs/q-and-a/spring/jpa-vs-mybatis)
 - 이동욱님의 책 [스프링 부트와 AWS로 혼자 구현하는 웹 서비스]
-- 김영한님의 인프런 강의 [실전! 스프링 부트와 JPA 활용 시리즈] <https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-JPA-%ED%99%9C%EC%9A%A9-1>
+- 김영한님의 인프런 강의 [실전! 스프링 부트와 JPA 활용 시리즈](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-JPA-%ED%99%9C%EC%9A%A9-1)

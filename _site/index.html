@@ -710,7 +710,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
   HTTP는 무상태(Stateless)와 비연결성(Connectionless)이라는 특성을 가지고 있다.
     
-      St... <span class="read_more">...</span>
+      Sta... <span class="read_more">...</span>
         </p>
       </a>
       <div class="post-tags">
@@ -793,7 +793,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
         <p>
         배경
 
-지난 프로젝트에서도 CORS 문제가 발생해서 하루만에 도메인도 구매하고 Nginx로 연결한 다음 Spring Boot 프로젝트에서 CORS 설정도 해줬었는데, 이번 프로젝트에서도 동일한 방법을 실행했지만 CORS가 해결되지 않는 문제가 발생했다. (이 문제로 서버도 몇 번이나 다시 만들고 nginx 파일... <span class="read_more">...</span>
+지난 프로젝트에서도 CORS 문제가 발생해서 하루만에 도메인도 구매하고 Nginx로 연결한 다음 Spring Boot 프로젝트에서 CORS 설정도 해줬었는데, 이번 프로젝트에서도 동일한 방법을 실행했지만 CORS가 해결되지 않는 문제가 발생했다. (이 문제로 서버도 몇 번이나 다시 만들고 nginx 파일을... <span class="read_more">...</span>
         </p>
       </a>
       <div class="post-tags">
@@ -1889,11 +1889,6 @@ DB Server 생성
       <a class="post-excerpt" href="/wiki/2024/04/22/array-sort-asc-desc.html">
         <p>
         배열 오름차순/내림차순 정렬
-배경
-코딩테스트 문제로 자주 등장하는 배열의 오름차순/내림차순 정렬에 대해 정리해두겠습니다.
-
-
-
 &lt;1&gt; 오름차순 정렬
 
 
@@ -1901,7 +1896,14 @@ DB Server 생성
 
 
 int[] A = {4, 3, 3};
-Arrays.sort(A); // 결과: A = {3, 3... <span class="read_more">...</span>
+Arrays.sort(A); // 결과: A = {3, 3, 4}
+
+
+
+&lt;2&gt; 내림차순 정렬
+
+
+  내림차순 정렬도 어렵진 않지만, 한 가지 주의할... <span class="read_more">...</span>
         </p>
       </a>
       <div class="post-tags">
@@ -2082,7 +2084,7 @@ Arrays.sort(A); // 결과: A = {3, 3... <span class="read_more">...</span>
 replace(CharSequence target, CharSequence replacement)
 
   일치하는 문자열(target)을 새로운 문자열(replacement)로 치환한다.
-    String str = "가/나/다... <span class="read_more">...</span>
+    String str = "가/나/다/... <span class="read_more">...</span>
         </p>
       </a>
       <div class="post-tags">
@@ -2249,11 +2251,10 @@ replace(CharSequence target, CharSequence replacement)
       </div>
       <a class="post-excerpt" href="/wiki/2024/02/29/programmers-12906.html">
         <p>
-        문제
+        문제 링크
 
 
   연속적으로 나타나는 숫자, 즉 앞의 숫자와 겹치면 제거하기 때문에 Stack을 사용해서 풀이를 해보려고 한다.
-  https://school.programmers.co.kr/learn/courses/30/lessons/12906
  
 
 
@@ -2261,7 +2262,9 @@ replace(CharSequence target, CharSequence replacement)
 풀이
 첫번째
 public int[] firstSolution(int[] arr) {
-	Stack&lt;Integ... <span class="read_more">...</span>
+	Stack&lt;Integer&gt; answer = new Stack&lt;&gt;();
+	answer.add(arr[0]);
+	for (in... <span class="read_more">...</span>
         </p>
       </a>
       <div class="post-tags">
@@ -2523,7 +2526,7 @@ public int[] firstSolution(int[] arr) {
 
 원인
 
-  정확히는 생성일 컬럼에 이름을 설정하기 위해 붙인 @Column 어노테이션의 옵션 중 하나인 updatable의 기본값이 true라서 값을 설정해주지 않은 생성일 컬럼에 null이 update 된 ... <span class="read_more">...</span>
+  정확히는 생성일 컬럼에 이름을 설정하기 위해 붙인 @Column 어노테이션의 옵션 중 하나인 updatable의 기본값이 true라서 값을 설정해주지 않은 생성일 컬럼에 null이 update 된 것... <span class="read_more">...</span>
         </p>
       </a>
       <div class="post-tags">
@@ -3170,8 +3173,8 @@ public int solution(int N) {
 
 해결 방안 (=PRG 패턴)
 @PostMapping("/add")
-public String addItemV5(Item item) {
-     ... <span class="read_more">...</span>
+public String addItem(Item item) {
+      i... <span class="read_more">...</span>
         </p>
       </a>
       <div class="post-tags">
@@ -3436,13 +3439,13 @@ where condition = "A" ... <span class="read_more">...</span>
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Nov 13, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
       </div>
       <a class="post-excerpt" href="/wiki/2023/11/13/mybatis-jpa.html">
         <p>
         먼저 MyBatis와 JPA를 알아보기 전에 알아두면 좋은 두 개념을 살펴보자.
 SQL Mapper
-SQL Mapper는 직접 작성한 SQL에 해당되는 데이터를 읽고, 결과값을 객체화시켜 사용할 수 있게 해준다. SQL에 데이터베이스에 따라 SQL 문법이 다르므로 특정 RDB에 종속적이며, SQL에 의존적인 개... <span class="read_more">...</span>
+SQL Mapper는 직접 작성한 SQL에 해당되는 데이터를 읽고, 결과값을 객체화시켜 사용할 수 있게 해준다. SQL에 데이터베이스에 따라 SQL 문법이 다르므로 특정 RDB에 종속적이며, SQL에 의존적인 개발하게 된다... <span class="read_more">...</span>
         </p>
       </a>
       <div class="post-tags">
@@ -3525,12 +3528,12 @@ SQL Mapper는 직접 작성한 SQL에 해당되는 데이터를 읽고, 결과�
         <p>
         Map - getOrDefault(Object key, V defaultValue)
 public V getOrDefault(Object key, V defaultValue) {
-		Node&lt;K,V&gt; e;
-		return (e = getNode(key)) == null ? defaultValue : e.value;
+	Node&lt;K,V&gt; e;
+	return (e = getNode(key)) == null ? defaultValue : e.value;
 }
 
 
-  key가 존재하면 key... <span class="read_more">...</span>
+  key가 존재하면 key의 va... <span class="read_more">...</span>
         </p>
       </a>
       <div class="post-tags">
@@ -3808,7 +3811,8 @@ String[] split = question.split("?");
       </div>
       <a class="post-excerpt" href="/wiki/2023/11/13/fibonacci.html">
         <p>
-        
+        피보나치
+
   피보나치 수열은 재귀 함수의 대표적인 예시로, 첫째 및 둘째 항이 1이며 그 뒤의 모든 항은 바로 앞 두 항의 합인 수열이다.
     
       F(0) = 0, F(1) = 1일 때, 1 이상의 n에 대하여 F(n) = F(n-1) + F(n-2)
@@ -3817,7 +3821,7 @@ String[] split = question.split("?");
   
 
 
-public int fibonacci(int ... <span class="read_more">...</span>
+public int fibonacci... <span class="read_more">...</span>
         </p>
       </a>
       <div class="post-tags">
@@ -4184,17 +4188,17 @@ StringTokenizer(String str) // 공... <span class="read_more">...</span>
         <p>
         1. Stream의 skip과 limit
 
-Arrays.stream.skip(num)**
+Arrays.stream.skip(num)
 
   skip은 숫자(num)만큼 아이템을 건너뛴 다음 그 뒤의 아이템으로 새로운 스트림을 생성한다.
 
 
-Arrays.stream.limit(num)**
+Arrays.stream.limit(num)
 
   limit은 지정한 개수(num)만큼 가져와서 새로운 스트림을 리턴한다.
 
 
-int[] array = {1, 2, 3, 4, ... <span class="read_more">...</span>
+int[] array = {1, 2, 3, 4, 5, 6... <span class="read_more">...</span>
         </p>
       </a>
       <div class="post-tags">

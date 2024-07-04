@@ -1,0 +1,7 @@
+I"t<h3 id="배열-오름차순내림차순-정렬">배열 오름차순/내림차순 정렬</h3>
+<h4 id="1-오름차순-정렬">&lt;1&gt; 오름차순 정렬</h4>
+<p><img src="https://dajeongdev.github.io/assets/images/posts/arrays-sort.png" /></p>
+<ul>
+  <li>오름차순 정렬은 아주 간단하다. Arrays 클래스의 sort() 메소드를 사용하면 된다.</li>
+</ul>
+:ET

@@ -57,6 +57,5 @@ contents = contents.replaceFirst("#", childName)
 <br/>
 
 #### 참고
-- https://coding-factory.tistory.com/128
-- 031724 추가
-    - https://bada744.tistory.com/16
+- [[Java] 문자열 치환(Replace) 사용법 & 예제](https://coding-factory.tistory.com/128)
+- 031724 추가 [String 클래스 메서드의 replace()와 replaceAll()의 차이점](https://bada744.tistory.com/16)

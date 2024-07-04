@@ -32,11 +32,11 @@ public @interface Column {
 
 ```java
 @CreatedDate
-@Column(name = "created_date_time", **updatable = false**)
+@Column(name = "created_date_time", updatable = false)
 private LocalDateTime createdDateTime;
 ```
 <br/>
 
 
 #### 참고
-- https://wakestand.tistory.com/935
+- [JPA @CreatedDate Column Update시 Null 되는 현상 해결방법](https://wakestand.tistory.com/935)

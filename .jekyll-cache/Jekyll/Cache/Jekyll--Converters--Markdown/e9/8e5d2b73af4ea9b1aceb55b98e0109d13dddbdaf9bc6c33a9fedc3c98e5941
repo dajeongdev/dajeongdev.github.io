@@ -1,0 +1,11 @@
+I"Q<h3 id="map---getordefaultobject-key-v-defaultvalue">Map - getOrDefault(Object key, V defaultValue)</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="no">V</span> <span class="nf">getOrDefault</span><span class="o">(</span><span class="nc">Object</span> <span class="n">key</span><span class="o">,</span> <span class="no">V</span> <span class="n">defaultValue</span><span class="o">)</span> <span class="o">{</span>
+	<span class="nc">Node</span><span class="o">&lt;</span><span class="no">K</span><span class="o">,</span><span class="no">V</span><span class="o">&gt;</span> <span class="n">e</span><span class="o">;</span>
+	<span class="k">return</span> <span class="o">(</span><span class="n">e</span> <span class="o">=</span> <span class="n">getNode</span><span class="o">(</span><span class="n">key</span><span class="o">))</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">defaultValue</span> <span class="o">:</span> <span class="n">e</span><span class="o">.</span><span class="na">value</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>key가 존재하면 key의 value를 반환하고, 없으면 설정한 디폴트 값을 반환한다. <br />
+<br /></li>
+</ul>
+:ET
