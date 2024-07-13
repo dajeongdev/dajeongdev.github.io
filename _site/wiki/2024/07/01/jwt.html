@@ -658,7 +658,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#JWT">#JWT</a><a class="post-tag" href="/tags.html#Network">#Network</a>
@@ -761,6 +761,26 @@ RefreshToken은 AccessToken보다 수명이 길어(2주 이상) AccessToken의 �
 <br>
 <br></p>
 
+<h4 id="프로젝트에-적용한-방법">프로젝트에 적용한 방법</h4>
+<ul>
+  <li>가입 시 내부에서 사용할 정보를 키값과 함께 인코딩하여 accessToken과 refreshToken을 생성하는데, accessToken은 헤더에 담아 리턴해주고, refreshToken은 DB에 저장한다.</li>
+  <li>클라이언트로부터 API 요청을 받을 때 accessToken이 필요하다면 함께 받은 뒤 확인하는데, 이때 만약  accessToken이 만료되었다면 DB의 refreshToken을 조회해서 만료되지 않았으면 accessToken을 새로 발급해준다.
+    <ul>
+      <li>하지만 이때 refreshToken도 만료되었다면 다시 로그인하도록 에러를 리턴한다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>❓refreshToken은 어디에 두어야 할까? accessToken만 주는 것이 아니라 refreshToken도 같이 줘야 하나? 그래서 accessToken이 만료되거나 없으면 다시 같이 발급해주고 ?</p>
+<ul>
+  <li>accessToken만 사용하다가 보안 문제로 인해 refreshToken도 같이 발급하기 시작</li>
+  <li>refreshToken을 로컬에 저장해둘 수도 있지만, refreshToken처럼 탈취할 수 있다는 단점이 있어 최근에는 refreshToken을 서버에 저장하기 시작함</li>
+  <li>결국 지금 사용하는 방식이 괜찮은 방식이며, AccessToken과 RefreshToken의 개념과 HTTP에 대해서 더 자세히 알아보는게 좋겠다.
+<br>
+<br>
+</li>
+</ul>
+
 <h4 id="참고">참고</h4>
 <ul>
   <li><a href="https://velog.io/@chuu1019/%EC%95%8C%EA%B3%A0-%EC%93%B0%EC%9E%90-JWTJson-Web-Token">알고 쓰자, JWT(Json Web Token)</a></li>
@@ -778,10 +798,10 @@ RefreshToken은 AccessToken보다 수명이 길어(2주 이상) AccessToken의 �
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/wiki/2024/04/28/americanote-server1-create-linux-server.html" title="">아메리카노트 서버 구성 &lt;1&gt; Linux 서버 생성</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/java-regex-pattern-syntax-error.html" title="">Dangling meta character '?' near index 0</a></li>
-<li><a class="post-link" href="/wiki/2024/03/05/queue.html" title="">Queue</a></li>
-<li><a class="post-link" href="/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain.html" title="">아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용</a></li>
+        <li><a class="post-link" href="/wiki/2024/06/21/csp.html" title="">Mixed Content The page at '...' was loaded over HTTPS, but requested...</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/thymeleaf-rest-controller.html" title="">Thymeleaf와 @RestController</a></li>
+<li><a class="post-link" href="/wiki/2024/03/17/string-replacement.html" title="">문자열 대치</a></li>
+<li><a class="post-link" href="/wiki/2024/01/17/pathvariable-name-missing.html" title="">SpringBoot 3.2부터 @PathVariable 이름 미지정 시 에러</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>

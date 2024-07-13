@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2024-07-04T23:54:24+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">JWT(JSON Web Token)</title><link href="http://localhost:4000/wiki/2024/07/01/jwt.html" rel="alternate" type="text/html" title="JWT(JSON Web Token)" /><published>2024-07-01T00:00:00+09:00</published><updated>2024-07-01T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/07/01/jwt</id><content type="html" xml:base="http://localhost:4000/wiki/2024/07/01/jwt.html"><![CDATA[<h3 id="jwtjson-web-token-">JWT(JSON Web Token) ?</h3>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2024-07-13T14:37:24+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">JWT(JSON Web Token)</title><link href="http://localhost:4000/wiki/2024/07/01/jwt.html" rel="alternate" type="text/html" title="JWT(JSON Web Token)" /><published>2024-07-01T00:00:00+09:00</published><updated>2024-07-01T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/07/01/jwt</id><content type="html" xml:base="http://localhost:4000/wiki/2024/07/01/jwt.html"><![CDATA[<h3 id="jwtjson-web-token-">JWT(JSON Web Token) ?</h3>
 <ul>
   <li><strong>JWT(Json Web Token)</strong>란 인증에 필요한 JSON 데이터를 암호화시켜 저장한 Web Token
 <br /></li>
@@ -83,6 +83,25 @@ RefreshToken은 AccessToken보다 수명이 길어(2주 이상) AccessToken의 �
 <p>그리고 AccessToken는 만료 기한이 짧기 때문에 로그인을 자주 해야하는 번거로움이 있을 수 있으니 AccessToken만 사용하기보다는 RefreshToken을 함께 사용해서 편리하고 보안을 강화하는 게 좋아보인다.
 <br />
 <br /></p>
+
+<h4 id="프로젝트에-적용한-방법">프로젝트에 적용한 방법</h4>
+<ul>
+  <li>가입 시 내부에서 사용할 정보를 키값과 함께 인코딩하여 accessToken과 refreshToken을 생성하는데, accessToken은 헤더에 담아 리턴해주고, refreshToken은 DB에 저장한다.</li>
+  <li>클라이언트로부터 API 요청을 받을 때 accessToken이 필요하다면 함께 받은 뒤 확인하는데, 이때 만약  accessToken이 만료되었다면 DB의 refreshToken을 조회해서 만료되지 않았으면 accessToken을 새로 발급해준다.
+    <ul>
+      <li>하지만 이때 refreshToken도 만료되었다면 다시 로그인하도록 에러를 리턴한다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>❓refreshToken은 어디에 두어야 할까? accessToken만 주는 것이 아니라 refreshToken도 같이 줘야 하나? 그래서 accessToken이 만료되거나 없으면 다시 같이 발급해주고 ?</p>
+<ul>
+  <li>accessToken만 사용하다가 보안 문제로 인해 refreshToken도 같이 발급하기 시작</li>
+  <li>refreshToken을 로컬에 저장해둘 수도 있지만, refreshToken처럼 탈취할 수 있다는 단점이 있어 최근에는 refreshToken을 서버에 저장하기 시작함</li>
+  <li>결국 지금 사용하는 방식이 괜찮은 방식이며, AccessToken과 RefreshToken의 개념과 HTTP에 대해서 더 자세히 알아보는게 좋겠다.
+<br />
+<br /></li>
+</ul>
 
 <h4 id="참고">참고</h4>
 <ul>

@@ -1,4 +1,4 @@
-I"�<h3 id="jwtjson-web-token-">JWT(JSON Web Token) ?</h3>
+I"M<h3 id="jwtjson-web-token-">JWT(JSON Web Token) ?</h3>
 <ul>
   <li><strong>JWT(Json Web Token)</strong>란 인증에 필요한 JSON 데이터를 암호화시켜 저장한 Web Token
 <br /></li>
@@ -84,9 +84,28 @@ RefreshToken은 AccessToken보다 수명이 길어(2주 이상) AccessToken의 �
 <br />
 <br /></p>
 
+<h4 id="프로젝트에-적용한-방법">프로젝트에 적용한 방법</h4>
+<ul>
+  <li>가입 시 내부에서 사용할 정보를 키값과 함께 인코딩하여 accessToken과 refreshToken을 생성하는데, accessToken은 헤더에 담아 리턴해주고, refreshToken은 DB에 저장한다.</li>
+  <li>클라이언트로부터 API 요청을 받을 때 accessToken이 필요하다면 함께 받은 뒤 확인하는데, 이때 만약  accessToken이 만료되었다면 DB의 refreshToken을 조회해서 만료되지 않았으면 accessToken을 새로 발급해준다.
+    <ul>
+      <li>하지만 이때 refreshToken도 만료되었다면 다시 로그인하도록 에러를 리턴한다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>❓refreshToken은 어디에 두어야 할까? accessToken만 주는 것이 아니라 refreshToken도 같이 줘야 하나? 그래서 accessToken이 만료되거나 없으면 다시 같이 발급해주고 ?</p>
+<ul>
+  <li>accessToken만 사용하다가 보안 문제로 인해 refreshToken도 같이 발급하기 시작</li>
+  <li>refreshToken을 로컬에 저장해둘 수도 있지만, refreshToken처럼 탈취할 수 있다는 단점이 있어 최근에는 refreshToken을 서버에 저장하기 시작함</li>
+  <li>결국 지금 사용하는 방식이 괜찮은 방식이며, AccessToken과 RefreshToken의 개념과 HTTP에 대해서 더 자세히 알아보는게 좋겠다.
+<br />
+<br /></li>
+</ul>
+
 <h4 id="참고">참고</h4>
 <ul>
-  <li><a href="https://velog.io/@chuu1019/-%EC%95%8C%EA%B3%A0-%EC%93%B0%EC%9E%90-JWTJson-Web-Token">알고 쓰자, JWT(Json Web Token)</a></li>
+  <li><a href="https://velog.io/@chuu1019/%EC%95%8C%EA%B3%A0-%EC%93%B0%EC%9E%90-JWTJson-Web-Token">알고 쓰자, JWT(Json Web Token)</a></li>
   <li><a href="https://inpa.tistory.com/559">JWT 토큰 인증 이란? (쿠키 vs 세션 vs 토큰)</a></li>
   <li><a href="https://puleugo.tistory.com/138">우리는 왜 JWT를 사용하는가? / JWT 사용 이유</a></li>
 </ul>
