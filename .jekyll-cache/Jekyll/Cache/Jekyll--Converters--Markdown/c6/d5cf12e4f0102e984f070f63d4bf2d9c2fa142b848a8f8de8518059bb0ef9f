@@ -1,0 +1,84 @@
+I"�<h3 id="accesstoken과-refreshtoken">AccessToken과 RefreshToken</h3>
+<p>AccessToken은 사용자에 대한 정보를 담아 서비스에 접근(Access)할 수 있는 토큰이다.
+RefreshToken은 AccessToken과 다른 특별한 기능은 없지만, AccessToken을 새로 발급해주는 용도로 사용한다.
+<br />
+<br /></p>
+
+<h4 id="accesstoken의-문제">AccessToken의 문제</h4>
+<p>AccessToken만 사용하는 기존의 인증 방식은 토큰이 탈취되었을 때 문제가 발생한다. 
+또 이러한 상황에서도 내부에서는 해당 토큰이 탈취되었는지 구분할 수 없다. 그래서 유효기간이 필요한 것이다.
+그렇다고 유효기간이 너무 짧아도 사용자가 자주 로그인해야 하는 번거로움이 생기고, 유효기간을 늘리는 것 또한 보안에 취약할 수밖에 없다.
+그래서 유효기간이 다른 AccessToken과 RefreshToken 2개를 사용하는 것이다.
+<br />
+<br /></p>
+
+<h4 id="refreshtoken-사용">RefreshToken 사용</h4>
+<p>RefreshToken은 AccessToken처럼 JWT를 사용하지만, AccessToken는 내부 데이터에 접근하고, RefreshToken은 AccessToken을 재발급하는 역할을 한다.</p>
+
+<p>회원가입이나 로그인에 성공할 때 2가지 토큰을 모두 발급해준다. 데이터베이스에는 RefreshToken을 저장하고, 클라이언트에는 AccessToken과 RefreshToken을 보내 쿠키/세션/스토리지에 저장하여 토큰이 필요한 API마다 헤더(보통 Authorization)에 담아서 보낸다.</p>
+
+<p>RefreshToken은 AccessToken보다 유효기간이 길기 때문에, AccessToken이 만료되면 데이터베이스에 저장한 RefreshToken을 확인하여 다시 AccessToken을 재발급 해준다.
+<br />
+<br /></p>
+
+<h4 id="발급-프로세스">발급 프로세스</h4>
+<ol>
+  <li>서버는 회원가입/로그인 성공 시 AccessToken과 RefreshToken를 발급하여 클라이언트에 전달한다.
+    <ul>
+      <li>이때 RefreshToken은 데이터베이스에 저장해둔다.</li>
+    </ul>
+  </li>
+  <li>클라이언트는 전달받은 AccessToken과 RefreshToken을 로컬(쿠키/세션/스토리지 등)에 저장한다.</li>
+  <li>클라이언트는 토큰이 필요한 API의 헤더(Authorization)에 AccessToken을 넣어 요청을 보낸다.
+    <ul>
+      <li>서버에서는 인증된 사용자인지 먼저 검증한 후 요청 API의 로직을 수행하여 응답을 보낸다.</li>
+    </ul>
+  </li>
+  <li>로그아웃 API 요청 시 서버에서는 데이터베이스에 저장해둔 RefreshToken을 삭제한다.
+<br />
+<br /></li>
+</ol>
+
+<h4 id="토큰-검증-분기">토큰 검증 분기</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>AccessToken</th>
+      <th>RefreshToken</th>
+      <th>결과</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>유효</td>
+      <td>유효</td>
+      <td>정상 상태로 이후 로직 수행</td>
+    </tr>
+    <tr>
+      <td>만료</td>
+      <td>유효</td>
+      <td>클라이언트의 RefreshToken과 데이터베이스의 RefreshToken을 비교하여 AccessToken 재발급</td>
+    </tr>
+    <tr>
+      <td>유효</td>
+      <td>만료</td>
+      <td>AccessToken을 검증하여 RefreshToken 재발급</td>
+    </tr>
+    <tr>
+      <td>만료</td>
+      <td>만료</td>
+      <td>재로그인을 요청하여 토큰을 새로 발급받도록 유도</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br />
+<br /></p>
+
+<h4 id="참고">참고</h4>
+<ul>
+  <li><a href="[https://inpa.tistory.com/entry/WEB-📚-Access-Token-Refresh-Token-원리-feat-JWT](https://inpa.tistory.com/entry/WEB-%F0%9F%93%9A-Access-Token-Refresh-Token-%EC%9B%90%EB%A6%AC-feat-JWT)">Access Token &amp; Refresh Token 원리</a></li>
+  <li><a href="[https://velog.io/@chuu1019/Access-Token과-Refresh-Token이란-무엇이고-왜-필요할까](https://velog.io/@chuu1019/Access-Token%EA%B3%BC-Refresh-Token%EC%9D%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B4%EA%B3%A0-%EC%99%9C-%ED%95%84%EC%9A%94%ED%95%A0%EA%B9%8C)">Access Token과 Refresh Token이란 무엇이고 왜 필요할까?</a></li>
+</ul>
+:ET

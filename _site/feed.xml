@@ -1,4 +1,89 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2024-07-13T14:37:24+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">JWT(JSON Web Token)</title><link href="http://localhost:4000/wiki/2024/07/01/jwt.html" rel="alternate" type="text/html" title="JWT(JSON Web Token)" /><published>2024-07-01T00:00:00+09:00</published><updated>2024-07-01T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/07/01/jwt</id><content type="html" xml:base="http://localhost:4000/wiki/2024/07/01/jwt.html"><![CDATA[<h3 id="jwtjson-web-token-">JWT(JSON Web Token) ?</h3>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2024-07-20T18:40:28+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">AccessToken과 RefreshToken</title><link href="http://localhost:4000/wiki/2024/07/13/accesstoken-refreshtoken.html" rel="alternate" type="text/html" title="AccessToken과 RefreshToken" /><published>2024-07-13T00:00:00+09:00</published><updated>2024-07-13T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/07/13/accesstoken-refreshtoken</id><content type="html" xml:base="http://localhost:4000/wiki/2024/07/13/accesstoken-refreshtoken.html"><![CDATA[<h3 id="accesstoken과-refreshtoken">AccessToken과 RefreshToken</h3>
+<p><code class="language-plaintext highlighter-rouge">AccessToken</code>은 사용자에 대한 정보를 담아 서비스에 접근(Access)할 수 있는 토큰이다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">RefreshToken</code>은 <code class="language-plaintext highlighter-rouge">AccessToken</code>과 다른 특별한 기능은 없지만, <code class="language-plaintext highlighter-rouge">AccessToken</code>을 새로 발급해주는 용도로 사용한다.
+<br />
+<br /></p>
+
+<h4 id="accesstoken의-문제">AccessToken의 문제</h4>
+<p><code class="language-plaintext highlighter-rouge">AccessToken</code>만 사용하는 기존의 인증 방식은 토큰이 탈취되었을 때 문제가 발생한다.</p>
+
+<p>또 이러한 상황에서도 내부에서는 해당 토큰이 탈취되었는지 구분할 수 없다. 그래서 유효기간이 필요한 것이다.</p>
+
+<p>그렇다고 유효기간이 너무 짧아도 사용자가 자주 로그인해야 하는 번거로움이 생기고, 유효기간을 늘리는 것 또한 보안에 취약할 수밖에 없다.
+그래서 유효기간이 다른 <code class="language-plaintext highlighter-rouge">AccessToken</code>과 <code class="language-plaintext highlighter-rouge">RefreshToken</code> 2개를 사용하는 것이다.
+<br />
+<br /></p>
+
+<h4 id="refreshtoken-사용">RefreshToken 사용</h4>
+<p><code class="language-plaintext highlighter-rouge">RefreshToken</code>은 <code class="language-plaintext highlighter-rouge">AccessToken</code>처럼 JWT를 사용하지만, AccessToken는 내부 데이터에 접근하고, <code class="language-plaintext highlighter-rouge">RefreshToken</code>은 <code class="language-plaintext highlighter-rouge">AccessToken</code>을 재발급하는 역할을 한다.</p>
+
+<p>회원가입이나 로그인에 성공할 때 2가지 토큰을 모두 발급해준다. 
+데이터베이스에는 <code class="language-plaintext highlighter-rouge">RefreshToken</code>을 저장하고, 클라이언트에는 <code class="language-plaintext highlighter-rouge">AccessToken</code>과 <code class="language-plaintext highlighter-rouge">RefreshToken</code>을 보내 쿠키/세션/스토리지에 저장하여 토큰이 필요한 API마다 헤더(보통 Authorization)에 담아서 보낸다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">RefreshToken</code>은 <code class="language-plaintext highlighter-rouge">AccessToken</code>보다 유효기간이 길기 때문에, AccessToken이 만료되면 데이터베이스에 저장한 <code class="language-plaintext highlighter-rouge">RefreshToken</code>을 확인하여 다시 <code class="language-plaintext highlighter-rouge">AccessToken</code>을 재발급 해준다.
+<br />
+<br /></p>
+
+<h4 id="발급-프로세스">발급 프로세스</h4>
+<ol>
+  <li>서버는 회원가입/로그인 성공 시 <code class="language-plaintext highlighter-rouge">AccessToken</code>과 <code class="language-plaintext highlighter-rouge">RefreshToken</code>를 발급하여 클라이언트에 전달한다.
+    <ul>
+      <li>이때 <code class="language-plaintext highlighter-rouge">RefreshToken</code>은 데이터베이스에 저장해둔다.</li>
+    </ul>
+  </li>
+  <li>클라이언트는 전달받은 <code class="language-plaintext highlighter-rouge">AccessToken</code>과 <code class="language-plaintext highlighter-rouge">RefreshToken</code>을 로컬(쿠키/세션/스토리지 등)에 저장한다.</li>
+  <li>클라이언트는 토큰이 필요한 API의 헤더(Authorization)에 <code class="language-plaintext highlighter-rouge">AccessToken</code>을 넣어 요청을 보낸다.
+    <ul>
+      <li>서버에서는 인증된 사용자인지 먼저 검증한 후 요청 API의 로직을 수행하여 응답을 보낸다.</li>
+    </ul>
+  </li>
+  <li>로그아웃 API 요청 시 서버에서는 데이터베이스에 저장해둔 <code class="language-plaintext highlighter-rouge">RefreshToken</code>을 삭제한다.
+<br />
+<br /></li>
+</ol>
+
+<h4 id="토큰-검증-분기">토큰 검증 분기</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>AccessToken</th>
+      <th>RefreshToken</th>
+      <th>결과</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>유효</td>
+      <td>유효</td>
+      <td>정상 상태로 이후 로직 수행</td>
+    </tr>
+    <tr>
+      <td>만료</td>
+      <td>유효</td>
+      <td>클라이언트의 RefreshToken과 데이터베이스의 RefreshToken을 비교하여 AccessToken 재발급</td>
+    </tr>
+    <tr>
+      <td>유효</td>
+      <td>만료</td>
+      <td>AccessToken을 검증하여 RefreshToken 재발급</td>
+    </tr>
+    <tr>
+      <td>만료</td>
+      <td>만료</td>
+      <td>재로그인을 요청하여 토큰을 새로 발급받도록 유도</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<h4 id="참고">참고</h4>
+<ul>
+  <li><a href="[https://inpa.tistory.com/entry/WEB-📚-Access-Token-Refresh-Token-원리-feat-JWT](https://inpa.tistory.com/entry/WEB-%F0%9F%93%9A-Access-Token-Refresh-Token-%EC%9B%90%EB%A6%AC-feat-JWT)">Access Token &amp; Refresh Token 원리</a></li>
+  <li><a href="[https://velog.io/@chuu1019/Access-Token과-Refresh-Token이란-무엇이고-왜-필요할까](https://velog.io/@chuu1019/Access-Token%EA%B3%BC-Refresh-Token%EC%9D%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B4%EA%B3%A0-%EC%99%9C-%ED%95%84%EC%9A%94%ED%95%A0%EA%B9%8C)">Access Token과 Refresh Token이란 무엇이고 왜 필요할까?</a></li>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="JWT" /><category term="AccessToken" /><category term="RefreshToken Network" /><summary type="html"><![CDATA[AccessToken과 RefreshToken AccessToken은 사용자에 대한 정보를 담아 서비스에 접근(Access)할 수 있는 토큰이다.]]></summary></entry><entry><title type="html">JWT(JSON Web Token)</title><link href="http://localhost:4000/wiki/2024/07/01/jwt.html" rel="alternate" type="text/html" title="JWT(JSON Web Token)" /><published>2024-07-01T00:00:00+09:00</published><updated>2024-07-01T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/07/01/jwt</id><content type="html" xml:base="http://localhost:4000/wiki/2024/07/01/jwt.html"><![CDATA[<h3 id="jwtjson-web-token-">JWT(JSON Web Token) ?</h3>
 <ul>
   <li><strong>JWT(Json Web Token)</strong>란 인증에 필요한 JSON 데이터를 암호화시켜 저장한 Web Token
 <br /></li>
@@ -315,44 +400,7 @@ QueryDSL에 관련해서는 나도 많이 부족했지만, 실무에서의 경�
 
 <p>입사하면 신입이나 주니어는 보통 세팅된 환경에서만 개발을 하기 때문에 나 또한 전회사에서 기초 설정에 대한 부분을 사수나 다른 팀원들이 해줬었는데, 이번 프로젝트로 Swagger 설정이나 서버, JWT 같은 기본이라고 하면 할 수 있는 중요한 부분을 작업하면서 개발자로서 조금 더 나아가는 느낌을 받았다.</p>
 
-<p>또한, 기획이나 프론트 팀원과도 의사소통하면서 내가 알고 있는 지식을 상대방의 설명하는 게 정말 힘들었기 때문에, 앞으로 의미가 잘 전달될 수 있도록 말을 조금 더 잘 고르고 상대의 입장을 생각해 봐야겠다.</p>]]></content><author><name>Dajeong Park</name></author><category term="blog" /><category term="TeamProject" /><category term="Project" /><category term="Americanote" /><category term="Review" /><summary type="html"><![CDATA[Americanote ☕️ 프로젝트: 아메리카노트 (내 취향에 딱 맞는 아메리카노 카페 찾기 서비스) 프로젝트 기간: 2024.03.21 ~ 2024.03.30, 리팩토링 2024.04]]></summary></entry><entry><title type="html">도서 등록 API 속도 개선 회고</title><link href="http://localhost:4000/blog/2024/05/10/book-insert-api-speed-improvement-review.html" rel="alternate" type="text/html" title="도서 등록 API 속도 개선 회고" /><published>2024-05-10T00:00:00+09:00</published><updated>2024-05-10T00:00:00+09:00</updated><id>http://localhost:4000/blog/2024/05/10/book-insert-api-speed-improvement-review</id><content type="html" xml:base="http://localhost:4000/blog/2024/05/10/book-insert-api-speed-improvement-review.html"><![CDATA[<p>홈페이지 마이그레이션 이후 새로운 업무를 받았다.</p>
-
-<p>당시 자사 서비스인 도서 플랫폼에서는 사용자로부터 도서 등록 문의를 받아 등록해줬었다.</p>
-
-<p>문의한 도서가 ‘전집’일 때는 운영팀에서 도서를 검색해서 개발팀에게 전달해 데이터베이스에 등록하는 과정을 거쳤지만,<br />
-‘단행본’일 때는 운영팀에서 관리자 페이지에서 직접 등록하기도 했다.<br />
-하지만 점점 요청이 많아지기도 해서 내가 ‘단행본’ 등록하는 API를 개발하게 되었다.
-<br />
-<br /></p>
-
-<p>기존 전집 등록 API를 이용하면 금방 만들 수 있겠다고 생각했지만, 도서 플랫폼의 백단 프로젝트가 거대한 레거시 프로젝트라는 한 가지 복병이 있었다.</p>
-
-<p>레거시 프로젝트는 JPA로 구성되어 있었지만, JPA의 장점을 하나도 사용하지 않는 데다 특정 메소드만 사용하고 있었고,<br />
-사용하고 있는 특정 메소드 또한 방대한 중복 및 로깅 코드에 클래스와 메소드 이름이 중구난방에 의미도 불분명했다.<br />
-게다가 데이터베이스도 테이블이 엄청나게 얽혀 있어 함부로 수정할 수 없는 상태였다.
-<br />
-<br /></p>
-
-<p>이런 상태에서 그대로 단행본 API만 만들 수도 있었지만, 왠지 마음이 찝찝해서 기존 전집 등록 API부터 개선해보기로 했다. 그리고 이때 속도를 비교해보면 좋을 것 같아서 <code class="language-plaintext highlighter-rouge">System.currentTimeMillis</code> 메소드를 사용해서 이전 코드의 속도를 측정해보니 50권의 전집을 등록할 때 5.56초가 걸렸다.
-<br />
-<br /></p>
-
-<p>일단 이리갔다 저리갔다 코드가 너무 보기 불편했기 때문에 클래스와 메서드부터 연관성에 따라서 재배치하거나 분리했다.<br />
-그리고 불명확하게 작성되어 있던 메소드 이름도 가독성 있는 이름으로 바꿨다.<br />
-마지막으로는 수많은 로깅 및 주석 코드를 정리했고, 중간중간 중복 코드도 찾아내어 삭제했다.</p>
-
-<p>이후 코드 속도를 다시 측정해보니 같은 전집을 등록할 때 3.27초로 속도가 개선되었다.
-<br />
-<br /></p>
-
-<p>이후 단행본 API를 구현하는 건 정말 간단했다.<br />
-원래는 같은 API를 쓰고 싶었지만, 운영팀에서 주시는 전집과 단행본의 엑셀 컬럼이 달라서 다른 API로 분리를 한 다음<br />
-엑셀을 읽어들이는 부분만 다르게 설정하고, 내부 로직은 동일한 메소드를 사용하도록 조정했다.
-<br />
-<br /></p>
-
-<h4 id="소감">소감</h4>
-<p>단행본 API를 구현하라는 업무에서 사실상 전집 API를 개선하는 데 더 시간을 많이 보냈지만 개인적으로 정말 뿌듯한 업무였다. ㅎㅎ 주니어 때 해보기 힘든 속도도 개선도 해보고, 데이터에 영향이 가지 않도록 고민하는 과정들이 개발자라는 직업에 대해 깊이 있게 생각하게 만들어 준 것 같다~!</p>]]></content><author><name>Dajeong Park</name></author><category term="blog" /><category term="Project" /><category term="Review" /><summary type="html"><![CDATA[홈페이지 마이그레이션 이후 새로운 업무를 받았다.]]></summary></entry><entry><title type="html">독서 관리 서비스의 Admin 개발 회고</title><link href="http://localhost:4000/blog/2024/05/10/book-service-admin-review.html" rel="alternate" type="text/html" title="독서 관리 서비스의 Admin 개발 회고" /><published>2024-05-10T00:00:00+09:00</published><updated>2024-05-10T00:00:00+09:00</updated><id>http://localhost:4000/blog/2024/05/10/book-service-admin-review</id><content type="html" xml:base="http://localhost:4000/blog/2024/05/10/book-service-admin-review.html"><![CDATA[<p>홈페이지 마이그레이션, 도서 단행본 API 구현 업무를 마치고 나니 협력사와 아이가 도서를 읽고 독후감을 쓰면 첨삭해주는 서비스를 만들게 됐는데, 당시 일손이 부족해서 내가 관리자를 통으로 담당하게 되었다.
+<p>또한, 기획이나 프론트 팀원과도 의사소통하면서 내가 알고 있는 지식을 상대방의 설명하는 게 정말 힘들었기 때문에, 앞으로 의미가 잘 전달될 수 있도록 말을 조금 더 잘 고르고 상대의 입장을 생각해 봐야겠다.</p>]]></content><author><name>Dajeong Park</name></author><category term="blog" /><category term="TeamProject" /><category term="Project" /><category term="Americanote" /><category term="Review" /><summary type="html"><![CDATA[Americanote ☕️ 프로젝트: 아메리카노트 (내 취향에 딱 맞는 아메리카노 카페 찾기 서비스) 프로젝트 기간: 2024.03.21 ~ 2024.03.30, 리팩토링 2024.04]]></summary></entry><entry><title type="html">독서 관리 서비스의 Admin 개발 회고</title><link href="http://localhost:4000/blog/2024/05/10/book-service-admin-review.html" rel="alternate" type="text/html" title="독서 관리 서비스의 Admin 개발 회고" /><published>2024-05-10T00:00:00+09:00</published><updated>2024-05-10T00:00:00+09:00</updated><id>http://localhost:4000/blog/2024/05/10/book-service-admin-review</id><content type="html" xml:base="http://localhost:4000/blog/2024/05/10/book-service-admin-review.html"><![CDATA[<p>홈페이지 마이그레이션, 도서 단행본 API 구현 업무를 마치고 나니 협력사와 아이가 도서를 읽고 독후감을 쓰면 첨삭해주는 서비스를 만들게 됐는데, 당시 일손이 부족해서 내가 관리자를 통으로 담당하게 되었다.
 <br />
 <br /></p>
 
@@ -390,7 +438,44 @@ QueryDSL에 관련해서는 나도 많이 부족했지만, 실무에서의 경�
 <h4 id="소감">소감</h4>
 <p>중간중간 운영팀 과장님과 대리님께 피드백도 받아가면서 프로젝트를 마무리했더니 의사소통도 잘하고 손이 빠르다는 평을 들었다. 새로운 기능도 많이 개발해보고, 프론트단도 처음이지만 이리저리 공부하면서 작업한 부분도 정말 뿌듯했다. 이 프로젝트를 통해서 팀원들과의 의사소통과 사용자 입장에서 개발하는 것의 중요성을 뼈저리게 깨달았다.</p>
 
-<p>그리고 공부해서 바로 실무에 적용해보는 게 정말 재미있기도 했는데, 실제로 다음 프로젝트부터는 VO를 보호하기 위해 DTO와 Builder 패턴을 사용하는 등 김영한님의 강의가 정말 하나하나 피가 되고 살이 되어서 모든 강의를 다 수강해서 열심히 공부하기도 했다.</p>]]></content><author><name>Dajeong Park</name></author><category term="blog" /><category term="Project" /><category term="Admin" /><category term="Review" /><summary type="html"><![CDATA[홈페이지 마이그레이션, 도서 단행본 API 구현 업무를 마치고 나니 협력사와 아이가 도서를 읽고 독후감을 쓰면 첨삭해주는 서비스를 만들게 됐는데, 당시 일손이 부족해서 내가 관리자를 통으로 담당하게 되었다.]]></summary></entry><entry><title type="html">홈페이지 마이그레이션 회고</title><link href="http://localhost:4000/blog/2024/05/09/hompage-migration-review.html" rel="alternate" type="text/html" title="홈페이지 마이그레이션 회고" /><published>2024-05-09T00:00:00+09:00</published><updated>2024-05-09T00:00:00+09:00</updated><id>http://localhost:4000/blog/2024/05/09/hompage-migration-review</id><content type="html" xml:base="http://localhost:4000/blog/2024/05/09/hompage-migration-review.html"><![CDATA[<p>포트폴리오를 작성하다보니 생각보다 예전에 했던 프로젝트들이 회고해볼 만한 게 많아서 한 번 되짚어보려고 한다.
+<p>그리고 공부해서 바로 실무에 적용해보는 게 정말 재미있기도 했는데, 실제로 다음 프로젝트부터는 VO를 보호하기 위해 DTO와 Builder 패턴을 사용하는 등 김영한님의 강의가 정말 하나하나 피가 되고 살이 되어서 모든 강의를 다 수강해서 열심히 공부하기도 했다.</p>]]></content><author><name>Dajeong Park</name></author><category term="blog" /><category term="Project" /><category term="Admin" /><category term="Review" /><summary type="html"><![CDATA[홈페이지 마이그레이션, 도서 단행본 API 구현 업무를 마치고 나니 협력사와 아이가 도서를 읽고 독후감을 쓰면 첨삭해주는 서비스를 만들게 됐는데, 당시 일손이 부족해서 내가 관리자를 통으로 담당하게 되었다.]]></summary></entry><entry><title type="html">도서 등록 API 속도 개선 회고</title><link href="http://localhost:4000/blog/2024/05/10/book-insert-api-speed-improvement-review.html" rel="alternate" type="text/html" title="도서 등록 API 속도 개선 회고" /><published>2024-05-10T00:00:00+09:00</published><updated>2024-05-10T00:00:00+09:00</updated><id>http://localhost:4000/blog/2024/05/10/book-insert-api-speed-improvement-review</id><content type="html" xml:base="http://localhost:4000/blog/2024/05/10/book-insert-api-speed-improvement-review.html"><![CDATA[<p>홈페이지 마이그레이션 이후 새로운 업무를 받았다.</p>
+
+<p>당시 자사 서비스인 도서 플랫폼에서는 사용자로부터 도서 등록 문의를 받아 등록해줬었다.</p>
+
+<p>문의한 도서가 ‘전집’일 때는 운영팀에서 도서를 검색해서 개발팀에게 전달해 데이터베이스에 등록하는 과정을 거쳤지만,<br />
+‘단행본’일 때는 운영팀에서 관리자 페이지에서 직접 등록하기도 했다.<br />
+하지만 점점 요청이 많아지기도 해서 내가 ‘단행본’ 등록하는 API를 개발하게 되었다.
+<br />
+<br /></p>
+
+<p>기존 전집 등록 API를 이용하면 금방 만들 수 있겠다고 생각했지만, 도서 플랫폼의 백단 프로젝트가 거대한 레거시 프로젝트라는 한 가지 복병이 있었다.</p>
+
+<p>레거시 프로젝트는 JPA로 구성되어 있었지만, JPA의 장점을 하나도 사용하지 않는 데다 특정 메소드만 사용하고 있었고,<br />
+사용하고 있는 특정 메소드 또한 방대한 중복 및 로깅 코드에 클래스와 메소드 이름이 중구난방에 의미도 불분명했다.<br />
+게다가 데이터베이스도 테이블이 엄청나게 얽혀 있어 함부로 수정할 수 없는 상태였다.
+<br />
+<br /></p>
+
+<p>이런 상태에서 그대로 단행본 API만 만들 수도 있었지만, 왠지 마음이 찝찝해서 기존 전집 등록 API부터 개선해보기로 했다. 그리고 이때 속도를 비교해보면 좋을 것 같아서 <code class="language-plaintext highlighter-rouge">System.currentTimeMillis</code> 메소드를 사용해서 이전 코드의 속도를 측정해보니 50권의 전집을 등록할 때 5.56초가 걸렸다.
+<br />
+<br /></p>
+
+<p>일단 이리갔다 저리갔다 코드가 너무 보기 불편했기 때문에 클래스와 메서드부터 연관성에 따라서 재배치하거나 분리했다.<br />
+그리고 불명확하게 작성되어 있던 메소드 이름도 가독성 있는 이름으로 바꿨다.<br />
+마지막으로는 수많은 로깅 및 주석 코드를 정리했고, 중간중간 중복 코드도 찾아내어 삭제했다.</p>
+
+<p>이후 코드 속도를 다시 측정해보니 같은 전집을 등록할 때 3.27초로 속도가 개선되었다.
+<br />
+<br /></p>
+
+<p>이후 단행본 API를 구현하는 건 정말 간단했다.<br />
+원래는 같은 API를 쓰고 싶었지만, 운영팀에서 주시는 전집과 단행본의 엑셀 컬럼이 달라서 다른 API로 분리를 한 다음<br />
+엑셀을 읽어들이는 부분만 다르게 설정하고, 내부 로직은 동일한 메소드를 사용하도록 조정했다.
+<br />
+<br /></p>
+
+<h4 id="소감">소감</h4>
+<p>단행본 API를 구현하라는 업무에서 사실상 전집 API를 개선하는 데 더 시간을 많이 보냈지만 개인적으로 정말 뿌듯한 업무였다. ㅎㅎ 주니어 때 해보기 힘든 속도도 개선도 해보고, 데이터에 영향이 가지 않도록 고민하는 과정들이 개발자라는 직업에 대해 깊이 있게 생각하게 만들어 준 것 같다~!</p>]]></content><author><name>Dajeong Park</name></author><category term="blog" /><category term="Project" /><category term="Review" /><summary type="html"><![CDATA[홈페이지 마이그레이션 이후 새로운 업무를 받았다.]]></summary></entry><entry><title type="html">홈페이지 마이그레이션 회고</title><link href="http://localhost:4000/blog/2024/05/09/hompage-migration-review.html" rel="alternate" type="text/html" title="홈페이지 마이그레이션 회고" /><published>2024-05-09T00:00:00+09:00</published><updated>2024-05-09T00:00:00+09:00</updated><id>http://localhost:4000/blog/2024/05/09/hompage-migration-review</id><content type="html" xml:base="http://localhost:4000/blog/2024/05/09/hompage-migration-review.html"><![CDATA[<p>포트폴리오를 작성하다보니 생각보다 예전에 했던 프로젝트들이 회고해볼 만한 게 많아서 한 번 되짚어보려고 한다.
 <br />
 <br /></p>
 
@@ -745,140 +830,4 @@ server <span class="o">{</span>
 <ul>
   <li><a href="https://jaehyeon48.github.io/nginx/configure-nginx-on-ubuntu-2004">Ubuntu 20.04에서 Nginx 설치 및 설정하기</a></li>
   <li><a href="https://velog.io/@xangj0ng/Linux-Ubuntu-Nginx-%EC%84%A4%EC%B9%98">https://velog.io/@xangj0ng/Linux-Ubuntu-Nginx-설치</a></li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Server" /><category term="NaverCloudPlatform" /><category term="Project" /><category term="DNS" /><summary type="html"><![CDATA[자동 배포까지 했으니 어느정도는 백엔드 코드를 서버에 올리는 것까지 했다고 할 수 있겠습니다. 저도 여기가 마지막인 줄 알았으나.. 첨부한 이미지는 프론트분이 API가 요청되지 않는다고 캡쳐해주신 에러 메세지입니다. 읽어보면 HTTPS인 프론트 도메인에서 HTTP인 백엔드 도메인으로 요청하는 부분에서 XMLHttpRequest 에러가 발생했습니다. 바로 CORS 문제입니다 ㅎㅎ 검색해보니 프론트 쪽에서 간단하게 &lt;meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"&gt; 같은 HTML 코드를 넣어서 해결하는 방법도 있었지만, 그래도 저희는 해결되지 않아서 결국 도메인을 구매하기로 결정했습니다. (심지어 마감 전날 토요일에 ㅎㅎ)]]></summary></entry><entry><title type="html">아메리카노트 서버 구성 &amp;lt;4&amp;gt; 자동 배포</title><link href="http://localhost:4000/wiki/2024/04/29/americanote-server4-automatical-deploy.html" rel="alternate" type="text/html" title="아메리카노트 서버 구성 &amp;lt;4&amp;gt; 자동 배포" /><published>2024-04-29T00:00:00+09:00</published><updated>2024-04-29T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/04/29/americanote-server4-automatical-deploy</id><content type="html" xml:base="http://localhost:4000/wiki/2024/04/29/americanote-server4-automatical-deploy.html"><![CDATA[<hr />
-<p>layout: post
-title: 아메리카노트 서버 구성 &lt;4&gt; 자동 배포
-subtitle: 
-categories: wiki
-tags: [Server, NaverCloudPlatform, Project, Deploy, GithubActions]
-—</p>
-<ul>
-  <li>프로젝트를 서버에 배포해봤다면 번거롭다는 생각을 한번쯤 해봤을 것 같습니다. 그래서 이번에는 그 배포를 자동으로 진행해보겠습니다.</li>
-  <li>자동 배포는 Github Actions의 self-hosted runner를 사용했습니다.
-<br />
-<br /></li>
-</ul>
-
-<h4 id="1-프로젝트-리포지토리에서-github-actions-runner-생성하기">1. 프로젝트 리포지토리에서 Github Actions Runner 생성하기</h4>
-<ul>
-  <li>프로젝트 리포지토리로 이동하여 Settings - Actions - Runners - New self-hosted runner 화면으로 이동합니다.
-<img width="1344" alt="github-actions1" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/c576842e-5e21-4301-a477-b84727d1d967" />
-<br />
-<br /></li>
-</ul>
-
-<h4 id="2-서버에서-명령어-입력하기">2. 서버에서 명령어 입력하기</h4>
-<ul>
-  <li>서버에 Github Actions runner를 생성해주는 명령어들로 하나씩 차근차근 입력해 줍니다.</li>
-  <li>마지막 명령어 실행 중 <strong>Must not run with sudo</strong> 라는 에러 메시지가 발생하면 <code class="language-plaintext highlighter-rouge">export RUNNER_ALLOW_RUNASROOT="1”</code>를 입력한 뒤 재시도하면 됩니다.
-<img width="788" alt="github-actions2" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/43dad816-a9ed-4eaa-b137-d76272e537b6" /></li>
-  <li>설치 완료 이후 화면
-<img width="671" alt="github-actions3" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/9bf0bd39-e89e-468b-9755-6debf9c54ac6" /></li>
-  <li>이후 아래 명령어를 입력하면 Github Actions를 수신할 준비가 완료됩니다.
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo</span> ./svc.sh <span class="nb">install
-sudo</span> ./svc.sh start
-</code></pre></div>    </div>
-    <p><br />
-<br /></p>
-  </li>
-</ul>
-
-<h4 id="3-리포지토리에서-actons-workflow-생성">3. 리포지토리에서 Actons workflow 생성</h4>
-<ul>
-  <li>다시 리포지토리로 돌아가서 Actions 탭에서 왼쪽 상단의 New workflow를 클릭한 뒤 저희 프로젝트에 맞는 ‘Java with Gradle’을 선택하여 워크플로우를 생성합니다.</li>
-  <li>이 워크플로우가 바로 Github Actions가 서버에서 수행할 업무들입니다.</li>
-  <li>이전 페이지(<a href="https://dajeongdev.github.io/wiki/2024/04/29/deploy-project.html">&lt;3&gt; 프로젝트 배포</a>)에서 직접 설치 및 작성한 것과 동일하게 진행합니다.
-    <ul>
-      <li>JDK 17 설치</li>
-      <li>YML 파일 생성</li>
-      <li>Gradle 빌드</li>
-    </ul>
-  </li>
-</ul>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name: Auto Deploy
-
-on:
-  push:
-    branches:
-      - develop
-
-<span class="nb">jobs</span>:
-  build:
-
-    runs-on: self-hosted
-
-    steps:
-      <span class="c"># checkout</span>
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      <span class="c"># JDK setting</span>
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: <span class="s1">'17'</span>
-          distribution: <span class="s1">'zulu'</span>
-
-      <span class="c"># secret yml file 생성</span>
-      - name: Set secret yml
-        run: |
-          <span class="nb">mkdir</span> <span class="nt">-p</span> src/main/resources
-          <span class="nb">echo</span> <span class="s2">"$"</span> | <span class="nb">base64</span> <span class="nt">--decode</span> <span class="o">&gt;</span> src/main/resources/application-database.yml
-          <span class="nb">echo</span> <span class="s2">"$"</span> | <span class="nb">base64</span> <span class="nt">--decode</span> <span class="o">&gt;</span> src/main/resources/application-naver-token.yml
-          <span class="nb">echo</span> <span class="s2">"$"</span> | <span class="nb">base64</span> <span class="nt">--decode</span> <span class="o">&gt;</span> src/main/resources/application-security.yml
-          find src
-        shell: bash
-
-      <span class="c"># Gradle 권한 부여</span>
-      - name: Grant permission <span class="k">for </span>gradlew
-        run: <span class="nb">chmod</span> +x ./gradlew
-
-      <span class="c"># 테스트 없이 빌드</span>
-      - name: Build with Gradle
-        run: ./gradlew clean build <span class="nt">-x</span> <span class="nb">test</span>
-
-      <span class="c"># 포트가 사용 중이라면 종료</span>
-      - name: Kill 8009 port <span class="k">if </span>exist
-        run: |
-            <span class="k">if </span><span class="nb">sudo </span>lsof <span class="nt">-i</span> :8009<span class="p">;</span> <span class="k">then
-              </span><span class="nb">echo</span> <span class="s2">"Port 8009 is already in use. Killing the process..."</span>
-              <span class="nb">sudo kill</span> <span class="nt">-9</span> <span class="sb">`</span><span class="nb">sudo </span>lsof <span class="nt">-t</span> <span class="nt">-i</span>:8009<span class="sb">`</span>
-            <span class="k">fi</span>
-
-      <span class="c"># build/libs 폴더 속 jar 파일 실행</span>
-      - name: Execute Jar File
-        run: |
-          <span class="nb">sudo nohup </span>java <span class="nt">-jar</span> build/libs/americano-0.0.1-SNAPSHOT.jar 1&gt;/root/nohup/output.log 2&gt;/root/nohup/error.log &amp;
-          <span class="nb">sleep </span>10
-</code></pre></div></div>
-<ul>
-  <li>secret yml 파일의 경우 별도로 필요한 yml들을 Base64로 인코딩하여 리포지토리 Settings → Secrets and variables → Actions에서 Repository Secrets로 설정해주었습니다.
-<img width="1340" alt="github-actions4" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/f2771b69-b97f-4255-9e94-6e3c1307921d" /></li>
-  <li>또한, Github Actions self-hosted runner에서는 nohup이 적용되지 않아 자꾸 <code class="language-plaintext highlighter-rouge">Unable access to jarfile</code>가 발생하여, 결국 이 부분을 제거했더니 성공적으로 실행되었습니다.
-    <ul>
-      <li><del>nohup이 적용되지 않는 부분은 추후 원인을 찾아내면 꼭 작성해두도록 하겠습니다!</del> <strong>방법을 찾아서 추가하겠습니다. 또한 어이없게도 제가 nohup 이후에 설정한 게 없기 때문에 로그를 확인할 수 없어 필요하기도 했습니다..🥲</strong>
-        <ul>
-          <li>nohup의 출력은 프로젝트 내에서 권한 밖이기 때문에 발생한 에러라고 확인이 됩니다. 그래서 프로젝트 밖의 경로로 설정하여 표준 출력과 에러를 구분하여 로그를 전달하는 방식으로 스크립트를 추가했습니다.</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 이전
-<span class="nb">sudo nohup </span>java <span class="nt">-jar</span> build/libs/americano-0.0.1-SNAPSHOT.jar &amp;
-// 현재
- <span class="nb">sudo nohup </span>java <span class="nt">-jar</span> build/libs/americano-0.0.1-SNAPSHOT.jar 1&gt;/root/nohup/output.log 2&gt;/root/nohup/error.log &amp;
-</code></pre></div></div>
-<p><br />
-<br /></p>
-
-<h4 id="참고">참고</h4>
-<ul>
-  <li>https://e-room.tistory.com/145</li>
-  <li>https://be-student.tistory.com/75</li>
-  <li><a href="https://velog.io/@bjk1649/github-Action-%EB%A7%8C%EC%9C%BC%EB%A1%9C-%EC%A7%80%EC%86%8D%EC%A0%81-%EB%B0%B0%ED%8F%ACCD-%EB%AA%BB%ED%95%98%EB%82%98">https://velog.io/@bjk1649/github-Action-만으로-지속적-배포CD-못하나</a></li>
-  <li>https://green-joo.tistory.com/26</li>
-  <li><a href="https://velog.io/@chlee4858/20211205-github%EC%97%90%EC%84%9C-CICD-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0-github-action">https://velog.io/@chlee4858/20211205-github에서-CICD-적용하기-github-action</a></li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Server" /><category term="NaverCloudPlatform" /><category term="Project" /><category term="Deploy" /><summary type="html"><![CDATA[layout: post title: 아메리카노트 서버 구성 &lt;4&gt; 자동 배포 subtitle: categories: wiki tags: [Server, NaverCloudPlatform, Project, Deploy, GithubActions] — 프로젝트를 서버에 배포해봤다면 번거롭다는 생각을 한번쯤 해봤을 것 같습니다. 그래서 이번에는 그 배포를 자동으로 진행해보겠습니다. 자동 배포는 Github Actions의 self-hosted runner를 사용했습니다.]]></summary></entry></feed>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Server" /><category term="NaverCloudPlatform" /><category term="Project" /><category term="DNS" /><summary type="html"><![CDATA[자동 배포까지 했으니 어느정도는 백엔드 코드를 서버에 올리는 것까지 했다고 할 수 있겠습니다. 저도 여기가 마지막인 줄 알았으나.. 첨부한 이미지는 프론트분이 API가 요청되지 않는다고 캡쳐해주신 에러 메세지입니다. 읽어보면 HTTPS인 프론트 도메인에서 HTTP인 백엔드 도메인으로 요청하는 부분에서 XMLHttpRequest 에러가 발생했습니다. 바로 CORS 문제입니다 ㅎㅎ 검색해보니 프론트 쪽에서 간단하게 &lt;meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"&gt; 같은 HTML 코드를 넣어서 해결하는 방법도 있었지만, 그래도 저희는 해결되지 않아서 결국 도메인을 구매하기로 결정했습니다. (심지어 마감 전날 토요일에 ㅎㅎ)]]></summary></entry></feed>
