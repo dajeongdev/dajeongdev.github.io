@@ -1,6 +1,0 @@
-I"2<h3 id="accesstoken과-refreshtoken">AccessToken과 RefreshToken</h3>
-<p><code class="language-plaintext highlighter-rouge">AccessToken</code>은 사용자에 대한 정보를 담아 서비스에 접근(Access)할 수 있는 토큰이다.
-<code class="language-plaintext highlighter-rouge">RefreshToken</code>은 <code class="language-plaintext highlighter-rouge">AccessToken</code>과 다른 특별한 기능은 없지만, <code class="language-plaintext highlighter-rouge">AccessToken</code>을 새로 발급해주는 용도로 사용한다.
-<br />
-<br /></p>
-:ET
