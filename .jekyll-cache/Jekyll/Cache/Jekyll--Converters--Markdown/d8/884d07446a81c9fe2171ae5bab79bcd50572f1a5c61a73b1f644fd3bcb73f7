@@ -1,0 +1,155 @@
+I"�*<h4 id="배경">배경</h4>
+<p>백엔드 작업에서 Validation은 꽤나 중요도가 높은 작업으로, 클라이언트가 보내는 데이터가 서버에서 기대하는 형식과 규칙을 충족하는지 확인하는 과정을 의미합니다. 
+주로 웹 애플리케이션에서 클라이언트가 API를 통해 데이터를 전송할 때 백엔드에서는 이 데이터가 정확한지, 요구사항을 만족하는지 검증을 해야 데이터베이스에 저장하거나 다음 처리를 진행하게 됩니다.
+<br />
+<br /></p>
+
+<h4 id="validation이-중요한-이유">Validation이 중요한 이유</h4>
+<ol>
+  <li><strong>데이터 무결성 보장</strong>
+    <ul>
+      <li>검증되지 않은 데이터가 서버로 들어오면 데이터베이스의 일관성이 깨질 수 있습니다.</li>
+      <li>예를 들어, 생년월일 필드에 알파벳이 포함되거나 전화번호에 특수 문자가 포함되는 경우, 데이터의 신뢰성을 확보하기 어렵습니다. 이때 Validation을 통해 이러한 잘못된 데이터를 사전에 차단할 수 있습니다.</li>
+    </ul>
+  </li>
+  <li><strong>보안 강화</strong>
+    <ul>
+      <li>유효하지 않은 데이터는 SQL 인젝션, 스크립트 인젝션(XSS) 등과 같은 보안 취약점을 노출시킬 수 있습니다.</li>
+      <li>Validation을 통해 이러한 악성 입력을 막음으로써 백엔드 시스템을 보호할 수 있습니다.</li>
+    </ul>
+  </li>
+  <li><strong>애플리케이션 안정성 유지</strong>
+    <ul>
+      <li>Validation을 통해 예상하지 못한 데이터 형식으로 인한 에러를 줄일 수 있습니다.</li>
+      <li>검증된 데이터만을 처리하기 때문에 애플리케이션의 안정성과 성능을 유지할 수 있습니다.</li>
+    </ul>
+  </li>
+  <li><strong>비즈니스 로직 보호</strong>
+    <ul>
+      <li>유효성 검사는 단순히 데이터 형식을 확인하는 것뿐만 아니라, 비즈니스 로직에 맞는 데이터인지 검토할 수 있습니다.
+<br />
+<br /></li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="사용-방법">사용 방법</h4>
+<p><strong>1. 의존성 추가</strong>
+Spring Boot를 사용한다면 아래처럼 javax.validation 또는 jakarta.validation 패키지를 기본적으로 제공하지만, 프로젝트에 따라 Hibernate Validator 의존성을 명시적으로 추가해야 할 수도 있습니다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">validation</span><span class="err">'</span>
+</code></pre></div></div>
+
+<p><strong>2. 어노테이션 추가</strong>
+Validation은 주로 어노테이션을 기반으로 동작하기 때문에 DTO에 검증 어노테이션을 추가하여 Spring이 자동으로 검증을 수행하게 할 수 있습니다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserRequest</span> <span class="o">{</span>
+
+	<span class="nd">@NotBlank</span><span class="o">(</span><span class="n">message</span> <span class="o">=</span> <span class="s">"이름을 필수입니다."</span><span class="o">)</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+	<span class="nd">@Email</span><span class="o">(</span><span class="n">message</span> <span class="o">=</span> <span class="s">"이메일 형식을 확인해주세요."</span><span class="o">)</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">email</span><span class="o">;</span>
+	<span class="nd">@Size</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">8</span><span class="o">,</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"비밀번호는 최소 8자 이상이어야 합니다."</span><span class="o">)</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">password</span><span class="o">;</span>
+
+	<span class="c1">// ...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>3. 컨트롤러에서 적용</strong>
+컨트롤러에서 @Valid 어노테이션을 사용하여 DTO를 검증할 수 있습니다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserController</span> <span class="o">{</span>
+
+    <span class="nd">@PostMapping</span><span class="o">(</span><span class="s">"/users"</span><span class="o">)</span>
+	<span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">saveUser</span><span class="o">(</span><span class="nd">@Valid</span> <span class="nd">@RequestBody</span> <span class="nc">UserRequest</span> <span class="n">userRequest</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="nc">ResponseEntity</span><span class="o">.</span><span class="na">ok</span><span class="o">(</span><span class="s">"successfully saved User!"</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>4. 검증 에러 처리</strong>
+검증에 실패하면 Spring Boot는 기본적으로 MethodArgumentNotValidException을 발생시킵니다. 이를 처리하기 위해 @ExceptionHandler를 사용하거나 @ControllerAdvice를 통해 글로벌하게 처리할 수 있습니다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RestControllerAdvice</span>
+<span class="kd">class</span> <span class="nc">CommonExceptionHandler</span> <span class="o">{</span>
+
+    <span class="nd">@ExceptionHandler</span><span class="o">(</span><span class="nc">MethodArgumentNotValidException</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+    <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">CommonResponse</span><span class="o">&lt;</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;&gt;&gt;</span> <span class="nf">handleValidationException</span><span class="o">(</span><span class="nc">MethodArgumentNotValidException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="k">new</span> <span class="nc">CommonResponse</span><span class="o">&lt;&gt;(</span><span class="nc">ErrorCode</span><span class="o">.</span><span class="na">INVALID_REQUEST_FORMAT</span><span class="o">.</span><span class="na">getErrorMessage</span><span class="o">(),</span> <span class="kc">null</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">BAD_REQUEST</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p><br />
+<br /></p>
+
+<h4 id="많이-쓰는-애노테이션과-팁">많이 쓰는 애노테이션과 팁</h4>
+<h5><기본 애노테이션=""></기본></h5>
+<p><code class="language-plaintext highlighter-rouge">@NotNull</code>, <code class="language-plaintext highlighter-rouge">@NotEmpty</code>, <code class="language-plaintext highlighter-rouge">@NotBlank</code></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">@NotNull</code>은 null이 아닌 값으로, 모든 타입에 사용 가능</li>
+  <li><code class="language-plaintext highlighter-rouge">@NotEmpty</code>은 null이거나 비어있지 않은 값으로, CharSequence, Collection, Map, 배열만 사용 가능</li>
+  <li><code class="language-plaintext highlighter-rouge">@NotBlank</code>는 null, 빈 문자열(<code class="language-plaintext highlighter-rouge">””</code>), 하나 이상의 공백이 아닌 문자만 허용</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">@Size</code></p>
+<ul>
+  <li>문자열, 배열, 컬렉션의 길이나 크기를 제한</li>
+  <li>min, max 속성을 사용해 범위를 설정할 수 있음
+<br /></li>
+</ul>
+
+<h5 id="-1"><숫자 관련="" 애노테이션=""></숫자></h5>
+<p><code class="language-plaintext highlighter-rouge">@Min</code></p>
+<ul>
+  <li>숫자 필드의 최소값 지정</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">@Max</code></p>
+<ul>
+  <li>숫자 필드의 최댓값 지정</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">@Positive</code>, <code class="language-plaintext highlighter-rouge">@PositiveOrZero</code></p>
+<ul>
+  <li>값이 양수인지(0 포함 여부 선택)</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">@Negative</code>, <code class="language-plaintext highlighter-rouge">@NegativeOrZero</code></p>
+<ul>
+  <li>값이 음수인지(0 포함 여부 선택)</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">@Digits</code></p>
+<ul>
+  <li>정수와 소수의 자리수를 지정할 수 있음
+    <ul>
+      <li>ex: <code class="language-plaintext highlighter-rouge">@Digits(integer = 3, fraction = 2, message = “정수 3자리, 소수 2자리까지 가능합니다.”)</code>
+<br /></li>
+    </ul>
+  </li>
+</ul>
+
+<h6 id="-2"><문자열 관련="" 애노테이션=""></문자열></h6>
+<p><code class="language-plaintext highlighter-rouge">@Email</code></p>
+<ul>
+  <li>문자열이 이메일 형식인지 검증</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">@Pattern</code></p>
+<ul>
+  <li>정규표현식을 사용하여 값이 특정한 패턴을 만족하는지 검증</li>
+  <li>ex: <code class="language-plaintext highlighter-rouge">@Pattern(regexp = "^[0-9]{10}$", message = "전화번호는 10자리 숫자여야 합니다.")</code>
+<br /></li>
+</ul>
+
+<h5 id="-3"><날짜 관련="" 애노테이션=""></날짜></h5>
+<p><code class="language-plaintext highlighter-rouge">@Past, @PastOrPresent</code></p>
+<ul>
+  <li>값이 과거 날짜인지, 현재 날짜를 포함한 과거인지 검증</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">@Future</code>, <code class="language-plaintext highlighter-rouge">@FutureOrPresent</code></p>
+<ul>
+  <li>값이 미래 날짜인지, 현재 날짜를 포함한 미래인지 검증
+<br />
+<br /></li>
+</ul>
+:ET

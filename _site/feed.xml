@@ -1,4 +1,154 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2024-10-13T14:06:16+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">이직 후기, 그리고 글또 다짐을 곁들인</title><link href="http://localhost:4000/blog/2024/10/13/geultto-first-post.html" rel="alternate" type="text/html" title="이직 후기, 그리고 글또 다짐을 곁들인" /><published>2024-10-13T00:00:00+09:00</published><updated>2024-10-13T00:00:00+09:00</updated><id>http://localhost:4000/blog/2024/10/13/geultto-first-post</id><content type="html" xml:base="http://localhost:4000/blog/2024/10/13/geultto-first-post.html"><![CDATA[<h4 id="이직">이직</h4>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2024-10-27T21:50:32+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">Validation 그거 어떻게 하는건데</title><link href="http://localhost:4000/wiki/2024/10/27/spring-validation.html" rel="alternate" type="text/html" title="Validation 그거 어떻게 하는건데" /><published>2024-10-27T00:00:00+09:00</published><updated>2024-10-27T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/10/27/spring-validation</id><content type="html" xml:base="http://localhost:4000/wiki/2024/10/27/spring-validation.html"><![CDATA[<h3 id="배경">배경</h3>
+<p>백엔드 작업에서 Validation은 꽤나 중요도가 높은 작업으로, 클라이언트가 보내는 데이터가 서버에서 기대하는 형식과 규칙을 충족하는지 확인하는 과정을 의미합니다. 
+주로 웹 애플리케이션에서 클라이언트가 API를 통해 데이터를 전송할 때 백엔드에서는 이 데이터가 정확한지, 요구사항을 만족하는지 검증을 해야 데이터베이스에 저장하거나 다음 처리를 진행하게 됩니다.
+<br />
+<br /></p>
+
+<h3 id="validation이-중요한-이유">Validation이 중요한 이유</h3>
+<ol>
+  <li><strong>데이터 무결성 보장</strong>
+    <ul>
+      <li>검증되지 않은 데이터가 서버로 들어오면 데이터베이스의 일관성이 깨질 수 있습니다.</li>
+      <li>예를 들어, 생년월일 필드에 알파벳이 포함되거나 전화번호에 특수 문자가 포함되는 경우, 데이터의 신뢰성을 확보하기 어렵습니다. 이때 Validation을 통해 이러한 잘못된 데이터를 사전에 차단할 수 있습니다.</li>
+    </ul>
+  </li>
+  <li><strong>보안 강화</strong>
+    <ul>
+      <li>유효하지 않은 데이터는 SQL 인젝션, 스크립트 인젝션(XSS) 등과 같은 보안 취약점을 노출시킬 수 있습니다.</li>
+      <li>Validation을 통해 이러한 악성 입력을 막음으로써 백엔드 시스템을 보호할 수 있습니다.</li>
+    </ul>
+  </li>
+  <li><strong>애플리케이션 안정성 유지</strong>
+    <ul>
+      <li>Validation을 통해 예상하지 못한 데이터 형식으로 인한 에러를 줄일 수 있습니다.</li>
+      <li>검증된 데이터만을 처리하기 때문에 애플리케이션의 안정성과 성능을 유지할 수 있습니다.</li>
+    </ul>
+  </li>
+  <li><strong>비즈니스 로직 보호</strong>
+    <ul>
+      <li>유효성 검사는 단순히 데이터 형식을 확인하는 것뿐만 아니라, 비즈니스 로직에 맞는 데이터인지 검토할 수 있습니다.
+<br />
+<br /></li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="사용-방법">사용 방법</h3>
+<h4 id="1-의존성-추가"><strong>1. 의존성 추가</strong></h4>
+<p>Spring Boot를 사용한다면 아래처럼 javax.validation 또는 jakarta.validation 패키지를 기본적으로 제공하지만, 프로젝트에 따라 Hibernate Validator 의존성을 명시적으로 추가해야 할 수도 있습니다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">validation</span><span class="err">'</span>
+</code></pre></div></div>
+
+<h4 id="2-어노테이션-추가"><strong>2. 어노테이션 추가</strong></h4>
+<p>Validation은 주로 어노테이션을 기반으로 동작하기 때문에 DTO에 검증 어노테이션을 추가하여 Spring이 자동으로 검증을 수행하게 할 수 있습니다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserRequest</span> <span class="o">{</span>
+
+	<span class="nd">@NotBlank</span><span class="o">(</span><span class="n">message</span> <span class="o">=</span> <span class="s">"이름을 필수입니다."</span><span class="o">)</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+	<span class="nd">@Email</span><span class="o">(</span><span class="n">message</span> <span class="o">=</span> <span class="s">"이메일 형식을 확인해주세요."</span><span class="o">)</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">email</span><span class="o">;</span>
+	<span class="nd">@Size</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">8</span><span class="o">,</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"비밀번호는 최소 8자 이상이어야 합니다."</span><span class="o">)</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">password</span><span class="o">;</span>
+
+	<span class="c1">// ...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h4 id="3-컨트롤러에서-적용"><strong>3. 컨트롤러에서 적용</strong></h4>
+<p>컨트롤러에서 @Valid 어노테이션을 사용하여 DTO를 검증할 수 있습니다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserController</span> <span class="o">{</span>
+
+    <span class="nd">@PostMapping</span><span class="o">(</span><span class="s">"/users"</span><span class="o">)</span>
+	<span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">saveUser</span><span class="o">(</span><span class="nd">@Valid</span> <span class="nd">@RequestBody</span> <span class="nc">UserRequest</span> <span class="n">userRequest</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="nc">ResponseEntity</span><span class="o">.</span><span class="na">ok</span><span class="o">(</span><span class="s">"successfully saved User!"</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h4 id="4-검증-에러-처리"><strong>4. 검증 에러 처리</strong></h4>
+<p>검증에 실패하면 Spring Boot는 기본적으로 MethodArgumentNotValidException을 발생시킵니다. 이를 처리하기 위해 @ExceptionHandler를 사용하거나 @ControllerAdvice를 통해 글로벌하게 처리할 수 있습니다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RestControllerAdvice</span>
+<span class="kd">class</span> <span class="nc">CommonExceptionHandler</span> <span class="o">{</span>
+
+    <span class="nd">@ExceptionHandler</span><span class="o">(</span><span class="nc">MethodArgumentNotValidException</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+    <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">CommonResponse</span><span class="o">&lt;</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;&gt;&gt;</span> <span class="nf">handleValidationException</span><span class="o">(</span><span class="nc">MethodArgumentNotValidException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="k">new</span> <span class="nc">CommonResponse</span><span class="o">&lt;&gt;(</span><span class="nc">ErrorCode</span><span class="o">.</span><span class="na">INVALID_REQUEST_FORMAT</span><span class="o">.</span><span class="na">getErrorMessage</span><span class="o">(),</span> <span class="kc">null</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">BAD_REQUEST</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p><br />
+<br /></p>
+
+<h3 id="많이-쓰는-애노테이션과-팁">많이 쓰는 애노테이션과 팁</h3>
+<h4 id="기본-애노테이션">[기본 애노테이션]</h4>
+<p><code class="language-plaintext highlighter-rouge">@NotNull</code>, <code class="language-plaintext highlighter-rouge">@NotEmpty</code>, <code class="language-plaintext highlighter-rouge">@NotBlank</code></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">@NotNull</code>은 null이 아닌 값으로, 모든 타입에 사용 가능</li>
+  <li><code class="language-plaintext highlighter-rouge">@NotEmpty</code>은 null이거나 비어있지 않은 값으로, CharSequence, Collection, Map, 배열만 사용 가능</li>
+  <li><code class="language-plaintext highlighter-rouge">@NotBlank</code>는 null, 빈 문자열(<code class="language-plaintext highlighter-rouge">””</code>), 하나 이상의 공백이 아닌 문자만 허용</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">@Size</code></p>
+<ul>
+  <li>문자열, 배열, 컬렉션의 길이나 크기를 제한</li>
+  <li>min, max 속성을 사용해 범위를 설정할 수 있음
+<br /></li>
+</ul>
+
+<h4 id="숫자-관련-애노테이션">[숫자 관련 애노테이션]</h4>
+<p><code class="language-plaintext highlighter-rouge">@Min</code></p>
+<ul>
+  <li>숫자 필드의 최소값 지정</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">@Max</code></p>
+<ul>
+  <li>숫자 필드의 최댓값 지정</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">@Positive</code>, <code class="language-plaintext highlighter-rouge">@PositiveOrZero</code></p>
+<ul>
+  <li>값이 양수인지(0 포함 여부 선택)</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">@Negative</code>, <code class="language-plaintext highlighter-rouge">@NegativeOrZero</code></p>
+<ul>
+  <li>값이 음수인지(0 포함 여부 선택)</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">@Digits</code></p>
+<ul>
+  <li>정수와 소수의 자리수를 지정할 수 있음</li>
+  <li><code class="language-plaintext highlighter-rouge">@Digits(integer = 3, fraction = 2, message = “정수 3자리, 소수 2자리까지 가능합니다.”)</code>
+<br /></li>
+</ul>
+
+<h4 id="문자열-관련-애노테이션">[문자열 관련 애노테이션]</h4>
+<p><code class="language-plaintext highlighter-rouge">@Email</code></p>
+<ul>
+  <li>문자열이 이메일 형식인지 검증</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">@Pattern</code></p>
+<ul>
+  <li>정규표현식을 사용하여 값이 특정한 패턴을 만족하는지 검증</li>
+  <li><code class="language-plaintext highlighter-rouge">@Pattern(regexp = "^[0-9]{10}$", message = "전화번호는 10자리 숫자여야 합니다.")</code>
+<br /></li>
+</ul>
+
+<h4 id="날짜-관련-애노테이션">[날짜 관련 애노테이션]</h4>
+<p><code class="language-plaintext highlighter-rouge">@Past, @PastOrPresent</code></p>
+<ul>
+  <li>값이 과거 날짜인지, 현재 날짜를 포함한 과거인지 검증</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">@Future</code>, <code class="language-plaintext highlighter-rouge">@FutureOrPresent</code></p>
+<ul>
+  <li>값이 미래 날짜인지, 현재 날짜를 포함한 미래인지 검증
+<br />
+<br /></li>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Spring" /><category term="SpringBoot" /><category term="Validation" /><category term="글또" /><category term="글또10기" /><summary type="html"><![CDATA[배경 백엔드 작업에서 Validation은 꽤나 중요도가 높은 작업으로, 클라이언트가 보내는 데이터가 서버에서 기대하는 형식과 규칙을 충족하는지 확인하는 과정을 의미합니다. 주로 웹 애플리케이션에서 클라이언트가 API를 통해 데이터를 전송할 때 백엔드에서는 이 데이터가 정확한지, 요구사항을 만족하는지 검증을 해야 데이터베이스에 저장하거나 다음 처리를 진행하게 됩니다.]]></summary></entry><entry><title type="html">이직 후기, 그리고 글또 다짐을 곁들인</title><link href="http://localhost:4000/blog/2024/10/13/geultto-first-post.html" rel="alternate" type="text/html" title="이직 후기, 그리고 글또 다짐을 곁들인" /><published>2024-10-13T00:00:00+09:00</published><updated>2024-10-13T00:00:00+09:00</updated><id>http://localhost:4000/blog/2024/10/13/geultto-first-post</id><content type="html" xml:base="http://localhost:4000/blog/2024/10/13/geultto-first-post.html"><![CDATA[<h4 id="이직">이직</h4>
 <p>7월에 SI 스타트업으로 이직했습니다. 공모전 발표 다음날이라 순위의 영향은 크지 않았겠지만, 작업한 내용이 Github에 올라가 있으니 코드 내용으로 봐주셨겠죠. 조금 더 면접을 보고 결정하고 싶었지만, 포트폴리오가 괜찮은 편이라 긍정적으로 결정했습니다.</p>
 
 <p>1월 퇴사 이후 전회사가 상식 밖으로 힘든 곳이었지만 오히려 개발자라는 직업이 내가 하고 싶은 일이라는 걸 확실하게 깨달았습니다.. 그래서 실무 경험을 보여주고자 비사이드 포텐데이에도 참가하고, 운좋게 거기에서 만난 팀원들과 함께 공모전에 참여해서 2등이라는 좋은 결과도 얻을 수 있었네요. 상반기가 매우 바쁘기도 했지만, 그만큼 보람이 있었습니다. 😊
@@ -616,93 +766,4 @@ QueryDSL에 관련해서는 나도 많이 부족했지만, 실무에서의 경�
 <br /></li>
     </ul>
   </li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="Integer" /><category term="Method" /><summary type="html"><![CDATA[String toString(int n, int radix) 10진수를 N진수 형태의 문자열로 변환할 수 있다.]]></summary></entry><entry><title type="html">아메리카노트 서버 구성 &amp;lt;6&amp;gt; HTTPS 적용</title><link href="http://localhost:4000/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain.html" rel="alternate" type="text/html" title="아메리카노트 서버 구성 &amp;lt;6&amp;gt; HTTPS 적용" /><published>2024-04-29T00:00:00+09:00</published><updated>2024-04-29T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain</id><content type="html" xml:base="http://localhost:4000/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain.html"><![CDATA[<ul>
-  <li>이전 단계에서 진행했던 방화벽에서의 80, 443 포트 허용과 도메인이 있다면 이제 기간은 짧지만 무료로 받을 수 있는 Letsencrypt의 SSL 인증서를 발급 받아보겠습니다.
-<br />
-<br /></li>
-</ul>
-
-<h4 id="ssl-인증서-발급받기">SSL 인증서 발급받기</h4>
-<ul>
-  <li>인증서를 발급받기 위해 letsencrypt의 certbot을 설치해주고, 인증서를 발급받습니다.</li>
-</ul>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt update <span class="c"># 패키지 업데이트</span>
-<span class="nb">sudo </span>apt <span class="nb">install </span>certbot python3-certbot-nginx
-<span class="nb">sudo </span>certbot <span class="nt">--nginx</span> <span class="nt">-d</span> 도메인이름 <span class="nt">-d</span> www.도메인이름
-</code></pre></div></div>
-
-<ul>
-  <li>첫 실행 시에는 이메일을 입력하고 약관에 동의해야 합니다.</li>
-  <li>이후 certbot이 letsencrypt 서버와 통신 중 도메인이 유효한치 확인하는 과정을 거칩니다.
-    <ul>
-      <li>저는 이 부분에서 에러가 참 많이 발생했는데요 ㅎㅎ 하나씩 살펴보겠습니다.
-        <ol>
-          <li><strong>/well-known/acme-challenge/ 폴더가 허용되지 않았습니다.</strong>
-            <ul>
-              <li>
-                <p>이 부분은 Nginx에서 적용하는 부분이라 이전 단계에서 만들었던 <code class="language-plaintext highlighter-rouge">/etc/nginx/sites-available/도메인이름</code> 파일에서 추가해주었습니다.</p>
-
-                <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  server <span class="o">{</span>
-          listen 80 default_server<span class="p">;</span>
-          listen <span class="o">[</span>::]:80 default_server<span class="p">;</span>
-                
-          server_name 도메인이름 www.도메인이름<span class="p">;</span>
-                
-          location ~ /<span class="se">\.</span>well-known/acme-challenge/ <span class="o">{</span>
-          allow all<span class="p">;</span>
-          root /var/www/letsencrypt<span class="p">;</span>
-          <span class="o">}</span>
-  <span class="o">}</span>
-</code></pre></div>                </div>
-              </li>
-            </ul>
-          </li>
-          <li><strong>도메인에 A 레코드를 적용되어 있지 않았습니다.</strong>
-            <ul>
-              <li>A 레코드 적용을 위해 NCP에서 Global Domain에 도메인을 추가하고, A 레코드를 추가해주었습니다.
-  <img width="679" alt="https1" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/3abce503-be85-43fe-8531-612c95578743" /></li>
-              <li>하지만 이 Global Domain의 네임서버를 카페24의 도메인에 설정해주는 과정에서 24시간이 걸린다는 소식에 아주 멘탈이 탈탈 털릴 뻔 했지만… 다행히 12시간 정도 뒤에 사용이 가능했습니다😂
-  <img width="544" alt="https2" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/8f6df708-93fa-4e43-8709-e2ad85b0c689" /></li>
-            </ul>
-          </li>
-        </ol>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<p><img width="770" alt="https3" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/f52a2ee6-ea91-475c-ba0e-8252c28a2993" /></p>
-<ul>
-  <li>그리하여 드디어 간절히 기다리던 발급 성공 화면을 보게 되면 SSL 발급에 성공한 겁니다.</li>
-  <li>이제 <code class="language-plaintext highlighter-rouge">/etc/nginx/sites-available/도메인이름</code> 파일에 접근해보면 자동으로 SSL이 적용된 것을 확인할 수 있습니다.</li>
-</ul>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server <span class="o">{</span>
-        listen  443 ssl<span class="p">;</span>
-        server_name americanote.store www.americanote.store<span class="p">;</span>
-
-        <span class="c">#access_log /var/log/nginx/proxy/access.log;</span>
-        <span class="c">#error_log /var/log/nginx/proxy/error.log;</span>
-
-        ssl_certificate /etc/letsencrypt/live/americanote.store/fullchain.pem<span class="p">;</span>
-        ssl_certificate_key /etc/letsencrypt/live/americanote.store/privkey.pem<span class="p">;</span>
-
-        location / <span class="o">{</span> <span class="c"># 추가</span>
-                proxy_pass http://127.0.0.1:8009<span class="p">;</span>
-
-        <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<ul>
-  <li>참고로 <code class="language-plaintext highlighter-rouge">location / { … }</code> 부분까지 설정해주어야 현재 서버의 8009로 실행되고 있는 프로세스로 프록시가 요청을 전달해줍니다.
-<br />
-<br /></li>
-</ul>
-
-<h4 id="참고">참고</h4>
-<ul>
-  <li><a href="https://velog.io/@curiosity806/nginx-Lets-Encrypt-SSL-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EB%B0%9C%EA%B8%89">https://velog.io/@curiosity806/nginx-Lets-Encrypt-SSL-인증서-발급</a></li>
-  <li><a href="https://jaehyeon48.github.io/nginx/configure-nginx-on-ubuntu-2004">Ubuntu 20.04에서 Nginx 설치 및 설정하기</a></li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="NaverCloudPlatform" /><category term="Project" /><category term="MySQL" /><category term="DataBase" /><summary type="html"><![CDATA[이전 단계에서 진행했던 방화벽에서의 80, 443 포트 허용과 도메인이 있다면 이제 기간은 짧지만 무료로 받을 수 있는 Letsencrypt의 SSL 인증서를 발급 받아보겠습니다.]]></summary></entry></feed>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="Integer" /><category term="Method" /><summary type="html"><![CDATA[String toString(int n, int radix) 10진수를 N진수 형태의 문자열로 변환할 수 있다.]]></summary></entry></feed>
