@@ -238,10 +238,10 @@ html[data-scroll-status='down'] .framework .sidebar { top: 20px; }
 
 .post .post-related ul a:visited:after { background-color: #fff; }
 
-.post-comments { padding-top: 25px; }
+.post-comments { padding-top: 5px; padding-bottom: 25px; }
 
 /** Posts misc */
-.post-nav { display: flex; justify-content: space-between; margin: 72px 0 59px; padding: 31px 0 0; }
+.post-nav { display: flex; justify-content: space-between; margin: 40px 0 59px; padding: 31px 0 0; }
 
 .post-nav a { font-size: 18px; line-height: 15px; color: #666; max-width: 50%; }
 
@@ -330,6 +330,8 @@ html[data-scroll-status='down'] .framework .sidebar { top: 20px; }
 .page-segments li a:visited:after { background-color: #fff; }
 
 .left-vsplit:before { content: ""; display: inline-block; width: 1px; height: 10px; margin: 0 10px; background-color: #e3e3e3e3; vertical-align: baseline; }
+
+.giscus, .giscus-frame { width: 100%; min-height: 150px; padding-bottom: 10px; }
 
 @media screen and (max-width: 800px) { html[data-theme="dark"][data-scroll-status='top'] header.site-header-transparent.site-header .page-link { color: #f8f8f8; } }
 

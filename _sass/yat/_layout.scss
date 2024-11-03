@@ -486,7 +486,8 @@ html {
 }
 
 .post-comments {
-  padding-top: 25px;
+  padding-top: 5px;
+  padding-bottom: 25px;
 }
 
 
@@ -496,7 +497,7 @@ html {
 .post-nav {
   display: flex;
   justify-content: space-between;
-  margin: 72px 0 59px;
+  margin: 40px 0 59px;
   padding: 31px 0 0;
 
   a {
@@ -767,4 +768,10 @@ html {
   margin: 0 10px;
   background-color: #e3e3e3e3;
   vertical-align: baseline;
+}
+
+.giscus, .giscus-frame {
+  width: 100%;
+  min-height: 150px;
+  padding-bottom: 10px;
 }

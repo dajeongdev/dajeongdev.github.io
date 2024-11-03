@@ -27,7 +27,7 @@
 title: Every Single Day
 email: dajeongdev@gmail.com
 author: Dajeong Park
-copyright: Copyright © 2022
+copyright: Copyright © 2024
 description: >- # this means to ignore newlines until "baseurl:"
   
 
@@ -168,13 +168,26 @@ height: "300px"         # Banner default height
 #   shortname: "Dajeong"
 
 # Gitment comments
+comments:
+  active: giscus
+  giscus:
+    repo: dajeongdev/dajeongdev.github.io
+    repo_id: R_kgDOHS7Ikw
+    category: General
+    category_id: DIC_kwDOHS7Ik84Cj70Z
+    mapping: pathname
+    input-position: bottom
+    lang: en
+  # disqus:
+    # shortname: ...
+  # utterances:
+    # repo: ...
 # gitment:
 #   username: "dajeongdev"
 #   repo: "The repo to store comments"
 #   client_id: "Your client ID"
 #   client_secret: "Your client secret"
 #   redirect_uri: "https://dajeongdev.github.io"   # If you use a custom domain name
-
 # Build settings
 # highlighter: none
 markdown: kramdown

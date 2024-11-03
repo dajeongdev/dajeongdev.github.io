@@ -632,7 +632,33 @@ document.addEventListener('DOMContentLoaded', function(event) {
     </div>
 
 </article>
-<div class="post-comments"></div></section>
+<div class="post-comments">  <div id="gisqus_thread"></div>
+  <script src="https://giscus.app/client.js" data-repo="dajeongdev/dajeongdev.github.io" data-repo-id="R_kgDOHS7Ikw" data-category="General" data-category-id="DIC_kwDOHS7Ik84Cj70Z" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="ko" crossorigin="anonymous" async>
+  let giscusAttributes = {
+  src: "https://giscus.app/client.js",
+  "data-repo": "da-in/da-in.github.io",
+  "data-repo-id": "MDEwOlJlcG9zaXRvcnkzNTM5MDcyOTU=",
+  "data-category": "General",
+  "data-category-id": "DIC_kwDOFRgyX84CSEWg",
+  "data-mapping": "pathname",
+  "data-reactions-enabled": "1",
+  "data-emit-metadata": "0",
+  "data-theme": initTheme,
+  "data-input-position":
+    "bottom",
+  "data-lang": "",
+  crossorigin: "anonymous",
+  async: "",
+};
+
+let giscusScript = document.createElement("script");
+Object.entries(giscusAttributes).forEach(([key, value]) =>
+  giscusScript.setAttribute(key, value)
+);
+document.getElementById("tail-wrapper").appendChild(giscusScript);
+</script>
+</div>
+  </section>
 </div>
 
 
@@ -769,7 +795,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
   <div class="wrapper">
     <div class="site-footer-inner">
-      <div>Copyright © 2022 @Dajeong Park</div>
+      <div>Copyright © 2024 @Dajeong Park</div>
       <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
       generator." href="http://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
       another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>

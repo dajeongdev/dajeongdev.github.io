@@ -808,16 +808,42 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <div class="post-nav">
 <a class="previous" href="/wiki/2023/11/13/mysql-in.html" title="MySQL IN">MySQL IN</a><a class="next" href="/wiki/2023/11/13/prg-pattern.html" title="PRG 패턴과 RedirectAttributes">PRG 패턴과 RedirectAttributes</a>
 </div>
+<div class="post-comments">  <div id="gisqus_thread"></div>
+  <script src="https://giscus.app/client.js" data-repo="dajeongdev/dajeongdev.github.io" data-repo-id="R_kgDOHS7Ikw" data-category="General" data-category-id="DIC_kwDOHS7Ik84Cj70Z" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="ko" crossorigin="anonymous" async>
+  let giscusAttributes = {
+  src: "https://giscus.app/client.js",
+  "data-repo": "da-in/da-in.github.io",
+  "data-repo-id": "MDEwOlJlcG9zaXRvcnkzNTM5MDcyOTU=",
+  "data-category": "General",
+  "data-category-id": "DIC_kwDOFRgyX84CSEWg",
+  "data-mapping": "pathname",
+  "data-reactions-enabled": "1",
+  "data-emit-metadata": "0",
+  "data-theme": initTheme,
+  "data-input-position":
+    "bottom",
+  "data-lang": "",
+  crossorigin: "anonymous",
+  async: "",
+};
+
+let giscusScript = document.createElement("script");
+Object.entries(giscusAttributes).forEach(([key, value]) =>
+  giscusScript.setAttribute(key, value)
+);
+document.getElementById("tail-wrapper").appendChild(giscusScript);
+</script>
+</div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/wiki/2023/11/13/fibonacci.html" title="PRG 패턴과 RedirectAttributes">자바로 피보나치 수열 이해하기</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/prime-number.html" title="PRG 패턴과 RedirectAttributes">자바로 소수 판별</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/windows-command.html" title="PRG 패턴과 RedirectAttributes">Windows 명령어</a></li>
-<li><a class="post-link" href="/blog/2024/10/13/geultto-first-post.html" title="PRG 패턴과 RedirectAttributes">이직 후기, 그리고 글또 다짐을 곁들인</a></li>
+        <li><a class="post-link" href="/wiki/2023/11/13/stack.html" title="PRG 패턴과 RedirectAttributes">Stack</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/n-number-convert.html" title="PRG 패턴과 RedirectAttributes">진수 변환</a></li>
+<li><a class="post-link" href="/wiki/2024/04/28/americanote-server1-create-linux-server.html" title="PRG 패턴과 RedirectAttributes">아메리카노트 서버 구성 &lt;1&gt; Linux 서버 생성</a></li>
+<li><a class="post-link" href="/wiki/2024/04/30/integer-class.html" title="PRG 패턴과 RedirectAttributes">Integer Class</a></li>
 </ul>
     </div>
-<div class="post-comments"></div></section>
+  </section>
 </div>
 
 
@@ -954,7 +980,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
   <div class="wrapper">
     <div class="site-footer-inner">
-      <div>Copyright © 2022 @Dajeong Park</div>
+      <div>Copyright © 2024 @Dajeong Park</div>
       <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
       generator." href="http://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
       another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
