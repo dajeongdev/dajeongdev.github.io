@@ -24,7 +24,24 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2023-11-13T00:00:00+09:00","datePublished":"2023-11-13T00:00:00+09:00","description":"특징 책을 쌓듯이 데이터를 차곡차곡 쌓아 올린 형태의 자료구조 선형 구조 같은 구조의 데이터를 정해진 방향으로만 쌓을 수 있다. 후입선출(LIFO) 구조: 마지막에 삽입된 데이터를 가장 먼저 꺼낸다. 데이터가 없을 때 pop하는 오류를 stack-underflow, 스택의 크기 이상의 데이터를 push하려는 오류를 stack-overflow라고 한다. (!) 주요 연산 push: top을 위로 한 칸 올리고, top이 가리키는 위치에 데이터 저장(삽입)한다. pop: top이 가리키는 데이터를 반환하고, top을 아래로 한 칸 내린다(삭제). peek: 스택의 top에 있는 item을 반환한다. pop과 달리 stack에서 객체를 꺼내지 않는다. 활용 브라우저의 방문 기록(뒤로 가기): 가장 나중에 열린 페이지부터 다시 보여준다. 역순 문자열 만들기: 가장 나중에 입력된 문자부터 출력한다. 실행 취소(undo): 가장 나중에 실행된 것부터 취소한다. 수식의 괄호 검사(연산자 우선순위를 위한 괄호 검사) 함수의 콜스택: 가장 마지막에 호출된 함수가 가장 먼저 실행을 완료하고 복귀하는 LIFO 구조다. 함수 호출이 발생하면 함수 수행에 필요한 정보를 스택 프레임에 저장하여 시스템 스택에 삽입한다. 깊이 우선 탐색(DFS) Stack과 Queue 공통점: Stack과 Queue 모두 Peek을 사용할 수 있다. Peek 연산은 자료구조의 변화를 주지 않고, pop이나 dequeue를 할 때 리턴되는 item을 리턴할 수 있다. 차이점: 아이템을 삭제할 때 가장 큰 차이점이 있다. Stack은 가장 마지막에 추가된 item을 삭제하고, Queue는 가장 처음 들어와 있던 item을 삭제한다.","headline":"Stack","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2023/11/13/stack.html"},"url":"http://localhost:4000/wiki/2023/11/13/stack.html"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="shortcut icon" href="">
+<link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon.ico/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/favicon.ico/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/favicon.ico/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/favicon.ico/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/favicon.ico/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/favicon.ico/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/favicon.ico/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/favicon.ico/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon.ico/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon.ico/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon.ico/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon.ico/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
   <link rel="stylesheet" href="/assets/css/main.css">
@@ -761,10 +778,10 @@ document.getElementById("tail-wrapper").appendChild(giscusScript);
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/blog/2024/05/16/americanote-review.html" title="Thymeleaf와 @RestController">비사이드 403 포텐데이 Americanote 회고</a></li>
-<li><a class="post-link" href="/wiki/2024/02/29/programmers-12906.html" title="Thymeleaf와 @RestController">프로그래머스 - 같은 숫자는 싫어 풀이</a></li>
-<li><a class="post-link" href="/wiki/2023/11/21/list-remove-method.html" title="Thymeleaf와 @RestController">List에서 원소 삭제하기 remove()</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/intellij-shortcut.html" title="Thymeleaf와 @RestController">IntelliJ 단축키 정리</a></li>
+        <li><a class="post-link" href="/blog/2024/05/09/hompage-migration-review.html" title="Thymeleaf와 @RestController">홈페이지 마이그레이션 회고</a></li>
+<li><a class="post-link" href="/wiki/2024/03/05/queue.html" title="Thymeleaf와 @RestController">Queue</a></li>
+<li><a class="post-link" href="/wiki/2024/10/27/spring-validation.html" title="Thymeleaf와 @RestController">Validation 그거 어떻게 하는건데</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/windows-command.html" title="Thymeleaf와 @RestController">Windows 명령어</a></li>
 </ul>
     </div>
   </section>

@@ -24,7 +24,24 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2024-04-29T00:00:00+09:00","datePublished":"2024-04-29T00:00:00+09:00","description":"자동 배포까지 했으니 어느정도는 백엔드 코드를 서버에 올리는 것까지 했다고 할 수 있겠습니다. 저도 여기가 마지막인 줄 알았으나.. 첨부한 이미지는 프론트분이 API가 요청되지 않는다고 캡쳐해주신 에러 메세지입니다. 읽어보면 HTTPS인 프론트 도메인에서 HTTP인 백엔드 도메인으로 요청하는 부분에서 XMLHttpRequest 에러가 발생했습니다. 바로 CORS 문제입니다 ㅎㅎ 검색해보니 프론트 쪽에서 간단하게 &lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;upgrade-insecure-requests&quot;&gt; 같은 HTML 코드를 넣어서 해결하는 방법도 있었지만, 그래도 저희는 해결되지 않아서 결국 도메인을 구매하기로 결정했습니다. (심지어 마감 전날 토요일에 ㅎㅎ)","headline":"아메리카노트 서버 구성 &lt;5&gt; 도메인 연결","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2024/04/29/americanote-server5-connect-domain-name.html"},"url":"http://localhost:4000/wiki/2024/04/29/americanote-server5-connect-domain-name.html"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="shortcut icon" href="">
+<link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon.ico/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/favicon.ico/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/favicon.ico/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/favicon.ico/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/favicon.ico/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/favicon.ico/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/favicon.ico/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/favicon.ico/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon.ico/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon.ico/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon.ico/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon.ico/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
   <link rel="stylesheet" href="/assets/css/main.css">
@@ -876,10 +893,10 @@ document.getElementById("tail-wrapper").appendChild(giscusScript);
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/wiki/2023/11/13/prime-number.html" title="아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용">자바로 소수 판별</a></li>
-<li><a class="post-link" href="/blog/2024/10/13/geultto-first-post.html" title="아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용">이직 후기, 그리고 글또 다짐을 곁들인</a></li>
-<li><a class="post-link" href="/wiki/2024/06/21/csp.html" title="아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용">Mixed Content The page at '...' was loaded over HTTPS, but requested...</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/n-number-convert.html" title="아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용">진수 변환</a></li>
+        <li><a class="post-link" href="/wiki/2024/03/17/string-replacement.html" title="아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용">문자열 대치</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/intellij-shortcut.html" title="아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용">IntelliJ 단축키 정리</a></li>
+<li><a class="post-link" href="/wiki/2024/03/05/queue.html" title="아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용">Queue</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/mysql-in.html" title="아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용">MySQL IN</a></li>
 </ul>
     </div>
   </section>
