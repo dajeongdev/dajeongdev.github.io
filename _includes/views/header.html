@@ -63,10 +63,6 @@
     function storeScrollData() {
       var y = getScrollPos().y;
 
-      {%- if banner and header_transparent -%}
-      documentElement.setAttribute("data-header-transparent", "");
-      {%- endif -%}
-
       var scrollStatus = "";
 
       if (y <= 0) {

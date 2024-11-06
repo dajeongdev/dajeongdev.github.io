@@ -295,7 +295,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
     var documentElement = document.documentElement;
 
     function storeScrollData() {
-      var y = getScrollPos().y;var scrollStatus = "";
+      var y = getScrollPos().y;
+
+      var scrollStatus = "";
 
       if (y <= 0) {
         scrollStatus = "top";
