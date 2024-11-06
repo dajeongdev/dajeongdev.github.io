@@ -47,10 +47,7 @@ yat:
 # header_transparent: true
 
 # Google analytics
-analytics:
-  provider: "google-gtag"
-  google:
-    tracking_id: "G-SBCV6PTMNJ"
+google_analytics: G-SBCV6PTMNJ
 
 # If you want to generate website sitemap, you can set true
 # sitemap: false
