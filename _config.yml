@@ -48,7 +48,7 @@ yat:
 
 # Google analytics
 google_analytics: 
-  id: "G-SBCV6PTMNJ"
+  id: G-SBCV6PTMNJ
 
 # If you want to generate website sitemap, you can set true
 # sitemap: false
