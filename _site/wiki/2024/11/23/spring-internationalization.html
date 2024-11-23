@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SBCV6PTMNJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-SBCV6PTMNJ');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Spring Boot에서 국제화로 언어 장벽 허물기! | Every Single Day</title>
+<meta name="generator" content="Jekyll v4.2.2">
+<meta property="og:title" content="Spring Boot에서 국제화로 언어 장벽 허물기!">
+<meta name="author" content="Dajeong Park">
+<meta property="og:locale" content="ko">
+<meta name="description" content="배경 최근 회사에서 진행하는 프로젝트가 글로벌 사용자를 타겟으로 두고 있어서 다국어 처리를 사용해 보게 되었는데요, 이에 대해 제가 알아본 방법과 작업하고 있는 방법을 정리해보겠습니다.">
+<meta property="og:description" content="배경 최근 회사에서 진행하는 프로젝트가 글로벌 사용자를 타겟으로 두고 있어서 다국어 처리를 사용해 보게 되었는데요, 이에 대해 제가 알아본 방법과 작업하고 있는 방법을 정리해보겠습니다.">
+<link rel="canonical" href="http://localhost:4000/wiki/2024/11/23/spring-internationalization.html">
+<meta property="og:url" content="http://localhost:4000/wiki/2024/11/23/spring-internationalization.html">
+<meta property="og:site_name" content="Every Single Day">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2024-11-23T00:00:00+09:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="Spring Boot에서 국제화로 언어 장벽 허물기!">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2024-11-23T00:00:00+09:00","datePublished":"2024-11-23T00:00:00+09:00","description":"배경 최근 회사에서 진행하는 프로젝트가 글로벌 사용자를 타겟으로 두고 있어서 다국어 처리를 사용해 보게 되었는데요, 이에 대해 제가 알아본 방법과 작업하고 있는 방법을 정리해보겠습니다.","headline":"Spring Boot에서 국제화로 언어 장벽 허물기!","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2024/11/23/spring-internationalization.html"},"url":"http://localhost:4000/wiki/2024/11/23/spring-internationalization.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon.ico/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/favicon.ico/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/favicon.ico/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/favicon.ico/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/favicon.ico/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/favicon.ico/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/favicon.ico/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/favicon.ico/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon.ico/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon.ico/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon.ico/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon.ico/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="shortcut icon" href="">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Every Single Day">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="Every Single Day" src="" onerror="this.style.display='none'">
+  Every Single Day
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a>
+
+
+
+
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  (function() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;
+
+      var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  })();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<!--<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+-->
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">Spring Boot에서 국제화로 언어 장벽 허물기!</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2024-11-23T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Nov 23, 2024
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 10 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#SpringBoot">#SpringBoot</a><a class="post-tag" href="/tags.html#Internationalization">#Internationalization</a><a class="post-tag" href="/tags.html#Message">#Message</a><a class="post-tag" href="/tags.html#%EA%B8%80%EB%98%90">#글또</a><a class="post-tag" href="/tags.html#%EA%B8%80%EB%98%9010%EA%B8%B0">#글또10기</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h3 id="배경">배경</h3>
+<p>최근 회사에서 진행하는 프로젝트가 글로벌 사용자를 타겟으로 두고 있어서 다국어 처리를 사용해 보게 되었는데요, 이에 대해 제가 알아본 방법과 작업하고 있는 방법을 정리해보겠습니다.
+<br>
+<br></p>
+
+<h3 id="spring에서의-다국어-처리국제화">Spring에서의 다국어 처리(국제화)</h3>
+<p>Spring에서는 다국어 처리에 대해 국제화라는 기능을 제공하고 있습니다. messages.properties 파일의 messages라는 이름 뒤에 Locale만 붙이면 내부에서 해당 파일을 찾아 처리해 줍니다.</p>
+
+<p><strong>messages_ko.properties</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">greeting</span><span class="o">=</span><span class="n">안녕하세요</span>
+<span class="n">greeting_name</span><span class="o">=</span><span class="n">안녕하세요</span><span class="o">,</span> <span class="o">{</span><span class="mi">0</span><span class="o">}</span><span class="n">님</span>
+</code></pre></div></div>
+
+<p><strong>messages_en.properties</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">greeting</span><span class="o">=</span><span class="n">hello</span>
+<span class="n">greeting_name</span><span class="o">=</span><span class="n">hello</span><span class="o">,</span> <span class="o">{</span><span class="mi">0</span><span class="o">}</span>
+</code></pre></div></div>
+<p><br></p>
+
+<h4 id="locale">Locale</h4>
+<p>위에서 사용하는 로케일이란 무엇일까요? 로케일은 컴퓨터 시스템에서 특정 지역이나 문화권에 맞는 설정을 정의하는 개념으로, 주로 언어, 국가, 날짜와 시간 형식, 숫자 형식, 통화, 정렬 순서 등과 같은 지역화(Localization) 정보를 포함합니다.</p>
+
+<p><strong>Locale 표기 방식 (UNIX/LINUX 시스템)</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">language</span><span class="o">[</span><span class="n">_territory</span><span class="o">][.</span><span class="na">codeset</span><span class="o">][</span><span class="nd">@modifier</span><span class="o">]</span>
+</code></pre></div></div>
+
+<p>한국어를 사용하는 경우 ko_KR.UTF-8을 주로 사용합니다. ko는 한국어, KR은 지역을 의미하고, 코드셋에는 UTF-8이나 EUC-KR 같은 인코딩 타입을 지정해 줍니다.<br>
+일반적으로는 추가 문자열을 의미하는 @modifier 없이 언어, 지역, 코드셋 3개의 값으로 형성된 하나의 로케일을 사용합니다.
+<br>
+<br></p>
+
+<h2 id="설정-방법">설정 방법</h2>
+
+<h4 id="1-applicationymlproperties">1. application.yml(properties)</h4>
+<p>그래서 Spring에서 messages 파일을 어떻게 인식하는 걸까요? 기존에는 MessageSource를 직접 Bean으로 등록해야 했습니다. 그러나 SpringBoot에서는 따로 등록할 필요 없이 설정 파일(properties/yml)에서 설정할 수 있습니다. 이렇게 설정해두면 자동으로 <code class="language-plaintext highlighter-rouge">messages_*.properties</code>의 형식으로 추가한 파일들을 인식합니다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">spring:</span>
+  <span class="nl">messages:</span>
+    <span class="nl">basename:</span> <span class="n">messages</span><span class="o">/</span><span class="n">messages</span> <span class="err">#</span> <span class="n">메시지</span> <span class="n">파일명</span><span class="o">,</span> <span class="k">default</span> <span class="n">messages</span>
+    <span class="nl">encoding:</span> <span class="no">UTF</span><span class="o">-</span><span class="mi">8</span> <span class="err">#</span> <span class="n">인코딩</span> <span class="n">설정</span>
+    <span class="n">always</span><span class="o">-</span><span class="n">use</span><span class="o">-</span><span class="n">message</span><span class="o">-</span><span class="nl">format:</span> <span class="kc">false</span> <span class="err">#</span> <span class="n">시스템</span> <span class="n">로케일로</span> <span class="n">fallback</span> <span class="n">하지</span> <span class="n">않도록</span> <span class="n">설정</span>
+</code></pre></div></div>
+
+<h4 id="2localeinterceptor">2.LocaleInterceptor</h4>
+<p>현재 프로젝트에서는 경로에서 locale을 받아오기 때문에 로케일이 포함된 경로일 경우 로케일을 읽어 프로젝트의 기본 로케일로 설정해주고 있습니다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">LocaleInterceptor</span> <span class="kd">implements</span> <span class="nc">HandlerInterceptor</span> <span class="o">{</span>
+
+    <span class="nd">@Getter</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span><span class="o">[]</span> <span class="n">includePatterns</span> <span class="o">=</span> <span class="o">{</span><span class="s">"/api/**"</span><span class="o">};</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">preHandle</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">,</span> <span class="nc">Object</span> <span class="n">handler</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">requestURI</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getRequestURI</span><span class="o">();</span>
+        <span class="c1">// URL에서 locale 추출</span>
+        <span class="nc">String</span><span class="o">[]</span> <span class="n">pathSegments</span> <span class="o">=</span> <span class="n">requestURI</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">"/"</span><span class="o">);</span>
+
+        <span class="c1">// locale이 포함된 경로가 /api/{locale}/... 일 때</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">pathSegments</span><span class="o">.</span><span class="na">length</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">localeStr</span> <span class="o">=</span> <span class="n">pathSegments</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span>
+
+            <span class="c1">// locale이 유효한 형식일 때만 설정</span>
+            <span class="nc">Locale</span> <span class="n">locale</span> <span class="o">=</span> <span class="nc">Locale</span><span class="o">.</span><span class="na">forLanguageTag</span><span class="o">(</span><span class="n">localeStr</span><span class="o">);</span>
+            <span class="nc">Locale</span><span class="o">.</span><span class="na">setDefault</span><span class="o">(</span><span class="n">locale</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>🔼 그런데 지금 생각해보니 이렇게 처리하는 것보다 AcceptLanguage로 받는 게 더 낫지 않았을까 하는 생각이 듭니다. 프로젝트가 이미 어느 정도 진행 중이라 바꾸기 쉽지 않겠지만, 시도는 해보겠습니다.
+<br></p>
+
+<h4 id="3-securityconfig">3. SecurityConfig</h4>
+<p>작업한 환경에 따라 다르겠지만, 프로젝트에서 토큰을 사용 중이기 때문에 SecurityConfig에 2번에서 설정한 인터셉터를 추가해주었습니다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RequiredArgsConstructor</span>
+<span class="nd">@EnableWebSecurity</span>
+<span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SecurityConfig</span> <span class="kd">implements</span> <span class="nc">WebMvcConfigurer</span> <span class="o">{</span>
+
+  <span class="kd">private</span> <span class="kd">final</span> <span class="nc">LocaleInterceptor</span> <span class="n">localeInterceptor</span><span class="o">;</span>
+
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addInterceptors</span><span class="o">(</span><span class="nc">InterceptorRegistry</span> <span class="n">registry</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// 다국어 인터셉터</span>
+    <span class="n">registry</span><span class="o">.</span><span class="na">addInterceptor</span><span class="o">(</span><span class="n">localeInterceptor</span><span class="o">).</span>
+        <span class="n">addPathPatterns</span><span class="o">(</span><span class="n">localeInterceptor</span><span class="o">.</span><span class="na">getIncludePatterns</span><span class="o">());</span>
+  <span class="o">}</span>
+  <span class="o">...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h4 id="4-controllerservice">4. Controller/Service</h4>
+<p>저희 프로젝트에서는 다국어를 에러 메세지 위주로 사용하기 때문에 Service단에서 사용했는데요, 이또한 작업 환경에 따라 Controller에서도 사용할 수도 있습니다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">messageSource</span><span class="o">.</span><span class="na">getMessage</span><span class="o">(</span><span class="no">EXISTING_EMAIL</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="n">locale</span><span class="o">);</span>
+<span class="n">messageSource</span><span class="o">.</span><span class="na">getMessage</span><span class="o">(</span><span class="no">EXISTING_EMAIL</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Object</span><span class="o">[]{</span><span class="s">"name"</span><span class="o">},</span> <span class="n">locale</span><span class="o">);</span> <span class="c1">// 동적 메세지 사용</span>
+</code></pre></div></div>
+
+<p>보통 code, args, locale 세 가지의 파라미터를 사용한 getMessage() 메소드를 사용했습니다.</p>
+
+<ul>
+  <li>
+<strong>code</strong>: messages에 key 값으로 넣어둔 문자열</li>
+  <li>
+<strong>args</strong>: 동적 메세지를 사용하고 싶은 경우 값을 넣을 Object 배열</li>
+  <li>
+<strong>locale</strong>: 프론트로부터 받거나 기본적으로 설정된 locale
+<br>
+<br>
+</li>
+</ul>
+
+<h4 id="마무리">마무리</h4>
+<p>Spring에 대해 공부할 때부터 한 번쯤 제대로 경험해보고 싶었던 국제화 기능에 대해 자세히 알아보고 실무에서 바로 사용해보니 정말 재미있었습니다. 강력한 SpringBoot 덕분에 많은 설정 없이 원하는 언어별로 제공할 수 있네요.
+<br>
+<br></p>
+
+<h4 id="참고">참고</h4>
+<ul>
+  <li><a href="https://velog.io/@maketheworldwise/%EB%8B%A4%EA%B5%AD%EC%96%B4-%EC%B2%98%EB%A6%AC%EC%9D%98-%EB%AA%A8%EB%93%A0-%EA%B2%83">다국어 처리의 모든 것</a></li>
+</ul>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/wiki/2024/10/27/spring-validation.html" title="Validation 그거 어떻게 하는건데">Validation 그거 어떻게 하는건데</a><span></span>
+</div>
+<div class="post-comments">  <div id="gisqus_thread"></div>
+  <script src="https://giscus.app/client.js" data-repo="dajeongdev/dajeongdev.github.io" data-repo-id="R_kgDOHS7Ikw" data-category="General" data-category-id="DIC_kwDOHS7Ik84Cj70Z" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="ko" crossorigin="anonymous" async>
+  let giscusAttributes = {
+  src: "https://giscus.app/client.js",
+  "data-repo": "da-in/da-in.github.io",
+  "data-repo-id": "MDEwOlJlcG9zaXRvcnkzNTM5MDcyOTU=",
+  "data-category": "General",
+  "data-category-id": "DIC_kwDOFRgyX84CSEWg",
+  "data-mapping": "pathname",
+  "data-reactions-enabled": "1",
+  "data-emit-metadata": "0",
+  "data-theme": initTheme,
+  "data-input-position":
+    "bottom",
+  "data-lang": "",
+  crossorigin: "anonymous",
+  async: "",
+};
+
+let giscusScript = document.createElement("script");
+Object.entries(giscusAttributes).forEach(([key, value]) =>
+  giscusScript.setAttribute(key, value)
+);
+document.getElementById("tail-wrapper").appendChild(giscusScript);
+</script>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/wiki/2023/11/13/prime-number.html" title="">자바로 소수 판별</a></li>
+<li><a class="post-link" href="/wiki/2024/02/26/string-array-to-string.html" title="">String 배열 -&gt; String</a></li>
+<li><a class="post-link" href="/wiki/2024/02/29/programmers-12906.html" title="">프로그래머스 - 같은 숫자는 싫어 풀이</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/fibonacci.html" title="">자바로 피보나치 수열 이해하기</a></li>
+</ul>
+    </div>
+  </section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+      <div>Copyright © 2024 @Dajeong Park</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="http://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

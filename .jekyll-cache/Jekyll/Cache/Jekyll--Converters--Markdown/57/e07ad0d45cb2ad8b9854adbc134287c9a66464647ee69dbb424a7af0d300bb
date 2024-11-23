@@ -1,0 +1,124 @@
+I".<h3 id="배경">배경</h3>
+<p>최근 회사에서 진행하는 프로젝트가 글로벌 사용자를 타겟으로 두고 있어서 다국어 처리를 사용해 보게 되었는데요, 이에 대해 제가 알아본 방법과 작업하고 있는 방법을 정리해보겠습니다.
+<br />
+<br /></p>
+
+<h3 id="spring에서의-다국어-처리국제화">Spring에서의 다국어 처리(국제화)</h3>
+<p>Spring에서는 다국어 처리에 대해 국제화라는 기능을 제공하고 있습니다. messages.properties 파일의 messages라는 이름 뒤에 Locale만 붙이면 내부에서 해당 파일을 찾아 처리해 줍니다.</p>
+
+<p><em>messages_ko.properties</em></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">greeting</span><span class="o">=</span><span class="n">안녕하세요</span>
+<span class="n">greeting_name</span><span class="o">=</span><span class="n">안녕하세요</span><span class="o">,</span> <span class="o">{</span><span class="mi">0</span><span class="o">}</span><span class="n">님</span>
+</code></pre></div></div>
+
+<p><em>messages_en.properties</em></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">greeting</span><span class="o">=</span><span class="n">hello</span>
+<span class="n">greeting_name</span><span class="o">=</span><span class="n">hello</span><span class="o">,</span> <span class="o">{</span><span class="mi">0</span><span class="o">}</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h4 id="locale">Locale</h4>
+<p>위에서 사용하는 로케일이란 무엇일까요? 로케일은 컴퓨터 시스템에서 특정 지역이나 문화권에 맞는 설정을 정의하는 개념으로, 주로 언어, 국가, 날짜와 시간 형식, 숫자 형식, 통화, 정렬 순서 등과 같은 지역화(Localization) 정보를 포함합니다.</p>
+
+<p><strong>Locale 표기 방식 (UNIX/LINUX 시스템)</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">language</span><span class="o">[</span><span class="n">_territory</span><span class="o">][.</span><span class="na">codeset</span><span class="o">][</span><span class="nd">@modifier</span><span class="o">]</span>
+</code></pre></div></div>
+
+<p>한국어를 사용하는 경우 ko_KR.UTF-8을 주로 사용합니다. ko는 한국어, KR은 지역을 의미하고, 코드셋에는 UTF-8이나 EUC-KR 같은 인코딩 타입을 지정해 줍니다. 
+일반적으로는 추가 문자열을 의미하는 @modifier 없이 언어, 지역, 코드셋 3개의 값으로 형성된 하나의 로케일을 사용합니다.
+<br />
+<br /></p>
+
+<h2 id="설정-방법">설정 방법</h2>
+
+<h4 id="1-applicationymlproperties">1. application.yml(properties)</h4>
+<p>그래서 messages 파일은 Spring에서 어떻게 인식하는 걸까요? 원래라면 MessageSource를 직접 Bean으로 등록해야 합니다. 하지만 SpringBoot에서는 따로 등록할 필요 없이 설정 파일(properties/yml)에서 설정할 수 있습니다. 이렇게 설정해두면 자동으로 <code class="language-plaintext highlighter-rouge">messages_*.properties</code>의 형식으로 추가한 파일들을 인식합니다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">spring:</span>
+  <span class="nl">messages:</span>
+    <span class="nl">basename:</span> <span class="n">messages</span><span class="o">/</span><span class="n">messages</span> <span class="err">#</span> <span class="n">메시지</span> <span class="n">파일명</span><span class="o">,</span> <span class="k">default</span> <span class="n">messages</span>
+    <span class="nl">encoding:</span> <span class="no">UTF</span><span class="o">-</span><span class="mi">8</span> <span class="err">#</span> <span class="n">인코딩</span> <span class="n">설정</span>
+    <span class="n">always</span><span class="o">-</span><span class="n">use</span><span class="o">-</span><span class="n">message</span><span class="o">-</span><span class="nl">format:</span> <span class="kc">false</span> <span class="err">#</span> <span class="n">시스템</span> <span class="n">로케일로</span> <span class="n">fallback</span> <span class="n">하지</span> <span class="n">않도록</span> <span class="n">설정</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h4 id="2localeinterceptor">2.LocaleInterceptor</h4>
+<p>현재 프로젝트에서는 경로에서 locale을 받아오기 때문에 로케일이 포함된 경로일 경우 로케일을 읽어 프로젝트의 기본 로케일로 설정해주고 있습니다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">LocaleInterceptor</span> <span class="kd">implements</span> <span class="nc">HandlerInterceptor</span> <span class="o">{</span>
+
+    <span class="nd">@Getter</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span><span class="o">[]</span> <span class="n">includePatterns</span> <span class="o">=</span> <span class="o">{</span><span class="s">"/api/**"</span><span class="o">};</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">preHandle</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">,</span> <span class="nc">Object</span> <span class="n">handler</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">requestURI</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getRequestURI</span><span class="o">();</span>
+        <span class="c1">// URL에서 locale 추출</span>
+        <span class="nc">String</span><span class="o">[]</span> <span class="n">pathSegments</span> <span class="o">=</span> <span class="n">requestURI</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">"/"</span><span class="o">);</span>
+
+        <span class="c1">// locale이 포함된 경로가 /api/{locale}/... 일 때</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">pathSegments</span><span class="o">.</span><span class="na">length</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">localeStr</span> <span class="o">=</span> <span class="n">pathSegments</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span>
+
+            <span class="c1">// locale이 유효한 형식일 때만 설정</span>
+            <span class="nc">Locale</span> <span class="n">locale</span> <span class="o">=</span> <span class="nc">Locale</span><span class="o">.</span><span class="na">forLanguageTag</span><span class="o">(</span><span class="n">localeStr</span><span class="o">);</span>
+            <span class="nc">Locale</span><span class="o">.</span><span class="na">setDefault</span><span class="o">(</span><span class="n">locale</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>그런데 지금 생각해보니 이렇게 처리하는 것보다 AcceptLanguage로 받는 게 더 낫지 않았을까 하는 생각이 듭니다. 프로젝트가 이미 어느 정도 진행 중이라 바꾸기 쉽지 않겠지만, 시도는 해보겠습니다.
+<br /></p>
+
+<h4 id="3-securityconfig">3. SecurityConfig</h4>
+<p>작업한 환경에 따라 다르겠지만, 프로젝트에서 토큰을 사용 중이기 때문에 SecurityConfig에 2번에서 설정한 인터셉터를 추가해주었습니다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RequiredArgsConstructor</span>
+<span class="nd">@EnableWebSecurity</span>
+<span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SecurityConfig</span> <span class="kd">implements</span> <span class="nc">WebMvcConfigurer</span> <span class="o">{</span>
+
+  <span class="kd">private</span> <span class="kd">final</span> <span class="nc">LocaleInterceptor</span> <span class="n">localeInterceptor</span><span class="o">;</span>
+
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addInterceptors</span><span class="o">(</span><span class="nc">InterceptorRegistry</span> <span class="n">registry</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// 다국어 인터셉터</span>
+    <span class="n">registry</span><span class="o">.</span><span class="na">addInterceptor</span><span class="o">(</span><span class="n">localeInterceptor</span><span class="o">).</span>
+        <span class="n">addPathPatterns</span><span class="o">(</span><span class="n">localeInterceptor</span><span class="o">.</span><span class="na">getIncludePatterns</span><span class="o">());</span>
+  <span class="o">}</span>
+  
+	<span class="o">...</span>  
+<span class="o">}</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h4 id="4-controllerservice">4. Controller/Service</h4>
+<p>저희 프로젝트에서는 다국어를 에러 메세지 위주로 사용하기 때문에 Service단에서 사용했는데요, 이또한 작업 환경에 따라 Controller에서도 사용할 수도 있습니다.</p>
+
+<p><strong>예시</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">messageSource</span><span class="o">.</span><span class="na">getMessage</span><span class="o">(</span><span class="no">EXISTING_EMAIL</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="n">locale</span><span class="o">);</span>
+<span class="n">messageSource</span><span class="o">.</span><span class="na">getMessage</span><span class="o">(</span><span class="no">EXISTING_EMAIL</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Object</span><span class="o">[]{</span><span class="s">"name"</span><span class="o">},</span> <span class="n">locale</span><span class="o">);</span> <span class="c1">// 동적 메세지 사용</span>
+</code></pre></div></div>
+
+<p>보통 code, args, locale 세 가지의 파라미터를 사용한 getMessage() 메소드를 사용했습니다.</p>
+
+<ul>
+  <li><strong>code</strong>: messages에 key 값으로 넣어둔 문자열</li>
+  <li><strong>args</strong>: 동적 메세지를 사용하고 싶은 경우 값을 넣을 Object 배열</li>
+  <li><strong>locale</strong>: 프론트로부터 받거나 기본적으로 설정된 locale
+<br />
+<br /></li>
+</ul>
+
+<h4 id="마무리">마무리</h4>
+<p>Spring에 대해 공부할 때부터 한 번쯤 제대로 경험해보고 싶었던 국제화 기능에 대해 자세히 알아보고 실무에서 바로 사용해보니 정말 재미있었습니다. 강력한 SpringBoot 덕분에 많은 설정 없이 원하는 언어별로 제공할 수 있네요.
+<br /></p>
+
+<h4 id="참고">참고</h4>
+<ul>
+  <li>[다국어 처리의 모든 것]https://velog.io/@maketheworldwise/%EB%8B%A4%EA%B5%AD%EC%96%B4-%EC%B2%98%EB%A6%AC%EC%9D%98-%EB%AA%A8%EB%93%A0-%EA%B2%83</li>
+</ul>
+:ET
