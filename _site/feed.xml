@@ -1,4 +1,176 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2024-11-23T18:06:38+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">Spring Boot에서 국제화로 언어 장벽 허물기!</title><link href="http://localhost:4000/wiki/2024/11/23/spring-internationalization.html" rel="alternate" type="text/html" title="Spring Boot에서 국제화로 언어 장벽 허물기!" /><published>2024-11-23T00:00:00+09:00</published><updated>2024-11-23T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/11/23/spring-internationalization</id><content type="html" xml:base="http://localhost:4000/wiki/2024/11/23/spring-internationalization.html"><![CDATA[<h3 id="배경">배경</h3>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2024-12-22T23:58:44+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">API 문서 자동화로 시간 절약하기 (feat.Swagger)</title><link href="http://localhost:4000/wiki/2024/12/22/spring-swagger.html" rel="alternate" type="text/html" title="API 문서 자동화로 시간 절약하기 (feat.Swagger)" /><published>2024-12-22T00:00:00+09:00</published><updated>2024-12-22T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/12/22/spring-swagger</id><content type="html" xml:base="http://localhost:4000/wiki/2024/12/22/spring-swagger.html"><![CDATA[<h4 id="배경">배경</h4>
+<p>백엔드 개발자에게 API란 무엇일까 생각해봤습니다. 열심히 설계하고 작성한 코드가 의미가 있으려면 그걸 받아서 작업하는 프론트 또는 앱 개발자분들에게 잘 전달되어야겠죠. 그렇습니다. API는 잘 작성하는 것도 중요하지만, 그걸 잘 전달하는 것 또한 매우 중요합니다. 그래서 API를 잘 전달하기 위해 API 명세서를 작성하는 방법을 소개해볼까 합니다. 제가 실무에서 작업한 방법을 알려드리는 것이니, 더 좋은 방법이나 틀린 곳이 있다면 언제든지 댓글 부탁드리겠습니다.
+<br />
+<br /></p>
+
+<h4 id="swagger란">Swagger란?</h4>
+<ul>
+  <li>Swagger는 API 명세서(문서)를 자동으로 생성 및 관리하기 위한 도구로, OpenAPI Specification(OAS)를 기반으로 API 설계 및 문서회에 활용할 수 있습니다.</li>
+  <li><strong>Swagger의 주요 장점</strong>
+    <ul>
+      <li>개발 속도 향상</li>
+      <li>문서와 API 코드 간의 동기화 가능</li>
+      <li>Swagger UI로 실시간 API 테스트 가능
+<br />
+<br /></li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="swagger-설치-및-설정-방법">Swagger 설치 및 설정 방법</h4>
+<p><strong>1. 의존성 추가</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springdoc</span><span class="o">:</span><span class="n">springdoc</span><span class="o">-</span><span class="n">openapi</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">webmvc</span><span class="o">-</span><span class="nl">ui:</span><span class="mf">2.2</span><span class="o">.</span><span class="mi">0</span><span class="err">'</span>
+</code></pre></div></div>
+<ul>
+  <li>Swagger를 사용하기 위해 springdoc-openapi 라이브러리를 설치해주겠습니다.</li>
+  <li>springfox는 더이상 지원하지 않으므로 사용을 권장하지 않습니다.<br />
+<br /></li>
+</ul>
+
+<p><strong>2. Swagger 설정 클래스 추가</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="kd">class</span> <span class="nc">SwaggerConfig</span> <span class="o">{</span>
+
+        <span class="nd">@Bean</span>
+        <span class="kd">public</span> <span class="nc">OpenAPI</span> <span class="nf">getOpenAPI</span><span class="o">()</span> <span class="o">{</span>
+                <span class="nc">String</span> <span class="n">securityJwt</span> <span class="o">=</span> <span class="s">"JWT"</span><span class="o">;</span>
+                <span class="nc">SecurityRequirement</span> <span class="n">securityRequirement</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SecurityRequirement</span><span class="o">().</span><span class="na">addList</span><span class="o">(</span><span class="n">securityJwt</span><span class="o">);</span>
+                <span class="nc">Components</span> <span class="n">components</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Components</span><span class="o">()</span>
+                        <span class="o">.</span><span class="na">addSecuritySchemes</span><span class="o">(</span><span class="n">securityJwt</span><span class="o">,</span> <span class="k">new</span> <span class="nc">SecurityScheme</span><span class="o">()</span>
+                                <span class="o">.</span><span class="na">name</span><span class="o">(</span><span class="n">securityJwt</span><span class="o">)</span>
+                                <span class="o">.</span><span class="na">type</span><span class="o">(</span><span class="nc">SecurityScheme</span><span class="o">.</span><span class="na">Type</span><span class="o">.</span><span class="na">HTTP</span><span class="o">)</span>
+                                <span class="o">.</span><span class="na">scheme</span><span class="o">(</span><span class="no">TOKEN_PREFIX</span><span class="o">)</span>
+                                <span class="o">.</span><span class="na">bearerFormat</span><span class="o">(</span><span class="nc">HttpHeaders</span><span class="o">.</span><span class="na">AUTHORIZATION</span><span class="o">)</span>
+                        <span class="o">);</span>
+
+                <span class="k">return</span> <span class="k">new</span> <span class="nf">OpenAPI</span><span class="o">()</span>
+                        <span class="o">.</span><span class="na">addSecurityItem</span><span class="o">(</span><span class="n">securityRequirement</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">components</span><span class="o">(</span><span class="n">components</span><span class="o">);</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>내부에서 JWT 토큰을 사용하고 있기 때문에 미리 설정해두었습니다.
+<br />
+<br /></li>
+</ul>
+
+<h4 id="swagger-어노테이션-사용-방법">Swagger 어노테이션 사용 방법</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Tag</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"고객"</span><span class="o">,</span> <span class="n">description</span> <span class="o">=</span> <span class="s">"고객 관련 API입니다."</span><span class="o">)</span>
+<span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/api/user"</span><span class="o">)</span>
+<span class="nd">@RequiredArgsConstructor</span>
+<span class="nd">@RestController</span>
+<span class="kd">class</span> <span class="nc">UserController</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">UserService</span> <span class="n">userService</span><span class="o">;</span>
+
+    <span class="nd">@Operation</span><span class="o">(</span><span class="n">summary</span> <span class="o">=</span> <span class="s">"summary : 이메일 인증번호 전송"</span><span class="o">,</span>
+            <span class="n">description</span> <span class="o">=</span> <span class="s">"""
+                    ## 요청 :
+                    - Locale locale 로케일 (경로, 필수)
+                    
+                    - String email 이메일 (필수)
+                    ## 응답 :
+                    - String data "</span><span class="n">success</span><span class="s">"
+                    """</span><span class="o">)</span>
+    <span class="nd">@BasicApiSwaggerResponse</span>
+    <span class="nd">@PostMapping</span><span class="o">(</span><span class="s">"/send-email"</span><span class="o">)</span>
+    <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">CommonResponse</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;&gt;</span> <span class="nf">sendEmail</span><span class="o">(</span><span class="nd">@PathVariable</span><span class="o">(</span><span class="s">"locale"</span><span class="o">)</span> <span class="nc">Locale</span> <span class="n">locale</span><span class="o">,</span> <span class="nd">@Valid</span> <span class="nd">@RequestBody</span> <span class="nc">SendEmailRequest</span> <span class="n">request</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">userService</span><span class="o">.</span><span class="na">sendEmail</span><span class="o">(</span><span class="n">locale</span><span class="o">,</span> <span class="n">request</span><span class="o">);</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="k">new</span> <span class="nc">CommonResponse</span><span class="o">&lt;&gt;(</span><span class="s">"이메일 인증번호 전송"</span><span class="o">,</span> <span class="nc">MessageConstants</span><span class="o">.</span><span class="na">SUCCESS_MESSAGE</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li><strong>@Tag</strong> : API 그룹 설정
+    <ul>
+      <li>name: 태그명</li>
+      <li>description: 태그에 대한 설명</li>
+    </ul>
+  </li>
+  <li><strong>@Operation</strong> : API에 대한 설명
+    <ul>
+      <li>summary: API 요약</li>
+      <li>description: API 상세 설명
+<br /></li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SaveNoticeRequest</span> <span class="o">{</span>
+
+    <span class="nd">@NotNull</span>
+    <span class="nd">@Schema</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"language"</span><span class="o">,</span> <span class="n">description</span> <span class="o">=</span> <span class="s">"언어"</span><span class="o">,</span> <span class="n">example</span> <span class="o">=</span> <span class="s">"ko"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">Language</span> <span class="n">language</span><span class="o">;</span>
+
+    <span class="nd">@NotNull</span>
+    <span class="nd">@Schema</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"category"</span><span class="o">,</span> <span class="n">description</span> <span class="o">=</span> <span class="s">"카테고리"</span><span class="o">,</span> <span class="n">example</span> <span class="o">=</span> <span class="s">"공지"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">category</span><span class="o">;</span>
+    
+    <span class="nd">@NotNull</span>
+    <span class="nd">@Schema</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"title"</span><span class="o">,</span> <span class="n">description</span> <span class="o">=</span> <span class="s">"제목"</span><span class="o">,</span> <span class="n">example</span> <span class="o">=</span> <span class="s">"제목"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">title</span><span class="o">;</span>
+
+    <span class="nd">@NotNull</span>
+    <span class="nd">@Schema</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"content"</span><span class="o">,</span> <span class="n">description</span> <span class="o">=</span> <span class="s">"내용"</span><span class="o">,</span> <span class="n">example</span> <span class="o">=</span> <span class="s">"내용"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">content</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li><strong>@Schema</strong>: 해당 Schema에 대한 설명
+    <ul>
+      <li>name: 스키마 이름</li>
+      <li>description: 설명</li>
+      <li>example: 예시</li>
+    </ul>
+  </li>
+  <li>@Schema를 작성하여 요청값에 대한 정확한 설명을 적어주면 API 명세서가 더 완성도 있게 작성될 수 있습니다.
+    <ul>
+      <li>이외에도 allowValues, defaultValue 같은 옵션이 있으니 잘 적용해보면 좋겠습니다.
+<br />
+<br /></li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="swagger의-장단점">Swagger의 장단점</h4>
+
+<p><strong>장점</strong></p>
+<ol>
+  <li>API 문서의 자동화</li>
+  <li>협업 및 커뮤니케이션 강화</li>
+  <li>실시간 테스트 및 디버깅 가능</li>
+</ol>
+
+<p><strong>단점</strong></p>
+<ol>
+  <li>코드와 문서가 따로 관리될 경우 실제 동작과 불일치 가능</li>
+  <li>어노테이션으로 인해 코드 복잡성 증가
+<br />
+<br /></li>
+</ol>
+
+<h4 id="swagger-실무-활용-팁">Swagger 실무 활용 팁</h4>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Retention</span><span class="o">(</span><span class="nc">RetentionPolicy</span><span class="o">.</span><span class="na">RUNTIME</span><span class="o">)</span>
+<span class="nd">@Target</span><span class="o">({</span><span class="nc">ElementType</span><span class="o">.</span><span class="na">TYPE</span><span class="o">,</span> <span class="nc">ElementType</span><span class="o">.</span><span class="na">METHOD</span><span class="o">})</span>
+<span class="nd">@Documented</span>
+<span class="nd">@ApiResponses</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="o">{</span>
+        <span class="nd">@ApiResponse</span><span class="o">(</span><span class="n">responseCode</span> <span class="o">=</span> <span class="s">"200"</span><span class="o">,</span> <span class="n">description</span> <span class="o">=</span> <span class="s">"API 호출 성공"</span><span class="o">),</span>
+        <span class="nd">@ApiResponse</span><span class="o">(</span><span class="n">responseCode</span> <span class="o">=</span> <span class="s">"400"</span><span class="o">,</span> <span class="n">description</span> <span class="o">=</span> <span class="s">"잘못된 요청"</span><span class="o">),</span>
+        <span class="nd">@ApiResponse</span><span class="o">(</span><span class="n">responseCode</span> <span class="o">=</span> <span class="s">"404"</span><span class="o">,</span> <span class="n">description</span> <span class="o">=</span> <span class="s">"존재하지 않는 API"</span><span class="o">),</span>
+        <span class="nd">@ApiResponse</span><span class="o">(</span><span class="n">responseCode</span> <span class="o">=</span> <span class="s">"403"</span><span class="o">,</span> <span class="n">description</span> <span class="o">=</span> <span class="s">"인가 실패(권한 없음)"</span><span class="o">),</span>
+        <span class="nd">@ApiResponse</span><span class="o">(</span><span class="n">responseCode</span> <span class="o">=</span> <span class="s">"500"</span><span class="o">,</span> <span class="n">description</span> <span class="o">=</span> <span class="s">"서버 에러"</span><span class="o">)</span>
+<span class="o">})</span>
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="nc">BasicApiSwaggerResponse</span> <span class="o">{}</span>
+</code></pre></div></div>
+<ul>
+  <li>위의 코드 예제에서 사용한 것처럼  @BasicApiSwaggerResponse 같은 응답 상태 코드를 설명해주는 어노테이션을 만들어두고 사용하면 편리합니다.</li>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Spring" /><category term="SpringBoot" /><category term="Swagger" /><category term="SpringAPIDocs" /><category term="글또" /><category term="글또10기" /><summary type="html"><![CDATA[배경 백엔드 개발자에게 API란 무엇일까 생각해봤습니다. 열심히 설계하고 작성한 코드가 의미가 있으려면 그걸 받아서 작업하는 프론트 또는 앱 개발자분들에게 잘 전달되어야겠죠. 그렇습니다. API는 잘 작성하는 것도 중요하지만, 그걸 잘 전달하는 것 또한 매우 중요합니다. 그래서 API를 잘 전달하기 위해 API 명세서를 작성하는 방법을 소개해볼까 합니다. 제가 실무에서 작업한 방법을 알려드리는 것이니, 더 좋은 방법이나 틀린 곳이 있다면 언제든지 댓글 부탁드리겠습니다.]]></summary></entry><entry><title type="html">Spring Boot에서 국제화로 언어 장벽 허물기!</title><link href="http://localhost:4000/wiki/2024/11/23/spring-internationalization.html" rel="alternate" type="text/html" title="Spring Boot에서 국제화로 언어 장벽 허물기!" /><published>2024-11-23T00:00:00+09:00</published><updated>2024-11-23T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/11/23/spring-internationalization</id><content type="html" xml:base="http://localhost:4000/wiki/2024/11/23/spring-internationalization.html"><![CDATA[<h3 id="배경">배경</h3>
 <p>최근 회사에서 진행하는 프로젝트가 글로벌 사용자를 타겟으로 두고 있어서 다국어 처리를 사용해 보게 되었는데요, 이에 대해 제가 알아본 방법과 작업하고 있는 방법을 정리해보겠습니다.
 <br />
 <br /></p>
@@ -774,58 +946,4 @@ QueryDSL에 관련해서는 나도 많이 부족했지만, 실무에서의 경�
 <br /></p>
 
 <h4 id="소감">소감</h4>
-<p>단행본 API를 구현하라는 업무에서 사실상 전집 API를 개선하는 데 더 시간을 많이 보냈지만 개인적으로 정말 뿌듯한 업무였다. ㅎㅎ 주니어 때 해보기 힘든 속도도 개선도 해보고, 데이터에 영향이 가지 않도록 고민하는 과정들이 개발자라는 직업에 대해 깊이 있게 생각하게 만들어 준 것 같다~!</p>]]></content><author><name>Dajeong Park</name></author><category term="blog" /><category term="Project" /><category term="Review" /><summary type="html"><![CDATA[홈페이지 마이그레이션 이후 새로운 업무를 받았다.]]></summary></entry><entry><title type="html">홈페이지 마이그레이션 회고</title><link href="http://localhost:4000/blog/2024/05/09/hompage-migration-review.html" rel="alternate" type="text/html" title="홈페이지 마이그레이션 회고" /><published>2024-05-09T00:00:00+09:00</published><updated>2024-05-09T00:00:00+09:00</updated><id>http://localhost:4000/blog/2024/05/09/hompage-migration-review</id><content type="html" xml:base="http://localhost:4000/blog/2024/05/09/hompage-migration-review.html"><![CDATA[<p>포트폴리오를 작성하다보니 생각보다 예전에 했던 프로젝트들이 회고해볼 만한 게 많아서 한 번 되짚어보려고 한다.
-<br />
-<br /></p>
-
-<p>입사 당시 첫 주는 거의 일이 없어서 심심했었는데, 2주차에는 드디어 첫 업무를 받았다.
-<br /></p>
-
-<p>Spring 4.3.3, Maven, JSP로 구성되어 있던 프로젝트를 Spring Boot, Gradle, Thymeleaf로 마이그레이션 하는 업무였는데, 마이그레이션 자체도 처음이고 Spring Boot와 Thymeleaf도 처음 써보는 거라 걱정반 기대반으로 조사부터 했었다.
-<br /></p>
-
-<p>다행스럽게도 마이그레이션에 대한 레퍼런스가 많아서 찬찬히 읽어보고 시작했다.
-<br /></p>
-
-<p>일단 Spring 4점대가 이미 개발 지원이 종료된 상태였고, 불필요한 중복 코드나 주석도 많아서 함께 리팩토링하기로 했다. 그리고 한꺼번에 바꾸게 되면 에러날 확률이 높다고 해서 하나씩 바꾸기로 했다.
-<br />
-<br /></p>
-
-<h4 id="1-spring--springboot">1. Spring → SpringBoot</h4>
-<p>spring boot 의존성도 추가하고, xml 파일들을 yml 혹은 config 파일로 분리했다.</p>
-
-<p>xml 파일이 적지 않아서 yml 문법에 맞게 옮기는 데 시간이 조금 걸렸고, java config 파일은 웬만하면 만들고 싶지 않아서 yml 문법으로 가능한 건 다 yml로 처리했었다.
-<br /></p>
-
-<h4 id="2-maven--gradle">2. Maven → Gradle</h4>
-<p>maven에서 gradle로 변경하는 건 생각보다 간단했는데, 일단 gradle을 설치하고 환경변수를 설정한 후 프로젝트 내에서 reload gradle project를 해주면 된다.</p>
-
-<p>그런데 빌드하면서 에러가 발생했는데 lombok 부분을 annotationProcessor로 변경해주니 금방 해결되었다.
-<br /></p>
-
-<h4 id="3-jsp--thymeleaf">3. JSP → Thymeleaf</h4>
-<p>당연하지만 3가지 순서 중에 가장 오래 걸린 부분이다.
-<br /></p>
-
-<p>사실 이 부분은 내가 하고 싶어서 한 부분인데, JSP를 지양하는 문화로 가기도 했고 Spring Boot를 사용할 때 Thyemelaf를 권고한다고 해서 써보고 싶었다. Thymeleaf는 성능면에서 JSP보다 조금 느리지만, Jar 파일로 빌드할 수 있다. 그리고 무엇보다 HTML과 자바 코드가 섞이지 않아도 되는 점이 가장 마음에 들었다.
-<br /></p>
-
-<p>Thymeleaf는 JSP와 인식되는 폴더 자체가 다르기 때문에 폴더 구조부터 수정한 뒤 jsp 파일을 html 파일로 변경했다.</p>
-
-<p>이후부터는 Thymeleaf 문법에 맞추는 수작업이었는데, Thymeleaf 설정에서 cache를 false로 설정해주면 브라우저에서 새로고침만으로도 바로 변경사항을 반영해볼 수 있어서 정말 편리했다.
-<br />
-<br /></p>
-
-<h4 id="ps-css하">P.S. CSS..하..</h4>
-<p>진짜 여러모로 CSS 덕분에 아주 눈물이 날 뻔 했다. Thymeleaf까지만 해도 재미있었는데, 확신의 백엔드인건지 CSS 부분 수정하는 데 더 오래 걸려서 아주 미치는 줄 알았다.
-이미지인 줄 알았는데 하드 코딩된 거라는 것도… ㅋㅋㅋㅋ 그래도 실무에서 이런 경험 해보는 것도 나쁘지 않았다.. 이후 관리자 개발할 때도 많이 도움되기도 했고!
-<br />
-<br /></p>
-
-<h4 id="소감">소감</h4>
-<p>사실 지금 생각해보면 아주 간단한 프로젝트였고, 모르는 게 있으면 질문을 정리해서 대리님께 물어봤기 때문에 금방 해낼 수 있었다.
-첫 업무를 생각보다 빠르게 끝내서 기분 좋기도 했고(당연하지만 지금 하면 더 잘할 수 있을텐데),
-회사에서도 뭔가 시켜도 되겠다 싶으셨는지 이후에 업무를 차근차근 받아서 진행하는 계기가 됐었다.
-<br /></p>
-
-<p>지금 생각해보면 일하느라 바빠서 말도 많이 안했던 것 같은데 ㅋㅋ 조용히 열심히 하는 직원으로 생각해주셨으려나~</p>]]></content><author><name>Dajeong Park</name></author><category term="blog" /><category term="Java" /><category term="Spring" /><category term="SpringBoot" /><category term="Maven" /><category term="Gradle" /><category term="JSP" /><category term="Thymeleaf Migration" /><category term="Review" /><summary type="html"><![CDATA[포트폴리오를 작성하다보니 생각보다 예전에 했던 프로젝트들이 회고해볼 만한 게 많아서 한 번 되짚어보려고 한다.]]></summary></entry></feed>
+<p>단행본 API를 구현하라는 업무에서 사실상 전집 API를 개선하는 데 더 시간을 많이 보냈지만 개인적으로 정말 뿌듯한 업무였다. ㅎㅎ 주니어 때 해보기 힘든 속도도 개선도 해보고, 데이터에 영향이 가지 않도록 고민하는 과정들이 개발자라는 직업에 대해 깊이 있게 생각하게 만들어 준 것 같다~!</p>]]></content><author><name>Dajeong Park</name></author><category term="blog" /><category term="Project" /><category term="Review" /><summary type="html"><![CDATA[홈페이지 마이그레이션 이후 새로운 업무를 받았다.]]></summary></entry></feed>
