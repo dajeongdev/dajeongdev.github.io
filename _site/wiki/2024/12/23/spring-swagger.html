@@ -21,17 +21,17 @@
 <meta property="og:title" content="API 문서 자동화로 시간 절약하기 (feat.Swagger)">
 <meta name="author" content="Dajeong Park">
 <meta property="og:locale" content="ko">
-<meta name="description" content="배경 백엔드 개발자에게 API란 무엇일까 생각해봤습니다. 열심히 설계하고 작성한 코드가 의미가 있으려면 그걸 받아서 작업하는 프론트 또는 앱 개발자분들에게 잘 전달되어야겠죠. 그렇습니다. API는 잘 작성하는 것도 중요하지만, 그걸 잘 전달하는 것 또한 매우 중요합니다. 그래서 API를 잘 전달하기 위해 API 명세서를 작성하는 방법을 소개해볼까 합니다. 제가 실무에서 작업한 방법을 알려드리는 것이니, 더 좋은 방법이나 틀린 곳이 있다면 언제든지 댓글 부탁드리겠습니다.">
-<meta property="og:description" content="배경 백엔드 개발자에게 API란 무엇일까 생각해봤습니다. 열심히 설계하고 작성한 코드가 의미가 있으려면 그걸 받아서 작업하는 프론트 또는 앱 개발자분들에게 잘 전달되어야겠죠. 그렇습니다. API는 잘 작성하는 것도 중요하지만, 그걸 잘 전달하는 것 또한 매우 중요합니다. 그래서 API를 잘 전달하기 위해 API 명세서를 작성하는 방법을 소개해볼까 합니다. 제가 실무에서 작업한 방법을 알려드리는 것이니, 더 좋은 방법이나 틀린 곳이 있다면 언제든지 댓글 부탁드리겠습니다.">
-<link rel="canonical" href="http://localhost:4000/wiki/2024/12/22/spring-swagger.html">
-<meta property="og:url" content="http://localhost:4000/wiki/2024/12/22/spring-swagger.html">
+<meta name="description" content="배경 백엔드 개발자에게 API란 무엇일까요. 열심히 설계하고 작성한 코드가 의미가 있으려면, 그걸 받아서 작업하는 프론트 또는 앱 개발자분들에게 잘 전달되어야겠죠. 그렇습니다. API를 잘 작성하는 것도 중요하지만, 그걸 잘 전달하는 것 또한 매우 중요합니다. 그래서 API를 잘 전달하기 위해 API 명세서를 작성하는 방법을 소개해볼까 합니다. 제가 실무에서 작업한 방법을 알려드리는 것이니, 더 좋은 방법이나 틀린 곳이 있다면 언제든지 댓글 부탁드리겠습니다.">
+<meta property="og:description" content="배경 백엔드 개발자에게 API란 무엇일까요. 열심히 설계하고 작성한 코드가 의미가 있으려면, 그걸 받아서 작업하는 프론트 또는 앱 개발자분들에게 잘 전달되어야겠죠. 그렇습니다. API를 잘 작성하는 것도 중요하지만, 그걸 잘 전달하는 것 또한 매우 중요합니다. 그래서 API를 잘 전달하기 위해 API 명세서를 작성하는 방법을 소개해볼까 합니다. 제가 실무에서 작업한 방법을 알려드리는 것이니, 더 좋은 방법이나 틀린 곳이 있다면 언제든지 댓글 부탁드리겠습니다.">
+<link rel="canonical" href="http://localhost:4000/wiki/2024/12/23/spring-swagger.html">
+<meta property="og:url" content="http://localhost:4000/wiki/2024/12/23/spring-swagger.html">
 <meta property="og:site_name" content="Every Single Day">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2024-12-22T00:00:00+09:00">
+<meta property="article:published_time" content="2024-12-23T00:00:00+09:00">
 <meta name="twitter:card" content="summary">
 <meta property="twitter:title" content="API 문서 자동화로 시간 절약하기 (feat.Swagger)">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2024-12-22T00:00:00+09:00","datePublished":"2024-12-22T00:00:00+09:00","description":"배경 백엔드 개발자에게 API란 무엇일까 생각해봤습니다. 열심히 설계하고 작성한 코드가 의미가 있으려면 그걸 받아서 작업하는 프론트 또는 앱 개발자분들에게 잘 전달되어야겠죠. 그렇습니다. API는 잘 작성하는 것도 중요하지만, 그걸 잘 전달하는 것 또한 매우 중요합니다. 그래서 API를 잘 전달하기 위해 API 명세서를 작성하는 방법을 소개해볼까 합니다. 제가 실무에서 작업한 방법을 알려드리는 것이니, 더 좋은 방법이나 틀린 곳이 있다면 언제든지 댓글 부탁드리겠습니다.","headline":"API 문서 자동화로 시간 절약하기 (feat.Swagger)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2024/12/22/spring-swagger.html"},"url":"http://localhost:4000/wiki/2024/12/22/spring-swagger.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2024-12-23T00:00:00+09:00","datePublished":"2024-12-23T00:00:00+09:00","description":"배경 백엔드 개발자에게 API란 무엇일까요. 열심히 설계하고 작성한 코드가 의미가 있으려면, 그걸 받아서 작업하는 프론트 또는 앱 개발자분들에게 잘 전달되어야겠죠. 그렇습니다. API를 잘 작성하는 것도 중요하지만, 그걸 잘 전달하는 것 또한 매우 중요합니다. 그래서 API를 잘 전달하기 위해 API 명세서를 작성하는 방법을 소개해볼까 합니다. 제가 실무에서 작업한 방법을 알려드리는 것이니, 더 좋은 방법이나 틀린 곳이 있다면 언제든지 댓글 부탁드리겠습니다.","headline":"API 문서 자동화로 시간 절약하기 (feat.Swagger)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2024/12/23/spring-swagger.html"},"url":"http://localhost:4000/wiki/2024/12/23/spring-swagger.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon.ico/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="/assets/favicon.ico/apple-icon-60x60.png">
@@ -649,7 +649,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
   <h2 class="post-subtitle"></h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2024-12-22T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Dec 22, 2024
+    <time class="dt-published" datetime="2024-12-23T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Dec 23, 2024
     </time>
 
     
@@ -686,7 +686,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 13 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 15 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#SpringBoot">#SpringBoot</a><a class="post-tag" href="/tags.html#Swagger">#Swagger</a><a class="post-tag" href="/tags.html#SpringAPIDocs">#SpringAPIDocs</a><a class="post-tag" href="/tags.html#%EA%B8%80%EB%98%90">#글또</a><a class="post-tag" href="/tags.html#%EA%B8%80%EB%98%9010%EA%B8%B0">#글또10기</a>
@@ -696,15 +696,16 @@ document.addEventListener('DOMContentLoaded', function(event) {
     <div class="post-content e-content" itemprop="articleBody">
 
       <h4 id="배경">배경</h4>
-<p>백엔드 개발자에게 API란 무엇일까 생각해봤습니다. 열심히 설계하고 작성한 코드가 의미가 있으려면 그걸 받아서 작업하는 프론트 또는 앱 개발자분들에게 잘 전달되어야겠죠. 그렇습니다. API는 잘 작성하는 것도 중요하지만, 그걸 잘 전달하는 것 또한 매우 중요합니다. 그래서 API를 잘 전달하기 위해 API 명세서를 작성하는 방법을 소개해볼까 합니다. 제가 실무에서 작업한 방법을 알려드리는 것이니, 더 좋은 방법이나 틀린 곳이 있다면 언제든지 댓글 부탁드리겠습니다.
+<p>백엔드 개발자에게 API란 무엇일까요. 열심히 설계하고 작성한 코드가 의미가 있으려면, 그걸 받아서 작업하는 프론트 또는 앱 개발자분들에게 잘 전달되어야겠죠. 그렇습니다. API를 잘 작성하는 것도 중요하지만, 그걸 잘 전달하는 것 또한 매우 중요합니다. 그래서 API를 잘 전달하기 위해 API 명세서를 작성하는 방법을 소개해볼까 합니다. 제가 실무에서 작업한 방법을 알려드리는 것이니, 더 좋은 방법이나 틀린 곳이 있다면 언제든지 댓글 부탁드리겠습니다.
 <br>
 <br></p>
 
+<h3 id="swagger">Swagger</h3>
 <h4 id="swagger란">Swagger란?</h4>
+
 <ul>
   <li>Swagger는 API 명세서(문서)를 자동으로 생성 및 관리하기 위한 도구로, OpenAPI Specification(OAS)를 기반으로 API 설계 및 문서회에 활용할 수 있습니다.</li>
-  <li>
-<strong>Swagger의 주요 장점</strong>
+  <li>Swagger의 주요 장점
     <ul>
       <li>개발 속도 향상</li>
       <li>문서와 API 코드 간의 동기화 가능</li>
@@ -717,47 +718,60 @@ document.addEventListener('DOMContentLoaded', function(event) {
 </ul>
 
 <h4 id="swagger-설치-및-설정-방법">Swagger 설치 및 설정 방법</h4>
+
 <p><strong>1. 의존성 추가</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springdoc</span><span class="o">:</span><span class="n">springdoc</span><span class="o">-</span><span class="n">openapi</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">webmvc</span><span class="o">-</span><span class="nl">ui:</span><span class="mf">2.2</span><span class="o">.</span><span class="mi">0</span><span class="err">'</span>
-</code></pre></div></div>
 <ul>
   <li>Swagger를 사용하기 위해 springdoc-openapi 라이브러리를 설치해주겠습니다.</li>
-  <li>springfox는 더이상 지원하지 않으므로 사용을 권장하지 않습니다.<br>
-<br>
-</li>
+  <li>springfox는 더이상 지원하지 않으므로 사용을 권장하지 않습니다.</li>
 </ul>
 
-<p><strong>2. Swagger 설정 클래스 추가</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springdoc</span><span class="o">:</span><span class="n">springdoc</span><span class="o">-</span><span class="n">openapi</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">webmvc</span><span class="o">-</span><span class="nl">ui:</span><span class="mf">2.2</span><span class="o">.</span><span class="mi">0</span><span class="err">'</span>
+</code></pre></div></div>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<p><strong>2 Swagger 설정 클래스 추가 (공통)</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@OpenAPIDefinition</span><span class="o">(</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="nd">@Info</span><span class="o">(</span>
+                <span class="n">title</span> <span class="o">=</span> <span class="s">"Test API Document"</span><span class="o">,</span>
+                <span class="n">version</span> <span class="o">=</span> <span class="s">"v1"</span>
+        <span class="o">)</span>
+<span class="o">)</span>
+<span class="nd">@Configuration</span>
 <span class="kd">class</span> <span class="nc">SwaggerConfig</span> <span class="o">{</span>
 
-        <span class="nd">@Bean</span>
-        <span class="kd">public</span> <span class="nc">OpenAPI</span> <span class="nf">getOpenAPI</span><span class="o">()</span> <span class="o">{</span>
-                <span class="nc">String</span> <span class="n">securityJwt</span> <span class="o">=</span> <span class="s">"JWT"</span><span class="o">;</span>
-                <span class="nc">SecurityRequirement</span> <span class="n">securityRequirement</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SecurityRequirement</span><span class="o">().</span><span class="na">addList</span><span class="o">(</span><span class="n">securityJwt</span><span class="o">);</span>
-                <span class="nc">Components</span> <span class="n">components</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Components</span><span class="o">()</span>
-                        <span class="o">.</span><span class="na">addSecuritySchemes</span><span class="o">(</span><span class="n">securityJwt</span><span class="o">,</span> <span class="k">new</span> <span class="nc">SecurityScheme</span><span class="o">()</span>
-                                <span class="o">.</span><span class="na">name</span><span class="o">(</span><span class="n">securityJwt</span><span class="o">)</span>
-                                <span class="o">.</span><span class="na">type</span><span class="o">(</span><span class="nc">SecurityScheme</span><span class="o">.</span><span class="na">Type</span><span class="o">.</span><span class="na">HTTP</span><span class="o">)</span>
-                                <span class="o">.</span><span class="na">scheme</span><span class="o">(</span><span class="no">TOKEN_PREFIX</span><span class="o">)</span>
-                                <span class="o">.</span><span class="na">bearerFormat</span><span class="o">(</span><span class="nc">HttpHeaders</span><span class="o">.</span><span class="na">AUTHORIZATION</span><span class="o">)</span>
-                        <span class="o">);</span>
-
-                <span class="k">return</span> <span class="k">new</span> <span class="nf">OpenAPI</span><span class="o">()</span>
-                        <span class="o">.</span><span class="na">addSecurityItem</span><span class="o">(</span><span class="n">securityRequirement</span><span class="o">)</span>
-                        <span class="o">.</span><span class="na">components</span><span class="o">(</span><span class="n">components</span><span class="o">);</span>
-        <span class="o">}</span>
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">OpenAPI</span> <span class="nf">getOpenAPI</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">OpenAPI</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">components</span><span class="o">(</span><span class="k">new</span> <span class="nc">Components</span><span class="o">());</span>
+    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
+<p><img alt="swagger-ui-common-setting" src="https://github.com/user-attachments/assets/4177ac6b-a378-4143-9a42-bcfb2ff081a5"></p>
+
+<p><strong>3. 그룹별 Swagger 설정 클래스 추가</strong></p>
 <ul>
-  <li>내부에서 JWT 토큰을 사용하고 있기 때문에 미리 설정해두었습니다.
-<br>
-<br>
-</li>
+  <li>그룹별로 API를 나눠서 제공하면 사용자가 보다 편리하게 문서를 이용할 수 있습니다.</li>
 </ul>
 
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="kd">class</span> <span class="nc">UserSwaggerConfig</span> <span class="o">{</span>
+
+    <span class="nd">@Bean</span>
+    <span class="nc">GroupedOpenApi</span> <span class="nf">userDocs</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nc">GroupedOpenApi</span><span class="o">.</span><span class="na">builder</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">group</span><span class="o">(</span><span class="s">"고객 API"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">packagesToScan</span><span class="o">(</span><span class="s">"com.test.test.user"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p><img alt="swagger-ui-group-setting" src="https://github.com/user-attachments/assets/39bab756-d150-474a-ab4c-1330b385129d">
+<br>
+<br></p>
+
 <h4 id="swagger-어노테이션-사용-방법">Swagger 어노테이션 사용 방법</h4>
+
+<p><strong>1. Controller</strong></p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Tag</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"고객"</span><span class="o">,</span> <span class="n">description</span> <span class="o">=</span> <span class="s">"고객 관련 API입니다."</span><span class="o">)</span>
 <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/api/user"</span><span class="o">)</span>
@@ -770,16 +784,14 @@ document.addEventListener('DOMContentLoaded', function(event) {
     <span class="nd">@Operation</span><span class="o">(</span><span class="n">summary</span> <span class="o">=</span> <span class="s">"summary : 이메일 인증번호 전송"</span><span class="o">,</span>
             <span class="n">description</span> <span class="o">=</span> <span class="s">"""
                     ## 요청 :
-                    - Locale locale 로케일 (경로, 필수)
-                    
                     - String email 이메일 (필수)
                     ## 응답 :
                     - String data "</span><span class="n">success</span><span class="s">"
                     """</span><span class="o">)</span>
     <span class="nd">@BasicApiSwaggerResponse</span>
     <span class="nd">@PostMapping</span><span class="o">(</span><span class="s">"/send-email"</span><span class="o">)</span>
-    <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">CommonResponse</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;&gt;</span> <span class="nf">sendEmail</span><span class="o">(</span><span class="nd">@PathVariable</span><span class="o">(</span><span class="s">"locale"</span><span class="o">)</span> <span class="nc">Locale</span> <span class="n">locale</span><span class="o">,</span> <span class="nd">@Valid</span> <span class="nd">@RequestBody</span> <span class="nc">SendEmailRequest</span> <span class="n">request</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">userService</span><span class="o">.</span><span class="na">sendEmail</span><span class="o">(</span><span class="n">locale</span><span class="o">,</span> <span class="n">request</span><span class="o">);</span>
+    <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">CommonResponse</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;&gt;</span> <span class="nf">sendEmail</span><span class="o">(</span><span class="nd">@Valid</span> <span class="nd">@RequestBody</span> <span class="nc">SendEmailRequest</span> <span class="n">request</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">userService</span><span class="o">.</span><span class="na">sendEmail</span><span class="o">(</span><span class="n">request</span><span class="o">);</span>
         <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="k">new</span> <span class="nc">CommonResponse</span><span class="o">&lt;&gt;(</span><span class="s">"이메일 인증번호 전송"</span><span class="o">,</span> <span class="nc">MessageConstants</span><span class="o">.</span><span class="na">SUCCESS_MESSAGE</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -787,22 +799,22 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <ul>
   <li>
-<strong>@Tag</strong> : API 그룹 설정
+<strong>@Tag</strong>: API 그룹 설정
     <ul>
       <li>name: 태그명</li>
       <li>description: 태그에 대한 설명</li>
     </ul>
   </li>
   <li>
-<strong>@Operation</strong> : API에 대한 설명
+<strong>@Operation</strong>: API에 대한 설명
     <ul>
       <li>summary: API 요약</li>
-      <li>description: API 상세 설명
-<br>
-</li>
+      <li>description: API 상세 설명</li>
     </ul>
   </li>
 </ul>
+
+<p><strong>2. Request class</strong></p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SaveNoticeRequest</span> <span class="o">{</span>
@@ -845,7 +857,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
 </ul>
 
 <h4 id="swagger의-장단점">Swagger의 장단점</h4>
-
 <p><strong>장점</strong></p>
 <ol>
   <li>API 문서의 자동화</li>
@@ -863,6 +874,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
 </ol>
 
 <h4 id="swagger-실무-활용-팁">Swagger 실무 활용 팁</h4>
+<p><strong>1. @BasicApiSwaggerResponse 설정</strong>
+위의 코드 예제에서 사용한 것처럼  @BasicApiSwaggerResponse 같은 응답 상태 코드를 설명해주는 어노테이션을 만들어두고 사용하면 편리합니다.</p>
+
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Retention</span><span class="o">(</span><span class="nc">RetentionPolicy</span><span class="o">.</span><span class="na">RUNTIME</span><span class="o">)</span>
 <span class="nd">@Target</span><span class="o">({</span><span class="nc">ElementType</span><span class="o">.</span><span class="na">TYPE</span><span class="o">,</span> <span class="nc">ElementType</span><span class="o">.</span><span class="na">METHOD</span><span class="o">})</span>
 <span class="nd">@Documented</span>
@@ -875,9 +889,32 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <span class="o">})</span>
 <span class="kd">public</span> <span class="nd">@interface</span> <span class="nc">BasicApiSwaggerResponse</span> <span class="o">{}</span>
 </code></pre></div></div>
-<ul>
-  <li>위의 코드 예제에서 사용한 것처럼  @BasicApiSwaggerResponse 같은 응답 상태 코드를 설명해주는 어노테이션을 만들어두고 사용하면 편리합니다.</li>
-</ul>
+
+<p><strong>2. JWT 설정</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="kd">class</span> <span class="nc">SwaggerConfig</span> <span class="o">{</span>
+
+        <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">TOKEN_PREFIX</span> <span class="o">=</span> <span class="s">"Bearer"</span><span class="o">;</span>
+        
+        <span class="nd">@Bean</span>
+        <span class="kd">public</span> <span class="nc">OpenAPI</span> <span class="nf">getOpenAPI</span><span class="o">()</span> <span class="o">{</span>
+                <span class="nc">String</span> <span class="n">securityJwt</span> <span class="o">=</span> <span class="s">"JWT"</span><span class="o">;</span>
+                <span class="nc">SecurityRequirement</span> <span class="n">securityRequirement</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SecurityRequirement</span><span class="o">().</span><span class="na">addList</span><span class="o">(</span><span class="n">securityJwt</span><span class="o">);</span>
+                <span class="nc">Components</span> <span class="n">components</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Components</span><span class="o">()</span>
+                        <span class="o">.</span><span class="na">addSecuritySchemes</span><span class="o">(</span><span class="n">securityJwt</span><span class="o">,</span> <span class="k">new</span> <span class="nc">SecurityScheme</span><span class="o">()</span>
+                                <span class="o">.</span><span class="na">name</span><span class="o">(</span><span class="n">securityJwt</span><span class="o">)</span>
+                                <span class="o">.</span><span class="na">type</span><span class="o">(</span><span class="nc">SecurityScheme</span><span class="o">.</span><span class="na">Type</span><span class="o">.</span><span class="na">HTTP</span><span class="o">)</span>
+                                <span class="o">.</span><span class="na">scheme</span><span class="o">(</span><span class="no">TOKEN_PREFIX</span><span class="o">)</span>
+                                <span class="o">.</span><span class="na">bearerFormat</span><span class="o">(</span><span class="nc">HttpHeaders</span><span class="o">.</span><span class="na">AUTHORIZATION</span><span class="o">)</span>
+                        <span class="o">);</span>
+
+                <span class="k">return</span> <span class="k">new</span> <span class="nf">OpenAPI</span><span class="o">()</span>
+                        <span class="o">.</span><span class="na">addSecurityItem</span><span class="o">(</span><span class="n">securityRequirement</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">components</span><span class="o">(</span><span class="n">components</span><span class="o">);</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
 
 
     </div>
@@ -915,10 +952,10 @@ document.getElementById("tail-wrapper").appendChild(giscusScript);
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/wiki/2023/11/13/fibonacci.html" title="">자바로 피보나치 수열 이해하기</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/prime-number.html" title="">자바로 소수 판별</a></li>
-<li><a class="post-link" href="/wiki/2024/01/17/pathvariable-name-missing.html" title="">SpringBoot 3.2부터 @PathVariable 이름 미지정 시 에러</a></li>
-<li><a class="post-link" href="/wiki/2023/12/30/hibernate6-custom-function.html" title="">hibernate6 custom function(MySQL Dialect)</a></li>
+        <li><a class="post-link" href="/wiki/2023/11/13/prg-pattern.html" title="">PRG 패턴과 RedirectAttributes</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/thymeleaf-rest-controller.html" title="">Thymeleaf와 @RestController</a></li>
+<li><a class="post-link" href="/wiki/2024/03/17/string-replacement.html" title="">문자열 대치</a></li>
+<li><a class="post-link" href="/wiki/2023/11/13/stack.html" title="">Stack</a></li>
 </ul>
     </div>
   </section>
