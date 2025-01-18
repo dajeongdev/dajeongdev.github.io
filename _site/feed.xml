@@ -1,4 +1,94 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2025-01-05T09:53:50+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">API 문서 자동화로 시간 절약하기 (feat.Swagger)</title><link href="http://localhost:4000/wiki/2024/12/23/spring-swagger.html" rel="alternate" type="text/html" title="API 문서 자동화로 시간 절약하기 (feat.Swagger)" /><published>2024-12-23T00:00:00+09:00</published><updated>2024-12-23T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/12/23/spring-swagger</id><content type="html" xml:base="http://localhost:4000/wiki/2024/12/23/spring-swagger.html"><![CDATA[<h4 id="배경">배경</h4>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2025-01-18T14:49:52+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">작지만 확실한 성장기 - 2024 회고와 2025 목표</title><link href="http://localhost:4000/blog/2025/01/18/review-2024-and-2025.html" rel="alternate" type="text/html" title="작지만 확실한 성장기 - 2024 회고와 2025 목표" /><published>2025-01-18T00:00:00+09:00</published><updated>2025-01-18T00:00:00+09:00</updated><id>http://localhost:4000/blog/2025/01/18/review-2024-and-2025</id><content type="html" xml:base="http://localhost:4000/blog/2025/01/18/review-2024-and-2025.html"><![CDATA[<p><img alt="swagger-ui-group-setting" src="https://github.com/user-attachments/assets/bff0e492-715e-4534-a209-03fcacf10494" />
+<br /></p>
+
+<p><br /></p>
+
+<h2 id="2024-회고">2024 회고</h2>
+
+<h3 id="잘한-점">잘한 점</h3>
+
+<h4 id="인턴">인턴</h4>
+<p>2023년까지는 공백기와 여러 가지 이유로 개발자라는 직업에 대해 회의감이 많이 들었습니다. 그래서 다음 회사에서도 이 직업을 해야 하는 이유에 대해서 찾지 못한다면 다른 직업을 찾아봐야겠다고 생각했었죠. 그렇게 입사하게 된 회사에서 다행히 좋은 팀원들을 만났습니다. 저보다 열정적이고 똑똑한 팀원들 덕분에 클린 아키텍처와 AWS 관련해서 흥미를 갖게 되었고, 개발 컨벤션이나 Jira에 대해서도 배웠습니다. 그 때 두 분 덕분에 제가 개발자로 후회없이 해보고 싶은 마음을 갖게 되어 아직도 감사하고 있습니다.
+ <br /></p>
+
+<h4 id="포텐데이와-공모전-참가">포텐데이와 공모전 참가</h4>
+<p>인턴 이후 마땅히 취업 때 보여드릴 코드가 없다고 생각해 사이드 프로젝트를 구하고 있었는데요. 그때 마침 눈에 들어온 게 포텐데이였습니다. 포텐데이는 기획자, 디자이너, 프론트/백엔드 개발자가 10일간 개발하는 해커톤입니다. 포텐데이를 진행하면서 특히 같은 백엔드분께 이런저런 기능을 왜 사용해야 하는지 설명해주면서 개인적으로 많이 성장할 수 있었습니다. 프로젝트와 서버 세팅 등 주니어가 경험하기 힘든 작업을 주도적으로 진행하면서 백엔드가 하는 직무에 대해서도 많이 흥미를 느끼는 계기가 되었습니다.
+ <br /></p>
+
+<h4 id="국민취업지원제도">국민취업지원제도</h4>
+<p>2024년에는 제 자신에 대해 제대로 파악해서 취업하고 싶었습니다. 그래서 지인이 경험해보고 괜찮다고 한 국민취업지원제도를 통해 이력서, 자기소개서에 대해 첨삭도 받고 연결 받은 곳을 통해 취업도 할 수 있었습니다. 이 과정에서 인프런 이력서 강의의 강사님께 첨삭도 받아봤는데, 정말 도움이 많이 되어서 저도 강사님처럼 다른 개발자분들께 도움이 되고 싶다는 생각도 하게 되었습니다.
+ <br /></p>
+
+<h4 id="취업">취업</h4>
+<p>무엇이든 경험해보는 게 목표였기 때문에 가리지 않고 지원한 결과 SI 회사에 입사하게 되었습니다. 현재  회사는 SI보다는 에이전시의 성격을 가지고 있는데요, 그래서인지 프로젝트마다 많은 걸 경험하고 있습니다.<br />
+입사한지 반 년 정도 된 지금, 생각보다 다양한 기능을 작업해봤는데요. 결제 작업이 되어있는 기존 프로젝트에 정기결제를 하는 작업도 해보고, 현재 프로젝트에서는 토스페이먼츠 연동, 다국어 처리, 오픈 API를 통한 달러 조회, 센드버드 등 새로운 기능을 경험해봤습니다. 이에 대해서는 차차 블로그에 글로 기록해보도록 하겠습니다.
+ <br /></p>
+
+<h4 id="글또">글또</h4>
+<p>개발에 대한 동기부여를 얻기 위해 글또에 참여했는데요. 역시나 열심히 하시는 글또분들 덕분에 그래도 하반기에 조금이나마 열심히 블로그 글을 써볼 수 있었습니다.
+ <br /></p>
+
+<h3 id="아쉬운-점">아쉬운 점</h3>
+<h4 id="취직-이후-개발-공부">취직 이후 개발 공부</h4>
+<p>입사 후 적응도 하고 야근하느라 바빠 개발 공부에 소홀했습니다. 목표로 두었던 테스트코드 강의도 완강하지 못했네요 🥹
+ <br /></p>
+<h4 id="글또-참여율">글또 참여율</h4>
+<p>초반 튜링의 사과에서 방문해서 커피챗을 한 것 이외에 오프라인 참여가 아무것도 없다니… 정말 너무 아쉽네요.. 다른 모임에서도 뭔가 활발히 활동하지 않은 것 같습니다..
+ <br />
+  <br /></p>
+
+<h2 id="2025-목표와-다짐">2025 목표와 다짐</h2>
+
+<h3 id="목표">목표</h3>
+
+<h4 id="이직">이직</h4>
+<p>여러 가지 이유로 하반기 이직을 목표로 하고 있는데요. 그래서 이번 상반기가 아주 중요할 것 같습니다. 이번달에는 포트폴리오도 업데이트하고, 공모전과 코딩테스트 공부 등 미루던 일들을 차차 진행해보겠습니다.</p>
+<h4 id="글또-참여율-높이기">글또 참여율 높이기</h4>
+<p>2024년 아쉬움에 썼던 대로 앞으로 후회하지 않기 위해서 남은 기간은 글또에 매일 방문해보려고 합니다. 또한, 튜링의 사과에도 2주에 한번 방문해서 커피챗의 기회도 많이 늘려보겠습니다. 파이팅!</p>
+<h4 id="꾸준히-글쓰기">꾸준히 글쓰기</h4>
+<p>글또가 끝나도 한 달에 2번 이상 글 쓰는 게 목표입니다. 주 1회가 가장 이상적이지만, 천천히 늘려보겠습니다.</p>
+<h4 id="트러블슈팅-바로바로">트러블슈팅 바로바로</h4>
+<p>이번 프로젝트부터는 일하기 바빠 트러블슈팅을 바로 하지 않았더니 열심히 해결한 문제도 제대로 기억나지 않더라구요. 앞으로는 트러블슈팅도 업무의 일환으로 생각하여 최대 일주일 안에 정리해서 작성해보려고 합니다.</p>
+<h4 id="테스트-코드-등으로-역량-넓히기">테스트 코드 등으로 역량 넓히기</h4>
+<p>올해야말로 테스트 코드를 정복해야 할 때라고 생각합니다. 회사에서는 구매해주신 강의를 통해 차근차근 연습해보려고 합니다. 이번 달 안에 박우빈님의 ‘Practical Testing: 실용적인 테스트 가이드’를 완강하고, 다음 달에는 글또 대나무숲에서 추천해주셨던 테스트 강의를 구매해서 수강해보겠습니다. 이외에도 역량을 넓히기 위해 성능 테스트 등 몇 가지를 도전해보겠습니다.</p>
+<h4 id="코딩테스트-관련-공부">코딩테스트 관련 공부</h4>
+<p>더 이상 미룰 수 없다.. 코딩테스트 관련 공부를 항상 미뤄왔는데요. 이제 더 이상은 안되겠습니다.. 다시 하루에 한 개씩 풀겠다는 목표를 세웠는데, 마침 글또에도 하루에 한 문제씩 풀어서 인증하는 채널이 있더라구요! 저도 한 번 조인해보겠습니다 👍</p>
+<h4 id="질-좋은-의사소통">질 좋은 의사소통</h4>
+<p>어느덧 3년차.. 조금씩 연차가 찰 수록 드는 생각은 “개발자에게 코드만큼 중요한 게 의사소통이다”라는 건데요. 요즘 뼈저리게 느끼고 있는 만큼 좋은 의사소통에 대해 고민하고 개선해 볼 생각입니다.</p>
+<h4 id="준비된-체력">준비된 체력</h4>
+<p>작년 취업 준비 기간을 운동으로 잘 버텼던 만큼 올해에는 PT를 통해 체력과 집중력 모두 잡아보려고 합니다. 다음달에 마라톤도 나가기로 했으니 기대 많이 해주시라,,,</p>
+<h4 id="도파민-줄이기">도파민 줄이기</h4>
+<p>출퇴근 길에도 무의미하게 게임하고 유튜브 쇼츠도 너무 무방비하게 보는 것을 막고자 게임도 지우고 유튜브 프리미엄을 해지해보려고 합니다. 계속 되길 바라며, 도파민 대신 책 읽고 출근길에는 말해보카로 영어 공부를 하며 좋은 습관을 다시 들여보겠습니다.
+<br /></p>
+
+<h3 id="마음가짐">마음가짐</h3>
+<ul>
+  <li>무엇이든 후회없이 해보기 (<strong>일단 해!</strong>)</li>
+  <li>긍정적으로 생각하기</li>
+</ul>
+
+<h3 id="다짐">다짐</h3>
+<p>2024년은 계획한 목표에 도전해보고 이뤄낸 것들이 많은 해였습니다. 그래서인지 그 어느 때보다 더 만족스러웠지만, 항상 그렇듯 아쉬운 점은 남아있습니다. 올해는 그 부분들을 채워보려고 합니다. 그러기 위해서는 크고 작은 목표를 많이 세우는 게 중요하다고 생각하는데요. (뼛속까지 J) 회고 덕분에 목표를 제대로 정리해볼 수 있어서 정말 좋았습니다. 목표 달성률을 높이려면 계속 상기시켜야 하니까 이 글에 2주마다 들어와서 목표가 어느 정도 진행되고 있는지 써보겠습니다 <strong>(어디 한 번 해보자고!)</strong>
+ <br />
+ <br /></p>
+
+<hr />
+
+<h3 id="ing">~ing</h3>
+
+<p><strong>2025.01.18</strong></p>
+<ul>
+  <li>튜링의 사과 방문 w.승현님</li>
+  <li>다진마늘 출석률 부족… 조금 더 힘내자</li>
+  <li>이번주까지 주 4회 운동 👍</li>
+</ul>
+
+<p><strong>2025.01.01 ~</strong></p>
+<ul>
+  <li>유튜브 프리미엄 해지</li>
+  <li>핸드폰 게임 삭제</li>
+  <li>매일 말해보카 출석</li>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="blog" /><category term="2024회고" /><category term="2025다짐" /><category term="글또" /><category term="글또10기" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">API 문서 자동화로 시간 절약하기 (feat.Swagger)</title><link href="http://localhost:4000/wiki/2024/12/23/spring-swagger.html" rel="alternate" type="text/html" title="API 문서 자동화로 시간 절약하기 (feat.Swagger)" /><published>2024-12-23T00:00:00+09:00</published><updated>2024-12-23T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2024/12/23/spring-swagger</id><content type="html" xml:base="http://localhost:4000/wiki/2024/12/23/spring-swagger.html"><![CDATA[<h4 id="배경">배경</h4>
 <p>백엔드 개발자에게 API란 무엇일까요. 열심히 설계하고 작성한 코드가 의미가 있으려면, 그걸 받아서 작업하는 프론트 또는 앱 개발자분들에게 잘 전달되어야겠죠. 그렇습니다. API를 잘 작성하는 것도 중요하지만, 그걸 잘 전달하는 것 또한 매우 중요합니다. 그래서 API를 잘 전달하기 위해 API 명세서를 작성하는 방법을 소개해볼까 합니다. 제가 실무에서 작업한 방법을 알려드리는 것이니, 더 좋은 방법이나 틀린 곳이 있다면 언제든지 댓글 부탁드리겠습니다.
 <br />
 <br /></p>
@@ -950,41 +1040,4 @@ QueryDSL에 관련해서는 나도 많이 부족했지만, 실무에서의 경�
 <h4 id="소감">소감</h4>
 <p>중간중간 운영팀 과장님과 대리님께 피드백도 받아가면서 프로젝트를 마무리했더니 의사소통도 잘하고 손이 빠르다는 평을 들었다. 새로운 기능도 많이 개발해보고, 프론트단도 처음이지만 이리저리 공부하면서 작업한 부분도 정말 뿌듯했다. 이 프로젝트를 통해서 팀원들과의 의사소통과 사용자 입장에서 개발하는 것의 중요성을 뼈저리게 깨달았다.</p>
 
-<p>그리고 공부해서 바로 실무에 적용해보는 게 정말 재미있기도 했는데, 실제로 다음 프로젝트부터는 VO를 보호하기 위해 DTO와 Builder 패턴을 사용하는 등 김영한님의 강의가 정말 하나하나 피가 되고 살이 되어서 모든 강의를 다 수강해서 열심히 공부하기도 했다.</p>]]></content><author><name>Dajeong Park</name></author><category term="blog" /><category term="Project" /><category term="Admin" /><category term="Review" /><summary type="html"><![CDATA[홈페이지 마이그레이션, 도서 단행본 API 구현 업무를 마치고 나니 협력사와 아이가 도서를 읽고 독후감을 쓰면 첨삭해주는 서비스를 만들게 됐는데, 당시 일손이 부족해서 내가 관리자를 통으로 담당하게 되었다.]]></summary></entry><entry><title type="html">도서 등록 API 속도 개선 회고</title><link href="http://localhost:4000/blog/2024/05/10/book-insert-api-speed-improvement-review.html" rel="alternate" type="text/html" title="도서 등록 API 속도 개선 회고" /><published>2024-05-10T00:00:00+09:00</published><updated>2024-05-10T00:00:00+09:00</updated><id>http://localhost:4000/blog/2024/05/10/book-insert-api-speed-improvement-review</id><content type="html" xml:base="http://localhost:4000/blog/2024/05/10/book-insert-api-speed-improvement-review.html"><![CDATA[<p>홈페이지 마이그레이션 이후 새로운 업무를 받았다.</p>
-
-<p>당시 자사 서비스인 도서 플랫폼에서는 사용자로부터 도서 등록 문의를 받아 등록해줬었다.</p>
-
-<p>문의한 도서가 ‘전집’일 때는 운영팀에서 도서를 검색해서 개발팀에게 전달해 데이터베이스에 등록하는 과정을 거쳤지만,<br />
-‘단행본’일 때는 운영팀에서 관리자 페이지에서 직접 등록하기도 했다.<br />
-하지만 점점 요청이 많아지기도 해서 내가 ‘단행본’ 등록하는 API를 개발하게 되었다.
-<br />
-<br /></p>
-
-<p>기존 전집 등록 API를 이용하면 금방 만들 수 있겠다고 생각했지만, 도서 플랫폼의 백단 프로젝트가 거대한 레거시 프로젝트라는 한 가지 복병이 있었다.</p>
-
-<p>레거시 프로젝트는 JPA로 구성되어 있었지만, JPA의 장점을 하나도 사용하지 않는 데다 특정 메소드만 사용하고 있었고,<br />
-사용하고 있는 특정 메소드 또한 방대한 중복 및 로깅 코드에 클래스와 메소드 이름이 중구난방에 의미도 불분명했다.<br />
-게다가 데이터베이스도 테이블이 엄청나게 얽혀 있어 함부로 수정할 수 없는 상태였다.
-<br />
-<br /></p>
-
-<p>이런 상태에서 그대로 단행본 API만 만들 수도 있었지만, 왠지 마음이 찝찝해서 기존 전집 등록 API부터 개선해보기로 했다. 그리고 이때 속도를 비교해보면 좋을 것 같아서 <code class="language-plaintext highlighter-rouge">System.currentTimeMillis</code> 메소드를 사용해서 이전 코드의 속도를 측정해보니 50권의 전집을 등록할 때 5.56초가 걸렸다.
-<br />
-<br /></p>
-
-<p>일단 이리갔다 저리갔다 코드가 너무 보기 불편했기 때문에 클래스와 메서드부터 연관성에 따라서 재배치하거나 분리했다.<br />
-그리고 불명확하게 작성되어 있던 메소드 이름도 가독성 있는 이름으로 바꿨다.<br />
-마지막으로는 수많은 로깅 및 주석 코드를 정리했고, 중간중간 중복 코드도 찾아내어 삭제했다.</p>
-
-<p>이후 코드 속도를 다시 측정해보니 같은 전집을 등록할 때 3.27초로 속도가 개선되었다.
-<br />
-<br /></p>
-
-<p>이후 단행본 API를 구현하는 건 정말 간단했다.<br />
-원래는 같은 API를 쓰고 싶었지만, 운영팀에서 주시는 전집과 단행본의 엑셀 컬럼이 달라서 다른 API로 분리를 한 다음<br />
-엑셀을 읽어들이는 부분만 다르게 설정하고, 내부 로직은 동일한 메소드를 사용하도록 조정했다.
-<br />
-<br /></p>
-
-<h4 id="소감">소감</h4>
-<p>단행본 API를 구현하라는 업무에서 사실상 전집 API를 개선하는 데 더 시간을 많이 보냈지만 개인적으로 정말 뿌듯한 업무였다. ㅎㅎ 주니어 때 해보기 힘든 속도도 개선도 해보고, 데이터에 영향이 가지 않도록 고민하는 과정들이 개발자라는 직업에 대해 깊이 있게 생각하게 만들어 준 것 같다~!</p>]]></content><author><name>Dajeong Park</name></author><category term="blog" /><category term="Project" /><category term="Review" /><summary type="html"><![CDATA[홈페이지 마이그레이션 이후 새로운 업무를 받았다.]]></summary></entry></feed>
+<p>그리고 공부해서 바로 실무에 적용해보는 게 정말 재미있기도 했는데, 실제로 다음 프로젝트부터는 VO를 보호하기 위해 DTO와 Builder 패턴을 사용하는 등 김영한님의 강의가 정말 하나하나 피가 되고 살이 되어서 모든 강의를 다 수강해서 열심히 공부하기도 했다.</p>]]></content><author><name>Dajeong Park</name></author><category term="blog" /><category term="Project" /><category term="Admin" /><category term="Review" /><summary type="html"><![CDATA[홈페이지 마이그레이션, 도서 단행본 API 구현 업무를 마치고 나니 협력사와 아이가 도서를 읽고 독후감을 쓰면 첨삭해주는 서비스를 만들게 됐는데, 당시 일손이 부족해서 내가 관리자를 통으로 담당하게 되었다.]]></summary></entry></feed>
