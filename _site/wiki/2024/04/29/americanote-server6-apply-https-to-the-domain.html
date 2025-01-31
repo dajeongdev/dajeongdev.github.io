@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="ko"><head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-SBCV6PTMNJ"></script>
   <script>
@@ -14,22 +12,21 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
-<!-- Begin Jekyll SEO tag v2.8.0 -->
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용 | Every Single Day</title>
-<meta name="generator" content="Jekyll v4.2.2">
-<meta property="og:title" content="아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용">
-<meta name="author" content="Dajeong Park">
-<meta property="og:locale" content="ko">
-<meta name="description" content="이전 단계에서 진행했던 방화벽에서의 80, 443 포트 허용과 도메인이 있다면 이제 기간은 짧지만 무료로 받을 수 있는 Letsencrypt의 SSL 인증서를 발급 받아보겠습니다.">
-<meta property="og:description" content="이전 단계에서 진행했던 방화벽에서의 80, 443 포트 허용과 도메인이 있다면 이제 기간은 짧지만 무료로 받을 수 있는 Letsencrypt의 SSL 인증서를 발급 받아보겠습니다.">
-<link rel="canonical" href="http://localhost:4000/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain.html">
-<meta property="og:url" content="http://localhost:4000/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain.html">
-<meta property="og:site_name" content="Every Single Day">
-<meta property="og:type" content="article">
-<meta property="article:published_time" content="2024-04-29T00:00:00+09:00">
-<meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용">
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용" />
+<meta name="author" content="Dajeong Park" />
+<meta property="og:locale" content="ko" />
+<meta name="description" content="이전 단계에서 진행했던 방화벽에서의 80, 443 포트 허용과 도메인이 있다면 이제 기간은 짧지만 무료로 받을 수 있는 Letsencrypt의 SSL 인증서를 발급 받아보겠습니다." />
+<meta property="og:description" content="이전 단계에서 진행했던 방화벽에서의 80, 443 포트 허용과 도메인이 있다면 이제 기간은 짧지만 무료로 받을 수 있는 Letsencrypt의 SSL 인증서를 발급 받아보겠습니다." />
+<link rel="canonical" href="http://localhost:4000/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain.html" />
+<meta property="og:url" content="http://localhost:4000/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain.html" />
+<meta property="og:site_name" content="Every Single Day" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-04-29T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용" />
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2024-04-29T00:00:00+09:00","datePublished":"2024-04-29T00:00:00+09:00","description":"이전 단계에서 진행했던 방화벽에서의 80, 443 포트 허용과 도메인이 있다면 이제 기간은 짧지만 무료로 받을 수 있는 Letsencrypt의 SSL 인증서를 발급 받아보겠습니다.","headline":"아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain.html"},"url":"http://localhost:4000/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain.html"}</script>
 <!-- End Jekyll SEO tag -->
@@ -42,7 +39,7 @@
   <link rel="apple-touch-icon" sizes="144x144" href="/assets/favicon.ico/apple-icon-144x144.png">
   <link rel="apple-touch-icon" sizes="152x152" href="/assets/favicon.ico/apple-icon-152x152.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon.ico/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon.ico/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/favicon.ico/android-icon-192x192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon.ico/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon.ico/favicon-16x16.png">
@@ -54,11 +51,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
   <link rel="stylesheet" href="/assets/css/main.css">
-  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Every Single Day">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Every Single Day" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
 <!-- and it's easy to individually load additional languages -->
-<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
 
 
 
@@ -274,30 +272,27 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <header class="site-header " role="banner">
 
   <div class="wrapper">
-    <div class="site-header-inner">
-<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+    <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
   <img class="site-favicon" title="Every Single Day" src="" onerror="this.style.display='none'">
   Every Single Day
 </a>
 </span><nav class="site-nav">
-          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
           <label for="nav-trigger">
             <span class="menu-icon">
-              <svg viewbox="0 0 18 15" width="18px" height="15px">
-                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
               </svg>
             </span>
           </label>
 
-          <div class="trigger">
-<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a>
+          <div class="trigger"><a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a>
 
 
 
 
 </div>
-        </nav>
-</div>
+        </nav></div>
   </div>
 </header>
 
@@ -687,19 +682,15 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
     <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
-  </p>
-<div class="post-tags">
-<a class="post-tag" href="/tags.html#NaverCloudPlatform">#NaverCloudPlatform</a><a class="post-tag" href="/tags.html#Project">#Project</a><a class="post-tag" href="/tags.html#MySQL">#MySQL</a><a class="post-tag" href="/tags.html#DataBase">#DataBase</a>
-</div></header>
+  </p><div class="post-tags"><a class="post-tag" href="/tags.html#NaverCloudPlatform">#NaverCloudPlatform</a><a class="post-tag" href="/tags.html#Project">#Project</a><a class="post-tag" href="/tags.html#MySQL">#MySQL</a><a class="post-tag" href="/tags.html#DataBase">#DataBase</a></div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
       <ul>
   <li>이전 단계에서 진행했던 방화벽에서의 80, 443 포트 허용과 도메인이 있다면 이제 기간은 짧지만 무료로 받을 수 있는 Letsencrypt의 SSL 인증서를 발급 받아보겠습니다.
-<br>
-<br>
-</li>
+<br />
+<br /></li>
 </ul>
 
 <h4 id="ssl-인증서-발급받기">SSL 인증서 발급받기</h4>
@@ -718,14 +709,12 @@ document.addEventListener('DOMContentLoaded', function(event) {
     <ul>
       <li>저는 이 부분에서 에러가 참 많이 발생했는데요 ㅎㅎ 하나씩 살펴보겠습니다.
         <ol>
-          <li>
-<strong>/well-known/acme-challenge/ 폴더가 허용되지 않았습니다.</strong>
+          <li><strong>/well-known/acme-challenge/ 폴더가 허용되지 않았습니다.</strong>
             <ul>
               <li>
                 <p>이 부분은 Nginx에서 적용하는 부분이라 이전 단계에서 만들었던 <code class="language-plaintext highlighter-rouge">/etc/nginx/sites-available/도메인이름</code> 파일에서 추가해주었습니다.</p>
 
-                <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>  server <span class="o">{</span>
+                <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  server <span class="o">{</span>
           listen 80 default_server<span class="p">;</span>
           listen <span class="o">[</span>::]:80 default_server<span class="p">;</span>
                 
@@ -740,15 +729,12 @@ document.addEventListener('DOMContentLoaded', function(event) {
               </li>
             </ul>
           </li>
-          <li>
-<strong>도메인에 A 레코드를 적용되어 있지 않았습니다.</strong>
+          <li><strong>도메인에 A 레코드를 적용되어 있지 않았습니다.</strong>
             <ul>
               <li>A 레코드 적용을 위해 NCP에서 Global Domain에 도메인을 추가하고, A 레코드를 추가해주었습니다.
-  <img width="679" alt="https1" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/3abce503-be85-43fe-8531-612c95578743">
-</li>
+  <img width="679" alt="https1" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/3abce503-be85-43fe-8531-612c95578743" /></li>
               <li>하지만 이 Global Domain의 네임서버를 카페24의 도메인에 설정해주는 과정에서 24시간이 걸린다는 소식에 아주 멘탈이 탈탈 털릴 뻔 했지만… 다행히 12시간 정도 뒤에 사용이 가능했습니다😂
-  <img width="544" alt="https2" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/8f6df708-93fa-4e43-8709-e2ad85b0c689">
-</li>
+  <img width="544" alt="https2" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/8f6df708-93fa-4e43-8709-e2ad85b0c689" /></li>
             </ul>
           </li>
         </ol>
@@ -757,7 +743,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
   </li>
 </ul>
 
-<p><img width="770" alt="https3" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/f52a2ee6-ea91-475c-ba0e-8252c28a2993"></p>
+<p><img width="770" alt="https3" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/f52a2ee6-ea91-475c-ba0e-8252c28a2993" /></p>
 <ul>
   <li>그리하여 드디어 간절히 기다리던 발급 성공 화면을 보게 되면 SSL 발급에 성공한 겁니다.</li>
   <li>이제 <code class="language-plaintext highlighter-rouge">/etc/nginx/sites-available/도메인이름</code> 파일에 접근해보면 자동으로 SSL이 적용된 것을 확인할 수 있습니다.</li>
@@ -782,9 +768,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <ul>
   <li>참고로 <code class="language-plaintext highlighter-rouge">location / { … }</code> 부분까지 설정해주어야 현재 서버의 8009로 실행되고 있는 프로세스로 프록시가 요청을 전달해줍니다.
-<br>
-<br>
-</li>
+<br />
+<br /></li>
 </ul>
 
 <h4 id="참고">참고</h4>
@@ -797,11 +782,21 @@ document.addEventListener('DOMContentLoaded', function(event) {
     </div>
 
 </article>
-<div class="post-nav">
-<a class="previous" href="/wiki/2024/04/29/americanote-server5-connect-domain-name.html" title="아메리카노트 서버 구성 &lt;5&gt; 도메인 연결">아메리카노트 서버 구성 &lt;5&gt; 도메인 연결...</a><a class="next" href="/wiki/2024/04/30/integer-class.html" title="Integer Class">Integer Class</a>
-</div>
-<div class="post-comments">  <div id="gisqus_thread"></div>
-  <script src="https://giscus.app/client.js" data-repo="dajeongdev/dajeongdev.github.io" data-repo-id="R_kgDOHS7Ikw" data-category="General" data-category-id="DIC_kwDOHS7Ik84Cj70Z" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="ko" crossorigin="anonymous" async>
+<div class="post-nav"><a class="previous" href="/wiki/2024/04/29/americanote-server5-connect-domain-name.html" title="아메리카노트 서버 구성 &lt;5&gt; 도메인 연결">아메리카노트 서버 구성 &lt;5&gt; 도메인 연결...</a><a class="next" href="/wiki/2024/04/30/integer-class.html" title="Integer Class">Integer Class</a></div><div class="post-comments">  <div id="gisqus_thread"></div>
+  <script src="https://giscus.app/client.js"
+  data-repo="dajeongdev/dajeongdev.github.io"
+  data-repo-id="R_kgDOHS7Ikw"
+  data-category="General"
+  data-category-id="DIC_kwDOHS7Ik84Cj70Z"
+  data-mapping="pathname"
+  data-strict="0"
+  data-reactions-enabled="1"
+  data-emit-metadata="0"
+  data-input-position="bottom"
+  data-theme="preferred_color_scheme"
+  data-lang="ko"
+  crossorigin="anonymous"
+  async>
   let giscusAttributes = {
   src: "https://giscus.app/client.js",
   "data-repo": "da-in/da-in.github.io",
@@ -824,17 +819,11 @@ Object.entries(giscusAttributes).forEach(([key, value]) =>
   giscusScript.setAttribute(key, value)
 );
 document.getElementById("tail-wrapper").appendChild(giscusScript);
-</script>
-</div>
-<div class="post-related">
+</script></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/wiki/2024/03/05/queue.html" title="Integer Class">Queue</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/windows-command.html" title="Integer Class">Windows 명령어</a></li>
-<li><a class="post-link" href="/wiki/2024/04/29/americanote-server3-deploy-project.html" title="Integer Class">아메리카노트 서버 구성 &lt;3&gt; 프로젝트 배포</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/intellij-shortcut.html" title="Integer Class">IntelliJ 단축키 정리</a></li>
-</ul>
-    </div>
+        <li><a class="post-link" href="/wiki/2023/11/13/array-slice-method.html" title="Integer Class">배열 자르기</a></li><li><a class="post-link" href="/blog/2025/01/18/review-2024-and-2025.html" title="Integer Class">작지만 확실한 성장기 - 2024 회고와 2025 목표</a></li><li><a class="post-link" href="/wiki/2023/11/13/thymeleaf-rest-controller.html" title="Integer Class">Thymeleaf와 @RestController</a></li><li><a class="post-link" href="/wiki/2023/11/13/n-number-convert.html" title="Integer Class">진수 변환</a></li></ul>
+    </div></script>
   </section>
 </div>
 

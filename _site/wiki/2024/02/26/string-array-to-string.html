@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="ko"><head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-SBCV6PTMNJ"></script>
   <script>
@@ -14,22 +12,21 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
-<!-- Begin Jekyll SEO tag v2.8.0 -->
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>String 배열 -&gt; String | Every Single Day</title>
-<meta name="generator" content="Jekyll v4.2.2">
-<meta property="og:title" content="String 배열 -&gt; String">
-<meta name="author" content="Dajeong Park">
-<meta property="og:locale" content="ko">
-<meta name="description" content="배경 코딩테스트 문제를 풀면서 String 배열을 String으로 변환하는 작업이 자주 나와서 기록해두려고 한다.">
-<meta property="og:description" content="배경 코딩테스트 문제를 풀면서 String 배열을 String으로 변환하는 작업이 자주 나와서 기록해두려고 한다.">
-<link rel="canonical" href="http://localhost:4000/wiki/2024/02/26/string-array-to-string.html">
-<meta property="og:url" content="http://localhost:4000/wiki/2024/02/26/string-array-to-string.html">
-<meta property="og:site_name" content="Every Single Day">
-<meta property="og:type" content="article">
-<meta property="article:published_time" content="2024-02-26T00:00:00+09:00">
-<meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="String 배열 -&gt; String">
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="String 배열 -&gt; String" />
+<meta name="author" content="Dajeong Park" />
+<meta property="og:locale" content="ko" />
+<meta name="description" content="배경 코딩테스트 문제를 풀면서 String 배열을 String으로 변환하는 작업이 자주 나와서 기록해두려고 한다." />
+<meta property="og:description" content="배경 코딩테스트 문제를 풀면서 String 배열을 String으로 변환하는 작업이 자주 나와서 기록해두려고 한다." />
+<link rel="canonical" href="http://localhost:4000/wiki/2024/02/26/string-array-to-string.html" />
+<meta property="og:url" content="http://localhost:4000/wiki/2024/02/26/string-array-to-string.html" />
+<meta property="og:site_name" content="Every Single Day" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-02-26T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="String 배열 -&gt; String" />
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2024-02-26T00:00:00+09:00","datePublished":"2024-02-26T00:00:00+09:00","description":"배경 코딩테스트 문제를 풀면서 String 배열을 String으로 변환하는 작업이 자주 나와서 기록해두려고 한다.","headline":"String 배열 -&gt; String","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2024/02/26/string-array-to-string.html"},"url":"http://localhost:4000/wiki/2024/02/26/string-array-to-string.html"}</script>
 <!-- End Jekyll SEO tag -->
@@ -42,7 +39,7 @@
   <link rel="apple-touch-icon" sizes="144x144" href="/assets/favicon.ico/apple-icon-144x144.png">
   <link rel="apple-touch-icon" sizes="152x152" href="/assets/favicon.ico/apple-icon-152x152.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon.ico/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon.ico/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/favicon.ico/android-icon-192x192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon.ico/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon.ico/favicon-16x16.png">
@@ -54,11 +51,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
   <link rel="stylesheet" href="/assets/css/main.css">
-  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Every Single Day">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Every Single Day" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
 <!-- and it's easy to individually load additional languages -->
-<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
 
 
 
@@ -274,30 +272,27 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <header class="site-header " role="banner">
 
   <div class="wrapper">
-    <div class="site-header-inner">
-<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+    <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
   <img class="site-favicon" title="Every Single Day" src="" onerror="this.style.display='none'">
   Every Single Day
 </a>
 </span><nav class="site-nav">
-          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
           <label for="nav-trigger">
             <span class="menu-icon">
-              <svg viewbox="0 0 18 15" width="18px" height="15px">
-                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
               </svg>
             </span>
           </label>
 
-          <div class="trigger">
-<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a>
+          <div class="trigger"><a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a>
 
 
 
 
 </div>
-        </nav>
-</div>
+        </nav></div>
   </div>
 </header>
 
@@ -687,44 +682,37 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
     <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
-  </p>
-<div class="post-tags">
-<a class="post-tag" href="/tags.html#Java">#Java</a><a class="post-tag" href="/tags.html#String">#String</a>
-</div></header>
+  </p><div class="post-tags"><a class="post-tag" href="/tags.html#Java">#Java</a><a class="post-tag" href="/tags.html#String">#String</a></div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
       <h3 id="배경">배경</h3>
 <ul>
-  <li>코딩테스트 문제를 풀면서 String 배열을 String으로 변환하는 작업이 자주 나와서 기록해두려고 한다. <br>
-<br>
-</li>
+  <li>코딩테스트 문제를 풀면서 String 배열을 String으로 변환하는 작업이 자주 나와서 기록해두려고 한다. <br />
+<br /></li>
 </ul>
 
 <h4 id="1-stringjoincharsequence-delimiter-charsequence-elements">1. String.join(CharSequence delimiter, CharSequence… elements)</h4>
 <ul>
-  <li>
-<code class="language-plaintext highlighter-rouge">join()</code> 메서드는 delimiter(구분자)를 사용하여 elements(대상 배열)을 문자열을 리턴할 수 있다.</li>
+  <li><code class="language-plaintext highlighter-rouge">join()</code> 메서드는 delimiter(구분자)를 사용하여 elements(대상 배열)을 문자열을 리턴할 수 있다.</li>
   <li>String.join() 메서드는 Java 1.8 이상부터 사용 가능
-    <div class="language-java highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">strArr</span> <span class="o">=</span> <span class="o">{</span><span class="s">"hello"</span><span class="o">,</span> <span class="s">"java"</span><span class="o">};</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">strArr</span> <span class="o">=</span> <span class="o">{</span><span class="s">"hello"</span><span class="o">,</span> <span class="s">"java"</span><span class="o">};</span>
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">join</span><span class="o">(</span><span class="s">","</span><span class="o">,</span> <span class="n">strArr</span><span class="o">));</span>
 <span class="c1">// 결과 : hello,java</span>
 </code></pre></div>    </div>
-    <p><br></p>
+    <p><br /></p>
   </li>
 </ul>
 
 <h4 id="2-arraystostringobject-a">2. Arrays.toString(Object[] a)</h4>
 <ul>
   <li>Arrays 클래스의 <code class="language-plaintext highlighter-rouge">toString()</code> 메서드를 사용하여 배열 모양의 문자열을 리턴할 수 있다.
-    <div class="language-java highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">strArr</span> <span class="o">=</span> <span class="o">{</span><span class="s">"hello"</span><span class="o">,</span> <span class="s">"java"</span><span class="o">};</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">strArr</span> <span class="o">=</span> <span class="o">{</span><span class="s">"hello"</span><span class="o">,</span> <span class="s">"java"</span><span class="o">};</span>
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">strArr</span><span class="o">));</span>
 <span class="c1">// 결과 : [hello, java]</span>
 </code></pre></div>    </div>
-    <p><br></p>
+    <p><br /></p>
   </li>
 </ul>
 
@@ -732,12 +720,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <ul>
   <li>Stream의 <code class="language-plaintext highlighter-rouge">Collectors.joining()</code> 메서드를 사용하여 문자열을 리턴할 수 있다.</li>
   <li>Stream은 Java 1.8 이상부터 사용 가능
-    <div class="language-java highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">strArr</span> <span class="o">=</span> <span class="o">{</span><span class="s">"hello"</span><span class="o">,</span> <span class="s">"java"</span><span class="o">};</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">strArr</span> <span class="o">=</span> <span class="o">{</span><span class="s">"hello"</span><span class="o">,</span> <span class="s">"java"</span><span class="o">};</span>
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">strArr</span><span class="o">).</span><span class="na">collect</span><span class="o">(</span><span class="nc">Collectors</span><span class="o">.</span><span class="na">joining</span><span class="o">()));</span>
 <span class="c1">// 결과 : hellojava</span>
 </code></pre></div>    </div>
-    <p><br></p>
+    <p><br /></p>
   </li>
 </ul>
 
@@ -745,8 +732,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <ul>
   <li>가장 기본적인 방법 중에는 StringBuilder를 생성하여 <code class="language-plaintext highlighter-rouge">append()</code> 메서드를 사용하여 문자열을 리턴할 수 있다.</li>
   <li>빠르지만 for문을 사용하기 때문에 코드가 조금 길어진다는 단점이 있다.
-    <div class="language-java highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">strArr</span> <span class="o">=</span> <span class="o">{</span><span class="s">"hello"</span><span class="o">,</span> <span class="s">"java"</span><span class="o">};</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">strArr</span> <span class="o">=</span> <span class="o">{</span><span class="s">"hello"</span><span class="o">,</span> <span class="s">"java"</span><span class="o">};</span>
 <span class="nc">StringBuilder</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span><span class="o">();</span>
 <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">strArr</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
   <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">strArr</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
@@ -754,17 +740,15 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sb</span><span class="o">);</span>
 <span class="c1">// 결과 : hellojava</span>
 </code></pre></div>    </div>
-    <p><br></p>
+    <p><br /></p>
   </li>
 </ul>
 
 <h4 id="5-apache-commons-lang-3--라이브러리">5. Apache Commons Lang 3  라이브러리</h4>
 <ul>
-  <li>
-<a href="https://commons.apache.org/proper/commons-lang">Apache Commons Lang 3</a> 라이브러리는 Java의 유틸리티 클래스 패키지로, 문자열, 배열, 숫자 등 매우 다양하고 편리한 기능을 제공한다.</li>
+  <li><a href="https://commons.apache.org/proper/commons-lang">Apache Commons Lang 3</a> 라이브러리는 Java의 유틸리티 클래스 패키지로, 문자열, 배열, 숫자 등 매우 다양하고 편리한 기능을 제공한다.</li>
   <li>그 중 StringUtils 클래스의 <code class="language-plaintext highlighter-rouge">join()</code> 메서드를 사용하여 문자열 배열을 문자열로 리턴할 수 있다.
-    <div class="language-java highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">strArr</span> <span class="o">=</span> <span class="o">{</span><span class="s">"hello"</span><span class="o">,</span> <span class="s">"java"</span><span class="o">};</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">strArr</span> <span class="o">=</span> <span class="o">{</span><span class="s">"hello"</span><span class="o">,</span> <span class="s">"java"</span><span class="o">};</span>
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">StringUtils</span><span class="o">.</span><span class="na">join</span><span class="o">(</span><span class="n">strArr</span><span class="o">,</span> <span class="s">","</span><span class="o">));</span>
 <span class="c1">// 결과 : hello,java</span>
 </code></pre></div>    </div>
@@ -775,11 +759,21 @@ document.addEventListener('DOMContentLoaded', function(event) {
     </div>
 
 </article>
-<div class="post-nav">
-<a class="previous" href="/wiki/2024/01/17/pathvariable-name-missing.html" title="SpringBoot 3.2부터 @PathVariable 이름 미지정 시 에러">SpringBoot 3.2부터 @PathVariable 이름 미지정 시...</a><a class="next" href="/wiki/2024/02/29/programmers-12906.html" title="프로그래머스 - 같은 숫자는 싫어 풀이">프로그래머스 - 같은 숫자는 싫어 풀이...</a>
-</div>
-<div class="post-comments">  <div id="gisqus_thread"></div>
-  <script src="https://giscus.app/client.js" data-repo="dajeongdev/dajeongdev.github.io" data-repo-id="R_kgDOHS7Ikw" data-category="General" data-category-id="DIC_kwDOHS7Ik84Cj70Z" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="ko" crossorigin="anonymous" async>
+<div class="post-nav"><a class="previous" href="/wiki/2024/01/17/pathvariable-name-missing.html" title="SpringBoot 3.2부터 @PathVariable 이름 미지정 시 에러">SpringBoot 3.2부터 @PathVariable 이름 미지정 시...</a><a class="next" href="/wiki/2024/02/29/programmers-12906.html" title="프로그래머스 - 같은 숫자는 싫어 풀이">프로그래머스 - 같은 숫자는 싫어 풀이...</a></div><div class="post-comments">  <div id="gisqus_thread"></div>
+  <script src="https://giscus.app/client.js"
+  data-repo="dajeongdev/dajeongdev.github.io"
+  data-repo-id="R_kgDOHS7Ikw"
+  data-category="General"
+  data-category-id="DIC_kwDOHS7Ik84Cj70Z"
+  data-mapping="pathname"
+  data-strict="0"
+  data-reactions-enabled="1"
+  data-emit-metadata="0"
+  data-input-position="bottom"
+  data-theme="preferred_color_scheme"
+  data-lang="ko"
+  crossorigin="anonymous"
+  async>
   let giscusAttributes = {
   src: "https://giscus.app/client.js",
   "data-repo": "da-in/da-in.github.io",
@@ -802,17 +796,11 @@ Object.entries(giscusAttributes).forEach(([key, value]) =>
   giscusScript.setAttribute(key, value)
 );
 document.getElementById("tail-wrapper").appendChild(giscusScript);
-</script>
-</div>
-<div class="post-related">
+</script></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/wiki/2023/11/21/list-remove-method.html" title="프로그래머스 - 같은 숫자는 싫어 풀이">List에서 원소 삭제하기 remove()</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/java-regex-pattern-syntax-error.html" title="프로그래머스 - 같은 숫자는 싫어 풀이">Dangling meta character '?' near index 0</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/prime-number.html" title="프로그래머스 - 같은 숫자는 싫어 풀이">자바로 소수 판별</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/cut-string-method.html" title="프로그래머스 - 같은 숫자는 싫어 풀이">문자열 자르기</a></li>
-</ul>
-    </div>
+        <li><a class="post-link" href="/blog/2025/01/18/review-2024-and-2025.html" title="프로그래머스 - 같은 숫자는 싫어 풀이">작지만 확실한 성장기 - 2024 회고와 2025 목표</a></li><li><a class="post-link" href="/blog/2024/10/13/geultto-first-post.html" title="프로그래머스 - 같은 숫자는 싫어 풀이">이직 후기, 그리고 글또 다짐을 곁들인</a></li><li><a class="post-link" href="/blog/2024/05/10/book-service-admin-review.html" title="프로그래머스 - 같은 숫자는 싫어 풀이">독서 관리 서비스의 Admin 개발 회고</a></li><li><a class="post-link" href="/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain.html" title="프로그래머스 - 같은 숫자는 싫어 풀이">아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용</a></li></ul>
+    </div></script>
   </section>
 </div>
 

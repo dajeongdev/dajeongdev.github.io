@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="ko"><head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-SBCV6PTMNJ"></script>
   <script>
@@ -14,22 +12,21 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
-<!-- Begin Jekyll SEO tag v2.8.0 -->
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>독서 관리 서비스의 Admin 개발 회고 | Every Single Day</title>
-<meta name="generator" content="Jekyll v4.2.2">
-<meta property="og:title" content="독서 관리 서비스의 Admin 개발 회고">
-<meta name="author" content="Dajeong Park">
-<meta property="og:locale" content="ko">
-<meta name="description" content="홈페이지 마이그레이션, 도서 단행본 API 구현 업무를 마치고 나니 협력사와 아이가 도서를 읽고 독후감을 쓰면 첨삭해주는 서비스를 만들게 됐는데, 당시 일손이 부족해서 내가 관리자를 통으로 담당하게 되었다.">
-<meta property="og:description" content="홈페이지 마이그레이션, 도서 단행본 API 구현 업무를 마치고 나니 협력사와 아이가 도서를 읽고 독후감을 쓰면 첨삭해주는 서비스를 만들게 됐는데, 당시 일손이 부족해서 내가 관리자를 통으로 담당하게 되었다.">
-<link rel="canonical" href="http://localhost:4000/blog/2024/05/10/book-service-admin-review.html">
-<meta property="og:url" content="http://localhost:4000/blog/2024/05/10/book-service-admin-review.html">
-<meta property="og:site_name" content="Every Single Day">
-<meta property="og:type" content="article">
-<meta property="article:published_time" content="2024-05-10T00:00:00+09:00">
-<meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="독서 관리 서비스의 Admin 개발 회고">
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="독서 관리 서비스의 Admin 개발 회고" />
+<meta name="author" content="Dajeong Park" />
+<meta property="og:locale" content="ko" />
+<meta name="description" content="홈페이지 마이그레이션, 도서 단행본 API 구현 업무를 마치고 나니 협력사와 아이가 도서를 읽고 독후감을 쓰면 첨삭해주는 서비스를 만들게 됐는데, 당시 일손이 부족해서 내가 관리자를 통으로 담당하게 되었다." />
+<meta property="og:description" content="홈페이지 마이그레이션, 도서 단행본 API 구현 업무를 마치고 나니 협력사와 아이가 도서를 읽고 독후감을 쓰면 첨삭해주는 서비스를 만들게 됐는데, 당시 일손이 부족해서 내가 관리자를 통으로 담당하게 되었다." />
+<link rel="canonical" href="http://localhost:4000/blog/2024/05/10/book-service-admin-review.html" />
+<meta property="og:url" content="http://localhost:4000/blog/2024/05/10/book-service-admin-review.html" />
+<meta property="og:site_name" content="Every Single Day" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-05-10T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="독서 관리 서비스의 Admin 개발 회고" />
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2024-05-10T00:00:00+09:00","datePublished":"2024-05-10T00:00:00+09:00","description":"홈페이지 마이그레이션, 도서 단행본 API 구현 업무를 마치고 나니 협력사와 아이가 도서를 읽고 독후감을 쓰면 첨삭해주는 서비스를 만들게 됐는데, 당시 일손이 부족해서 내가 관리자를 통으로 담당하게 되었다.","headline":"독서 관리 서비스의 Admin 개발 회고","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2024/05/10/book-service-admin-review.html"},"url":"http://localhost:4000/blog/2024/05/10/book-service-admin-review.html"}</script>
 <!-- End Jekyll SEO tag -->
@@ -42,7 +39,7 @@
   <link rel="apple-touch-icon" sizes="144x144" href="/assets/favicon.ico/apple-icon-144x144.png">
   <link rel="apple-touch-icon" sizes="152x152" href="/assets/favicon.ico/apple-icon-152x152.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon.ico/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon.ico/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/favicon.ico/android-icon-192x192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon.ico/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon.ico/favicon-16x16.png">
@@ -54,11 +51,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
   <link rel="stylesheet" href="/assets/css/main.css">
-  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Every Single Day">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Every Single Day" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
 <!-- and it's easy to individually load additional languages -->
-<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
 
 
 
@@ -274,30 +272,27 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <header class="site-header " role="banner">
 
   <div class="wrapper">
-    <div class="site-header-inner">
-<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+    <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
   <img class="site-favicon" title="Every Single Day" src="" onerror="this.style.display='none'">
   Every Single Day
 </a>
 </span><nav class="site-nav">
-          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
           <label for="nav-trigger">
             <span class="menu-icon">
-              <svg viewbox="0 0 18 15" width="18px" height="15px">
-                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
               </svg>
             </span>
           </label>
 
-          <div class="trigger">
-<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a>
+          <div class="trigger"><a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a>
 
 
 
 
 </div>
-        </nav>
-</div>
+        </nav></div>
   </div>
 </header>
 
@@ -687,30 +682,27 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
     <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
-  </p>
-<div class="post-tags">
-<a class="post-tag" href="/tags.html#Project">#Project</a><a class="post-tag" href="/tags.html#Admin">#Admin</a><a class="post-tag" href="/tags.html#Review">#Review</a>
-</div></header>
+  </p><div class="post-tags"><a class="post-tag" href="/tags.html#Project">#Project</a><a class="post-tag" href="/tags.html#Admin">#Admin</a><a class="post-tag" href="/tags.html#Review">#Review</a></div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
       <p>홈페이지 마이그레이션, 도서 단행본 API 구현 업무를 마치고 나니 협력사와 아이가 도서를 읽고 독후감을 쓰면 첨삭해주는 서비스를 만들게 됐는데, 당시 일손이 부족해서 내가 관리자를 통으로 담당하게 되었다.
-<br>
-<br></p>
+<br />
+<br /></p>
 
 <p>사수분들께서 바빠서 잘 봐줄 수 없을 것 같다고 하셔서 (ㅎㅎ) 기획서를 받기 전부터 조금 긴장했던 것 같다.
 기초 설정은 차장님께서 해주셔서 Spring Boot 2.4.1 버전에 Maven을 사용한 프로젝트를 생성해주셨고, 홈페이지 마이그레이션 때처럼 Thymeleaf를 사용하기로 했는데, 마이그레이션 때 사용해봐서 걱정은 조금 덜었었다.
-<br>
-<br></p>
+<br />
+<br /></p>
 
 <p>관리자 페이지답게 엑셀 다운로드부터 Push(FCM) 발송, 첨삭 수동 매칭, 첨삭 교사의 라이센스 확인, 관리자 권한 설정 그리고 사용자 통계까지 정말 다양한 기능을 8월 중순부터 1월 초까지 작업했으니 약 5개월동안 정말 열심히 했었다. 그래서 힘들다기보다는 해보지 못했던 기능을 만들어봐서 정말 재미있게 개발했다.
-<br>
-<br></p>
+<br />
+<br /></p>
 
 <p>이번 프로젝트에서는 기획서가 있었는데, 미리 주신 덕분에 보면서 “내가 관리자라면 검색할 때 이 조건을 불편하지 않을까?”라고 관리자의 입장에서 생각해보면서 추가하거나 삭제해도 괜찮을 것 같은 기능들을 정리해서 운영팀 과장님과 상의하면서 작업했더니 확실히 완성도가 올라간다는 느낌이 들었다. 이때부터 기획서나 피그마를 잘 분석해서 의사소통하는 게 팀워크에 좋은 영향을 끼친다고 생각했다.
-<br>
-<br></p>
+<br />
+<br /></p>
 
 <h4 id="프론트단">프론트단</h4>
 <p>관리자 페이지의 프론트 부분을 제대로 작업해본 건 처음이었는데, 디자인에 너무 신경쓰지 않아도 된다고 하셨지만 그래도 어느정도는 깔끔하게 보이고 싶었다.</p>
@@ -718,8 +710,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <p>아무래도 관리자 페이지는 비슷한 페이지들이 많다보니 모달이나 글자수 카운팅, 페이징, 이미지 탭 같은 부분을 공통적으로 사용하는 게 좋을 것 같다고 판단해서 그런 기능들은 컴포넌트화 시켜서 사용하기 시작했다.</p>
 
 <p>그리고 개발 트렌드에 맞게 jQuery 대신 Javascript만 사용하고 싶다는 목표도 세웠기 때문에 작업 중에 드림코딩이나 노마드코더 같은 Javascript 강의를 들어보니 Java랑 조금 다른 부분들이 재미있게 느껴졌다.
-<br>
-<br></p>
+<br />
+<br /></p>
 
 <h4 id="백단">백단</h4>
 <p>백단 작업도 이전 프로젝트보다 더 발전하고 싶다는 생각이 들었다. 김영한님의 Spring 강의를 들으면서 @Autowired 대신 생성자 주입을 위해 @RequiredArgument 사용하는 것처럼 더 나은 코드를 위해 필요한 부분들을 체크해서 실무에 적용해보기도 했다.</p>
@@ -727,8 +719,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <p>백단 부분은 계속 MyBatis를 사용했기 때문에 입사 전에 했던 팀프로젝트 때랑 많이 다르지 않아서 편했지만, 통계나 여러 테이블을 조인하는 과정이 어려웠기 때문에 대리님께 질문도 드리고, 개인적으로도 검색을 통해 많이 배웠다. 최근에는 JPA만 써서 MyBatis도 한 번 제대로 정리해봐야겠다..</p>
 
 <p>그리고 이때 처음으로 프로젝트를 서버에 배포하는 것도 알려주셔서 해봤는데 생각보다 어려워서 공부를 많이 해야겠다고 생각했다. 실서버가 2개라는 것도 차장님이 말씀을 안 해주셔서 막바지에 알게 된 해프닝도 있었다. ㅋㅋ
-<br>
-<br></p>
+<br />
+<br /></p>
 
 <h4 id="소감">소감</h4>
 <p>중간중간 운영팀 과장님과 대리님께 피드백도 받아가면서 프로젝트를 마무리했더니 의사소통도 잘하고 손이 빠르다는 평을 들었다. 새로운 기능도 많이 개발해보고, 프론트단도 처음이지만 이리저리 공부하면서 작업한 부분도 정말 뿌듯했다. 이 프로젝트를 통해서 팀원들과의 의사소통과 사용자 입장에서 개발하는 것의 중요성을 뼈저리게 깨달았다.</p>
@@ -739,11 +731,21 @@ document.addEventListener('DOMContentLoaded', function(event) {
     </div>
 
 </article>
-<div class="post-nav">
-<a class="previous" href="/blog/2024/05/10/book-insert-api-speed-improvement-review.html" title="도서 등록 API 속도 개선 회고">도서 등록 API 속도 개선 회고...</a><a class="next" href="/blog/2024/05/16/americanote-review.html" title="비사이드 403 포텐데이 Americanote 회고">비사이드 403 포텐데이 Americanote 회고</a>
-</div>
-<div class="post-comments">  <div id="gisqus_thread"></div>
-  <script src="https://giscus.app/client.js" data-repo="dajeongdev/dajeongdev.github.io" data-repo-id="R_kgDOHS7Ikw" data-category="General" data-category-id="DIC_kwDOHS7Ik84Cj70Z" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="ko" crossorigin="anonymous" async>
+<div class="post-nav"><a class="previous" href="/blog/2024/05/10/book-insert-api-speed-improvement-review.html" title="도서 등록 API 속도 개선 회고">도서 등록 API 속도 개선 회고...</a><a class="next" href="/blog/2024/05/16/americanote-review.html" title="비사이드 403 포텐데이 Americanote 회고">비사이드 403 포텐데이 Americanote 회고</a></div><div class="post-comments">  <div id="gisqus_thread"></div>
+  <script src="https://giscus.app/client.js"
+  data-repo="dajeongdev/dajeongdev.github.io"
+  data-repo-id="R_kgDOHS7Ikw"
+  data-category="General"
+  data-category-id="DIC_kwDOHS7Ik84Cj70Z"
+  data-mapping="pathname"
+  data-strict="0"
+  data-reactions-enabled="1"
+  data-emit-metadata="0"
+  data-input-position="bottom"
+  data-theme="preferred_color_scheme"
+  data-lang="ko"
+  crossorigin="anonymous"
+  async>
   let giscusAttributes = {
   src: "https://giscus.app/client.js",
   "data-repo": "da-in/da-in.github.io",
@@ -766,17 +768,11 @@ Object.entries(giscusAttributes).forEach(([key, value]) =>
   giscusScript.setAttribute(key, value)
 );
 document.getElementById("tail-wrapper").appendChild(giscusScript);
-</script>
-</div>
-<div class="post-related">
+</script></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/wiki/2023/11/13/java-regex-pattern-syntax-error.html" title="비사이드 403 포텐데이 Americanote 회고">Dangling meta character '?' near index 0</a></li>
-<li><a class="post-link" href="/blog/2024/05/09/hompage-migration-review.html" title="비사이드 403 포텐데이 Americanote 회고">홈페이지 마이그레이션 회고</a></li>
-<li><a class="post-link" href="/wiki/2024/04/28/americanote-server1-create-linux-server.html" title="비사이드 403 포텐데이 Americanote 회고">아메리카노트 서버 구성 &lt;1&gt; Linux 서버 생성</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/array-slice-method.html" title="비사이드 403 포텐데이 Americanote 회고">배열 자르기</a></li>
-</ul>
-    </div>
+        <li><a class="post-link" href="/wiki/2023/11/13/prg-pattern.html" title="비사이드 403 포텐데이 Americanote 회고">PRG 패턴과 RedirectAttributes</a></li><li><a class="post-link" href="/wiki/2024/06/21/csp.html" title="비사이드 403 포텐데이 Americanote 회고">Mixed Content The page at &#39;...&#39; was loaded over HTTPS, but requested...</a></li><li><a class="post-link" href="/wiki/2023/11/13/java-regex-pattern-syntax-error.html" title="비사이드 403 포텐데이 Americanote 회고">Dangling meta character &#39;?&#39; near index 0</a></li><li><a class="post-link" href="/wiki/2024/04/28/americanote-server1-create-linux-server.html" title="비사이드 403 포텐데이 Americanote 회고">아메리카노트 서버 구성 &lt;1&gt; Linux 서버 생성</a></li></ul>
+    </div></script>
   </section>
 </div>
 

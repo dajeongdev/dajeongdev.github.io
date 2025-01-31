@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="ko"><head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-SBCV6PTMNJ"></script>
   <script>
@@ -14,22 +12,21 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
-<!-- Begin Jekyll SEO tag v2.8.0 -->
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>Validation 그거 어떻게 하는건데 | Every Single Day</title>
-<meta name="generator" content="Jekyll v4.2.2">
-<meta property="og:title" content="Validation 그거 어떻게 하는건데">
-<meta name="author" content="Dajeong Park">
-<meta property="og:locale" content="ko">
-<meta name="description" content="배경 백엔드 작업에서 Validation은 꽤나 중요도가 높은 작업으로, 클라이언트가 보내는 데이터가 서버에서 기대하는 형식과 규칙을 충족하는지 확인하는 과정을 의미합니다. 주로 웹 애플리케이션에서 클라이언트가 API를 통해 데이터를 전송할 때 백엔드에서는 이 데이터가 정확한지, 요구사항을 만족하는지 검증을 해야 데이터베이스에 저장하거나 다음 처리를 진행하게 됩니다.">
-<meta property="og:description" content="배경 백엔드 작업에서 Validation은 꽤나 중요도가 높은 작업으로, 클라이언트가 보내는 데이터가 서버에서 기대하는 형식과 규칙을 충족하는지 확인하는 과정을 의미합니다. 주로 웹 애플리케이션에서 클라이언트가 API를 통해 데이터를 전송할 때 백엔드에서는 이 데이터가 정확한지, 요구사항을 만족하는지 검증을 해야 데이터베이스에 저장하거나 다음 처리를 진행하게 됩니다.">
-<link rel="canonical" href="http://localhost:4000/wiki/2024/10/27/spring-validation.html">
-<meta property="og:url" content="http://localhost:4000/wiki/2024/10/27/spring-validation.html">
-<meta property="og:site_name" content="Every Single Day">
-<meta property="og:type" content="article">
-<meta property="article:published_time" content="2024-10-27T00:00:00+09:00">
-<meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="Validation 그거 어떻게 하는건데">
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Validation 그거 어떻게 하는건데" />
+<meta name="author" content="Dajeong Park" />
+<meta property="og:locale" content="ko" />
+<meta name="description" content="배경 백엔드 작업에서 Validation은 꽤나 중요도가 높은 작업으로, 클라이언트가 보내는 데이터가 서버에서 기대하는 형식과 규칙을 충족하는지 확인하는 과정을 의미합니다. 주로 웹 애플리케이션에서 클라이언트가 API를 통해 데이터를 전송할 때 백엔드에서는 이 데이터가 정확한지, 요구사항을 만족하는지 검증을 해야 데이터베이스에 저장하거나 다음 처리를 진행하게 됩니다." />
+<meta property="og:description" content="배경 백엔드 작업에서 Validation은 꽤나 중요도가 높은 작업으로, 클라이언트가 보내는 데이터가 서버에서 기대하는 형식과 규칙을 충족하는지 확인하는 과정을 의미합니다. 주로 웹 애플리케이션에서 클라이언트가 API를 통해 데이터를 전송할 때 백엔드에서는 이 데이터가 정확한지, 요구사항을 만족하는지 검증을 해야 데이터베이스에 저장하거나 다음 처리를 진행하게 됩니다." />
+<link rel="canonical" href="http://localhost:4000/wiki/2024/10/27/spring-validation.html" />
+<meta property="og:url" content="http://localhost:4000/wiki/2024/10/27/spring-validation.html" />
+<meta property="og:site_name" content="Every Single Day" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-10-27T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Validation 그거 어떻게 하는건데" />
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2024-10-27T00:00:00+09:00","datePublished":"2024-10-27T00:00:00+09:00","description":"배경 백엔드 작업에서 Validation은 꽤나 중요도가 높은 작업으로, 클라이언트가 보내는 데이터가 서버에서 기대하는 형식과 규칙을 충족하는지 확인하는 과정을 의미합니다. 주로 웹 애플리케이션에서 클라이언트가 API를 통해 데이터를 전송할 때 백엔드에서는 이 데이터가 정확한지, 요구사항을 만족하는지 검증을 해야 데이터베이스에 저장하거나 다음 처리를 진행하게 됩니다.","headline":"Validation 그거 어떻게 하는건데","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2024/10/27/spring-validation.html"},"url":"http://localhost:4000/wiki/2024/10/27/spring-validation.html"}</script>
 <!-- End Jekyll SEO tag -->
@@ -42,7 +39,7 @@
   <link rel="apple-touch-icon" sizes="144x144" href="/assets/favicon.ico/apple-icon-144x144.png">
   <link rel="apple-touch-icon" sizes="152x152" href="/assets/favicon.ico/apple-icon-152x152.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon.ico/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon.ico/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/favicon.ico/android-icon-192x192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon.ico/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon.ico/favicon-16x16.png">
@@ -54,11 +51,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
   <link rel="stylesheet" href="/assets/css/main.css">
-  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Every Single Day">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Every Single Day" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
 <!-- and it's easy to individually load additional languages -->
-<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
 
 
 
@@ -274,30 +272,27 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <header class="site-header " role="banner">
 
   <div class="wrapper">
-    <div class="site-header-inner">
-<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+    <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
   <img class="site-favicon" title="Every Single Day" src="" onerror="this.style.display='none'">
   Every Single Day
 </a>
 </span><nav class="site-nav">
-          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
           <label for="nav-trigger">
             <span class="menu-icon">
-              <svg viewbox="0 0 18 15" width="18px" height="15px">
-                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
               </svg>
             </span>
           </label>
 
-          <div class="trigger">
-<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a>
+          <div class="trigger"><a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a>
 
 
 
 
 </div>
-        </nav>
-</div>
+        </nav></div>
   </div>
 </header>
 
@@ -687,10 +682,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
     <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 10 mins</span>
-  </p>
-<div class="post-tags">
-<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#SpringBoot">#SpringBoot</a><a class="post-tag" href="/tags.html#Validation">#Validation</a><a class="post-tag" href="/tags.html#%EA%B8%80%EB%98%90">#글또</a><a class="post-tag" href="/tags.html#%EA%B8%80%EB%98%9010%EA%B8%B0">#글또10기</a>
-</div></header>
+  </p><div class="post-tags"><a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#SpringBoot">#SpringBoot</a><a class="post-tag" href="/tags.html#Validation">#Validation</a><a class="post-tag" href="/tags.html#글또">#글또</a><a class="post-tag" href="/tags.html#글또10기">#글또10기</a></div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
@@ -698,39 +690,34 @@ document.addEventListener('DOMContentLoaded', function(event) {
       <h3 id="배경">배경</h3>
 <p>백엔드 작업에서 Validation은 꽤나 중요도가 높은 작업으로, 클라이언트가 보내는 데이터가 서버에서 기대하는 형식과 규칙을 충족하는지 확인하는 과정을 의미합니다. 
 주로 웹 애플리케이션에서 클라이언트가 API를 통해 데이터를 전송할 때 백엔드에서는 이 데이터가 정확한지, 요구사항을 만족하는지 검증을 해야 데이터베이스에 저장하거나 다음 처리를 진행하게 됩니다.
-<br>
-<br></p>
+<br />
+<br /></p>
 
 <h3 id="validation이-중요한-이유">Validation이 중요한 이유</h3>
 <ol>
-  <li>
-<strong>데이터 무결성 보장</strong>
+  <li><strong>데이터 무결성 보장</strong>
     <ul>
       <li>검증되지 않은 데이터가 서버로 들어오면 데이터베이스의 일관성이 깨질 수 있습니다.</li>
       <li>예를 들어, 생년월일 필드에 알파벳이 포함되거나 전화번호에 특수 문자가 포함되는 경우, 데이터의 신뢰성을 확보하기 어렵습니다. 이때 Validation을 통해 이러한 잘못된 데이터를 사전에 차단할 수 있습니다.</li>
     </ul>
   </li>
-  <li>
-<strong>보안 강화</strong>
+  <li><strong>보안 강화</strong>
     <ul>
       <li>유효하지 않은 데이터는 SQL 인젝션, 스크립트 인젝션(XSS) 등과 같은 보안 취약점을 노출시킬 수 있습니다.</li>
       <li>Validation을 통해 이러한 악성 입력을 막음으로써 백엔드 시스템을 보호할 수 있습니다.</li>
     </ul>
   </li>
-  <li>
-<strong>애플리케이션 안정성 유지</strong>
+  <li><strong>애플리케이션 안정성 유지</strong>
     <ul>
       <li>Validation을 통해 예상하지 못한 데이터 형식으로 인한 에러를 줄일 수 있습니다.</li>
       <li>검증된 데이터만을 처리하기 때문에 애플리케이션의 안정성과 성능을 유지할 수 있습니다.</li>
     </ul>
   </li>
-  <li>
-<strong>비즈니스 로직 보호</strong>
+  <li><strong>비즈니스 로직 보호</strong>
     <ul>
       <li>유효성 검사는 단순히 데이터 형식을 확인하는 것뿐만 아니라, 비즈니스 로직에 맞는 데이터인지 검토할 수 있습니다.
-<br>
-<br>
-</li>
+<br />
+<br /></li>
     </ul>
   </li>
 </ol>
@@ -779,27 +766,23 @@ document.addEventListener('DOMContentLoaded', function(event) {
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
-<p><br>
-<br></p>
+<p><br />
+<br /></p>
 
 <h3 id="많이-쓰는-애노테이션과-팁">많이 쓰는 애노테이션과 팁</h3>
 <h4 id="기본-애노테이션">[기본 애노테이션]</h4>
 <p><code class="language-plaintext highlighter-rouge">@NotNull</code>, <code class="language-plaintext highlighter-rouge">@NotEmpty</code>, <code class="language-plaintext highlighter-rouge">@NotBlank</code></p>
 <ul>
-  <li>
-<code class="language-plaintext highlighter-rouge">@NotNull</code>은 null이 아닌 값으로, 모든 타입에 사용 가능</li>
-  <li>
-<code class="language-plaintext highlighter-rouge">@NotEmpty</code>은 null이거나 비어있지 않은 값으로, CharSequence, Collection, Map, 배열만 사용 가능</li>
-  <li>
-<code class="language-plaintext highlighter-rouge">@NotBlank</code>는 null, 빈 문자열(<code class="language-plaintext highlighter-rouge">””</code>), 하나 이상의 공백이 아닌 문자만 허용</li>
+  <li><code class="language-plaintext highlighter-rouge">@NotNull</code>은 null이 아닌 값으로, 모든 타입에 사용 가능</li>
+  <li><code class="language-plaintext highlighter-rouge">@NotEmpty</code>은 null이거나 비어있지 않은 값으로, CharSequence, Collection, Map, 배열만 사용 가능</li>
+  <li><code class="language-plaintext highlighter-rouge">@NotBlank</code>는 null, 빈 문자열(<code class="language-plaintext highlighter-rouge">””</code>), 하나 이상의 공백이 아닌 문자만 허용</li>
 </ul>
 
 <p><code class="language-plaintext highlighter-rouge">@Size</code></p>
 <ul>
   <li>문자열, 배열, 컬렉션의 길이나 크기를 제한</li>
   <li>min, max 속성을 사용해 범위를 설정할 수 있음
-<br>
-</li>
+<br /></li>
 </ul>
 
 <h4 id="숫자-관련-애노테이션">[숫자 관련 애노테이션]</h4>
@@ -826,10 +809,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <p><code class="language-plaintext highlighter-rouge">@Digits</code></p>
 <ul>
   <li>정수와 소수의 자리수를 지정할 수 있음</li>
-  <li>
-<code class="language-plaintext highlighter-rouge">@Digits(integer = 3, fraction = 2, message = “정수 3자리, 소수 2자리까지 가능합니다.”)</code>
-<br>
-</li>
+  <li><code class="language-plaintext highlighter-rouge">@Digits(integer = 3, fraction = 2, message = “정수 3자리, 소수 2자리까지 가능합니다.”)</code>
+<br /></li>
 </ul>
 
 <h4 id="문자열-관련-애노테이션">[문자열 관련 애노테이션]</h4>
@@ -841,10 +822,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <p><code class="language-plaintext highlighter-rouge">@Pattern</code></p>
 <ul>
   <li>정규표현식을 사용하여 값이 특정한 패턴을 만족하는지 검증</li>
-  <li>
-<code class="language-plaintext highlighter-rouge">@Pattern(regexp = "^[0-9]{10}$", message = "전화번호는 10자리 숫자여야 합니다.")</code>
-<br>
-</li>
+  <li><code class="language-plaintext highlighter-rouge">@Pattern(regexp = "^[0-9]{10}$", message = "전화번호는 10자리 숫자여야 합니다.")</code>
+<br /></li>
 </ul>
 
 <h4 id="날짜-관련-애노테이션">[날짜 관련 애노테이션]</h4>
@@ -856,20 +835,29 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <p><code class="language-plaintext highlighter-rouge">@Future</code>, <code class="language-plaintext highlighter-rouge">@FutureOrPresent</code></p>
 <ul>
   <li>값이 미래 날짜인지, 현재 날짜를 포함한 미래인지 검증
-<br>
-<br>
-</li>
+<br />
+<br /></li>
 </ul>
 
 
     </div>
 
 </article>
-<div class="post-nav">
-<a class="previous" href="/blog/2024/10/13/geultto-first-post.html" title="이직 후기, 그리고 글또 다짐을 곁들인">이직 후기, 그리고 글또 다짐을 곁들인...</a><a class="next" href="/wiki/2024/11/23/spring-internationalization.html" title="Spring Boot에서 국제화로 언어 장벽 허물기!">Spring Boot에서 국제화로 언어 장벽 허물기!...</a>
-</div>
-<div class="post-comments">  <div id="gisqus_thread"></div>
-  <script src="https://giscus.app/client.js" data-repo="dajeongdev/dajeongdev.github.io" data-repo-id="R_kgDOHS7Ikw" data-category="General" data-category-id="DIC_kwDOHS7Ik84Cj70Z" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="ko" crossorigin="anonymous" async>
+<div class="post-nav"><a class="previous" href="/blog/2024/10/13/geultto-first-post.html" title="이직 후기, 그리고 글또 다짐을 곁들인">이직 후기, 그리고 글또 다짐을 곁들인...</a><a class="next" href="/wiki/2024/11/23/spring-internationalization.html" title="Spring Boot에서 국제화로 언어 장벽 허물기!">Spring Boot에서 국제화로 언어 장벽 허물기!...</a></div><div class="post-comments">  <div id="gisqus_thread"></div>
+  <script src="https://giscus.app/client.js"
+  data-repo="dajeongdev/dajeongdev.github.io"
+  data-repo-id="R_kgDOHS7Ikw"
+  data-category="General"
+  data-category-id="DIC_kwDOHS7Ik84Cj70Z"
+  data-mapping="pathname"
+  data-strict="0"
+  data-reactions-enabled="1"
+  data-emit-metadata="0"
+  data-input-position="bottom"
+  data-theme="preferred_color_scheme"
+  data-lang="ko"
+  crossorigin="anonymous"
+  async>
   let giscusAttributes = {
   src: "https://giscus.app/client.js",
   "data-repo": "da-in/da-in.github.io",
@@ -892,17 +880,11 @@ Object.entries(giscusAttributes).forEach(([key, value]) =>
   giscusScript.setAttribute(key, value)
 );
 document.getElementById("tail-wrapper").appendChild(giscusScript);
-</script>
-</div>
-<div class="post-related">
+</script></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/wiki/2023/11/13/array-slice-method.html" title="Spring Boot에서 국제화로 언어 장벽 허물기!">배열 자르기</a></li>
-<li><a class="post-link" href="/wiki/2024/03/17/string-replacement.html" title="Spring Boot에서 국제화로 언어 장벽 허물기!">문자열 대치</a></li>
-<li><a class="post-link" href="/wiki/2024/12/23/spring-swagger.html" title="Spring Boot에서 국제화로 언어 장벽 허물기!">API 문서 자동화로 시간 절약하기 (feat.Swagger)</a></li>
-<li><a class="post-link" href="/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain.html" title="Spring Boot에서 국제화로 언어 장벽 허물기!">아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용</a></li>
-</ul>
-    </div>
+        <li><a class="post-link" href="/wiki/2023/11/13/intellij-shortcut.html" title="Spring Boot에서 국제화로 언어 장벽 허물기!">IntelliJ 단축키 정리</a></li><li><a class="post-link" href="/wiki/2023/11/13/fibonacci.html" title="Spring Boot에서 국제화로 언어 장벽 허물기!">자바로 피보나치 수열 이해하기</a></li><li><a class="post-link" href="/wiki/2024/03/17/string-replacement.html" title="Spring Boot에서 국제화로 언어 장벽 허물기!">문자열 대치</a></li><li><a class="post-link" href="/wiki/2023/11/13/stack.html" title="Spring Boot에서 국제화로 언어 장벽 허물기!">Stack</a></li></ul>
+    </div></script>
   </section>
 </div>
 

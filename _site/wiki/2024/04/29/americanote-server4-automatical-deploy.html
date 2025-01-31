@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="ko"><head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-SBCV6PTMNJ"></script>
   <script>
@@ -14,22 +12,21 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
-<!-- Begin Jekyll SEO tag v2.8.0 -->
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>아메리카노트 서버 구성 &lt;4&gt; 자동 배포 | Every Single Day</title>
-<meta name="generator" content="Jekyll v4.2.2">
-<meta property="og:title" content="아메리카노트 서버 구성 &lt;4&gt; 자동 배포">
-<meta name="author" content="Dajeong Park">
-<meta property="og:locale" content="ko">
-<meta name="description" content="layout: post title: 아메리카노트 서버 구성 &lt;4&gt; 자동 배포 subtitle: categories: wiki tags: [Server, NaverCloudPlatform, Project, Deploy, GithubActions] — 프로젝트를 서버에 배포해봤다면 번거롭다는 생각을 한번쯤 해봤을 것 같습니다. 그래서 이번에는 그 배포를 자동으로 진행해보겠습니다. 자동 배포는 Github Actions의 self-hosted runner를 사용했습니다.">
-<meta property="og:description" content="layout: post title: 아메리카노트 서버 구성 &lt;4&gt; 자동 배포 subtitle: categories: wiki tags: [Server, NaverCloudPlatform, Project, Deploy, GithubActions] — 프로젝트를 서버에 배포해봤다면 번거롭다는 생각을 한번쯤 해봤을 것 같습니다. 그래서 이번에는 그 배포를 자동으로 진행해보겠습니다. 자동 배포는 Github Actions의 self-hosted runner를 사용했습니다.">
-<link rel="canonical" href="http://localhost:4000/wiki/2024/04/29/americanote-server4-automatical-deploy.html">
-<meta property="og:url" content="http://localhost:4000/wiki/2024/04/29/americanote-server4-automatical-deploy.html">
-<meta property="og:site_name" content="Every Single Day">
-<meta property="og:type" content="article">
-<meta property="article:published_time" content="2024-04-29T00:00:00+09:00">
-<meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="아메리카노트 서버 구성 &lt;4&gt; 자동 배포">
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="아메리카노트 서버 구성 &lt;4&gt; 자동 배포" />
+<meta name="author" content="Dajeong Park" />
+<meta property="og:locale" content="ko" />
+<meta name="description" content="layout: post title: 아메리카노트 서버 구성 &lt;4&gt; 자동 배포 subtitle: categories: wiki tags: [Server, NaverCloudPlatform, Project, Deploy, GithubActions] — 프로젝트를 서버에 배포해봤다면 번거롭다는 생각을 한번쯤 해봤을 것 같습니다. 그래서 이번에는 그 배포를 자동으로 진행해보겠습니다. 자동 배포는 Github Actions의 self-hosted runner를 사용했습니다." />
+<meta property="og:description" content="layout: post title: 아메리카노트 서버 구성 &lt;4&gt; 자동 배포 subtitle: categories: wiki tags: [Server, NaverCloudPlatform, Project, Deploy, GithubActions] — 프로젝트를 서버에 배포해봤다면 번거롭다는 생각을 한번쯤 해봤을 것 같습니다. 그래서 이번에는 그 배포를 자동으로 진행해보겠습니다. 자동 배포는 Github Actions의 self-hosted runner를 사용했습니다." />
+<link rel="canonical" href="http://localhost:4000/wiki/2024/04/29/americanote-server4-automatical-deploy.html" />
+<meta property="og:url" content="http://localhost:4000/wiki/2024/04/29/americanote-server4-automatical-deploy.html" />
+<meta property="og:site_name" content="Every Single Day" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-04-29T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="아메리카노트 서버 구성 &lt;4&gt; 자동 배포" />
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2024-04-29T00:00:00+09:00","datePublished":"2024-04-29T00:00:00+09:00","description":"layout: post title: 아메리카노트 서버 구성 &lt;4&gt; 자동 배포 subtitle: categories: wiki tags: [Server, NaverCloudPlatform, Project, Deploy, GithubActions] — 프로젝트를 서버에 배포해봤다면 번거롭다는 생각을 한번쯤 해봤을 것 같습니다. 그래서 이번에는 그 배포를 자동으로 진행해보겠습니다. 자동 배포는 Github Actions의 self-hosted runner를 사용했습니다.","headline":"아메리카노트 서버 구성 &lt;4&gt; 자동 배포","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2024/04/29/americanote-server4-automatical-deploy.html"},"url":"http://localhost:4000/wiki/2024/04/29/americanote-server4-automatical-deploy.html"}</script>
 <!-- End Jekyll SEO tag -->
@@ -42,7 +39,7 @@
   <link rel="apple-touch-icon" sizes="144x144" href="/assets/favicon.ico/apple-icon-144x144.png">
   <link rel="apple-touch-icon" sizes="152x152" href="/assets/favicon.ico/apple-icon-152x152.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon.ico/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon.ico/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/favicon.ico/android-icon-192x192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon.ico/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon.ico/favicon-16x16.png">
@@ -54,11 +51,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
   <link rel="stylesheet" href="/assets/css/main.css">
-  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Every Single Day">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Every Single Day" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
 <!-- and it's easy to individually load additional languages -->
-<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
 
 
 
@@ -274,30 +272,27 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <header class="site-header " role="banner">
 
   <div class="wrapper">
-    <div class="site-header-inner">
-<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+    <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
   <img class="site-favicon" title="Every Single Day" src="" onerror="this.style.display='none'">
   Every Single Day
 </a>
 </span><nav class="site-nav">
-          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
           <label for="nav-trigger">
             <span class="menu-icon">
-              <svg viewbox="0 0 18 15" width="18px" height="15px">
-                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
               </svg>
             </span>
           </label>
 
-          <div class="trigger">
-<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a>
+          <div class="trigger"><a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a>
 
 
 
 
 </div>
-        </nav>
-</div>
+        </nav></div>
   </div>
 </header>
 
@@ -687,15 +682,12 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
     <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 10 mins</span>
-  </p>
-<div class="post-tags">
-<a class="post-tag" href="/tags.html#Server">#Server</a><a class="post-tag" href="/tags.html#NaverCloudPlatform">#NaverCloudPlatform</a><a class="post-tag" href="/tags.html#Project">#Project</a><a class="post-tag" href="/tags.html#Deploy">#Deploy</a>
-</div></header>
+  </p><div class="post-tags"><a class="post-tag" href="/tags.html#Server">#Server</a><a class="post-tag" href="/tags.html#NaverCloudPlatform">#NaverCloudPlatform</a><a class="post-tag" href="/tags.html#Project">#Project</a><a class="post-tag" href="/tags.html#Deploy">#Deploy</a></div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <hr>
+      <hr />
 <p>layout: post
 title: 아메리카노트 서버 구성 &lt;4&gt; 자동 배포
 subtitle: 
@@ -705,36 +697,31 @@ tags: [Server, NaverCloudPlatform, Project, Deploy, GithubActions]
 <ul>
   <li>프로젝트를 서버에 배포해봤다면 번거롭다는 생각을 한번쯤 해봤을 것 같습니다. 그래서 이번에는 그 배포를 자동으로 진행해보겠습니다.</li>
   <li>자동 배포는 Github Actions의 self-hosted runner를 사용했습니다.
-<br>
-<br>
-</li>
+<br />
+<br /></li>
 </ul>
 
 <h4 id="1-프로젝트-리포지토리에서-github-actions-runner-생성하기">1. 프로젝트 리포지토리에서 Github Actions Runner 생성하기</h4>
 <ul>
   <li>프로젝트 리포지토리로 이동하여 Settings - Actions - Runners - New self-hosted runner 화면으로 이동합니다.
-<img width="1344" alt="github-actions1" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/c576842e-5e21-4301-a477-b84727d1d967">
-<br>
-<br>
-</li>
+<img width="1344" alt="github-actions1" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/c576842e-5e21-4301-a477-b84727d1d967" />
+<br />
+<br /></li>
 </ul>
 
 <h4 id="2-서버에서-명령어-입력하기">2. 서버에서 명령어 입력하기</h4>
 <ul>
   <li>서버에 Github Actions runner를 생성해주는 명령어들로 하나씩 차근차근 입력해 줍니다.</li>
   <li>마지막 명령어 실행 중 <strong>Must not run with sudo</strong> 라는 에러 메시지가 발생하면 <code class="language-plaintext highlighter-rouge">export RUNNER_ALLOW_RUNASROOT="1”</code>를 입력한 뒤 재시도하면 됩니다.
-<img width="788" alt="github-actions2" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/43dad816-a9ed-4eaa-b137-d76272e537b6">
-</li>
+<img width="788" alt="github-actions2" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/43dad816-a9ed-4eaa-b137-d76272e537b6" /></li>
   <li>설치 완료 이후 화면
-<img width="671" alt="github-actions3" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/9bf0bd39-e89e-468b-9755-6debf9c54ac6">
-</li>
+<img width="671" alt="github-actions3" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/9bf0bd39-e89e-468b-9755-6debf9c54ac6" /></li>
   <li>이후 아래 명령어를 입력하면 Github Actions를 수신할 준비가 완료됩니다.
-    <div class="language-bash highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="nb">sudo</span> ./svc.sh <span class="nb">install
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo</span> ./svc.sh <span class="nb">install
 sudo</span> ./svc.sh start
 </code></pre></div>    </div>
-    <p><br>
-<br></p>
+    <p><br />
+<br /></p>
   </li>
 </ul>
 
@@ -809,12 +796,10 @@ on:
 </code></pre></div></div>
 <ul>
   <li>secret yml 파일의 경우 별도로 필요한 yml들을 Base64로 인코딩하여 리포지토리 Settings → Secrets and variables → Actions에서 Repository Secrets로 설정해주었습니다.
-<img width="1340" alt="github-actions4" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/f2771b69-b97f-4255-9e94-6e3c1307921d">
-</li>
+<img width="1340" alt="github-actions4" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/f2771b69-b97f-4255-9e94-6e3c1307921d" /></li>
   <li>또한, Github Actions self-hosted runner에서는 nohup이 적용되지 않아 자꾸 <code class="language-plaintext highlighter-rouge">Unable access to jarfile</code>가 발생하여, 결국 이 부분을 제거했더니 성공적으로 실행되었습니다.
     <ul>
-      <li>
-<del>nohup이 적용되지 않는 부분은 추후 원인을 찾아내면 꼭 작성해두도록 하겠습니다!</del> <strong>방법을 찾아서 추가하겠습니다. 또한 어이없게도 제가 nohup 이후에 설정한 게 없기 때문에 로그를 확인할 수 없어 필요하기도 했습니다..🥲</strong>
+      <li><del>nohup이 적용되지 않는 부분은 추후 원인을 찾아내면 꼭 작성해두도록 하겠습니다!</del> <strong>방법을 찾아서 추가하겠습니다. 또한 어이없게도 제가 nohup 이후에 설정한 게 없기 때문에 로그를 확인할 수 없어 필요하기도 했습니다..🥲</strong>
         <ul>
           <li>nohup의 출력은 프로젝트 내에서 권한 밖이기 때문에 발생한 에러라고 확인이 됩니다. 그래서 프로젝트 밖의 경로로 설정하여 표준 출력과 에러를 구분하여 로그를 전달하는 방식으로 스크립트를 추가했습니다.</li>
         </ul>
@@ -828,8 +813,8 @@ on:
 // 현재
  <span class="nb">sudo nohup </span>java <span class="nt">-jar</span> build/libs/americano-0.0.1-SNAPSHOT.jar 1&gt;/root/nohup/output.log 2&gt;/root/nohup/error.log &amp;
 </code></pre></div></div>
-<p><br>
-<br></p>
+<p><br />
+<br /></p>
 
 <h4 id="참고">참고</h4>
 <ul>
@@ -844,11 +829,21 @@ on:
     </div>
 
 </article>
-<div class="post-nav">
-<a class="previous" href="/wiki/2024/04/29/americanote-server3-deploy-project.html" title="아메리카노트 서버 구성 &lt;3&gt; 프로젝트 배포">아메리카노트 서버 구성 &lt;3&gt; 프로젝트 배포...</a><a class="next" href="/wiki/2024/04/29/americanote-server5-connect-domain-name.html" title="아메리카노트 서버 구성 &lt;5&gt; 도메인 연결">아메리카노트 서버 구성 &lt;5&gt; 도메인 연결...</a>
-</div>
-<div class="post-comments">  <div id="gisqus_thread"></div>
-  <script src="https://giscus.app/client.js" data-repo="dajeongdev/dajeongdev.github.io" data-repo-id="R_kgDOHS7Ikw" data-category="General" data-category-id="DIC_kwDOHS7Ik84Cj70Z" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="ko" crossorigin="anonymous" async>
+<div class="post-nav"><a class="previous" href="/wiki/2024/04/29/americanote-server3-deploy-project.html" title="아메리카노트 서버 구성 &lt;3&gt; 프로젝트 배포">아메리카노트 서버 구성 &lt;3&gt; 프로젝트 배포...</a><a class="next" href="/wiki/2024/04/29/americanote-server5-connect-domain-name.html" title="아메리카노트 서버 구성 &lt;5&gt; 도메인 연결">아메리카노트 서버 구성 &lt;5&gt; 도메인 연결...</a></div><div class="post-comments">  <div id="gisqus_thread"></div>
+  <script src="https://giscus.app/client.js"
+  data-repo="dajeongdev/dajeongdev.github.io"
+  data-repo-id="R_kgDOHS7Ikw"
+  data-category="General"
+  data-category-id="DIC_kwDOHS7Ik84Cj70Z"
+  data-mapping="pathname"
+  data-strict="0"
+  data-reactions-enabled="1"
+  data-emit-metadata="0"
+  data-input-position="bottom"
+  data-theme="preferred_color_scheme"
+  data-lang="ko"
+  crossorigin="anonymous"
+  async>
   let giscusAttributes = {
   src: "https://giscus.app/client.js",
   "data-repo": "da-in/da-in.github.io",
@@ -871,17 +866,11 @@ Object.entries(giscusAttributes).forEach(([key, value]) =>
   giscusScript.setAttribute(key, value)
 );
 document.getElementById("tail-wrapper").appendChild(giscusScript);
-</script>
-</div>
-<div class="post-related">
+</script></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/wiki/2023/11/13/stack.html" title="아메리카노트 서버 구성 &lt;5&gt; 도메인 연결">Stack</a></li>
-<li><a class="post-link" href="/wiki/2024/04/29/americanote-server5-connect-domain-name.html" title="아메리카노트 서버 구성 &lt;5&gt; 도메인 연결">아메리카노트 서버 구성 &lt;5&gt; 도메인 연결</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/n-number-convert.html" title="아메리카노트 서버 구성 &lt;5&gt; 도메인 연결">진수 변환</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/ascii-to-string.html" title="아메리카노트 서버 구성 &lt;5&gt; 도메인 연결">아스키코드 문자 ↔ 숫자</a></li>
-</ul>
-    </div>
+        <li><a class="post-link" href="/wiki/2024/04/29/americanote-server2-create-mysql-database.html" title="아메리카노트 서버 구성 &lt;5&gt; 도메인 연결">아메리카노트 서버 구성 &lt;2&gt; MySQL 데이터베이스 생성</a></li><li><a class="post-link" href="/wiki/2024/04/28/americanote-server1-create-linux-server.html" title="아메리카노트 서버 구성 &lt;5&gt; 도메인 연결">아메리카노트 서버 구성 &lt;1&gt; Linux 서버 생성</a></li><li><a class="post-link" href="/wiki/2024/04/29/americanote-server4-automatical-deploy.html" title="아메리카노트 서버 구성 &lt;5&gt; 도메인 연결">아메리카노트 서버 구성 &lt;4&gt; 자동 배포</a></li><li><a class="post-link" href="/wiki/2023/11/13/prime-number.html" title="아메리카노트 서버 구성 &lt;5&gt; 도메인 연결">자바로 소수 판별</a></li></ul>
+    </div></script>
   </section>
 </div>
 

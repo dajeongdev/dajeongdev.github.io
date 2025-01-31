@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SBCV6PTMNJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-SBCV6PTMNJ');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>QueryDSL에서 FROM 절에 서브쿼리를 넣어보자 (feat. @Subselect) | Every Single Day</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="QueryDSL에서 FROM 절에 서브쿼리를 넣어보자 (feat. @Subselect)" />
+<meta name="author" content="Dajeong Park" />
+<meta property="og:locale" content="ko" />
+<meta name="description" content="현재 진행하는 프로젝트에서 쿠폰 관련 복잡한 쿼리를 작성하던 중이었다. SQL로 먼저 작업을 해보는데 서브쿼리를 from 절에 넣어야 데이터가 제대로 나오는데, QueryDSL에서는 from 절에 서브쿼리를 넣을 수 없었다. 그래서 GPT에게 문의하여 방법을 찾아보니 @Subselect를 사용하면 쿼리를 캡슐화해서 View를 만들어 엔티티처럼 사용하는 방법을 알게 되었다." />
+<meta property="og:description" content="현재 진행하는 프로젝트에서 쿠폰 관련 복잡한 쿼리를 작성하던 중이었다. SQL로 먼저 작업을 해보는데 서브쿼리를 from 절에 넣어야 데이터가 제대로 나오는데, QueryDSL에서는 from 절에 서브쿼리를 넣을 수 없었다. 그래서 GPT에게 문의하여 방법을 찾아보니 @Subselect를 사용하면 쿼리를 캡슐화해서 View를 만들어 엔티티처럼 사용하는 방법을 알게 되었다." />
+<link rel="canonical" href="http://localhost:4000/wiki/2025/01/31/querydsl-subselect.html" />
+<meta property="og:url" content="http://localhost:4000/wiki/2025/01/31/querydsl-subselect.html" />
+<meta property="og:site_name" content="Every Single Day" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-01-31T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="QueryDSL에서 FROM 절에 서브쿼리를 넣어보자 (feat. @Subselect)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2025-01-31T00:00:00+09:00","datePublished":"2025-01-31T00:00:00+09:00","description":"현재 진행하는 프로젝트에서 쿠폰 관련 복잡한 쿼리를 작성하던 중이었다. SQL로 먼저 작업을 해보는데 서브쿼리를 from 절에 넣어야 데이터가 제대로 나오는데, QueryDSL에서는 from 절에 서브쿼리를 넣을 수 없었다. 그래서 GPT에게 문의하여 방법을 찾아보니 @Subselect를 사용하면 쿼리를 캡슐화해서 View를 만들어 엔티티처럼 사용하는 방법을 알게 되었다.","headline":"QueryDSL에서 FROM 절에 서브쿼리를 넣어보자 (feat. @Subselect)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2025/01/31/querydsl-subselect.html"},"url":"http://localhost:4000/wiki/2025/01/31/querydsl-subselect.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon.ico/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/favicon.ico/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/favicon.ico/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/favicon.ico/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/favicon.ico/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/favicon.ico/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/favicon.ico/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/favicon.ico/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon.ico/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/favicon.ico/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon.ico/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon.ico/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="shortcut icon" href="">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Every Single Day" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="Every Single Day" src="" onerror="this.style.display='none'">
+  Every Single Day
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger"><a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a>
+
+
+
+
+</div>
+        </nav></div>
+  </div>
+</header>
+
+<script>
+  (function() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;
+
+      var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  })();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<!--<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+-->
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">QueryDSL에서 FROM 절에 서브쿼리를 넣어보자 (feat. @Subselect)</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2025-01-31T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Jan 31, 2025
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 22 mins</span>
+  </p><div class="post-tags"><a class="post-tag" href="/tags.html#Java">#Java</a><a class="post-tag" href="/tags.html#SpringBoot">#SpringBoot</a><a class="post-tag" href="/tags.html#JPA">#JPA</a><a class="post-tag" href="/tags.html#QueryDSL">#QueryDSL</a><a class="post-tag" href="/tags.html#Subselect">#Subselect</a></div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <p>현재 진행하는 프로젝트에서 쿠폰 관련 복잡한 쿼리를 작성하던 중이었다. SQL로 먼저 작업을 해보는데 서브쿼리를 from 절에 넣어야 데이터가 제대로 나오는데, QueryDSL에서는 from 절에 서브쿼리를 넣을 수 없었다. 그래서 GPT에게 문의하여 방법을 찾아보니 <code class="language-plaintext highlighter-rouge">@Subselect</code>를 사용하면 쿼리를 캡슐화해서 View를 만들어 엔티티처럼 사용하는 방법을 알게 되었다.</p>
+
+<p><img width="743" alt="Image" src="https://github.com/user-attachments/assets/8d09e978-f260-4342-905f-fa789ffb653f" />
+<br />
+<br /></p>
+
+<h3 id="서브쿼리로-사용할-클래스-선언">서브쿼리로 사용할 클래스 선언</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Subselect</span><span class="o">(</span>
+        <span class="s">"select c.id, ROW_NUMBER() OVER (ORDER BY cd.valid_end_date ASC) as rn "</span> <span class="o">+</span>
+                <span class="s">"from coupons c "</span> <span class="o">+</span>
+                <span class="s">"inner join coupon_duration_settings cd on c.id = cd.coupon_id "</span> <span class="o">+</span>
+                <span class="s">"where c.discount_type = 'RATE' "</span> <span class="o">+</span>
+                    <span class="s">"and c.discount_value = ("</span> <span class="o">+</span>
+                        <span class="s">"select max(c2.discount_value) "</span> <span class="o">+</span>
+                        <span class="s">"from coupons c2 "</span> <span class="o">+</span>
+                        <span class="s">"where c2.discount_type = 'RATE'"</span> <span class="o">+</span>
+                    <span class="s">")"</span>
+<span class="o">)</span>
+<span class="nd">@Immutable</span>
+<span class="nd">@Synchronize</span><span class="o">(</span><span class="s">"coupons"</span><span class="o">)</span>
+<span class="nd">@NoArgsConstructor</span>
+<span class="nd">@AllArgsConstructor</span>
+<span class="nd">@Entity</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MaxRateCouponSubDto</span> <span class="o">{</span>
+
+    <span class="nd">@Id</span>
+    <span class="nd">@Column</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"id"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">;</span>
+
+    <span class="nd">@Column</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"rn"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="kt">long</span> <span class="n">rn</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>select문에서 사용한 컬럼명과 필드에 <code class="language-plaintext highlighter-rouge">@Column</code> 애노테이션으로 설정해준 name이 동일해야 찾을 수 있다.</li>
+  <li><code class="language-plaintext highlighter-rouge">@Subselect</code>를 사용한 엔티티는 어떤 특정 엔티티에 종속된 것이 아니기 때문에 <code class="language-plaintext highlighter-rouge">@Immutable</code>을 선언해주어야 하여 불변(<strong>immutable</strong>), 즉 읽기 전용으로 변경 불가함을 선언해야 한다.  <br />
+<img width="1003" alt="Image" src="https://github.com/user-attachments/assets/f033f851-4c23-4c52-b86e-e4f52c9e5f45" /></li>
+  <li>또한, 동시성 문제를 제어하여 데이터의 일관성을 보장하기 위해 <code class="language-plaintext highlighter-rouge">@Sychronize</code>을 사용했다.
+<br />
+<br /></li>
+</ul>
+
+<h3 id="querydsl에서-사용">QueryDSL에서 사용</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">QMaxRateCouponSubDto</span> <span class="n">maxRateCouponSub</span> <span class="o">=</span> <span class="nc">QMaxRateCouponSubDto</span><span class="o">.</span><span class="na">maxRateCouponSubDto</span><span class="o">;</span>
+<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">QMaxAmountCouponSubDto</span> <span class="n">maxAmountCouponSub</span> <span class="o">=</span> <span class="nc">QMaxAmountCouponSubDto</span><span class="o">.</span><span class="na">maxAmountCouponSubDto</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">HotelAndCouponResponse</span><span class="o">&gt;</span> <span class="nf">findHotelAndCoupons</span><span class="o">(</span><span class="nc">HotelSearchConditionDto</span> <span class="n">condition</span><span class="o">)</span> <span class="o">{</span>
+ <span class="nc">BooleanBuilder</span> <span class="n">whereClause</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BooleanBuilder</span><span class="o">();</span>
+ <span class="o">...</span> 
+ <span class="k">return</span> <span class="n">queryFactory</span><span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="nc">Projections</span><span class="o">.</span><span class="na">constructor</span><span class="o">(</span><span class="nc">HotelAndCouponResponse</span><span class="o">.</span><span class="na">class</span><span class="o">,</span>
+                        <span class="n">hotel</span><span class="o">.</span><span class="na">id</span><span class="o">,</span>
+                        <span class="nc">Projections</span><span class="o">.</span><span class="na">constructor</span><span class="o">(</span><span class="nc">CouponDto</span><span class="o">.</span><span class="na">class</span><span class="o">,</span>
+                                <span class="n">rateCouponDuration</span><span class="o">.</span><span class="na">isTimeDeal</span><span class="o">.</span><span class="na">stringValue</span><span class="o">().</span><span class="na">max</span><span class="o">(),</span>
+                                <span class="n">rateCouponDuration</span><span class="o">.</span><span class="na">validStartDate</span><span class="o">.</span><span class="na">max</span><span class="o">(),</span>
+                                <span class="n">rateCouponDuration</span><span class="o">.</span><span class="na">validEndDate</span><span class="o">.</span><span class="na">max</span><span class="o">(),</span>
+                                <span class="n">rateCoupon</span><span class="o">.</span><span class="na">discountType</span><span class="o">.</span><span class="na">max</span><span class="o">(),</span>
+                                <span class="n">rateCoupon</span><span class="o">.</span><span class="na">discountValue</span><span class="o">.</span><span class="na">max</span><span class="o">(),</span>
+                                <span class="n">rateCoupon</span><span class="o">.</span><span class="na">maxDiscountPrice</span><span class="o">.</span><span class="na">max</span><span class="o">()</span>
+                        <span class="o">),</span>
+                        <span class="nc">Projections</span><span class="o">.</span><span class="na">constructor</span><span class="o">(</span><span class="nc">CouponDto</span><span class="o">.</span><span class="na">class</span><span class="o">,</span>
+                                <span class="n">amountCouponDuration</span><span class="o">.</span><span class="na">isTimeDeal</span><span class="o">.</span><span class="na">stringValue</span><span class="o">().</span><span class="na">max</span><span class="o">(),</span>
+                                <span class="n">amountCouponDuration</span><span class="o">.</span><span class="na">validStartDate</span><span class="o">.</span><span class="na">max</span><span class="o">(),</span>
+                                <span class="n">amountCouponDuration</span><span class="o">.</span><span class="na">validEndDate</span><span class="o">.</span><span class="na">max</span><span class="o">(),</span>
+                                <span class="n">amountCoupon</span><span class="o">.</span><span class="na">discountType</span><span class="o">.</span><span class="na">max</span><span class="o">(),</span>
+                                <span class="n">amountCoupon</span><span class="o">.</span><span class="na">discountValue</span><span class="o">.</span><span class="na">max</span><span class="o">(),</span>
+                                <span class="n">amountCoupon</span><span class="o">.</span><span class="na">maxDiscountPrice</span><span class="o">.</span><span class="na">max</span><span class="o">()</span>
+                        <span class="o">)</span>
+                <span class="o">))</span>
+                <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">hotel</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">leftJoin</span><span class="o">(</span><span class="n">couponUsageConditionObject</span><span class="o">).</span><span class="na">on</span><span class="o">(</span><span class="n">couponUsageConditionObject</span><span class="o">.</span><span class="na">hotel</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">hotel</span><span class="o">.</span><span class="na">id</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">leftJoin</span><span class="o">(</span><span class="n">rateCoupon</span><span class="o">).</span><span class="na">on</span><span class="o">(</span><span class="n">rateCoupon</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">couponUsageConditionObject</span><span class="o">.</span><span class="na">coupon</span><span class="o">.</span><span class="na">id</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">and</span><span class="o">(</span><span class="n">rateCoupon</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span>
+                                <span class="nc">JPAExpressions</span><span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="n">maxRateCouponSub</span><span class="o">.</span><span class="na">id</span><span class="o">)</span>
+                                        <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">maxRateCouponSub</span><span class="o">)</span>
+                                        <span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">maxRateCouponSub</span><span class="o">.</span><span class="na">rn</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="mi">1L</span><span class="o">))</span>
+                        <span class="o">)))</span>
+                <span class="o">.</span><span class="na">leftJoin</span><span class="o">(</span><span class="n">rateCouponDuration</span><span class="o">).</span><span class="na">on</span><span class="o">(</span><span class="n">rateCouponDuration</span><span class="o">.</span><span class="na">coupon</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">rateCoupon</span><span class="o">.</span><span class="na">id</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">leftJoin</span><span class="o">(</span><span class="n">amountCoupon</span><span class="o">).</span><span class="na">on</span><span class="o">(</span><span class="n">amountCoupon</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">couponUsageConditionObject</span><span class="o">.</span><span class="na">coupon</span><span class="o">.</span><span class="na">id</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">and</span><span class="o">(</span><span class="n">amountCoupon</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span>
+                                <span class="nc">JPAExpressions</span><span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="n">maxAmountCouponSub</span><span class="o">.</span><span class="na">id</span><span class="o">)</span>
+                                        <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">maxAmountCouponSub</span><span class="o">)</span>
+                                        <span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">maxAmountCouponSub</span><span class="o">.</span><span class="na">rn</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="mi">1L</span><span class="o">))</span>
+                        <span class="o">)))</span>
+                <span class="o">.</span><span class="na">leftJoin</span><span class="o">(</span><span class="n">amountCouponDuration</span><span class="o">).</span><span class="na">on</span><span class="o">(</span><span class="n">amountCouponDuration</span><span class="o">.</span><span class="na">coupon</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">amountCoupon</span><span class="o">.</span><span class="na">id</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">whereClause</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">groupBy</span><span class="o">(</span><span class="n">hotel</span><span class="o">.</span><span class="na">id</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">fetch</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>위에서 생성해준 클래스를 Q클래스로 선언하고, from 절에 넣어 사용하면 <code class="language-plaintext highlighter-rouge">@Subselect</code>에 작성한 코드가 그대로 서브쿼리로 들어간다.</li>
+</ul>
+
+<p><strong>SQL 예시</strong></p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">h</span><span class="p">.</span><span class="n">id</span><span class="p">,</span>
+       <span class="k">MAX</span><span class="p">(</span><span class="n">rcd</span><span class="p">.</span><span class="n">is_time_deal</span><span class="p">),</span>
+       <span class="k">MAX</span><span class="p">(</span><span class="n">rcd</span><span class="p">.</span><span class="n">valid_start_date</span><span class="p">),</span>
+       <span class="k">MAX</span><span class="p">(</span><span class="n">rcd</span><span class="p">.</span><span class="n">valid_end_date</span><span class="p">),</span>
+       <span class="k">MAX</span><span class="p">(</span><span class="n">rc</span><span class="p">.</span><span class="n">discount_type</span><span class="p">),</span>
+       <span class="k">MAX</span><span class="p">(</span><span class="n">rc</span><span class="p">.</span><span class="n">discount_value</span><span class="p">),</span>
+       <span class="k">MAX</span><span class="p">(</span><span class="n">rc</span><span class="p">.</span><span class="n">max_discount_price</span><span class="p">),</span>
+       <span class="k">MAX</span><span class="p">(</span><span class="n">acd</span><span class="p">.</span><span class="n">is_time_deal</span><span class="p">),</span>
+       <span class="k">MAX</span><span class="p">(</span><span class="n">acd</span><span class="p">.</span><span class="n">valid_start_date</span><span class="p">),</span>
+       <span class="k">MAX</span><span class="p">(</span><span class="n">acd</span><span class="p">.</span><span class="n">valid_end_date</span><span class="p">),</span>
+       <span class="k">MAX</span><span class="p">(</span><span class="n">ac</span><span class="p">.</span><span class="n">discount_type</span><span class="p">),</span>
+       <span class="k">MAX</span><span class="p">(</span><span class="n">ac</span><span class="p">.</span><span class="n">discount_value</span><span class="p">),</span>
+       <span class="k">MAX</span><span class="p">(</span><span class="n">ac</span><span class="p">.</span><span class="n">max_discount_price</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">hotels</span> <span class="n">h</span>
+         <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">coupon_usage_conditions</span> <span class="n">cuc</span>
+                   <span class="k">ON</span> <span class="n">cuc</span><span class="p">.</span><span class="n">hotel_id</span> <span class="o">=</span> <span class="n">h</span><span class="p">.</span><span class="n">id</span>
+         <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">rate_coupons</span> <span class="n">rc</span>
+                   <span class="k">ON</span> <span class="n">rc</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">cuc</span><span class="p">.</span><span class="n">coupon_id</span>
+                       <span class="k">AND</span> <span class="n">rc</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="p">(</span>
+                           <span class="k">SELECT</span> <span class="n">mrt</span><span class="p">.</span><span class="n">id</span>
+                           <span class="k">FROM</span> <span class="p">(</span>
+                                    <span class="k">select</span> <span class="k">c</span><span class="p">.</span><span class="n">id</span><span class="p">,</span> <span class="n">ROW_NUMBER</span><span class="p">()</span> <span class="n">OVER</span> <span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">cd</span><span class="p">.</span><span class="n">valid_end_date</span> <span class="k">ASC</span><span class="p">)</span> <span class="k">as</span> <span class="n">rn</span>
+                                    <span class="k">from</span> <span class="n">coupons</span> <span class="k">c</span>
+                                             <span class="k">inner</span> <span class="k">join</span> <span class="n">coupon_duration_settings</span> <span class="n">cd</span> <span class="k">on</span> <span class="k">c</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">cd</span><span class="p">.</span><span class="n">coupon_id</span>
+                                    <span class="k">where</span> <span class="k">c</span><span class="p">.</span><span class="n">discount_type</span> <span class="o">=</span> <span class="s1">'RATE'</span>
+                                      <span class="k">and</span> <span class="k">c</span><span class="p">.</span><span class="n">discount_value</span> <span class="o">=</span> <span class="p">(</span>
+                                        <span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="n">c2</span><span class="p">.</span><span class="n">discount_value</span><span class="p">)</span>
+                                        <span class="k">from</span> <span class="n">coupons</span> <span class="n">c2</span>
+                                        <span class="k">where</span> <span class="n">c2</span><span class="p">.</span><span class="n">discount_type</span> <span class="o">=</span> <span class="s1">'RATE'</span>
+                                    <span class="p">)</span>
+                                <span class="p">)</span> <span class="n">mrt</span>
+                           <span class="k">WHERE</span> <span class="n">mrt</span><span class="p">.</span><span class="n">rn</span> <span class="o">=</span> <span class="mi">1</span>
+                       <span class="p">)</span>
+         <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">rate_coupon_durations</span> <span class="n">rcd</span>
+                   <span class="k">ON</span> <span class="n">rcd</span><span class="p">.</span><span class="n">coupon_id</span> <span class="o">=</span> <span class="n">rc</span><span class="p">.</span><span class="n">id</span>
+         <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">amount_coupons</span> <span class="n">ac</span>
+                   <span class="k">ON</span> <span class="n">ac</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">cuc</span><span class="p">.</span><span class="n">coupon_id</span>
+                       <span class="k">AND</span> <span class="n">ac</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="p">(</span>
+                           <span class="k">SELECT</span> <span class="n">mac</span><span class="p">.</span><span class="n">id</span>
+                           <span class="k">FROM</span> <span class="p">(</span>
+                                    <span class="k">select</span> <span class="n">c3</span><span class="p">.</span><span class="n">id</span><span class="p">,</span> <span class="n">ROW_NUMBER</span><span class="p">()</span> <span class="n">OVER</span> <span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">cd2</span><span class="p">.</span><span class="n">valid_end_date</span> <span class="k">ASC</span><span class="p">)</span> <span class="k">as</span> <span class="n">rn</span>
+                                    <span class="k">from</span> <span class="n">coupons</span> <span class="n">c3</span>
+                                             <span class="k">inner</span> <span class="k">join</span> <span class="n">coupon_duration_settings</span> <span class="n">cd2</span> <span class="k">on</span> <span class="n">c3</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">cd2</span><span class="p">.</span><span class="n">coupon_id</span>
+                                    <span class="k">where</span> <span class="n">c3</span><span class="p">.</span><span class="n">discount_type</span> <span class="o">=</span> <span class="s1">'AMOUNT'</span>
+                                      <span class="k">and</span> <span class="n">c3</span><span class="p">.</span><span class="n">discount_value</span> <span class="o">=</span> <span class="p">(</span>
+                                        <span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="n">c4</span><span class="p">.</span><span class="n">discount_value</span><span class="p">)</span>
+                                        <span class="k">from</span> <span class="n">coupons</span> <span class="n">c4</span>
+                                        <span class="k">where</span> <span class="n">c4</span><span class="p">.</span><span class="n">discount_type</span> <span class="o">=</span> <span class="s1">'AMOUNT'</span>
+                                    <span class="p">)</span>
+                                <span class="p">)</span> <span class="n">mac</span>
+                           <span class="k">WHERE</span> <span class="n">mac</span><span class="p">.</span><span class="n">rn</span> <span class="o">=</span> <span class="mi">1</span>
+                       <span class="p">)</span>
+         <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">amount_coupon_durations</span> <span class="n">acd</span>
+                   <span class="k">ON</span> <span class="n">acd</span><span class="p">.</span><span class="n">coupon_id</span> <span class="o">=</span> <span class="n">ac</span><span class="p">.</span><span class="n">id</span>
+<span class="k">WHERE</span> <span class="n">h</span><span class="p">.</span><span class="n">has_deleted</span> <span class="o">=</span> <span class="k">false</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">h</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+
+</code></pre></div></div>
+<p><br />
+<br /></p>
+
+<h3 id="장점">장점</h3>
+<ul>
+  <li>이렇게 쿠폰처럼 중복으로 여러 곳에서 사용할 경우 하나의 클래스로 두는 것이 가독성이나 유지보수면에서 좋다.</li>
+  <li><strong>읽기 전용(<code class="language-plaintext highlighter-rouge">immutable</code>)</strong>이기 때문에 불필요하게 엔티티를 저장 및 수정하지 않고 데이터의 일관성을 유지할 수 있다.</li>
+  <li>기존 테이블(여기선 coupons)를 변경하지 않고 새로운 엔티티를 정의하여 사용할 수 있다.</li>
+  <li><code class="language-plaintext highlighter-rouge">@Subselect</code>는 서브쿼리를 가상의 엔티티로 매핑하는 방식이므로, ORM이 이를 단순한 조회로 처리하기 때문에 복잡한 조인 쿼리보다 성능이 더 나을 수 있다.
+<br /></li>
+</ul>
+
+<h3 id="단점">단점</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">@Subselect</code> 문 안의 쿼리에 동적으로 쿼리를 추가할 수 없다. (제일 아쉬운 부분)</li>
+  <li>쿼리가 복잡한 경우 <strong>성능 저하</strong>를 유발할 수 있다.</li>
+  <li>View는 실제 데이터가 존재하지 않기 때문에 <strong>조회만 가능</strong>하다.
+<br />
+<br />
+<br /></li>
+</ul>
+
+<p><strong>참고</strong></p>
+<ul>
+  <li><a href="https://www.baeldung.com/hibernate-subselect">@Subselect Annotation in Hibernate</a></li>
+  <li><a href="https://juu-code.tistory.com/49">JPA 에서 From 절에 서브쿼리 쓰기(@Subselect 통해서 view 생성)</a></li>
+</ul>
+
+
+    </div>
+
+</article>
+<div class="post-nav"><a class="previous" href="/blog/2025/01/18/review-2024-and-2025.html" title="작지만 확실한 성장기 - 2024 회고와 2025 목표">작지만 확실한 성장기 - 2024 회고와...</a><span></span></div><div class="post-comments">  <div id="gisqus_thread"></div>
+  <script src="https://giscus.app/client.js"
+  data-repo="dajeongdev/dajeongdev.github.io"
+  data-repo-id="R_kgDOHS7Ikw"
+  data-category="General"
+  data-category-id="DIC_kwDOHS7Ik84Cj70Z"
+  data-mapping="pathname"
+  data-strict="0"
+  data-reactions-enabled="1"
+  data-emit-metadata="0"
+  data-input-position="bottom"
+  data-theme="preferred_color_scheme"
+  data-lang="ko"
+  crossorigin="anonymous"
+  async>
+  let giscusAttributes = {
+  src: "https://giscus.app/client.js",
+  "data-repo": "da-in/da-in.github.io",
+  "data-repo-id": "MDEwOlJlcG9zaXRvcnkzNTM5MDcyOTU=",
+  "data-category": "General",
+  "data-category-id": "DIC_kwDOFRgyX84CSEWg",
+  "data-mapping": "pathname",
+  "data-reactions-enabled": "1",
+  "data-emit-metadata": "0",
+  "data-theme": initTheme,
+  "data-input-position":
+    "bottom",
+  "data-lang": "",
+  crossorigin: "anonymous",
+  async: "",
+};
+
+let giscusScript = document.createElement("script");
+Object.entries(giscusAttributes).forEach(([key, value]) =>
+  giscusScript.setAttribute(key, value)
+);
+document.getElementById("tail-wrapper").appendChild(giscusScript);
+</script></div><div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/wiki/2024/04/29/americanote-server3-deploy-project.html" title="">아메리카노트 서버 구성 &lt;3&gt; 프로젝트 배포</a></li><li><a class="post-link" href="/wiki/2025/01/31/querydsl-subselect.html" title="">QueryDSL에서 FROM 절에 서브쿼리를 넣어보자 (feat. @Subselect)</a></li><li><a class="post-link" href="/wiki/2023/11/13/ascii-to-string.html" title="">아스키코드 문자 ↔ 숫자</a></li><li><a class="post-link" href="/wiki/2023/11/13/fibonacci.html" title="">자바로 피보나치 수열 이해하기</a></li></ul>
+    </div></script>
+  </section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+      <div>Copyright © 2024 @Dajeong Park</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="http://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

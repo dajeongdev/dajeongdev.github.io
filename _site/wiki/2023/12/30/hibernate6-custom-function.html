@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="ko"><head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-SBCV6PTMNJ"></script>
   <script>
@@ -14,22 +12,21 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
-<!-- Begin Jekyll SEO tag v2.8.0 -->
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>hibernate6 custom function(MySQL Dialect) | Every Single Day</title>
-<meta name="generator" content="Jekyll v4.2.2">
-<meta property="og:title" content="hibernate6 custom function(MySQL Dialect)">
-<meta name="author" content="Dajeong Park">
-<meta property="og:locale" content="ko">
-<meta name="description" content="배경 현재 프로젝트에서 QueryDSL을 사용 중인데 여기에 집계함수를 사용하고 싶어서 사용자 함수 추가를 위해 서치 후 적용해보려고 했다. 그런데 이게 웬일.. Spring boot 3점대에서는 hibernate 6.1을 기본으로 사용하고 있어서 당장 올해 3월까지 올라온 블로그 글의 코드도 적용되지 않았다.. 그래서 한시간을 고생해서 적용해보고 고치고 하다가 김영한님 JPA 강의의 커뮤니티에 어떤 친절한 분이 해결방안을 올려주셨다.. 정말 천사,,">
-<meta property="og:description" content="배경 현재 프로젝트에서 QueryDSL을 사용 중인데 여기에 집계함수를 사용하고 싶어서 사용자 함수 추가를 위해 서치 후 적용해보려고 했다. 그런데 이게 웬일.. Spring boot 3점대에서는 hibernate 6.1을 기본으로 사용하고 있어서 당장 올해 3월까지 올라온 블로그 글의 코드도 적용되지 않았다.. 그래서 한시간을 고생해서 적용해보고 고치고 하다가 김영한님 JPA 강의의 커뮤니티에 어떤 친절한 분이 해결방안을 올려주셨다.. 정말 천사,,">
-<link rel="canonical" href="http://localhost:4000/wiki/2023/12/30/hibernate6-custom-function.html">
-<meta property="og:url" content="http://localhost:4000/wiki/2023/12/30/hibernate6-custom-function.html">
-<meta property="og:site_name" content="Every Single Day">
-<meta property="og:type" content="article">
-<meta property="article:published_time" content="2023-12-30T00:00:00+09:00">
-<meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="hibernate6 custom function(MySQL Dialect)">
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="hibernate6 custom function(MySQL Dialect)" />
+<meta name="author" content="Dajeong Park" />
+<meta property="og:locale" content="ko" />
+<meta name="description" content="배경 현재 프로젝트에서 QueryDSL을 사용 중인데 여기에 집계함수를 사용하고 싶어서 사용자 함수 추가를 위해 서치 후 적용해보려고 했다. 그런데 이게 웬일.. Spring boot 3점대에서는 hibernate 6.1을 기본으로 사용하고 있어서 당장 올해 3월까지 올라온 블로그 글의 코드도 적용되지 않았다.. 그래서 한시간을 고생해서 적용해보고 고치고 하다가 김영한님 JPA 강의의 커뮤니티에 어떤 친절한 분이 해결방안을 올려주셨다.. 정말 천사,," />
+<meta property="og:description" content="배경 현재 프로젝트에서 QueryDSL을 사용 중인데 여기에 집계함수를 사용하고 싶어서 사용자 함수 추가를 위해 서치 후 적용해보려고 했다. 그런데 이게 웬일.. Spring boot 3점대에서는 hibernate 6.1을 기본으로 사용하고 있어서 당장 올해 3월까지 올라온 블로그 글의 코드도 적용되지 않았다.. 그래서 한시간을 고생해서 적용해보고 고치고 하다가 김영한님 JPA 강의의 커뮤니티에 어떤 친절한 분이 해결방안을 올려주셨다.. 정말 천사,," />
+<link rel="canonical" href="http://localhost:4000/wiki/2023/12/30/hibernate6-custom-function.html" />
+<meta property="og:url" content="http://localhost:4000/wiki/2023/12/30/hibernate6-custom-function.html" />
+<meta property="og:site_name" content="Every Single Day" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-12-30T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="hibernate6 custom function(MySQL Dialect)" />
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2023-12-30T00:00:00+09:00","datePublished":"2023-12-30T00:00:00+09:00","description":"배경 현재 프로젝트에서 QueryDSL을 사용 중인데 여기에 집계함수를 사용하고 싶어서 사용자 함수 추가를 위해 서치 후 적용해보려고 했다. 그런데 이게 웬일.. Spring boot 3점대에서는 hibernate 6.1을 기본으로 사용하고 있어서 당장 올해 3월까지 올라온 블로그 글의 코드도 적용되지 않았다.. 그래서 한시간을 고생해서 적용해보고 고치고 하다가 김영한님 JPA 강의의 커뮤니티에 어떤 친절한 분이 해결방안을 올려주셨다.. 정말 천사,,","headline":"hibernate6 custom function(MySQL Dialect)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2023/12/30/hibernate6-custom-function.html"},"url":"http://localhost:4000/wiki/2023/12/30/hibernate6-custom-function.html"}</script>
 <!-- End Jekyll SEO tag -->
@@ -42,7 +39,7 @@
   <link rel="apple-touch-icon" sizes="144x144" href="/assets/favicon.ico/apple-icon-144x144.png">
   <link rel="apple-touch-icon" sizes="152x152" href="/assets/favicon.ico/apple-icon-152x152.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon.ico/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon.ico/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/favicon.ico/android-icon-192x192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon.ico/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon.ico/favicon-16x16.png">
@@ -54,11 +51,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
   <link rel="stylesheet" href="/assets/css/main.css">
-  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Every Single Day">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Every Single Day" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
 <!-- and it's easy to individually load additional languages -->
-<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
 
 
 
@@ -274,30 +272,27 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <header class="site-header " role="banner">
 
   <div class="wrapper">
-    <div class="site-header-inner">
-<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+    <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
   <img class="site-favicon" title="Every Single Day" src="" onerror="this.style.display='none'">
   Every Single Day
 </a>
 </span><nav class="site-nav">
-          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
           <label for="nav-trigger">
             <span class="menu-icon">
-              <svg viewbox="0 0 18 15" width="18px" height="15px">
-                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
               </svg>
             </span>
           </label>
 
-          <div class="trigger">
-<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a>
+          <div class="trigger"><a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a>
 
 
 
 
 </div>
-        </nav>
-</div>
+        </nav></div>
   </div>
 </header>
 
@@ -687,10 +682,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
     <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
-  </p>
-<div class="post-tags">
-<a class="post-tag" href="/tags.html#Hibernate6">#Hibernate6</a><a class="post-tag" href="/tags.html#MySQLDialect">#MySQLDialect</a><a class="post-tag" href="/tags.html#SpringBoot3">#SpringBoot3</a><a class="post-tag" href="/tags.html#QueryDSL">#QueryDSL</a><a class="post-tag" href="/tags.html#JPQL">#JPQL</a>
-</div></header>
+  </p><div class="post-tags"><a class="post-tag" href="/tags.html#Hibernate6">#Hibernate6</a><a class="post-tag" href="/tags.html#MySQLDialect">#MySQLDialect</a><a class="post-tag" href="/tags.html#SpringBoot3">#SpringBoot3</a><a class="post-tag" href="/tags.html#QueryDSL">#QueryDSL</a><a class="post-tag" href="/tags.html#JPQL">#JPQL</a></div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
@@ -698,16 +690,15 @@ document.addEventListener('DOMContentLoaded', function(event) {
       <h3 id="배경">배경</h3>
 <p>현재 프로젝트에서 QueryDSL을 사용 중인데 여기에 집계함수를 사용하고 싶어서 사용자 함수 추가를 위해 서치 후 적용해보려고 했다. 그런데 이게 웬일.. Spring boot 3점대에서는 hibernate 6.1을 기본으로 사용하고 있어서 당장 올해 3월까지 올라온 블로그 글의 코드도 적용되지 않았다.. 그래서 한시간을 고생해서 적용해보고 고치고 하다가 김영한님 JPA 강의의 커뮤니티에 어떤 친절한 분이 해결방안을 올려주셨다.. 정말 천사,,</p>
 
-<p><img src="https://dajeongdev.github.io/assets/images/posts/spring-boot-3.2-hibernate-version.png">
+<p><img src="https://dajeongdev.github.io/assets/images/posts/spring-boot-3.2-hibernate-version.png" />
 <a href="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0.0-M4-Release-Notes">https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0.0-M4-Release-Notes</a>
-<br>
-<br></p>
+<br />
+<br /></p>
 
 <h3 id="해결">해결</h3>
 <ol>
   <li>FunctionContributor의 구현체를 만들어준다.
-    <div class="language-java highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomFunctionContributor</span> <span class="kd">implements</span> <span class="nc">FunctionContributor</span> <span class="o">{</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomFunctionContributor</span> <span class="kd">implements</span> <span class="nc">FunctionContributor</span> <span class="o">{</span>
     
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">contributeFunctions</span><span class="o">(</span><span class="nc">FunctionContributions</span> <span class="n">functionContributions</span><span class="o">)</span> <span class="o">{</span>
@@ -722,13 +713,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
     <p>해당 파일에 1번의 구현체를 등록한다.</p>
 
     <ul>
-      <li>
-<code class="language-plaintext highlighter-rouge">패키지명.구현체</code> 이름의 형태로 등록</li>
+      <li><code class="language-plaintext highlighter-rouge">패키지명.구현체</code> 이름의 형태로 등록</li>
       <li>com.example.com.config.~Contributor
       -   yml 파일의 dialect 변경은 필요없음
-<br> <br>
-<br>
-</li>
+<br /> <br />
+<br /></li>
     </ul>
   </li>
 </ol>
@@ -737,33 +726,37 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <ul>
   <li><a href="https://discourse.hibernate.org/t/migrate-hibernate-5-to-6-with-spring-boot-2-7-x-to-3/7787/2">https://discourse.hibernate.org/t/migrate-hibernate-5-to-6-with-spring-boot-2-7-x-to-3/7787/2</a></li>
   <li><a href="https://discourse.hibernate.org/t/migration-of-dialect-to-hibernate-6/6956/16">https://discourse.hibernate.org/t/migration-of-dialect-to-hibernate-6/6956/16</a></li>
-  <li>
-<a href="https://thisiswoo.github.io/development/using-jpa-querydsl-groupconcat-func.html">https://thisiswoo.github.io/development/using-jpa-querydsl-groupconcat-func.html</a>
-<br>
-<br>
-</li>
+  <li><a href="https://thisiswoo.github.io/development/using-jpa-querydsl-groupconcat-func.html">https://thisiswoo.github.io/development/using-jpa-querydsl-groupconcat-func.html</a>
+<br />
+<br /></li>
 </ul>
 
 <p><strong>참고</strong></p>
 <ul>
-  <li>
-<a href="https://www.inflearn.com/questions/1096265/hibernate-6-custom-%ED%95%A8%EC%88%98-%EB%93%B1%EB%A1%9D-%EB%B0%A9%EB%B2%95-%EA%B3%B5%EC%9C%A0"></a><a href="https://www.inflearn.com/questions/1096265/hibernate-6-custom-%ED%95%A8%EC%88%98-%EB%93%B1%EB%A1%9D-%EB%B0%A9%EB%B2%95-%EA%B3%B5%EC%9C%A0">https://www.inflearn.com/questions/1096265/hibernate-6-custom-함수-등록-방법-공유</a>
-</li>
+  <li><a href="https://www.inflearn.com/questions/1096265/hibernate-6-custom-%ED%95%A8%EC%88%98-%EB%93%B1%EB%A1%9D-%EB%B0%A9%EB%B2%95-%EA%B3%B5%EC%9C%A0"></a><a href="https://www.inflearn.com/questions/1096265/hibernate-6-custom-%ED%95%A8%EC%88%98-%EB%93%B1%EB%A1%9D-%EB%B0%A9%EB%B2%95-%EA%B3%B5%EC%9C%A0">https://www.inflearn.com/questions/1096265/hibernate-6-custom-함수-등록-방법-공유</a></li>
   <li><a href="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0.0-M4-Release-Notes">https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0.0-M4-Release-Notes</a></li>
-  <li>
-<a href="https://velog.io/@ttomy/%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%A0%95%EC%9D%98-dialectmatch-against%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0"></a><a href="https://velog.io/@ttomy/%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%A0%95%EC%9D%98-dialectmatch-against%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0">https://velog.io/@ttomy/사용자-정의-dialectmatch-against사용하기</a>
-</li>
+  <li><a href="https://velog.io/@ttomy/%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%A0%95%EC%9D%98-dialectmatch-against%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0"></a><a href="https://velog.io/@ttomy/%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%A0%95%EC%9D%98-dialectmatch-against%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0">https://velog.io/@ttomy/사용자-정의-dialectmatch-against사용하기</a></li>
 </ul>
 
 
     </div>
 
 </article>
-<div class="post-nav">
-<a class="previous" href="/wiki/2023/11/21/list-remove-method.html" title="List에서 원소 삭제하기 remove()">List에서 원소 삭제하기 remove()</a><a class="next" href="/wiki/2024/01/12/jpa-created-date-column-null.html" title="update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법">update 시 @CreatedDate를 붙인 컬럼에 null이...</a>
-</div>
-<div class="post-comments">  <div id="gisqus_thread"></div>
-  <script src="https://giscus.app/client.js" data-repo="dajeongdev/dajeongdev.github.io" data-repo-id="R_kgDOHS7Ikw" data-category="General" data-category-id="DIC_kwDOHS7Ik84Cj70Z" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="ko" crossorigin="anonymous" async>
+<div class="post-nav"><a class="previous" href="/wiki/2023/11/21/list-remove-method.html" title="List에서 원소 삭제하기 remove()">List에서 원소 삭제하기 remove()</a><a class="next" href="/wiki/2024/01/12/jpa-created-date-column-null.html" title="update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법">update 시 @CreatedDate를 붙인 컬럼에 null이...</a></div><div class="post-comments">  <div id="gisqus_thread"></div>
+  <script src="https://giscus.app/client.js"
+  data-repo="dajeongdev/dajeongdev.github.io"
+  data-repo-id="R_kgDOHS7Ikw"
+  data-category="General"
+  data-category-id="DIC_kwDOHS7Ik84Cj70Z"
+  data-mapping="pathname"
+  data-strict="0"
+  data-reactions-enabled="1"
+  data-emit-metadata="0"
+  data-input-position="bottom"
+  data-theme="preferred_color_scheme"
+  data-lang="ko"
+  crossorigin="anonymous"
+  async>
   let giscusAttributes = {
   src: "https://giscus.app/client.js",
   "data-repo": "da-in/da-in.github.io",
@@ -786,17 +779,11 @@ Object.entries(giscusAttributes).forEach(([key, value]) =>
   giscusScript.setAttribute(key, value)
 );
 document.getElementById("tail-wrapper").appendChild(giscusScript);
-</script>
-</div>
-<div class="post-related">
+</script></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/wiki/2024/04/28/americanote-server1-create-linux-server.html" title="update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법">아메리카노트 서버 구성 &lt;1&gt; Linux 서버 생성</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/mybatis-jpa.html" title="update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법">MyBatis와 JPA</a></li>
-<li><a class="post-link" href="/wiki/2024/03/17/string-replacement.html" title="update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법">문자열 대치</a></li>
-<li><a class="post-link" href="/wiki/2023/11/13/intellij-shortcut.html" title="update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법">IntelliJ 단축키 정리</a></li>
-</ul>
-    </div>
+        <li><a class="post-link" href="/wiki/2024/01/17/pathvariable-name-missing.html" title="update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법">SpringBoot 3.2부터 @PathVariable 이름 미지정 시 에러</a></li><li><a class="post-link" href="/wiki/2023/12/30/hibernate6-custom-function.html" title="update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법">hibernate6 custom function(MySQL Dialect)</a></li><li><a class="post-link" href="/wiki/2024/04/29/americanote-server4-automatical-deploy.html" title="update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법">아메리카노트 서버 구성 &lt;4&gt; 자동 배포</a></li><li><a class="post-link" href="/blog/2025/01/18/review-2024-and-2025.html" title="update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법">작지만 확실한 성장기 - 2024 회고와 2025 목표</a></li></ul>
+    </div></script>
   </section>
 </div>
 

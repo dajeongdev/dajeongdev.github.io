@@ -1,7 +1,189 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2025-01-18T14:49:52+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">작지만 확실한 성장기 - 2024 회고와 2025 목표</title><link href="http://localhost:4000/blog/2025/01/18/review-2024-and-2025.html" rel="alternate" type="text/html" title="작지만 확실한 성장기 - 2024 회고와 2025 목표" /><published>2025-01-18T00:00:00+09:00</published><updated>2025-01-18T00:00:00+09:00</updated><id>http://localhost:4000/blog/2025/01/18/review-2024-and-2025</id><content type="html" xml:base="http://localhost:4000/blog/2025/01/18/review-2024-and-2025.html"><![CDATA[<p><img alt="swagger-ui-group-setting" src="https://github.com/user-attachments/assets/bff0e492-715e-4534-a209-03fcacf10494" />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2025-01-31T15:32:12+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">QueryDSL에서 FROM 절에 서브쿼리를 넣어보자 (feat. @Subselect)</title><link href="http://localhost:4000/wiki/2025/01/31/querydsl-subselect.html" rel="alternate" type="text/html" title="QueryDSL에서 FROM 절에 서브쿼리를 넣어보자 (feat. @Subselect)" /><published>2025-01-31T00:00:00+09:00</published><updated>2025-01-31T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2025/01/31/querydsl-subselect</id><content type="html" xml:base="http://localhost:4000/wiki/2025/01/31/querydsl-subselect.html"><![CDATA[<p>현재 진행하는 프로젝트에서 쿠폰 관련 복잡한 쿼리를 작성하던 중이었다. SQL로 먼저 작업을 해보는데 서브쿼리를 from 절에 넣어야 데이터가 제대로 나오는데, QueryDSL에서는 from 절에 서브쿼리를 넣을 수 없었다. 그래서 GPT에게 문의하여 방법을 찾아보니 <code class="language-plaintext highlighter-rouge">@Subselect</code>를 사용하면 쿼리를 캡슐화해서 View를 만들어 엔티티처럼 사용하는 방법을 알게 되었다.</p>
+
+<p><img width="743" alt="Image" src="https://github.com/user-attachments/assets/8d09e978-f260-4342-905f-fa789ffb653f" />
+<br />
 <br /></p>
 
-<p><br /></p>
+<h3 id="서브쿼리로-사용할-클래스-선언">서브쿼리로 사용할 클래스 선언</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Subselect</span><span class="o">(</span>
+        <span class="s">"select c.id, ROW_NUMBER() OVER (ORDER BY cd.valid_end_date ASC) as rn "</span> <span class="o">+</span>
+                <span class="s">"from coupons c "</span> <span class="o">+</span>
+                <span class="s">"inner join coupon_duration_settings cd on c.id = cd.coupon_id "</span> <span class="o">+</span>
+                <span class="s">"where c.discount_type = 'RATE' "</span> <span class="o">+</span>
+                    <span class="s">"and c.discount_value = ("</span> <span class="o">+</span>
+                        <span class="s">"select max(c2.discount_value) "</span> <span class="o">+</span>
+                        <span class="s">"from coupons c2 "</span> <span class="o">+</span>
+                        <span class="s">"where c2.discount_type = 'RATE'"</span> <span class="o">+</span>
+                    <span class="s">")"</span>
+<span class="o">)</span>
+<span class="nd">@Immutable</span>
+<span class="nd">@Synchronize</span><span class="o">(</span><span class="s">"coupons"</span><span class="o">)</span>
+<span class="nd">@NoArgsConstructor</span>
+<span class="nd">@AllArgsConstructor</span>
+<span class="nd">@Entity</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MaxRateCouponSubDto</span> <span class="o">{</span>
+
+    <span class="nd">@Id</span>
+    <span class="nd">@Column</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"id"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">;</span>
+
+    <span class="nd">@Column</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"rn"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="kt">long</span> <span class="n">rn</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>select문에서 사용한 컬럼명과 필드에 <code class="language-plaintext highlighter-rouge">@Column</code> 애노테이션으로 설정해준 name이 동일해야 찾을 수 있다.</li>
+  <li><code class="language-plaintext highlighter-rouge">@Subselect</code>를 사용한 엔티티는 어떤 특정 엔티티에 종속된 것이 아니기 때문에 <code class="language-plaintext highlighter-rouge">@Immutable</code>을 선언해주어야 하여 불변(<strong>immutable</strong>), 즉 읽기 전용으로 변경 불가함을 선언해야 한다.  <br />
+<img width="1003" alt="Image" src="https://github.com/user-attachments/assets/f033f851-4c23-4c52-b86e-e4f52c9e5f45" /></li>
+  <li>또한, 동시성 문제를 제어하여 데이터의 일관성을 보장하기 위해 <code class="language-plaintext highlighter-rouge">@Sychronize</code>을 사용했다.
+<br />
+<br /></li>
+</ul>
+
+<h3 id="querydsl에서-사용">QueryDSL에서 사용</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">QMaxRateCouponSubDto</span> <span class="n">maxRateCouponSub</span> <span class="o">=</span> <span class="nc">QMaxRateCouponSubDto</span><span class="o">.</span><span class="na">maxRateCouponSubDto</span><span class="o">;</span>
+<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">QMaxAmountCouponSubDto</span> <span class="n">maxAmountCouponSub</span> <span class="o">=</span> <span class="nc">QMaxAmountCouponSubDto</span><span class="o">.</span><span class="na">maxAmountCouponSubDto</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">HotelAndCouponResponse</span><span class="o">&gt;</span> <span class="nf">findHotelAndCoupons</span><span class="o">(</span><span class="nc">HotelSearchConditionDto</span> <span class="n">condition</span><span class="o">)</span> <span class="o">{</span>
+ <span class="nc">BooleanBuilder</span> <span class="n">whereClause</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BooleanBuilder</span><span class="o">();</span>
+ <span class="o">...</span> 
+ <span class="k">return</span> <span class="n">queryFactory</span><span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="nc">Projections</span><span class="o">.</span><span class="na">constructor</span><span class="o">(</span><span class="nc">HotelAndCouponResponse</span><span class="o">.</span><span class="na">class</span><span class="o">,</span>
+                        <span class="n">hotel</span><span class="o">.</span><span class="na">id</span><span class="o">,</span>
+                        <span class="nc">Projections</span><span class="o">.</span><span class="na">constructor</span><span class="o">(</span><span class="nc">CouponDto</span><span class="o">.</span><span class="na">class</span><span class="o">,</span>
+                                <span class="n">rateCouponDuration</span><span class="o">.</span><span class="na">isTimeDeal</span><span class="o">.</span><span class="na">stringValue</span><span class="o">().</span><span class="na">max</span><span class="o">(),</span>
+                                <span class="n">rateCouponDuration</span><span class="o">.</span><span class="na">validStartDate</span><span class="o">.</span><span class="na">max</span><span class="o">(),</span>
+                                <span class="n">rateCouponDuration</span><span class="o">.</span><span class="na">validEndDate</span><span class="o">.</span><span class="na">max</span><span class="o">(),</span>
+                                <span class="n">rateCoupon</span><span class="o">.</span><span class="na">discountType</span><span class="o">.</span><span class="na">max</span><span class="o">(),</span>
+                                <span class="n">rateCoupon</span><span class="o">.</span><span class="na">discountValue</span><span class="o">.</span><span class="na">max</span><span class="o">(),</span>
+                                <span class="n">rateCoupon</span><span class="o">.</span><span class="na">maxDiscountPrice</span><span class="o">.</span><span class="na">max</span><span class="o">()</span>
+                        <span class="o">),</span>
+                        <span class="nc">Projections</span><span class="o">.</span><span class="na">constructor</span><span class="o">(</span><span class="nc">CouponDto</span><span class="o">.</span><span class="na">class</span><span class="o">,</span>
+                                <span class="n">amountCouponDuration</span><span class="o">.</span><span class="na">isTimeDeal</span><span class="o">.</span><span class="na">stringValue</span><span class="o">().</span><span class="na">max</span><span class="o">(),</span>
+                                <span class="n">amountCouponDuration</span><span class="o">.</span><span class="na">validStartDate</span><span class="o">.</span><span class="na">max</span><span class="o">(),</span>
+                                <span class="n">amountCouponDuration</span><span class="o">.</span><span class="na">validEndDate</span><span class="o">.</span><span class="na">max</span><span class="o">(),</span>
+                                <span class="n">amountCoupon</span><span class="o">.</span><span class="na">discountType</span><span class="o">.</span><span class="na">max</span><span class="o">(),</span>
+                                <span class="n">amountCoupon</span><span class="o">.</span><span class="na">discountValue</span><span class="o">.</span><span class="na">max</span><span class="o">(),</span>
+                                <span class="n">amountCoupon</span><span class="o">.</span><span class="na">maxDiscountPrice</span><span class="o">.</span><span class="na">max</span><span class="o">()</span>
+                        <span class="o">)</span>
+                <span class="o">))</span>
+                <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">hotel</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">leftJoin</span><span class="o">(</span><span class="n">couponUsageConditionObject</span><span class="o">).</span><span class="na">on</span><span class="o">(</span><span class="n">couponUsageConditionObject</span><span class="o">.</span><span class="na">hotel</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">hotel</span><span class="o">.</span><span class="na">id</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">leftJoin</span><span class="o">(</span><span class="n">rateCoupon</span><span class="o">).</span><span class="na">on</span><span class="o">(</span><span class="n">rateCoupon</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">couponUsageConditionObject</span><span class="o">.</span><span class="na">coupon</span><span class="o">.</span><span class="na">id</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">and</span><span class="o">(</span><span class="n">rateCoupon</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span>
+                                <span class="nc">JPAExpressions</span><span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="n">maxRateCouponSub</span><span class="o">.</span><span class="na">id</span><span class="o">)</span>
+                                        <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">maxRateCouponSub</span><span class="o">)</span>
+                                        <span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">maxRateCouponSub</span><span class="o">.</span><span class="na">rn</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="mi">1L</span><span class="o">))</span>
+                        <span class="o">)))</span>
+                <span class="o">.</span><span class="na">leftJoin</span><span class="o">(</span><span class="n">rateCouponDuration</span><span class="o">).</span><span class="na">on</span><span class="o">(</span><span class="n">rateCouponDuration</span><span class="o">.</span><span class="na">coupon</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">rateCoupon</span><span class="o">.</span><span class="na">id</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">leftJoin</span><span class="o">(</span><span class="n">amountCoupon</span><span class="o">).</span><span class="na">on</span><span class="o">(</span><span class="n">amountCoupon</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">couponUsageConditionObject</span><span class="o">.</span><span class="na">coupon</span><span class="o">.</span><span class="na">id</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">and</span><span class="o">(</span><span class="n">amountCoupon</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span>
+                                <span class="nc">JPAExpressions</span><span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="n">maxAmountCouponSub</span><span class="o">.</span><span class="na">id</span><span class="o">)</span>
+                                        <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">maxAmountCouponSub</span><span class="o">)</span>
+                                        <span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">maxAmountCouponSub</span><span class="o">.</span><span class="na">rn</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="mi">1L</span><span class="o">))</span>
+                        <span class="o">)))</span>
+                <span class="o">.</span><span class="na">leftJoin</span><span class="o">(</span><span class="n">amountCouponDuration</span><span class="o">).</span><span class="na">on</span><span class="o">(</span><span class="n">amountCouponDuration</span><span class="o">.</span><span class="na">coupon</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">amountCoupon</span><span class="o">.</span><span class="na">id</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">whereClause</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">groupBy</span><span class="o">(</span><span class="n">hotel</span><span class="o">.</span><span class="na">id</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">fetch</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>위에서 생성해준 클래스를 Q클래스로 선언하고, from 절에 넣어 사용하면 <code class="language-plaintext highlighter-rouge">@Subselect</code>에 작성한 코드가 그대로 서브쿼리로 들어간다.</li>
+</ul>
+
+<p><strong>SQL 예시</strong></p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">h</span><span class="p">.</span><span class="n">id</span><span class="p">,</span>
+       <span class="k">MAX</span><span class="p">(</span><span class="n">rcd</span><span class="p">.</span><span class="n">is_time_deal</span><span class="p">),</span>
+       <span class="k">MAX</span><span class="p">(</span><span class="n">rcd</span><span class="p">.</span><span class="n">valid_start_date</span><span class="p">),</span>
+       <span class="k">MAX</span><span class="p">(</span><span class="n">rcd</span><span class="p">.</span><span class="n">valid_end_date</span><span class="p">),</span>
+       <span class="k">MAX</span><span class="p">(</span><span class="n">rc</span><span class="p">.</span><span class="n">discount_type</span><span class="p">),</span>
+       <span class="k">MAX</span><span class="p">(</span><span class="n">rc</span><span class="p">.</span><span class="n">discount_value</span><span class="p">),</span>
+       <span class="k">MAX</span><span class="p">(</span><span class="n">rc</span><span class="p">.</span><span class="n">max_discount_price</span><span class="p">),</span>
+       <span class="k">MAX</span><span class="p">(</span><span class="n">acd</span><span class="p">.</span><span class="n">is_time_deal</span><span class="p">),</span>
+       <span class="k">MAX</span><span class="p">(</span><span class="n">acd</span><span class="p">.</span><span class="n">valid_start_date</span><span class="p">),</span>
+       <span class="k">MAX</span><span class="p">(</span><span class="n">acd</span><span class="p">.</span><span class="n">valid_end_date</span><span class="p">),</span>
+       <span class="k">MAX</span><span class="p">(</span><span class="n">ac</span><span class="p">.</span><span class="n">discount_type</span><span class="p">),</span>
+       <span class="k">MAX</span><span class="p">(</span><span class="n">ac</span><span class="p">.</span><span class="n">discount_value</span><span class="p">),</span>
+       <span class="k">MAX</span><span class="p">(</span><span class="n">ac</span><span class="p">.</span><span class="n">max_discount_price</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">hotels</span> <span class="n">h</span>
+         <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">coupon_usage_conditions</span> <span class="n">cuc</span>
+                   <span class="k">ON</span> <span class="n">cuc</span><span class="p">.</span><span class="n">hotel_id</span> <span class="o">=</span> <span class="n">h</span><span class="p">.</span><span class="n">id</span>
+         <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">rate_coupons</span> <span class="n">rc</span>
+                   <span class="k">ON</span> <span class="n">rc</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">cuc</span><span class="p">.</span><span class="n">coupon_id</span>
+                       <span class="k">AND</span> <span class="n">rc</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="p">(</span>
+                           <span class="k">SELECT</span> <span class="n">mrt</span><span class="p">.</span><span class="n">id</span>
+                           <span class="k">FROM</span> <span class="p">(</span>
+                                    <span class="k">select</span> <span class="k">c</span><span class="p">.</span><span class="n">id</span><span class="p">,</span> <span class="n">ROW_NUMBER</span><span class="p">()</span> <span class="n">OVER</span> <span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">cd</span><span class="p">.</span><span class="n">valid_end_date</span> <span class="k">ASC</span><span class="p">)</span> <span class="k">as</span> <span class="n">rn</span>
+                                    <span class="k">from</span> <span class="n">coupons</span> <span class="k">c</span>
+                                             <span class="k">inner</span> <span class="k">join</span> <span class="n">coupon_duration_settings</span> <span class="n">cd</span> <span class="k">on</span> <span class="k">c</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">cd</span><span class="p">.</span><span class="n">coupon_id</span>
+                                    <span class="k">where</span> <span class="k">c</span><span class="p">.</span><span class="n">discount_type</span> <span class="o">=</span> <span class="s1">'RATE'</span>
+                                      <span class="k">and</span> <span class="k">c</span><span class="p">.</span><span class="n">discount_value</span> <span class="o">=</span> <span class="p">(</span>
+                                        <span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="n">c2</span><span class="p">.</span><span class="n">discount_value</span><span class="p">)</span>
+                                        <span class="k">from</span> <span class="n">coupons</span> <span class="n">c2</span>
+                                        <span class="k">where</span> <span class="n">c2</span><span class="p">.</span><span class="n">discount_type</span> <span class="o">=</span> <span class="s1">'RATE'</span>
+                                    <span class="p">)</span>
+                                <span class="p">)</span> <span class="n">mrt</span>
+                           <span class="k">WHERE</span> <span class="n">mrt</span><span class="p">.</span><span class="n">rn</span> <span class="o">=</span> <span class="mi">1</span>
+                       <span class="p">)</span>
+         <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">rate_coupon_durations</span> <span class="n">rcd</span>
+                   <span class="k">ON</span> <span class="n">rcd</span><span class="p">.</span><span class="n">coupon_id</span> <span class="o">=</span> <span class="n">rc</span><span class="p">.</span><span class="n">id</span>
+         <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">amount_coupons</span> <span class="n">ac</span>
+                   <span class="k">ON</span> <span class="n">ac</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">cuc</span><span class="p">.</span><span class="n">coupon_id</span>
+                       <span class="k">AND</span> <span class="n">ac</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="p">(</span>
+                           <span class="k">SELECT</span> <span class="n">mac</span><span class="p">.</span><span class="n">id</span>
+                           <span class="k">FROM</span> <span class="p">(</span>
+                                    <span class="k">select</span> <span class="n">c3</span><span class="p">.</span><span class="n">id</span><span class="p">,</span> <span class="n">ROW_NUMBER</span><span class="p">()</span> <span class="n">OVER</span> <span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">cd2</span><span class="p">.</span><span class="n">valid_end_date</span> <span class="k">ASC</span><span class="p">)</span> <span class="k">as</span> <span class="n">rn</span>
+                                    <span class="k">from</span> <span class="n">coupons</span> <span class="n">c3</span>
+                                             <span class="k">inner</span> <span class="k">join</span> <span class="n">coupon_duration_settings</span> <span class="n">cd2</span> <span class="k">on</span> <span class="n">c3</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">cd2</span><span class="p">.</span><span class="n">coupon_id</span>
+                                    <span class="k">where</span> <span class="n">c3</span><span class="p">.</span><span class="n">discount_type</span> <span class="o">=</span> <span class="s1">'AMOUNT'</span>
+                                      <span class="k">and</span> <span class="n">c3</span><span class="p">.</span><span class="n">discount_value</span> <span class="o">=</span> <span class="p">(</span>
+                                        <span class="k">select</span> <span class="k">max</span><span class="p">(</span><span class="n">c4</span><span class="p">.</span><span class="n">discount_value</span><span class="p">)</span>
+                                        <span class="k">from</span> <span class="n">coupons</span> <span class="n">c4</span>
+                                        <span class="k">where</span> <span class="n">c4</span><span class="p">.</span><span class="n">discount_type</span> <span class="o">=</span> <span class="s1">'AMOUNT'</span>
+                                    <span class="p">)</span>
+                                <span class="p">)</span> <span class="n">mac</span>
+                           <span class="k">WHERE</span> <span class="n">mac</span><span class="p">.</span><span class="n">rn</span> <span class="o">=</span> <span class="mi">1</span>
+                       <span class="p">)</span>
+         <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">amount_coupon_durations</span> <span class="n">acd</span>
+                   <span class="k">ON</span> <span class="n">acd</span><span class="p">.</span><span class="n">coupon_id</span> <span class="o">=</span> <span class="n">ac</span><span class="p">.</span><span class="n">id</span>
+<span class="k">WHERE</span> <span class="n">h</span><span class="p">.</span><span class="n">has_deleted</span> <span class="o">=</span> <span class="k">false</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">h</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+
+</code></pre></div></div>
+<p><br />
+<br /></p>
+
+<h3 id="장점">장점</h3>
+<ul>
+  <li>이렇게 쿠폰처럼 중복으로 여러 곳에서 사용할 경우 하나의 클래스로 두는 것이 가독성이나 유지보수면에서 좋다.</li>
+  <li><strong>읽기 전용(<code class="language-plaintext highlighter-rouge">immutable</code>)</strong>이기 때문에 불필요하게 엔티티를 저장 및 수정하지 않고 데이터의 일관성을 유지할 수 있다.</li>
+  <li>기존 테이블(여기선 coupons)를 변경하지 않고 새로운 엔티티를 정의하여 사용할 수 있다.</li>
+  <li><code class="language-plaintext highlighter-rouge">@Subselect</code>는 서브쿼리를 가상의 엔티티로 매핑하는 방식이므로, ORM이 이를 단순한 조회로 처리하기 때문에 복잡한 조인 쿼리보다 성능이 더 나을 수 있다.
+<br /></li>
+</ul>
+
+<h3 id="단점">단점</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">@Subselect</code> 문 안의 쿼리에 동적으로 쿼리를 추가할 수 없다. (제일 아쉬운 부분)</li>
+  <li>쿼리가 복잡한 경우 <strong>성능 저하</strong>를 유발할 수 있다.</li>
+  <li>View는 실제 데이터가 존재하지 않기 때문에 <strong>조회만 가능</strong>하다.
+<br />
+<br />
+<br /></li>
+</ul>
+
+<p><strong>참고</strong></p>
+<ul>
+  <li><a href="https://www.baeldung.com/hibernate-subselect">@Subselect Annotation in Hibernate</a></li>
+  <li><a href="https://juu-code.tistory.com/49">JPA 에서 From 절에 서브쿼리 쓰기(@Subselect 통해서 view 생성)</a></li>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="SpringBoot" /><category term="JPA" /><category term="QueryDSL" /><category term="Subselect" /><summary type="html"><![CDATA[현재 진행하는 프로젝트에서 쿠폰 관련 복잡한 쿼리를 작성하던 중이었다. SQL로 먼저 작업을 해보는데 서브쿼리를 from 절에 넣어야 데이터가 제대로 나오는데, QueryDSL에서는 from 절에 서브쿼리를 넣을 수 없었다. 그래서 GPT에게 문의하여 방법을 찾아보니 @Subselect를 사용하면 쿼리를 캡슐화해서 View를 만들어 엔티티처럼 사용하는 방법을 알게 되었다.]]></summary></entry><entry><title type="html">작지만 확실한 성장기 - 2024 회고와 2025 목표</title><link href="http://localhost:4000/blog/2025/01/18/review-2024-and-2025.html" rel="alternate" type="text/html" title="작지만 확실한 성장기 - 2024 회고와 2025 목표" /><published>2025-01-18T00:00:00+09:00</published><updated>2025-01-18T00:00:00+09:00</updated><id>http://localhost:4000/blog/2025/01/18/review-2024-and-2025</id><content type="html" xml:base="http://localhost:4000/blog/2025/01/18/review-2024-and-2025.html"><![CDATA[<p><img alt="swagger-ui-group-setting" src="https://github.com/user-attachments/assets/bff0e492-715e-4534-a209-03fcacf10494" />
+<br />
+<br /></p>
 
 <h2 id="2024-회고">2024 회고</h2>
 
@@ -1002,42 +1184,4 @@ QueryDSL에 관련해서는 나도 많이 부족했지만, 실무에서의 경�
 
 <p>입사하면 신입이나 주니어는 보통 세팅된 환경에서만 개발을 하기 때문에 나 또한 전회사에서 기초 설정에 대한 부분을 사수나 다른 팀원들이 해줬었는데, 이번 프로젝트로 Swagger 설정이나 서버, JWT 같은 기본이라고 하면 할 수 있는 중요한 부분을 작업하면서 개발자로서 조금 더 나아가는 느낌을 받았다.</p>
 
-<p>또한, 기획이나 프론트 팀원과도 의사소통하면서 내가 알고 있는 지식을 상대방의 설명하는 게 정말 힘들었기 때문에, 앞으로 의미가 잘 전달될 수 있도록 말을 조금 더 잘 고르고 상대의 입장을 생각해 봐야겠다.</p>]]></content><author><name>Dajeong Park</name></author><category term="blog" /><category term="TeamProject" /><category term="Project" /><category term="Americanote" /><category term="Review" /><summary type="html"><![CDATA[Americanote ☕️ 프로젝트: 아메리카노트 (내 취향에 딱 맞는 아메리카노 카페 찾기 서비스) 프로젝트 기간: 2024.03.21 ~ 2024.03.30, 리팩토링 2024.04]]></summary></entry><entry><title type="html">독서 관리 서비스의 Admin 개발 회고</title><link href="http://localhost:4000/blog/2024/05/10/book-service-admin-review.html" rel="alternate" type="text/html" title="독서 관리 서비스의 Admin 개발 회고" /><published>2024-05-10T00:00:00+09:00</published><updated>2024-05-10T00:00:00+09:00</updated><id>http://localhost:4000/blog/2024/05/10/book-service-admin-review</id><content type="html" xml:base="http://localhost:4000/blog/2024/05/10/book-service-admin-review.html"><![CDATA[<p>홈페이지 마이그레이션, 도서 단행본 API 구현 업무를 마치고 나니 협력사와 아이가 도서를 읽고 독후감을 쓰면 첨삭해주는 서비스를 만들게 됐는데, 당시 일손이 부족해서 내가 관리자를 통으로 담당하게 되었다.
-<br />
-<br /></p>
-
-<p>사수분들께서 바빠서 잘 봐줄 수 없을 것 같다고 하셔서 (ㅎㅎ) 기획서를 받기 전부터 조금 긴장했던 것 같다.
-기초 설정은 차장님께서 해주셔서 Spring Boot 2.4.1 버전에 Maven을 사용한 프로젝트를 생성해주셨고, 홈페이지 마이그레이션 때처럼 Thymeleaf를 사용하기로 했는데, 마이그레이션 때 사용해봐서 걱정은 조금 덜었었다.
-<br />
-<br /></p>
-
-<p>관리자 페이지답게 엑셀 다운로드부터 Push(FCM) 발송, 첨삭 수동 매칭, 첨삭 교사의 라이센스 확인, 관리자 권한 설정 그리고 사용자 통계까지 정말 다양한 기능을 8월 중순부터 1월 초까지 작업했으니 약 5개월동안 정말 열심히 했었다. 그래서 힘들다기보다는 해보지 못했던 기능을 만들어봐서 정말 재미있게 개발했다.
-<br />
-<br /></p>
-
-<p>이번 프로젝트에서는 기획서가 있었는데, 미리 주신 덕분에 보면서 “내가 관리자라면 검색할 때 이 조건을 불편하지 않을까?”라고 관리자의 입장에서 생각해보면서 추가하거나 삭제해도 괜찮을 것 같은 기능들을 정리해서 운영팀 과장님과 상의하면서 작업했더니 확실히 완성도가 올라간다는 느낌이 들었다. 이때부터 기획서나 피그마를 잘 분석해서 의사소통하는 게 팀워크에 좋은 영향을 끼친다고 생각했다.
-<br />
-<br /></p>
-
-<h4 id="프론트단">프론트단</h4>
-<p>관리자 페이지의 프론트 부분을 제대로 작업해본 건 처음이었는데, 디자인에 너무 신경쓰지 않아도 된다고 하셨지만 그래도 어느정도는 깔끔하게 보이고 싶었다.</p>
-
-<p>아무래도 관리자 페이지는 비슷한 페이지들이 많다보니 모달이나 글자수 카운팅, 페이징, 이미지 탭 같은 부분을 공통적으로 사용하는 게 좋을 것 같다고 판단해서 그런 기능들은 컴포넌트화 시켜서 사용하기 시작했다.</p>
-
-<p>그리고 개발 트렌드에 맞게 jQuery 대신 Javascript만 사용하고 싶다는 목표도 세웠기 때문에 작업 중에 드림코딩이나 노마드코더 같은 Javascript 강의를 들어보니 Java랑 조금 다른 부분들이 재미있게 느껴졌다.
-<br />
-<br /></p>
-
-<h4 id="백단">백단</h4>
-<p>백단 작업도 이전 프로젝트보다 더 발전하고 싶다는 생각이 들었다. 김영한님의 Spring 강의를 들으면서 @Autowired 대신 생성자 주입을 위해 @RequiredArgument 사용하는 것처럼 더 나은 코드를 위해 필요한 부분들을 체크해서 실무에 적용해보기도 했다.</p>
-
-<p>백단 부분은 계속 MyBatis를 사용했기 때문에 입사 전에 했던 팀프로젝트 때랑 많이 다르지 않아서 편했지만, 통계나 여러 테이블을 조인하는 과정이 어려웠기 때문에 대리님께 질문도 드리고, 개인적으로도 검색을 통해 많이 배웠다. 최근에는 JPA만 써서 MyBatis도 한 번 제대로 정리해봐야겠다..</p>
-
-<p>그리고 이때 처음으로 프로젝트를 서버에 배포하는 것도 알려주셔서 해봤는데 생각보다 어려워서 공부를 많이 해야겠다고 생각했다. 실서버가 2개라는 것도 차장님이 말씀을 안 해주셔서 막바지에 알게 된 해프닝도 있었다. ㅋㅋ
-<br />
-<br /></p>
-
-<h4 id="소감">소감</h4>
-<p>중간중간 운영팀 과장님과 대리님께 피드백도 받아가면서 프로젝트를 마무리했더니 의사소통도 잘하고 손이 빠르다는 평을 들었다. 새로운 기능도 많이 개발해보고, 프론트단도 처음이지만 이리저리 공부하면서 작업한 부분도 정말 뿌듯했다. 이 프로젝트를 통해서 팀원들과의 의사소통과 사용자 입장에서 개발하는 것의 중요성을 뼈저리게 깨달았다.</p>
-
-<p>그리고 공부해서 바로 실무에 적용해보는 게 정말 재미있기도 했는데, 실제로 다음 프로젝트부터는 VO를 보호하기 위해 DTO와 Builder 패턴을 사용하는 등 김영한님의 강의가 정말 하나하나 피가 되고 살이 되어서 모든 강의를 다 수강해서 열심히 공부하기도 했다.</p>]]></content><author><name>Dajeong Park</name></author><category term="blog" /><category term="Project" /><category term="Admin" /><category term="Review" /><summary type="html"><![CDATA[홈페이지 마이그레이션, 도서 단행본 API 구현 업무를 마치고 나니 협력사와 아이가 도서를 읽고 독후감을 쓰면 첨삭해주는 서비스를 만들게 됐는데, 당시 일손이 부족해서 내가 관리자를 통으로 담당하게 되었다.]]></summary></entry></feed>
+<p>또한, 기획이나 프론트 팀원과도 의사소통하면서 내가 알고 있는 지식을 상대방의 설명하는 게 정말 힘들었기 때문에, 앞으로 의미가 잘 전달될 수 있도록 말을 조금 더 잘 고르고 상대의 입장을 생각해 봐야겠다.</p>]]></content><author><name>Dajeong Park</name></author><category term="blog" /><category term="TeamProject" /><category term="Project" /><category term="Americanote" /><category term="Review" /><summary type="html"><![CDATA[Americanote ☕️ 프로젝트: 아메리카노트 (내 취향에 딱 맞는 아메리카노 카페 찾기 서비스) 프로젝트 기간: 2024.03.21 ~ 2024.03.30, 리팩토링 2024.04]]></summary></entry></feed>
