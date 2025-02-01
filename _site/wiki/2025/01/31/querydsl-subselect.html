@@ -727,8 +727,12 @@ SQL로 먼저 작업을 해보는데 서브쿼리를 from 절에 넣어야 데�
 
 <ul>
   <li>select문에서 사용한 컬럼명과 필드에 <code class="language-plaintext highlighter-rouge">@Column</code> 애노테이션으로 설정해준 name이 동일해야 찾을 수 있다.</li>
-  <li><code class="language-plaintext highlighter-rouge">@Subselect</code>를 사용한 엔티티는 어떤 특정 엔티티에 종속된 것이 아니기 때문에 <code class="language-plaintext highlighter-rouge">@Immutable</code>을 선언해주어야 하여 불변(<strong>immutable</strong>), 즉 읽기 전용으로 변경 불가함을 선언해야 한다.  <br />
+  <li><code class="language-plaintext highlighter-rouge">@Subselect</code>를 사용한 엔티티는 어떤 특정 엔티티에 종속된 것이 아니기 때문에 <code class="language-plaintext highlighter-rouge">@Immutable</code>을 선언해주어야 하여 불변(<strong>immutable</strong>), 즉 읽기 전용으로 변경 불가함을 선언해야 한다.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">@Immutable</code> : 해당 엔티티가 변경되지 않는 데이터임을 Hibernate에게 알려주는 애노테이션으로, 변경 감지를 방지하여 성능을 최적화할 수 있다.  <br />
 <img width="1003" alt="Image" src="https://github.com/user-attachments/assets/f033f851-4c23-4c52-b86e-e4f52c9e5f45" /></li>
+    </ul>
+  </li>
   <li>또한, 동시성 문제를 제어하여 데이터의 일관성을 보장하기 위해 <code class="language-plaintext highlighter-rouge">@Sychronize</code>을 사용했다.
 <br />
 <br /></li>
@@ -869,8 +873,9 @@ SQL로 먼저 작업을 해보는데 서브쿼리를 from 절에 넣어야 데�
 </ul>
 
 <h3 id="insight">insight</h3>
-<p>쿠폰처럼 여러 곳에서 중복으로 사용할 경우 이렇게 @Subselect를 붙인 엔티티를 사용하는 게 유지보수면에서 굉장히 도움이 됐다.
-쿼리도 기존보다 전혀 느리지 않아서 좋았지만, 이런 상황에서 동적 쿼리가 필요하다면 어떻게 해야 하는지 알아볼 필요가 있다.
+<p>이번 작업을 통해 QueryDSL에서 FROM 절의 서브쿼리 문제를 해결하는 다양한 방법을 고민할 수 있었다.
+처음에는 단순히 JPAExpressions로 해결하려 했지만, 쿠폰처럼 여러 곳에서 중복으로 사용할 경우 성능과 유지보수를 고려할 때 이렇게 @Subselect를 붙인 엔티티를 사용하는 게 더 적절하다는 결론을 냈다.
+다행히 쿼리도 기존보다 느려지지 않아서 좋았지만, 이런 상황에서 동적 쿼리가 필요하다면 어떻게 해야 하는지 알아볼 필요가 있다.
 <br />
 <br />
 <br /></p>
@@ -925,7 +930,7 @@ document.getElementById("tail-wrapper").appendChild(giscusScript);
 </script></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/wiki/2024/03/17/string-replacement.html" title="">문자열 대치</a></li><li><a class="post-link" href="/wiki/2024/04/29/americanote-server5-connect-domain-name.html" title="">아메리카노트 서버 구성 &lt;5&gt; 도메인 연결</a></li><li><a class="post-link" href="/wiki/2024/04/29/americanote-server3-deploy-project.html" title="">아메리카노트 서버 구성 &lt;3&gt; 프로젝트 배포</a></li><li><a class="post-link" href="/wiki/2023/11/13/fibonacci.html" title="">자바로 피보나치 수열 이해하기</a></li></ul>
+        <li><a class="post-link" href="/blog/2024/05/16/americanote-review.html" title="">비사이드 403 포텐데이 Americanote 회고</a></li><li><a class="post-link" href="/wiki/2023/11/13/cut-string-method.html" title="">문자열 자르기</a></li><li><a class="post-link" href="/blog/2024/04/19/naver-cloud-review.html" title="">비사이드 포텐데이 403 프로젝트에서 Naver Cloud Platform 사용 후기</a></li><li><a class="post-link" href="/blog/2025/01/18/review-2024-and-2025.html" title="">작지만 확실한 성장기 - 2024 회고와 2025 목표</a></li></ul>
     </div></script>
   </section>
 </div>
