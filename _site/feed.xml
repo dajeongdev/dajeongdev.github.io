@@ -1,4 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2025-01-31T15:32:12+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">QueryDSL에서 FROM 절에 서브쿼리를 넣어보자 (feat. @Subselect)</title><link href="http://localhost:4000/wiki/2025/01/31/querydsl-subselect.html" rel="alternate" type="text/html" title="QueryDSL에서 FROM 절에 서브쿼리를 넣어보자 (feat. @Subselect)" /><published>2025-01-31T00:00:00+09:00</published><updated>2025-01-31T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2025/01/31/querydsl-subselect</id><content type="html" xml:base="http://localhost:4000/wiki/2025/01/31/querydsl-subselect.html"><![CDATA[<p>현재 진행하는 프로젝트에서 쿠폰 관련 복잡한 쿼리를 작성하던 중이었다. SQL로 먼저 작업을 해보는데 서브쿼리를 from 절에 넣어야 데이터가 제대로 나오는데, QueryDSL에서는 from 절에 서브쿼리를 넣을 수 없었다. 그래서 GPT에게 문의하여 방법을 찾아보니 <code class="language-plaintext highlighter-rouge">@Subselect</code>를 사용하면 쿼리를 캡슐화해서 View를 만들어 엔티티처럼 사용하는 방법을 알게 되었다.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2025-02-01T22:42:39+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">QueryDSL에서 FROM 절에 서브쿼리를 넣어보자 (feat. @Subselect)</title><link href="http://localhost:4000/wiki/2025/01/31/querydsl-subselect.html" rel="alternate" type="text/html" title="QueryDSL에서 FROM 절에 서브쿼리를 넣어보자 (feat. @Subselect)" /><published>2025-01-31T00:00:00+09:00</published><updated>2025-01-31T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2025/01/31/querydsl-subselect</id><content type="html" xml:base="http://localhost:4000/wiki/2025/01/31/querydsl-subselect.html"><![CDATA[<p>현재 진행하는 프로젝트에서 쿠폰 관련 복잡한 쿼리를 작성하던 중이었다. 
+SQL로 먼저 작업을 해보는데 서브쿼리를 from 절에 넣어야 데이터가 제대로 나오는데, QueryDSL에서는 from 절에 서브쿼리를 넣을 수 없다는 문제를 있었다.
+그래서 해결 방법을 찾아보다가 <code class="language-plaintext highlighter-rouge">@Subselect</code>라는 Hibernate 기능을 사용하면 쿼리를 캡슐화해서 View를 만들어 엔티티처럼 사용할 수 있다는 걸 알게 되었다.
+그래서 @Subselect를 활용하여 서브쿼리를 효과적으로 사용하는 방법을 공유하려고 한다.</p>
 
 <p><img width="743" alt="Image" src="https://github.com/user-attachments/assets/8d09e978-f260-4342-905f-fa789ffb653f" />
 <br />
@@ -160,7 +163,7 @@
 
 <h3 id="장점">장점</h3>
 <ul>
-  <li>이렇게 쿠폰처럼 중복으로 여러 곳에서 사용할 경우 하나의 클래스로 두는 것이 가독성이나 유지보수면에서 좋다.</li>
+  <li>중복으로 여러 곳에서 사용할 경우 하나의 클래스로 두는 것이 가독성이나 유지보수면에서 좋다.</li>
   <li><strong>읽기 전용(<code class="language-plaintext highlighter-rouge">immutable</code>)</strong>이기 때문에 불필요하게 엔티티를 저장 및 수정하지 않고 데이터의 일관성을 유지할 수 있다.</li>
   <li>기존 테이블(여기선 coupons)를 변경하지 않고 새로운 엔티티를 정의하여 사용할 수 있다.</li>
   <li><code class="language-plaintext highlighter-rouge">@Subselect</code>는 서브쿼리를 가상의 엔티티로 매핑하는 방식이므로, ORM이 이를 단순한 조회로 처리하기 때문에 복잡한 조인 쿼리보다 성능이 더 나을 수 있다.
@@ -173,15 +176,21 @@
   <li>쿼리가 복잡한 경우 <strong>성능 저하</strong>를 유발할 수 있다.</li>
   <li>View는 실제 데이터가 존재하지 않기 때문에 <strong>조회만 가능</strong>하다.
 <br />
-<br />
 <br /></li>
 </ul>
+
+<h3 id="insight">insight</h3>
+<p>쿠폰처럼 여러 곳에서 중복으로 사용할 경우 이렇게 @Subselect를 붙인 엔티티를 사용하는 게 유지보수면에서 굉장히 도움이 됐다.
+쿼리도 기존보다 전혀 느리지 않아서 좋았지만, 이런 상황에서 동적 쿼리가 필요하다면 어떻게 해야 하는지 알아볼 필요가 있다.
+<br />
+<br />
+<br /></p>
 
 <p><strong>참고</strong></p>
 <ul>
   <li><a href="https://www.baeldung.com/hibernate-subselect">@Subselect Annotation in Hibernate</a></li>
   <li><a href="https://juu-code.tistory.com/49">JPA 에서 From 절에 서브쿼리 쓰기(@Subselect 통해서 view 생성)</a></li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="SpringBoot" /><category term="JPA" /><category term="QueryDSL" /><category term="Subselect" /><summary type="html"><![CDATA[현재 진행하는 프로젝트에서 쿠폰 관련 복잡한 쿼리를 작성하던 중이었다. SQL로 먼저 작업을 해보는데 서브쿼리를 from 절에 넣어야 데이터가 제대로 나오는데, QueryDSL에서는 from 절에 서브쿼리를 넣을 수 없었다. 그래서 GPT에게 문의하여 방법을 찾아보니 @Subselect를 사용하면 쿼리를 캡슐화해서 View를 만들어 엔티티처럼 사용하는 방법을 알게 되었다.]]></summary></entry><entry><title type="html">작지만 확실한 성장기 - 2024 회고와 2025 목표</title><link href="http://localhost:4000/blog/2025/01/18/review-2024-and-2025.html" rel="alternate" type="text/html" title="작지만 확실한 성장기 - 2024 회고와 2025 목표" /><published>2025-01-18T00:00:00+09:00</published><updated>2025-01-18T00:00:00+09:00</updated><id>http://localhost:4000/blog/2025/01/18/review-2024-and-2025</id><content type="html" xml:base="http://localhost:4000/blog/2025/01/18/review-2024-and-2025.html"><![CDATA[<p><img alt="swagger-ui-group-setting" src="https://github.com/user-attachments/assets/bff0e492-715e-4534-a209-03fcacf10494" />
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Java" /><category term="SpringBoot" /><category term="JPA" /><category term="QueryDSL" /><category term="Subselect" /><summary type="html"><![CDATA[현재 진행하는 프로젝트에서 쿠폰 관련 복잡한 쿼리를 작성하던 중이었다. SQL로 먼저 작업을 해보는데 서브쿼리를 from 절에 넣어야 데이터가 제대로 나오는데, QueryDSL에서는 from 절에 서브쿼리를 넣을 수 없다는 문제를 있었다. 그래서 해결 방법을 찾아보다가 @Subselect라는 Hibernate 기능을 사용하면 쿼리를 캡슐화해서 View를 만들어 엔티티처럼 사용할 수 있다는 걸 알게 되었다. 그래서 @Subselect를 활용하여 서브쿼리를 효과적으로 사용하는 방법을 공유하려고 한다.]]></summary></entry><entry><title type="html">작지만 확실한 성장기 - 2024 회고와 2025 목표</title><link href="http://localhost:4000/blog/2025/01/18/review-2024-and-2025.html" rel="alternate" type="text/html" title="작지만 확실한 성장기 - 2024 회고와 2025 목표" /><published>2025-01-18T00:00:00+09:00</published><updated>2025-01-18T00:00:00+09:00</updated><id>http://localhost:4000/blog/2025/01/18/review-2024-and-2025</id><content type="html" xml:base="http://localhost:4000/blog/2025/01/18/review-2024-and-2025.html"><![CDATA[<p><img alt="swagger-ui-group-setting" src="https://github.com/user-attachments/assets/bff0e492-715e-4534-a209-03fcacf10494" />
 <br />
 <br /></p>
 
