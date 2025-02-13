@@ -4,6 +4,19 @@
         xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     
     <url>
+        <loc>http://localhost:4000/wiki/2025/02/13/spring-scheduled-annotation.html</loc>
+        
+        <lastmod>2025-02-13T00:00:00+09:00</lastmod>
+        
+        
+        <changefreq>weekly</changefreq>
+        
+        
+        <priority>0.5</priority>
+        
+    </url>
+    
+    <url>
         <loc>http://localhost:4000/wiki/2025/01/31/querydsl-subselect.html</loc>
         
         <lastmod>2025-01-31T00:00:00+09:00</lastmod>

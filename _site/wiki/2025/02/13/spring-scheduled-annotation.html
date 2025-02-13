@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SBCV6PTMNJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-SBCV6PTMNJ');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Spring의 @Scheduled로 간단하게 원하는 시간에 스케줄을 걸어보자 | Every Single Day</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Spring의 @Scheduled로 간단하게 원하는 시간에 스케줄을 걸어보자" />
+<meta name="author" content="Dajeong Park" />
+<meta property="og:locale" content="ko" />
+<meta name="description" content="오늘은 실무에서 자주 사용하는 @Scheduled에 대해서 정리해두려고 한다. 이번 프로젝트에서도 어김없이 @Scheduled를 사용하게 되었는데, 마침 이번에 알게 된 부분까지 추가해서 @Scheduled를 사용하는 방법과 @Scheduled에서 원하는 시간에 스케줄러를 돌릴 때 사용할 수 있는 Cron식까지 알아보자." />
+<meta property="og:description" content="오늘은 실무에서 자주 사용하는 @Scheduled에 대해서 정리해두려고 한다. 이번 프로젝트에서도 어김없이 @Scheduled를 사용하게 되었는데, 마침 이번에 알게 된 부분까지 추가해서 @Scheduled를 사용하는 방법과 @Scheduled에서 원하는 시간에 스케줄러를 돌릴 때 사용할 수 있는 Cron식까지 알아보자." />
+<link rel="canonical" href="http://localhost:4000/wiki/2025/02/13/spring-scheduled-annotation.html" />
+<meta property="og:url" content="http://localhost:4000/wiki/2025/02/13/spring-scheduled-annotation.html" />
+<meta property="og:site_name" content="Every Single Day" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-02-13T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Spring의 @Scheduled로 간단하게 원하는 시간에 스케줄을 걸어보자" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2025-02-13T00:00:00+09:00","datePublished":"2025-02-13T00:00:00+09:00","description":"오늘은 실무에서 자주 사용하는 @Scheduled에 대해서 정리해두려고 한다. 이번 프로젝트에서도 어김없이 @Scheduled를 사용하게 되었는데, 마침 이번에 알게 된 부분까지 추가해서 @Scheduled를 사용하는 방법과 @Scheduled에서 원하는 시간에 스케줄러를 돌릴 때 사용할 수 있는 Cron식까지 알아보자.","headline":"Spring의 @Scheduled로 간단하게 원하는 시간에 스케줄을 걸어보자","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2025/02/13/spring-scheduled-annotation.html"},"url":"http://localhost:4000/wiki/2025/02/13/spring-scheduled-annotation.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon.ico/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/favicon.ico/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/favicon.ico/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/favicon.ico/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/favicon.ico/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/favicon.ico/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/favicon.ico/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/favicon.ico/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon.ico/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/favicon.ico/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon.ico/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon.ico/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="shortcut icon" href="">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Every Single Day" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="Every Single Day" src="" onerror="this.style.display='none'">
+  Every Single Day
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger"><a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a>
+
+
+
+
+</div>
+        </nav></div>
+  </div>
+</header>
+
+<script>
+  (function() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;
+
+      var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  })();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<!--<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+-->
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">Spring의 @Scheduled로 간단하게 원하는 시간에 스케줄을 걸어보자</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2025-02-13T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Feb 13, 2025
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 18 mins</span>
+  </p><div class="post-tags"><a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#Scheduled">#Scheduled</a><a class="post-tag" href="/tags.html#TaskScheduler">#TaskScheduler</a><a class="post-tag" href="/tags.html#Annotation">#Annotation</a></div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <p>오늘은 실무에서 자주 사용하는 <code class="language-plaintext highlighter-rouge">@Scheduled</code>에 대해서 정리해두려고 한다. 이번 프로젝트에서도 어김없이 <code class="language-plaintext highlighter-rouge">@Scheduled</code>를 사용하게 되었는데, 마침 이번에 알게 된 부분까지 추가해서 <code class="language-plaintext highlighter-rouge">@Scheduled</code>를 사용하는 방법과 <code class="language-plaintext highlighter-rouge">@Scheduled</code>에서 원하는 시간에 스케줄러를 돌릴 때 사용할 수 있는 Cron식까지 알아보자.
+<br />
+<br /></p>
+
+<h2 id="scheduled">@Scheduled</h2>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">@Scheduled</code>는 Spring에서 제공하는 스케줄링 어노테이션으로, 특정 작업을 일정한 주기로 자동 실행할 수 있도록 도와준다.</li>
+  <li>알림 전송, 배치 작업, 데이터 백업 등의 주기적인 작업을 수행해야 할 때 사용할 수 있다.
+<br /></li>
+</ul>
+
+<h3 id="scheduled-설정">@Scheduled 설정</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@EnableScheduling</span>
+<span class="nd">@SpringBootApplication</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SchedulerApplication</span> <span class="o">{</span> 
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>        
+		<span class="nc">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="nc">DemoApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>    
+	<span class="o">}</span> 
+<span class="o">}</span>
+
+</code></pre></div></div>
+<ul>
+  <li>먼저 Application 클래스 main() 메소드에 <code class="language-plaintext highlighter-rouge">@EnableScheduling</code> 어노테이션을 설정해준다. (Config 클래스를 만들어서 지정하는 것도 가능하다.)
+<br /></li>
+</ul>
+
+<h3 id="scheduled-사용법">@Scheduled 사용법</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SchedulerService</span> <span class="o">{</span>
+	<span class="nd">@Scheduled</span><span class="o">(</span><span class="n">fixedDelay</span> <span class="o">=</span> <span class="mi">1000</span><span class="o">)</span> <span class="c1">// 1초마다 실행</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hello Cron!"</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>그러면 이제 메소드에는 <code class="language-plaintext highlighter-rouge">@Scheduled</code> 어노테이션을 붙여 바로 사용할 수 있는데, 주의해야 할 점은 <code class="language-plaintext highlighter-rouge">@Scheduled</code>를 사용할 클래스가 스프링 빈에 등록된 클래스여야 한다는 것이다.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">@Component</code>, <code class="language-plaintext highlighter-rouge">@Service</code> 등
+<br /></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="scheduled-메소드-규칙">@Scheduled 메소드 규칙</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">@Scheduled</code>를 사용하는 메소드는 아래 두 규칙을 지켜야 한다.
+    <ol>
+      <li>void 리턴 타입</li>
+      <li>매개변수 사용 불가
+<br />
+<br /></li>
+    </ol>
+  </li>
+</ul>
+
+<h2 id="scheduled-속성">@Scheduled 속성</h2>
+
+<h3 id="fixeddelay">fixedDelay</h3>
+<ul>
+  <li>이전 Task의 종료 시점부터 정의된 시간만큼 지난 후 Task 실행 (단위: milliseconds)</li>
+  <li>(작업 수행 시간을 포함하여) <strong>작업을 마친 후부터</strong> 일정 주기마다 메소드 호출</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Scheduled</span><span class="o">(</span><span class="n">fixedDelay</span> <span class="o">=</span> <span class="mi">5000</span><span class="o">)</span> <span class="c1">// 5초마다 실행</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">fixedDelaySchedule</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"FixedDelay Task = {}"</span><span class="o">,</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">());</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">0</span><span class="n">초</span> <span class="o">-&gt;</span> <span class="n">실행</span> <span class="o">(</span><span class="mi">3</span><span class="n">초</span> <span class="n">걸림</span><span class="o">,</span> <span class="mi">5</span><span class="n">초</span> <span class="n">대기</span><span class="o">)</span>
+<span class="mi">8</span><span class="n">초</span> <span class="o">-&gt;</span> <span class="n">실행</span> <span class="o">(</span><span class="mi">3</span><span class="n">초</span> <span class="n">걸림</span><span class="o">,</span> <span class="mi">5</span><span class="n">초</span> <span class="n">대기</span><span class="o">)</span>
+<span class="mi">13</span><span class="n">초</span> <span class="o">-&gt;</span> <span class="n">실행</span>
+</code></pre></div></div>
+
+<h3 id="fixedrate">fixedRate</h3>
+<ul>
+  <li>이전 Task의 시작 시점으로부터 정의된 시간만큼 지난 후 Task 실행 (단위: milliseconds)</li>
+  <li><strong>작업 수행시간과 상관없이</strong> 일정 주기마다 메소드 호출</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Scheduled</span><span class="o">(</span><span class="n">fixedRate</span> <span class="o">=</span> <span class="mi">5000</span><span class="o">)</span> <span class="c1">// 5초마다 실행</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">fixedRateSchedule</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"FixedRate Task = {}"</span><span class="o">,</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">());</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">0</span><span class="n">초</span> <span class="o">-&gt;</span> <span class="n">실행</span> <span class="o">(</span><span class="mi">3</span><span class="n">초</span> <span class="n">걸림</span><span class="o">)</span>
+<span class="mi">5</span><span class="n">초</span> <span class="o">-&gt;</span> <span class="n">실행</span> <span class="o">(</span><span class="mi">3</span><span class="n">초</span> <span class="n">걸림</span><span class="o">)</span>
+<span class="mi">10</span><span class="n">초</span> <span class="o">-&gt;</span> <span class="n">실행</span>
+</code></pre></div></div>
+
+<h3 id="initialdelay">initialDelay</h3>
+<ul>
+  <li>애플리케이션 시작 후 초기 지연시간 설정</li>
+  <li>서버가 시작되자마자 실행되는 것을 방지</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Scheduled</span><span class="o">(</span><span class="n">fixedRate</span> <span class="o">=</span> <span class="mi">5000</span><span class="o">,</span> <span class="n">initialDelay</span> <span class="o">=</span> <span class="mi">10000</span><span class="o">)</span> <span class="c1">// 5초마다 실행, 초기 10초 대기</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">initialDelaySchedule</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"InitialDelay Task = {}"</span><span class="o">,</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">());</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">앱</span> <span class="n">시작</span> <span class="o">-&gt;</span> <span class="mi">10</span><span class="n">초</span> <span class="n">대기</span>
+<span class="mi">10</span><span class="n">초</span> <span class="o">-&gt;</span> <span class="n">실행</span>
+<span class="mi">15</span><span class="n">초</span> <span class="o">-&gt;</span> <span class="n">실행</span>
+<span class="mi">20</span><span class="n">초</span> <span class="o">-&gt;</span> <span class="n">실행</span>
+</code></pre></div></div>
+<p><br />
+<br /></p>
+
+<h2 id="cron">Cron</h2>
+<ul>
+  <li>일정한 주기가 아니라 특정 시간에 작업을 실행하고 싶다면 cron 속성에 Cron식을 사용하면 된다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Scheduled</span><span class="o">(</span><span class="n">cron</span> <span class="o">=</span> <span class="s">"0 0 10 * * *"</span><span class="o">)</span> <span class="c1">// 매일 오전 10시 실행</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">cronSchedule</span><span class="o">()</span> <span class="o">{</span>
+	<span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"Cron Task = {}"</span><span class="o">,</span> <span class="nc">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">());</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="순서">순서</h3>
+<p>1.초(0-59)
+2.분(0-59)
+3.시간(0-23)
+4.일(1-31)
+5.월(1-12)
+6.요일(0-6) (0:일, … 6: 토)</p>
+
+<h3 id="표현">표현</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>표현</th>
+      <th>설명</th>
+      <th>예시</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>*</td>
+      <td>모든 조건 (매시, 매일, 매주처럼 사용)</td>
+      <td>0 0 18 * * * -&gt; 매일 18시</td>
+    </tr>
+    <tr>
+      <td>?</td>
+      <td>설정값 없음 (날짜, 요일에서만 사용 가능)</td>
+      <td>0 0 14 10,20 * ? -&gt; 매달 10일, 20일 14시</td>
+    </tr>
+    <tr>
+      <td>-</td>
+      <td>범위 지정</td>
+      <td>0 0/5 9-18 * * * -&gt; 매일 9시0분에서18시55분 사이에 5분 간격</td>
+    </tr>
+    <tr>
+      <td>,</td>
+      <td>여러 값 지정</td>
+      <td>0 0 14 10,20 * ? -&gt; 매달 10일, 20일 14시</td>
+    </tr>
+    <tr>
+      <td>/</td>
+      <td>증분값, 즉 초기값과 증가치 설정에 사용</td>
+      <td>0 0 0/1 * * * -&gt; 1시간마다</td>
+    </tr>
+    <tr>
+      <td>L</td>
+      <td>마지막 - 지정할 수 있는 범위의 마지막 값 설정 시 사용 (날짜, 요일에서만 사용 가능)</td>
+      <td>0 30 10 ? * 6L -&gt; 매달 마지막 토요일 10시 30분마다</td>
+    </tr>
+    <tr>
+      <td>W</td>
+      <td>가장 가까운 평일(weekday) 설정</td>
+      <td>10W -&gt; 10일이 평일이면 10일, 주말이면 가까운 평일에 실행</td>
+    </tr>
+    <tr>
+      <td>#</td>
+      <td>N번째 주 특정 요일 설정 (요일에서만 사용 가능)</td>
+      <td>4#2 → 목요일#둘째주에 실행</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong><code class="language-plaintext highlighter-rouge">*</code>와 <code class="language-plaintext highlighter-rouge">?</code>의 차이</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">?</code>는 특정 값을 지정하지 않음을 의미하는데, <code class="language-plaintext highlighter-rouge">*</code>와 헷갈릴 수 있다.</li>
+  <li>예를 들어 <code class="language-plaintext highlighter-rouge">“0 0 12 * * ?”</code>는 매일 12시에 실행하지만, <code class="language-plaintext highlighter-rouge">“0 0 12 * * *”</code>는 매일 12시에 실행하면서 요일도 모든 값에 해당된다는 차이점이 있다.
+<br /></li>
+</ul>
+
+<h3 id="zone">zone</h3>
+<ul>
+  <li>cron 표현식에서 사용할 time zone (default: Local time zone)</li>
+  <li>서버의 기본 시간대에 의존하면 배포 환경마다 실행 시간이 다를 수 있으므로 zone으로 명확하게 지정해주는 것이 좋다.
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Scheduled</span><span class="o">(</span><span class="n">cron</span> <span class="o">=</span> <span class="err">“</span><span class="mi">0</span> <span class="mi">0</span> <span class="mi">12</span> <span class="o">*</span> <span class="o">*</span> <span class="o">?</span><span class="err">”</span><span class="o">,</span> <span class="n">zone</span> <span class="o">=</span> <span class="s">"Asia/Seoul"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">seoulTimeZoneTask</span><span class="o">()</span> <span class="o">{</span>
+  <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"한국 시간 기준 12시 실행"</span><span class="o">);</span>
+<span class="o">}</span>    
+</code></pre></div>    </div>
+    <p><br />
+<br /></p>
+  </li>
+</ul>
+
+<h2 id="trouble-shooting-">Trouble Shooting 💫</h2>
+
+<h3 id="같은-시간에-두-개의-스케줄러를-설정했는데-왜-하나만-실행될까">같은 시간에 두 개의 스케줄러를 설정했는데 왜 하나만 실행될까❓🤔</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">@Scheduled</code>는 기본적으로 <strong>싱글 스레드</strong>에서 실행되므로, 여러 개의 스케줄러를 동시에 실행하려면 application.yml이나 Config 클래스를 사용하여 스레드 풀을 2개 이상으로 설정해야 한다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nl">task:</span>
+    <span class="nl">scheduling:</span>
+      <span class="nl">pool:</span>
+        <span class="nl">size:</span> <span class="mi">5</span>
+</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TaskSchedulerConfig</span> <span class="o">{</span>
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">TaskScheduler</span> <span class="nf">taskScheduler</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">ThreadPoolTaskScheduler</span> <span class="n">scheduler</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ThreadPoolTaskScheduler</span><span class="o">();</span>
+        <span class="n">scheduler</span><span class="o">.</span><span class="na">setPoolSize</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
+        <span class="n">scheduler</span><span class="o">.</span><span class="na">initialize</span><span class="o">();</span>
+        <span class="k">return</span> <span class="n">scheduler</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="시간마다-말고-한-번만-스케줄러를-실행시킬-수는-없나">시간마다 말고 한 번만 스케줄러를 실행시킬 수는 없나❓🤔</h3>
+<ul>
+  <li>한 번만 실행되는 스케줄링 작업은 여러 가지가 있지만, 스프링을 사용하고 있다면 TaskScheduler 인터페이스를 구현한 ThreadPoolTaskScheduler를 사용해볼 수 있다.</li>
+  <li><code class="language-plaintext highlighter-rouge">@Scheduled</code>처럼 설정만 해주면 멀티 스레드가 가능하고, 대량의 작업을 처리할 수 있다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">OneTimeTaskSchedulerService</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">ThreadPoolTaskScheduler</span> <span class="n">taskScheduler</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">OneTimeTaskSchedulerService</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">taskScheduler</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ThreadPoolTaskScheduler</span><span class="o">();</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">taskScheduler</span><span class="o">.</span><span class="na">initialize</span><span class="o">();</span> <span class="c1">// 초기화 필수</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">scheduleOneTimeTask</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">taskScheduler</span><span class="o">.</span><span class="na">schedule</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"10분 후 실행되는 작업 실행됨! "</span> <span class="o">+</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">());</span>
+            <span class="c1">// 실행할 로직 추가</span>
+        <span class="o">},</span> <span class="nc">Instant</span><span class="o">.</span><span class="na">now</span><span class="o">().</span><span class="na">plusSeconds</span><span class="o">(</span><span class="mi">600</span><span class="o">));</span> <span class="c1">// 현재 시간 기준 600초(10분) 후 실행</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>위에서처럼 Config 클래스로 <code class="language-plaintext highlighter-rouge">@Bean</code> 등록을 해준다면 생성자에서 초기화할 필요 없어 코드도 간결하고, 여러 곳에서 사용할 수 있어 더 편리하다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RequiredArgsConstructor</span>
+<span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">OneTimeTaskSchedulerService</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">TaskScheduler</span> <span class="n">taskScheduler</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">scheduleOneTimeTask</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">taskScheduler</span><span class="o">.</span><span class="na">schedule</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"예약된 작업이 실행되었습니다! "</span> <span class="o">+</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">());</span>
+            <span class="c1">// 실행할 로직 추가</span>
+        <span class="o">},</span> <span class="nc">Instant</span><span class="o">.</span><span class="na">now</span><span class="o">().</span><span class="na">plusSeconds</span><span class="o">(</span><span class="mi">600</span><span class="o">));</span> <span class="c1">// 현재 시간 기준 600초(10분) 후 실행</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p><br />
+<br /></p>
+
+<p><strong>참고</strong></p>
+<ul>
+  <li><a href="https://spring.io/guides/gs/scheduling-tasks">Spring 공식 가이드</a></li>
+  <li><a href="https://dev-coco.tistory.com/176">https://dev-coco.tistory.com/176</a></li>
+  <li><a href="https://data-make.tistory.com/699">https://data-make.tistory.com/699</a></li>
+  <li><a href="https://chatgpt.com/c/67ac8d2b-83d0-8003-98ec-3ffc372b8437">https://chatgpt.com/c/67ac8d2b-83d0-8003-98ec-3ffc372b8437</a></li>
+</ul>
+
+
+    </div>
+
+</article>
+<div class="post-nav"><a class="previous" href="/wiki/2025/01/31/querydsl-subselect.html" title="QueryDSL에서 FROM 절에 서브쿼리를 넣어보자 (feat. @Subselect)">QueryDSL에서 FROM 절에 서브쿼리를 넣어보자 (feat....</a><span></span></div><div class="post-comments">  <div id="gisqus_thread"></div>
+  <script src="https://giscus.app/client.js"
+  data-repo="dajeongdev/dajeongdev.github.io"
+  data-repo-id="R_kgDOHS7Ikw"
+  data-category="General"
+  data-category-id="DIC_kwDOHS7Ik84Cj70Z"
+  data-mapping="pathname"
+  data-strict="0"
+  data-reactions-enabled="1"
+  data-emit-metadata="0"
+  data-input-position="bottom"
+  data-theme="preferred_color_scheme"
+  data-lang="ko"
+  crossorigin="anonymous"
+  async>
+  let giscusAttributes = {
+  src: "https://giscus.app/client.js",
+  "data-repo": "da-in/da-in.github.io",
+  "data-repo-id": "MDEwOlJlcG9zaXRvcnkzNTM5MDcyOTU=",
+  "data-category": "General",
+  "data-category-id": "DIC_kwDOFRgyX84CSEWg",
+  "data-mapping": "pathname",
+  "data-reactions-enabled": "1",
+  "data-emit-metadata": "0",
+  "data-theme": initTheme,
+  "data-input-position":
+    "bottom",
+  "data-lang": "",
+  crossorigin: "anonymous",
+  async: "",
+};
+
+let giscusScript = document.createElement("script");
+Object.entries(giscusAttributes).forEach(([key, value]) =>
+  giscusScript.setAttribute(key, value)
+);
+document.getElementById("tail-wrapper").appendChild(giscusScript);
+</script></div><div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/wiki/2023/11/13/prg-pattern.html" title="">PRG 패턴과 RedirectAttributes</a></li><li><a class="post-link" href="/wiki/2024/12/23/spring-swagger.html" title="">API 문서 자동화로 시간 절약하기 (feat.Swagger)</a></li><li><a class="post-link" href="/wiki/2023/11/13/windows-command.html" title="">Windows 명령어</a></li><li><a class="post-link" href="/wiki/2024/03/05/queue.html" title="">Queue</a></li></ul>
+    </div></script>
+  </section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+      <div>Copyright © 2024 @Dajeong Park</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="http://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
