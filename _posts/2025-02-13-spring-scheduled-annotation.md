@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spring의 @Scheduled로 간단하게 원하는 시간에 스케줄을 걸어보자
+title: Spring @Scheduled로 간단하게 원하는 시간에 스케줄을 등록해보자
 categories: wiki
 subtitle: 
 tags: [Spring, Scheduled, TaskScheduler, Annotation]
