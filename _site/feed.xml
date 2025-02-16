@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2025-02-13T23:27:00+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">Spring의 @Scheduled로 간단하게 원하는 시간에 스케줄을 걸어보자</title><link href="http://localhost:4000/wiki/2025/02/13/spring-scheduled-annotation.html" rel="alternate" type="text/html" title="Spring의 @Scheduled로 간단하게 원하는 시간에 스케줄을 걸어보자" /><published>2025-02-13T00:00:00+09:00</published><updated>2025-02-13T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2025/02/13/spring-scheduled-annotation</id><content type="html" xml:base="http://localhost:4000/wiki/2025/02/13/spring-scheduled-annotation.html"><![CDATA[<p>오늘은 실무에서 자주 사용하는 <code class="language-plaintext highlighter-rouge">@Scheduled</code>에 대해서 정리해두려고 한다. 이번 프로젝트에서도 어김없이 <code class="language-plaintext highlighter-rouge">@Scheduled</code>를 사용하게 되었는데, 마침 이번에 알게 된 부분까지 추가해서 <code class="language-plaintext highlighter-rouge">@Scheduled</code>를 사용하는 방법과 <code class="language-plaintext highlighter-rouge">@Scheduled</code>에서 원하는 시간에 스케줄러를 돌릴 때 사용할 수 있는 Cron식까지 알아보자.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2025-02-16T21:19:16+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">Spring @Scheduled로 간단하게 원하는 시간에 스케줄을 등록해보자</title><link href="http://localhost:4000/wiki/2025/02/13/spring-scheduled-annotation.html" rel="alternate" type="text/html" title="Spring @Scheduled로 간단하게 원하는 시간에 스케줄을 등록해보자" /><published>2025-02-13T00:00:00+09:00</published><updated>2025-02-13T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2025/02/13/spring-scheduled-annotation</id><content type="html" xml:base="http://localhost:4000/wiki/2025/02/13/spring-scheduled-annotation.html"><![CDATA[<p>오늘은 실무에서 자주 사용하는 <code class="language-plaintext highlighter-rouge">@Scheduled</code>에 대해서 정리해두려고 한다. 이번 프로젝트에서도 어김없이 <code class="language-plaintext highlighter-rouge">@Scheduled</code>를 사용하게 되었는데, 마침 이번에 알게 된 부분까지 추가해서 <code class="language-plaintext highlighter-rouge">@Scheduled</code>를 사용하는 방법과 <code class="language-plaintext highlighter-rouge">@Scheduled</code>에서 원하는 시간에 스케줄러를 돌릴 때 사용할 수 있는 Cron식까지 알아보자.
 <br />
 <br /></p>
 
@@ -551,6 +551,19 @@ SQL로 먼저 작업을 해보는데 서브쿼리를 from 절에 넣어야 데�
 <hr />
 
 <h3 id="ing">~ing</h3>
+
+<p><strong>2025.02.16</strong> 한 달만에 와버렸다 😢</p>
+<ul>
+  <li>아플 때 빼고 주 4회 운동 🫶</li>
+  <li>개발 역량을 위해 잇츠 스터디 시작 (오늘 첫 공식 모임!)</li>
+  <li>트러블 슈팅을 나름 꼬박꼬박 하고 있지만 조금 더 자주 쓰자</li>
+</ul>
+
+<p><strong>TODO</strong></p>
+<ul>
+  <li>2월에 테스트코드 강의 끝내기</li>
+  <li>이번주에 질투라는 감옥 완독하기</li>
+</ul>
 
 <p><strong>2025.01.18</strong></p>
 <ul>
