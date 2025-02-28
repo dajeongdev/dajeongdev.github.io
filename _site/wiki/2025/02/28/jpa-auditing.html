@@ -13,22 +13,22 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법 | Every Single Day</title>
+<title>JPA Auditing으로 엔티티 변경 이력 관리하기 | Every Single Day</title>
 <meta name="generator" content="Jekyll v3.9.5" />
-<meta property="og:title" content="update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법" />
+<meta property="og:title" content="JPA Auditing으로 엔티티 변경 이력 관리하기" />
 <meta name="author" content="Dajeong Park" />
 <meta property="og:locale" content="ko" />
-<meta name="description" content="배경 update문의 결과를 확인하는데 생성일 컬럼이 null로 update 되는 문제를 발견했다." />
-<meta property="og:description" content="배경 update문의 결과를 확인하는데 생성일 컬럼이 null로 update 되는 문제를 발견했다." />
-<link rel="canonical" href="http://localhost:4000/wiki/2024/01/12/jpa-created-date-column-null.html" />
-<meta property="og:url" content="http://localhost:4000/wiki/2024/01/12/jpa-created-date-column-null.html" />
+<meta name="description" content="Spring Data JPA에서는 기본적으로 제공해주는 기능 중 편리한 기능들이 많은데, 그중 내게 충격을 주었던 기능이 바로 Auditing이었다. MyBatis에서는 일일이 설정하거나 지정해줘야 했던 부분이 기능으로 있다니.. 오늘은 JPA Auditing에 대해서 자세히 알아보고, 아직 사용해보지 못한 AuditorAware 기능과 실무에서 겪었던 트러블 슈팅까지 추가해서 기록해두려고 한다." />
+<meta property="og:description" content="Spring Data JPA에서는 기본적으로 제공해주는 기능 중 편리한 기능들이 많은데, 그중 내게 충격을 주었던 기능이 바로 Auditing이었다. MyBatis에서는 일일이 설정하거나 지정해줘야 했던 부분이 기능으로 있다니.. 오늘은 JPA Auditing에 대해서 자세히 알아보고, 아직 사용해보지 못한 AuditorAware 기능과 실무에서 겪었던 트러블 슈팅까지 추가해서 기록해두려고 한다." />
+<link rel="canonical" href="http://localhost:4000/wiki/2025/02/28/jpa-auditing.html" />
+<meta property="og:url" content="http://localhost:4000/wiki/2025/02/28/jpa-auditing.html" />
 <meta property="og:site_name" content="Every Single Day" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2024-01-12T00:00:00+09:00" />
+<meta property="article:published_time" content="2025-02-28T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법" />
+<meta property="twitter:title" content="JPA Auditing으로 엔티티 변경 이력 관리하기" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2024-01-12T00:00:00+09:00","datePublished":"2024-01-12T00:00:00+09:00","description":"배경 update문의 결과를 확인하는데 생성일 컬럼이 null로 update 되는 문제를 발견했다.","headline":"update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2024/01/12/jpa-created-date-column-null.html"},"url":"http://localhost:4000/wiki/2024/01/12/jpa-created-date-column-null.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2025-02-28T00:00:00+09:00","datePublished":"2025-02-28T00:00:00+09:00","description":"Spring Data JPA에서는 기본적으로 제공해주는 기능 중 편리한 기능들이 많은데, 그중 내게 충격을 주었던 기능이 바로 Auditing이었다. MyBatis에서는 일일이 설정하거나 지정해줘야 했던 부분이 기능으로 있다니.. 오늘은 JPA Auditing에 대해서 자세히 알아보고, 아직 사용해보지 못한 AuditorAware 기능과 실무에서 겪었던 트러블 슈팅까지 추가해서 기록해두려고 한다.","headline":"JPA Auditing으로 엔티티 변경 이력 관리하기","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2025/02/28/jpa-auditing.html"},"url":"http://localhost:4000/wiki/2025/02/28/jpa-auditing.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon.ico/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="/assets/favicon.ico/apple-icon-60x60.png">
@@ -640,11 +640,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법</h1>
+  <h1 class="post-title p-name" itemprop="name headline">JPA Auditing으로 엔티티 변경 이력 관리하기</h1>
   <h2 class="post-subtitle"></h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2024-01-12T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Jan 12, 2024
+    <time class="dt-published" datetime="2025-02-28T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Feb 28, 2025
     </time>
 
     
@@ -681,56 +681,179 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
-  </p><div class="post-tags"><a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#JPA">#JPA</a></div></header>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 12 mins</span>
+  </p><div class="post-tags"><a class="post-tag" href="/tags.html#JPA">#JPA</a><a class="post-tag" href="/tags.html#Auditing">#Auditing</a></div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <h3 id="배경">배경</h3>
+      <p>Spring Data JPA에서는 기본적으로 제공해주는 기능 중 편리한 기능들이 많은데, 그중 내게 충격을 주었던 기능이 바로 Auditing이었다. 
+MyBatis에서는 일일이 설정하거나 지정해줘야 했던 부분이 기능으로 있다니.. 
+오늘은 JPA Auditing에 대해서 자세히 알아보고, 아직 사용해보지 못한 AuditorAware 기능과 실무에서 겪었던 트러블 슈팅까지 추가해서 기록해두려고 한다.
+<br />
+<br />
+<br /></p>
+
+<h2 id="jpa-auditing">JPA Auditing</h2>
+<p>Audit은 사전적으로 ‘감사하다’, ‘단속하다’라는 뜻을 가지고 있다. JPA에서는 Auditing을 제공하여 엔티티가 언제 혹은 누가 생성하거나 변경했는지를 자동으로 추적(단속)하는 기능을 제공한다.
+Auditing을 사용하기 위해서는 엔티티 클래스에 Auditing 정보를 포함한 메타데이터를 추가하고, 어노테이션을 사용하거나 특정 인터페이스를 구현하여 정의할 수 있다.
+<br />
+<br />
+<br /></p>
+
+<h2 id="auditing-적용">Auditing 적용</h2>
+
+<h3 id="applicationclass">Application.class</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@EnableJpaAuditing</span>
+<span class="nd">@SpringBootApplication</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Application</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="nc">CaffeineApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+<p><strong><code class="language-plaintext highlighter-rouge">@EnableJpaAuditing</code></strong></p>
 <ul>
-  <li>update문의 결과를 확인하는데 생성일 컬럼이 null로 update 되는 문제를 발견했다. <br />
+  <li>JPA Auditing을 활성하기 위한 어노테이션으로, 이렇게 Application단의 main 메소드에 붙여주거나 Config 클래스를 따로 생성하여 설정해줄 수 있다.</li>
+</ul>
+
+<h3 id="basetimeentityclass">BaseTimeEntity.class</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@MappedSuperclass</span>
+<span class="nd">@EntityListeners</span><span class="o">(</span><span class="nc">AuditingEntityListener</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">BaseDateTimeEntity</span> <span class="o">{</span>
+
+    <span class="nd">@CreatedDate</span>
+    <span class="kd">private</span> <span class="nc">LocalDateTime</span> <span class="n">createdDateTime</span><span class="o">;</span>
+
+    <span class="nd">@LastModifiedDate</span>
+    <span class="kd">private</span> <span class="nc">LocalDateTime</span> <span class="n">modifiedDateTime</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong><code class="language-plaintext highlighter-rouge">@MappedSuperclass</code></strong></p>
+<ul>
+  <li>JPA Entity 클래스들이 BaseTimeEntity 클래스를 상속할 경우 필드들(createdDateTime, modifiedDateTime)을 컬럼으로 인식하도록 한다.</li>
+</ul>
+
+<p><strong><code class="language-plaintext highlighter-rouge">@EntityListeners(AuditingEntityListener.class)</code></strong></p>
+<ul>
+  <li>BaseTimeEntity 클래스에 Auditing 기능을 포함시킨다.</li>
+</ul>
+
+<p><strong><code class="language-plaintext highlighter-rouge">@CreatedDate</code></strong></p>
+<ul>
+  <li>Entity가 생성되어 저장될 때 시간이 자동 저장된다.</li>
+</ul>
+
+<p><strong><code class="language-plaintext highlighter-rouge">@LastModifiedDate</code></strong></p>
+<ul>
+  <li>조회한 Entity의 값을 변경할 때 시간이 자동 저장된다.
 <br /></li>
 </ul>
 
-<h3 id="원인">원인</h3>
+<h3 id="-mappedsuperclass란"><strong>➕ @MappedSuperclass란?</strong></h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Documented</span>
+<span class="nd">@Target</span><span class="o">(</span><span class="no">TYPE</span><span class="o">)</span>
+<span class="nd">@Retention</span><span class="o">(</span><span class="no">RUNTIME</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="nc">MappedSuperclass</span>
+</code></pre></div></div>
 <ul>
-  <li>정확히는 생성일 컬럼에 이름을 설정하기 위해 붙인 @Column 어노테이션의 옵션 중 하나인 updatable의 기본값이 true라서 값을 설정해주지 않은 생성일 컬럼에 null이 update 된 것이다.</li>
+  <li>MappedSuperclass는 상위 클래스로부터 매핑 정보를 상속 받는 클래스임을 지정하는 어노테이션이다.</li>
+  <li>지정된 클래스 자체는 별도의 테이블이 생성되지 않는다. (== 상속하는 하위 클래스에만 적용된다.)</li>
+  <li>하위 클래스에서는 상속된 매핑 정보가 해당 클래스의 테이블에 적용되고, <code class="language-plaintext highlighter-rouge">@AttributeOverride</code>, <code class="language-plaintext highlighter-rouge">@AssociationOverride</code> 애노테이션 (또는 XML)을 사용하면 매핑 정보를 재정의할 수도 있다.<br />
+<br />
+<br />
+<br /></li>
 </ul>
+
+<h2 id="auditoraware">AuditorAware</h2>
+<p>그렇다면 AuditorAware는 뭘까? 
+아직 직접 써본 적 없지만 생성일, 수정일처럼 생성자, 수정자 같은 사용자 정보도 JPA Auditing을 통해 자동으로 입력해줄 수 있다.
+생성일, 수정일과는 구현체를 설정하고 그 구현체를 JWT 같은 인증 토큰을 검사할 때 같이 넣어주면 된다.</p>
+
+<h3 id="userauditawareclass">UserAuditAware.class</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserAuditAware</span> <span class="kd">implements</span> <span class="nc">AuditorAware</span><span class="o">&lt;</span><span class="nc">Long</span><span class="o">&gt;</span> <span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">Long</span><span class="o">&gt;</span> <span class="nf">getCurrentAuditor</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">Authentication</span> <span class="n">authentication</span> <span class="o">=</span> <span class="nc">SecurityContextHolder</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">getAuthentication</span><span class="o">();</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">authentication</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="o">!</span><span class="n">authentication</span><span class="o">.</span><span class="na">isAuthenticated</span><span class="o">())</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="nc">Optional</span><span class="o">.</span><span class="na">empty</span><span class="o">();</span>
+        <span class="o">}</span>
+
+        <span class="nc">CustomUserDetails</span> <span class="n">userDetails</span> <span class="o">=</span> <span class="o">(</span><span class="nc">CustomUserDetails</span><span class="o">)</span> <span class="n">authentication</span><span class="o">.</span><span class="na">getPrincipal</span><span class="o">();</span>
+        <span class="k">return</span> <span class="nc">Optional</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">userDetails</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="applicationclass-1">Application.class</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@EnableJpaAuditing</span><span class="o">(</span><span class="n">auditorAwareRef</span> <span class="o">=</span> <span class="s">"userAuditorAware"</span><span class="o">)</span>
+<span class="nd">@SpringBootApplication</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Application</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="nc">CaffeineApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>위에서 설정해준 main 메서드에 구현해준 클래스의 빈 이름을 설정해주면 해당 클래스를 이용하여 사용자 정보를 자동으로 등록할 수 있게 된다.<br />
+<br />
+<br />
+<br /></p>
+
+<h2 id="트러블-슈팅-">트러블 슈팅 💫</h2>
+
+<h3 id="어라-왜-update문의-결과를-확인하는데-createddatetime이-null로-업데이트-되지">어라 왜 update문의 결과를 확인하는데 createdDateTime이 null로 업데이트 되지❓🤔</h3>
+<p>생성일 컬럼에 이름을 설정하기 위해 <code class="language-plaintext highlighter-rouge">@Column</code> 어노테이션을 붙였는데, <code class="language-plaintext highlighter-rouge">@Column</code>의 옵션 중 하나인 updatable의 기본값이 true라서 값을 설정해주지 않은 생성일 컬럼에 null이 업데이트된 것이다.</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Target</span><span class="o">({</span><span class="no">METHOD</span><span class="o">,</span> <span class="no">FIELD</span><span class="o">})</span> 
 <span class="nd">@Retention</span><span class="o">(</span><span class="no">RUNTIME</span><span class="o">)</span>
 <span class="kd">public</span> <span class="nd">@interface</span> <span class="nc">Column</span> <span class="o">{</span>
-	    <span class="cm">/**
-	     * (Optional) Whether the column is included in SQL UPDATE 
-	     * statements generated by the persistence provider.
-	     */</span>
-	    <span class="kt">boolean</span> <span class="nf">updatable</span><span class="o">()</span> <span class="k">default</span> <span class="kc">true</span><span class="o">;</span>
-  <span class="o">}</span>
+	<span class="cm">/**
+	* (Optional) Whether the column is included in SQL UPDATE 
+	* statements generated by the persistence provider.
+	*/</span>
+	<span class="kt">boolean</span> <span class="nf">updatable</span><span class="o">()</span> <span class="k">default</span> <span class="o">**</span><span class="kc">true</span><span class="o">**;</span>
+<span class="o">}</span>
 </code></pre></div></div>
-<p><br /></p>
 
-<h3 id="해결-방법">해결 방법</h3>
-<ul>
-  <li>그래서 @Column 어노테이션의 updatable 옵션을 false로 지정해주어야 한다.</li>
-</ul>
+<p>그래서 <code class="language-plaintext highlighter-rouge">@Column</code>을 사용할 거라면 아래처럼 <strong>updatable</strong> 옵션을 <strong>false</strong>로 지정해주는 것이 필요하다.</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@CreatedDate</span>
 <span class="nd">@Column</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"created_date_time"</span><span class="o">,</span> <span class="n">updatable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
 <span class="kd">private</span> <span class="nc">LocalDateTime</span> <span class="n">createdDateTime</span><span class="o">;</span>
 </code></pre></div></div>
-<p><br /></p>
 
-<h4 id="참고">참고</h4>
+<p>다시 생각해보니 <code class="language-plaintext highlighter-rouge">@Column</code> 어노테이션을 꼭 써야할까? 하는 의문이 들었다. 내가 <code class="language-plaintext highlighter-rouge">@Column</code>을 썼던 이유는 Java의 카멜케이스를 데이터베이스의 스네이크케이스와 연결시키고 싶어서였다. 
+그런데 아래처럼 YML 파일에 설정하면 자동 연결이 된다니 💦 앞으로는 이런 설정 하나로 코드를 줄이기 위해 한번씩은 꼭 찾아보고 작업할 필요를 느꼈다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">spring:</span>
+  <span class="nl">jpa:</span>
+    <span class="nl">hibernate:</span>
+      <span class="nl">naming:</span>
+        <span class="n">physical</span><span class="o">-</span><span class="nl">strategy:</span> <span class="n">org</span><span class="o">.</span><span class="na">hibernate</span><span class="o">.</span><span class="na">boot</span><span class="o">.</span><span class="na">model</span><span class="o">.</span><span class="na">naming</span><span class="o">.</span><span class="na">CamelCaseToUnderscoresNamingStrategy</span>
+</code></pre></div></div>
+
+<p>➕ 추가로 <code class="language-plaintext highlighter-rouge">@CreatedDate</code>/<code class="language-plaintext highlighter-rouge">@CreatedBy</code>는 기본적으로 엔티티가 처음 저장될 때 자동으로 값이 설정되지만, 직접 변경하거나 Native Query로는 수정 가능하기 때문에 <code class="language-plaintext highlighter-rouge">@Column(updatable = false)</code>을 설정하는 것이 안전하다.<br />
+<br />
+<br /></p>
+
+<p><strong>참고</strong></p>
 <ul>
-  <li><a href="https://wakestand.tistory.com/935">JPA @CreatedDate Column Update시 Null 되는 현상 해결방법</a></li>
+  <li><a href="https://docs.spring.io/spring-data/jpa/reference/auditing.html">Spring 공식 문서</a></li>
+  <li><a href="https://hudi.blog/spring-data-jpa-auditing-create-update-date/">https://hudi.blog/spring-data-jpa-auditing-create-update-date/</a></li>
 </ul>
 
 
     </div>
 
 </article>
-<div class="post-nav"><a class="previous" href="/wiki/2023/12/30/hibernate6-custom-function.html" title="hibernate6 custom function(MySQL Dialect)">hibernate6 custom function(MySQL Dialect)</a><a class="next" href="/wiki/2024/01/17/pathvariable-name-missing.html" title="SpringBoot 3.2부터 @PathVariable 이름 미지정 시 에러">SpringBoot 3.2부터 @PathVariable 이름 미지정 시...</a></div><div class="post-comments">  <div id="gisqus_thread"></div>
+<div class="post-nav"><a class="previous" href="/wiki/2025/02/13/spring-scheduled-annotation.html" title="Spring @Scheduled로 간단하게 원하는 시간에 스케줄을 등록해보자">Spring @Scheduled로 간단하게 원하는 시간에 스케줄을...</a><span></span></div><div class="post-comments">  <div id="gisqus_thread"></div>
   <script src="https://giscus.app/client.js"
   data-repo="dajeongdev/dajeongdev.github.io"
   data-repo-id="R_kgDOHS7Ikw"
@@ -770,7 +893,7 @@ document.getElementById("tail-wrapper").appendChild(giscusScript);
 </script></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/wiki/2023/11/13/fibonacci.html" title="SpringBoot 3.2부터 @PathVariable 이름 미지정 시 에러">자바로 피보나치 수열 이해하기</a></li><li><a class="post-link" href="/wiki/2024/01/12/jpa-created-date-column-null.html" title="SpringBoot 3.2부터 @PathVariable 이름 미지정 시 에러">update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법</a></li><li><a class="post-link" href="/wiki/2023/11/13/intellij-shortcut.html" title="SpringBoot 3.2부터 @PathVariable 이름 미지정 시 에러">IntelliJ 단축키 정리</a></li><li><a class="post-link" href="/blog/2024/05/16/americanote-review.html" title="SpringBoot 3.2부터 @PathVariable 이름 미지정 시 에러">비사이드 403 포텐데이 Americanote 회고</a></li></ul>
+        <li><a class="post-link" href="/wiki/2024/04/29/americanote-server5-connect-domain-name.html" title="">아메리카노트 서버 구성 &lt;5&gt; 도메인 연결</a></li><li><a class="post-link" href="/blog/2024/04/19/naver-cloud-review.html" title="">비사이드 포텐데이 403 프로젝트에서 Naver Cloud Platform 사용 후기</a></li><li><a class="post-link" href="/wiki/2024/04/30/integer-class.html" title="">Integer Class</a></li><li><a class="post-link" href="/wiki/2023/11/13/thymeleaf-rest-controller.html" title="">Thymeleaf와 @RestController</a></li></ul>
     </div></script>
   </section>
 </div>
