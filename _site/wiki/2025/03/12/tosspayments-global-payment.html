@@ -823,31 +823,29 @@ Paypal은 동기 결제로 우리가 생각하는 흐름처럼 진행됩니다. 
 
 <p><strong>pendingUrl 페이지 예시</strong></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ```html
-    &lt;!DOCTYPE html&gt;
-    &lt;html lang="ko"&gt;
-    &lt;head&gt;
-        &lt;meta charset="utf-8"/&gt;
-        &lt;link rel="icon" href="https://static.toss.im/icons/png/4x/icon-toss-logo.png"/&gt;
-        &lt;link rel="stylesheet" href="/css/style.css" type="text/css"&gt;
-        &lt;meta http-equiv="X-UA-Compatible" content="IE=Chrome"/&gt;
-        &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"/&gt;
-        &lt;title&gt;토스페이먼츠 결제 위젯 대기&lt;/title&gt;
-    &lt;/head&gt;
-    
-    &lt;body&gt;
-    
-    &lt;script&gt;
-        async function confirm() {
-            location.href = ''; // app scheme 호출
-        }
-        confirm();
-    &lt;/script&gt;
-    
-    &lt;/body&gt;
-    &lt;/html&gt;
-    
-    ```
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"ko"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"icon"</span> <span class="na">href=</span><span class="s">"https://static.toss.im/icons/png/4x/icon-toss-logo.png"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"/css/style.css"</span> <span class="na">type=</span><span class="s">"text/css"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"X-UA-Compatible"</span> <span class="na">content=</span><span class="s">"IE=Chrome"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;title&gt;</span>토스페이먼츠 결제 위젯 대기 웹뷰<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+        
+<span class="nt">&lt;body&gt;</span>
+        
+    <span class="nt">&lt;script&gt;</span>
+        <span class="k">async</span> <span class="kd">function</span> <span class="nx">confirm</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="dl">''</span><span class="p">;</span> <span class="c1">// app scheme 호출</span>
+        <span class="p">}</span>
+        <span class="nx">confirm</span><span class="p">();</span>
+    <span class="nt">&lt;/script&gt;</span>
+        
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+        
 </code></pre></div></div>
 
 <h4 id="2-웹훅-등록-및-결제-승인-웹훅-api-추가">2. 웹훅 등록 및 결제 승인 웹훅 API 추가</h4>
@@ -857,19 +855,17 @@ Paypal은 동기 결제로 우리가 생각하는 흐름처럼 진행됩니다. 
 <p><strong>웹훅 분기 구현 예시</strong><br />
 ➕ 결제 상태(PaymentStatus)를 미리 enum 클래스로 구현해두었습니다.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ```java
-    public void confirmOrderWebhook(OrderWebhookDto webhook) {
-            TossPaymentDto payment = webhook.getData();
-            
-            // 결제 상태에 따른 분기 처리
-            if (PaymentStatus.DONE.equals(status)) {
-                // 결제 성공 시 로직 구현
-            } else if (PaymentStatus.ABORTED.equals(status) || 
-    						        PaymentStatus.EXPIRED.equals(status)) {
-                // 결제 실패 시 로직 구현
-            }
-    }
-    ```
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">confirmOrderWebhook</span><span class="o">(</span><span class="nc">OrderWebhookDto</span> <span class="n">webhook</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">TossPaymentDto</span> <span class="n">payment</span> <span class="o">=</span> <span class="n">webhook</span><span class="o">.</span><span class="na">getData</span><span class="o">();</span>
+                
+    <span class="c1">// 결제 상태에 따른 분기 처리</span>
+    <span class="k">if</span> <span class="o">(</span><span class="nc">PaymentStatus</span><span class="o">.</span><span class="na">DONE</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">status</span><span class="o">))</span> <span class="o">{</span>
+        <span class="c1">// 결제 성공 시 로직 구현</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="nc">PaymentStatus</span><span class="o">.</span><span class="na">ABORTED</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">status</span><span class="o">)</span> 
+                <span class="o">||</span> <span class="nc">PaymentStatus</span><span class="o">.</span><span class="na">EXPIRED</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">status</span><span class="o">))</span> <span class="o">{</span>
+        <span class="c1">// 결제 실패 시 로직 구현</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </code></pre></div></div>
 
 <h3 id="주의">주의</h3>
@@ -890,6 +886,7 @@ Paypal은 동기 결제로 우리가 생각하는 흐름처럼 진행됩니다. 
     <ul>
       <li>Paypal은 국내 아이피, 국내 회원가입 계정으로 결제하는 것이 Paypal 정책 및 국내법상 불가능합니다.</li>
       <li>해외카드는 해외에서 발급된 카드를 사용해야 합니다. 국내에서 발급받은 카드 중 VISA, MASTER가 붙은 카드도 국내 카드로 인식됩니다.
+<br />
 <br />
 <br /></li>
     </ul>
@@ -970,7 +967,7 @@ document.getElementById("tail-wrapper").appendChild(giscusScript);
 </script></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/wiki/2023/11/13/array-slice-method.html" title="">배열 자르기</a></li><li><a class="post-link" href="/wiki/2023/11/13/prime-number.html" title="">자바로 소수 판별</a></li><li><a class="post-link" href="/blog/2024/05/16/americanote-review.html" title="">비사이드 403 포텐데이 Americanote 회고</a></li><li><a class="post-link" href="/blog/2024/04/19/naver-cloud-review.html" title="">비사이드 포텐데이 403 프로젝트에서 Naver Cloud Platform 사용 후기</a></li></ul>
+        <li><a class="post-link" href="/wiki/2024/07/01/jwt.html" title="">JWT(JSON Web Token)</a></li><li><a class="post-link" href="/wiki/2023/11/13/mybatis-jpa.html" title="">MyBatis와 JPA</a></li><li><a class="post-link" href="/wiki/2023/11/13/n-number-convert.html" title="">진수 변환</a></li><li><a class="post-link" href="/wiki/2023/11/13/cut-string-method.html" title="">문자열 자르기</a></li></ul>
     </div></script>
   </section>
 </div>

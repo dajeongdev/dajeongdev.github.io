@@ -145,31 +145,31 @@ Paypal은 동기 결제로 우리가 생각하는 흐름처럼 진행됩니다. 
 
 **pendingUrl 페이지 예시**
         
-        ```html
-        <!DOCTYPE html>
-        <html lang="ko">
-        <head>
-            <meta charset="utf-8"/>
-            <link rel="icon" href="https://static.toss.im/icons/png/4x/icon-toss-logo.png"/>
-            <link rel="stylesheet" href="/css/style.css" type="text/css">
-            <meta http-equiv="X-UA-Compatible" content="IE=Chrome"/>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-            <title>토스페이먼츠 결제 위젯 대기</title>
-        </head>
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="icon" href="https://static.toss.im/icons/png/4x/icon-toss-logo.png"/>
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <meta http-equiv="X-UA-Compatible" content="IE=Chrome"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>토스페이먼츠 결제 위젯 대기 웹뷰</title>
+</head>
         
-        <body>
+<body>
         
-        <script>
-            async function confirm() {
-                location.href = ''; // app scheme 호출
-            }
-            confirm();
-        </script>
+    <script>
+        async function confirm() {
+            location.href = ''; // app scheme 호출
+        }
+        confirm();
+    </script>
         
-        </body>
-        </html>
+</body>
+</html>
         
-        ```
+```
 
 
 #### 2. 웹훅 등록 및 결제 승인 웹훅 API 추가  
@@ -179,19 +179,19 @@ Paypal은 동기 결제로 우리가 생각하는 흐름처럼 진행됩니다. 
 **웹훅 분기 구현 예시**  
 ➕ 결제 상태(PaymentStatus)를 미리 enum 클래스로 구현해두었습니다.
         
-        ```java
-        public void confirmOrderWebhook(OrderWebhookDto webhook) {
-                TossPaymentDto payment = webhook.getData();
+```java
+public void confirmOrderWebhook(OrderWebhookDto webhook) {
+    TossPaymentDto payment = webhook.getData();
                 
-                // 결제 상태에 따른 분기 처리
-                if (PaymentStatus.DONE.equals(status)) {
-                    // 결제 성공 시 로직 구현
-                } else if (PaymentStatus.ABORTED.equals(status) || 
-        						        PaymentStatus.EXPIRED.equals(status)) {
-                    // 결제 실패 시 로직 구현
-                }
-        }
-        ```
+    // 결제 상태에 따른 분기 처리
+    if (PaymentStatus.DONE.equals(status)) {
+        // 결제 성공 시 로직 구현
+    } else if (PaymentStatus.ABORTED.equals(status) 
+                || PaymentStatus.EXPIRED.equals(status)) {
+        // 결제 실패 시 로직 구현
+    }
+}
+```
         
 ### 주의
 1. AWallet이라는 테스트앱이 존재하지만, AWallet에서 결제를 진행해도 pendingUrl로 보내주지 않습니다.
@@ -210,7 +210,7 @@ Paypal은 동기 결제로 우리가 생각하는 흐름처럼 진행됩니다. 
     - 해외카드는 해외에서 발급된 카드를 사용해야 합니다. 국내에서 발급받은 카드 중 VISA, MASTER가 붙은 카드도 국내 카드로 인식됩니다.
 <br/>
 <br/>
-
+<br/>
 
 ### insight & thoughts
 - 이번 해외결제 연동을 진행하면서 예상치 못한 문제들이 있었지만, 해결 과정을 통해 토스페이먼츠의 결제 시스템을 이해할 수 있었습니다.
