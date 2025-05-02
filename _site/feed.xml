@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2025-05-02T16:28:20+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">조금 늦은 글또 회고</title><link href="http://localhost:4000/blog/2025/05/02/review-geultto.html" rel="alternate" type="text/html" title="조금 늦은 글또 회고" /><published>2025-05-02T00:00:00+09:00</published><updated>2025-05-02T00:00:00+09:00</updated><id>http://localhost:4000/blog/2025/05/02/review-geultto</id><content type="html" xml:base="http://localhost:4000/blog/2025/05/02/review-geultto.html"><![CDATA[<p><img src="https://dajeongdev.github.io/assets/images/posts/review-geultto.jpeg" /></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2025-05-02T16:32:00+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">조금 늦은 글또 회고</title><link href="http://localhost:4000/blog/2025/05/02/review-geultto.html" rel="alternate" type="text/html" title="조금 늦은 글또 회고" /><published>2025-05-02T00:00:00+09:00</published><updated>2025-05-02T00:00:00+09:00</updated><id>http://localhost:4000/blog/2025/05/02/review-geultto</id><content type="html" xml:base="http://localhost:4000/blog/2025/05/02/review-geultto.html"><![CDATA[<p><img src="https://dajeongdev.github.io/assets/images/posts/review-geultto.jpeg" /></p>
 
 <p>한 달이나 지나서 작성하는 글또 회고,, 반성합니다.</p>
 
@@ -14,14 +14,14 @@
 
 <h3 id="올해-목표">올해 목표</h3>
 <ol>
-  <li>글또 참여율 높이기</li>
-  <li>꾸준히 글 쓰기</li>
-  <li>트러블슈팅 바로바로</li>
-  <li>테스트 코드 등으로 역량 넓히기</li>
-  <li>코딩테스트 관련 공부</li>
-  <li>질 좋은 의사소통</li>
-  <li>준비된 체력</li>
-  <li>도파민 줄이기</li>
+  <li><strong>글또 참여율 높이기</strong></li>
+  <li><strong>꾸준히 글 쓰기</strong></li>
+  <li><strong>트러블슈팅 바로바로</strong></li>
+  <li><strong>테스트 코드 등으로 역량 넓히기</strong></li>
+  <li><strong>코딩테스트 관련 공부</strong></li>
+  <li><strong>질 좋은 의사소통</strong></li>
+  <li><strong>준비된 체력</strong></li>
+  <li><strong>도파민 줄이기</strong></li>
 </ol>
 
 <p>반은 해내고 반은 그렇지 못했지만, 그래도 남는 게 더 많았다.</p>
@@ -61,7 +61,7 @@
 
 <p>글또에 가입했을 때의 기대보다 더 많은 걸 얻어서 나도 앞으로 이 업계에서 좋은 영향력을 주고받을 수 있으면 좋겠다는 목표도 생겼다. 아직 내가 직업적으로 뭘 잘하는지 잘 모르겠지만 그런 부분을 빨리 파악해서 다른 사람들에게 도움을 줄 수 있으면 좋겠다.</p>
 
-<p>마지막으로 글또에서 활동해주신 모든 분들 덕분에 상반기 열심히 성장한 것 같아서 너무 감사드린다는 말을 전해드리고 싶습니다!</p>]]></content><author><name>Dajeong Park</name></author><category term="blog" /><category term="글또" /><category term="회고" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Spring @Transactional을 정말 제대로 쓰고 있는 걸까?</title><link href="http://localhost:4000/wiki/2025/03/28/spring-transactional-annotation.html" rel="alternate" type="text/html" title="Spring @Transactional을 정말 제대로 쓰고 있는 걸까?" /><published>2025-03-28T00:00:00+09:00</published><updated>2025-03-28T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2025/03/28/spring-transactional-annotation</id><content type="html" xml:base="http://localhost:4000/wiki/2025/03/28/spring-transactional-annotation.html"><![CDATA[<p>우리는 수많은 데이터를 저장하고 수정하며, 그 과정에서 데이터의 무결성을 보장하는 것이 얼마나 중요한지 깨닫게 된다. 특히 JPA와 Spring을 활용하는 환경에서는 트랜잭션을 제대로 관리하지 않으면 예상치 못한 문제가 발생할 수 있다.<br />
+<p>마지막으로 글또에서 활동해주신 모든 분들 덕분에 상반기 열심히 성장한 것 같아서 너무 감사드린다는 말을 전해드리고 싶습니다! 🫶</p>]]></content><author><name>Dajeong Park</name></author><category term="blog" /><category term="글또" /><category term="회고" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Spring @Transactional을 정말 제대로 쓰고 있는 걸까?</title><link href="http://localhost:4000/wiki/2025/03/28/spring-transactional-annotation.html" rel="alternate" type="text/html" title="Spring @Transactional을 정말 제대로 쓰고 있는 걸까?" /><published>2025-03-28T00:00:00+09:00</published><updated>2025-03-28T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2025/03/28/spring-transactional-annotation</id><content type="html" xml:base="http://localhost:4000/wiki/2025/03/28/spring-transactional-annotation.html"><![CDATA[<p>우리는 수많은 데이터를 저장하고 수정하며, 그 과정에서 데이터의 무결성을 보장하는 것이 얼마나 중요한지 깨닫게 된다. 특히 JPA와 Spring을 활용하는 환경에서는 트랜잭션을 제대로 관리하지 않으면 예상치 못한 문제가 발생할 수 있다.<br />
 JPA를 처음 접했을 때, 엔티티의 값을 바꾸면 자동으로 UPDATE 쿼리가 나가는 게 꽤 신기했다. 그런데 막상 실무에서 코드를 작성하다 보면 “왜 업데이트가 안 되지?”, “왜 데이터가 반영되지 않았지?” 하는 순간들을 겪게 된다.<br />
 그런 경험을 통해 JPA의 변경 감지가 트랜잭션 범위 내에서만 동작한다는 점을 알게 되고, 결국 @Transactional 애노테이션의 필요성을 체감하게 된다. 또 @Transactional(readOnly = true) 옵션을 활용하면 조회 성능을 최적화할 수 있다는 것도 알게 됐다.<br />
 결국 중요한 건 단순히 @Transactional을 붙이는 게 아니라, 트랜잭션이 어떻게 동작하는지를 이해하고, 상황에 맞는 옵션을 적용하는 것이다.
