@@ -1,4 +1,67 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2025-03-28T20:32:02+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">Spring @Transactional을 정말 제대로 쓰고 있는 걸까?</title><link href="http://localhost:4000/wiki/2025/03/28/spring-transactional-annotation.html" rel="alternate" type="text/html" title="Spring @Transactional을 정말 제대로 쓰고 있는 걸까?" /><published>2025-03-28T00:00:00+09:00</published><updated>2025-03-28T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2025/03/28/spring-transactional-annotation</id><content type="html" xml:base="http://localhost:4000/wiki/2025/03/28/spring-transactional-annotation.html"><![CDATA[<p>우리는 수많은 데이터를 저장하고 수정하며, 그 과정에서 데이터의 무결성을 보장하는 것이 얼마나 중요한지 깨닫게 된다. 특히 JPA와 Spring을 활용하는 환경에서는 트랜잭션을 제대로 관리하지 않으면 예상치 못한 문제가 발생할 수 있다.<br />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="ko" /><updated>2025-05-02T16:28:20+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Every Single Day</title><subtitle></subtitle><author><name>Dajeong Park</name></author><entry><title type="html">조금 늦은 글또 회고</title><link href="http://localhost:4000/blog/2025/05/02/review-geultto.html" rel="alternate" type="text/html" title="조금 늦은 글또 회고" /><published>2025-05-02T00:00:00+09:00</published><updated>2025-05-02T00:00:00+09:00</updated><id>http://localhost:4000/blog/2025/05/02/review-geultto</id><content type="html" xml:base="http://localhost:4000/blog/2025/05/02/review-geultto.html"><![CDATA[<p><img src="https://dajeongdev.github.io/assets/images/posts/review-geultto.jpeg" /></p>
+
+<p>한 달이나 지나서 작성하는 글또 회고,, 반성합니다.</p>
+
+<p>글또는 내가 작년에 한 일 중 가장 잘한 일로 손꼽힌다. 원래 마지막 글은 회고글을 제출하고 싶었지만, 공들여보고 싶은 마음에 미룬다는 게 지금까지 미루게 되었다.</p>
+
+<p>그렇다면 내가 글또를 통해 뭘 배우고 싶었을까? 그걸 알기 위해서 글또에서 처음으로 작성한 글과 올해 목표를 다시 돌아보았다.</p>
+
+<h3 id="첫-번째-글의-다짐">첫 번째 글의 다짐</h3>
+<ol>
+  <li>좋은 글을 많이 보고 글감에 대해 고민해보기</li>
+  <li>글을 쓰는 재미와 방법에 대해 알아가기</li>
+</ol>
+
+<h3 id="올해-목표">올해 목표</h3>
+<ol>
+  <li>글또 참여율 높이기</li>
+  <li>꾸준히 글 쓰기</li>
+  <li>트러블슈팅 바로바로</li>
+  <li>테스트 코드 등으로 역량 넓히기</li>
+  <li>코딩테스트 관련 공부</li>
+  <li>질 좋은 의사소통</li>
+  <li>준비된 체력</li>
+  <li>도파민 줄이기</li>
+</ol>
+
+<p>반은 해내고 반은 그렇지 못했지만, 그래도 남는 게 더 많았다.</p>
+
+<p>확실히 글또 시작 때보다 올해 더 많은 사람을 만나고 참여했고, 올해는 패스 없이 글도 모두 작성했다.</p>
+
+<p>그리고 업무를 진행하면서 틈틈이 트러블슈팅을 작성한 덕분에 글을 작성하는 게 더 수월하기도 했다.</p>
+
+<p>테스트 코드 강의도 반 정도는 들었고, 2월부터는 설계 스터디를 진행하고 있는데 벌써 거의 마무리 단계가 다가오고 있다. 좋은 팀원들을 만나서 어려운 부분도 나름 재미있게 배워가고 있다.</p>
+
+<p>아쉽게도 코딩테스트 준비는 전혀 하지 못했다,, 설계 스터디에 테스트 코드 강의를 듣기도 너무 바빴다.. 5월까지는 이번 프로젝트 마감으로 바쁠테니 6월부터 스터디를 구하든지 해서 꼭 준비해봐야지❗️</p>
+
+<p>의사소통에 관련해서는 많은 생각이 들었다. 잘 맞는 사람들이랑만 일할 수 없기 때문에 내 마음가짐을 고쳐먹는 게 중요했다. 주어를 얘기해주지 않거나 불명확하게 얘기해주시는 부분에 대해서 정확하게 얘기해달라고 말씀드리고, 내가 모르는 부분은 모른다고 빨리 인정하고 얘기하는 것. 일단 이것부터 하고 있다. 좋은 의사소통에 관련해서는 올해 계속 생각을 만들어가보려고 한다.</p>
+
+<p>운동은 올해 잘하고 있는 부분 중 하나인데, 필라테스를 끝내고 PT를 시작했다. 나름 잘 배우고 있지만, 근육량이 쉽게 늘지 않는 것에 스트레스를 받지 않으려고 노력하고 있다. PT쌤 덕분에 10km 레이스도 처음 나가봤는데, 재미있었지만 사람들이 너무 많아서 자주는 못할 것 같다.. 이제 날씨도 좋아졌으니 웨이트와 러닝을 적절히 섞어서 더 좋은 체력을 만들어봐야지.</p>
+
+<p>도파민 줄이기도 나름 잘해냈다. 핸드폰 게임도 삭제했고, 출퇴근길에 말해보카와 독서를 하면서 올해 벌써 6권의 책을 읽었다. 또 글또 독서모임도 덕분에 안 읽어볼 법한 책도 읽게 되어서 너무 재미있다.
+<br />
+<br /></p>
+
+<h3 id="글-목록">글 목록</h3>
+<p>처음 목표는 패스 하나도 안 쓰기였는데.. 🥹 1번의 패스를 사용하고, 1번은 글 제출 마감일날 버저비터를 누르려다가 실패해서 미제출이 되었다.. 💦 내 업보이니라…</p>
+
+<ul>
+  <li>기술/언어 관련 <strong>8개</strong></li>
+  <li>회고 관련 글 <strong>2개</strong></li>
+</ul>
+
+<p>그래서 이번 글또 활동을 통해 10개의 글을 제출했는데, 돌아보니 회고글이 생각보다 적어서 의외였다. 큐레이션에 한 번이라도 선정되고 싶었으나, 선정되는 글을 보니 정말정말 잘 쓰시는 분들이라 오히려 나도 앞으로 그런 글을 쓸 수 있도록 노력해야겠다는 생각이 많이 들었다.
+<br />
+<br /></p>
+
+<h3 id="글또-후기">글또 후기</h3>
+<p>4월에 한 개도 쓰지 못해서 글 쓰는 습관이 들었다고 하기 민망하지만, 그래도 글또 덕분에 글에 대한 좋은 인식이 생겼다. 마냥 어렵고 막막하기만 했는데, 이제 조금은 어떻게 써야할지 알게 되었고, 무엇보다 잘 쓰고 싶은 마음이 들어 앞으로 글 쓰는 방법에 대해서 많이 고민하고 알아볼 것이다.</p>
+
+<p>무엇보다 글또를 통해 사람들과 만나면서 확실히 동기부여를 많이 얻었다. 예상보다 많은 활동을 하지 않았지만, 다진마늘을 통해 세운 계획들도 많이 해냈고 달리또에는 가끔 글을 올려도 많은 분들이 응원을 해주셔서 힘이 났다. 또 삶의 지또를 통해 내 삶을 다시 돌아보면서 내가 어떻게 살아왔는지, 내 가치관은 어떻게 형성되었는지, 또 내게 무엇이 중요한지 등 나 자신에 대해 많이 돌아볼 수 있어서 너무 소중한 경험이 되었다. 지금 진행 중인 설계 스터디도 글또 홍보 글에 올려주셔서 할 수 있었고, 올해 가장 힘들 때 업그레이또 커피챗 덕분에 빨리 털어버릴 수 있었다. 이곳에서 만난 인연들이 오래 지속될 수 있도록 나도 많이 노력해야지.</p>
+
+<p>글또에 가입했을 때의 기대보다 더 많은 걸 얻어서 나도 앞으로 이 업계에서 좋은 영향력을 주고받을 수 있으면 좋겠다는 목표도 생겼다. 아직 내가 직업적으로 뭘 잘하는지 잘 모르겠지만 그런 부분을 빨리 파악해서 다른 사람들에게 도움을 줄 수 있으면 좋겠다.</p>
+
+<p>마지막으로 글또에서 활동해주신 모든 분들 덕분에 상반기 열심히 성장한 것 같아서 너무 감사드린다는 말을 전해드리고 싶습니다!</p>]]></content><author><name>Dajeong Park</name></author><category term="blog" /><category term="글또" /><category term="회고" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Spring @Transactional을 정말 제대로 쓰고 있는 걸까?</title><link href="http://localhost:4000/wiki/2025/03/28/spring-transactional-annotation.html" rel="alternate" type="text/html" title="Spring @Transactional을 정말 제대로 쓰고 있는 걸까?" /><published>2025-03-28T00:00:00+09:00</published><updated>2025-03-28T00:00:00+09:00</updated><id>http://localhost:4000/wiki/2025/03/28/spring-transactional-annotation</id><content type="html" xml:base="http://localhost:4000/wiki/2025/03/28/spring-transactional-annotation.html"><![CDATA[<p>우리는 수많은 데이터를 저장하고 수정하며, 그 과정에서 데이터의 무결성을 보장하는 것이 얼마나 중요한지 깨닫게 된다. 특히 JPA와 Spring을 활용하는 환경에서는 트랜잭션을 제대로 관리하지 않으면 예상치 못한 문제가 발생할 수 있다.<br />
 JPA를 처음 접했을 때, 엔티티의 값을 바꾸면 자동으로 UPDATE 쿼리가 나가는 게 꽤 신기했다. 그런데 막상 실무에서 코드를 작성하다 보면 “왜 업데이트가 안 되지?”, “왜 데이터가 반영되지 않았지?” 하는 순간들을 겪게 된다.<br />
 그런 경험을 통해 JPA의 변경 감지가 트랜잭션 범위 내에서만 동작한다는 점을 알게 되고, 결국 @Transactional 애노테이션의 필요성을 체감하게 된다. 또 @Transactional(readOnly = true) 옵션을 활용하면 조회 성능을 최적화할 수 있다는 것도 알게 됐다.<br />
 결국 중요한 건 단순히 @Transactional을 붙이는 게 아니라, 트랜잭션이 어떻게 동작하는지를 이해하고, 상황에 맞는 옵션을 적용하는 것이다.
@@ -1079,8 +1142,6 @@ SQL로 먼저 작업을 해보는데 서브쿼리를 from 절에 넣어야 데�
 
 <h3 id="목표">목표</h3>
 
-<h4 id="이직">이직</h4>
-<p>여러 가지 이유로 하반기 이직을 목표로 하고 있는데요. 그래서 이번 상반기가 아주 중요할 것 같습니다. 이번달에는 포트폴리오도 업데이트하고, 공모전과 코딩테스트 공부 등 미루던 일들을 차차 진행해보겠습니다.</p>
 <h4 id="글또-참여율-높이기">글또 참여율 높이기</h4>
 <p>2024년 아쉬움에 썼던 대로 앞으로 후회하지 않기 위해서 남은 기간은 글또에 매일 방문해보려고 합니다. 또한, 튜링의 사과에도 2주에 한번 방문해서 커피챗의 기회도 많이 늘려보겠습니다. 파이팅!</p>
 <h4 id="꾸준히-글쓰기">꾸준히 글쓰기</h4>
@@ -1106,7 +1167,7 @@ SQL로 먼저 작업을 해보는데 서브쿼리를 from 절에 넣어야 데�
 </ul>
 
 <h3 id="다짐">다짐</h3>
-<p>2024년은 계획한 목표에 도전해보고 이뤄낸 것들이 많은 해였습니다. 그래서인지 그 어느 때보다 더 만족스러웠지만, 항상 그렇듯 아쉬운 점은 남아있습니다. 올해는 그 부분들을 채워보려고 합니다. 그러기 위해서는 크고 작은 목표를 많이 세우는 게 중요하다고 생각하는데요. (뼛속까지 J) 회고 덕분에 목표를 제대로 정리해볼 수 있어서 정말 좋았습니다. 목표 달성률을 높이려면 계속 상기시켜야 하니까 이 글에 2주마다 들어와서 목표가 어느 정도 진행되고 있는지 써보겠습니다 <strong>(어디 한 번 해보자고!)</strong>
+<p>2024년은 계획한 목표에 도전해보고 이뤄낸 것들이 많은 해였습니다. 그래서인지 그 어느 때보다 더 만족스러웠지만, 항상 그렇듯 아쉬운 점은 남아있습니다. 올해는 그 부분들을 채워보려고 합니다. 그러기 위해서는 크고 작은 목표를 많이 세우는 게 중요하다고 생각하는데요. 회고 덕분에 목표를 제대로 정리해볼 수 있어서 정말 좋았습니다. 목표 달성률을 높이려면 계속 상기시켜야 하니까 이 글에 2주마다 들어와서 목표가 어느 정도 진행되고 있는지 써보겠습니다 <strong>(어디 한 번 해보자고!)</strong>
  <br />
  <br /></p>
 
@@ -1621,34 +1682,4 @@ SQL로 먼저 작업을 해보는데 서브쿼리를 from 절에 넣어야 데�
   <li>값이 미래 날짜인지, 현재 날짜를 포함한 미래인지 검증
 <br />
 <br /></li>
-</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Spring" /><category term="SpringBoot" /><category term="Validation" /><category term="글또" /><category term="글또10기" /><summary type="html"><![CDATA[배경 백엔드 작업에서 Validation은 꽤나 중요도가 높은 작업으로, 클라이언트가 보내는 데이터가 서버에서 기대하는 형식과 규칙을 충족하는지 확인하는 과정을 의미합니다. 주로 웹 애플리케이션에서 클라이언트가 API를 통해 데이터를 전송할 때 백엔드에서는 이 데이터가 정확한지, 요구사항을 만족하는지 검증을 해야 데이터베이스에 저장하거나 다음 처리를 진행하게 됩니다.]]></summary></entry><entry><title type="html">이직 후기, 그리고 글또 다짐을 곁들인</title><link href="http://localhost:4000/blog/2024/10/13/geultto-first-post.html" rel="alternate" type="text/html" title="이직 후기, 그리고 글또 다짐을 곁들인" /><published>2024-10-13T00:00:00+09:00</published><updated>2024-10-13T00:00:00+09:00</updated><id>http://localhost:4000/blog/2024/10/13/geultto-first-post</id><content type="html" xml:base="http://localhost:4000/blog/2024/10/13/geultto-first-post.html"><![CDATA[<h4 id="이직">이직</h4>
-<p>7월에 SI 스타트업으로 이직했습니다. 공모전 발표 다음날이라 순위의 영향은 크지 않았겠지만, 작업한 내용이 Github에 올라가 있으니 코드 내용으로 봐주셨겠죠. 조금 더 면접을 보고 결정하고 싶었지만, 포트폴리오가 괜찮은 편이라 긍정적으로 결정했습니다.</p>
-
-<p>1월 퇴사 이후 전회사가 상식 밖으로 힘든 곳이었지만 오히려 개발자라는 직업이 내가 하고 싶은 일이라는 걸 확실하게 깨달았습니다.. 그래서 실무 경험을 보여주고자 비사이드 포텐데이에도 참가하고, 운좋게 거기에서 만난 팀원들과 함께 공모전에 참여해서 2등이라는 좋은 결과도 얻을 수 있었네요. 상반기가 매우 바쁘기도 했지만, 그만큼 보람이 있었습니다. 😊
-<br />
-<br /></p>
-
-<h4 id="요즘-일하면서-느낀-건">요즘 일하면서 느낀 건</h4>
-<p>7월 입사인데 벌써 2번째 프로젝트를 한창 진행하고 있는데요. 거의 혼자 백단을 개발하게 되었지만, 저번 프로젝트보다 더 나은 코드를 작성하고 싶어서 애쓰는 중입니다. 글또에 참여한 이유 중 하나지만 SI 특성상 짧은 시간 안에 개발해야 하다보니 기록해두지 않으면 남는 게 없을 것 같더라구요. 그래서 잊어버리지 않도록 틈틈이 트러블 슈팅도 기록해두고, 업무일지도 점점 세분화해서 작성하고 있습니다.
-<br />
-<br /></p>
-
-<h4 id="글또에-가입한-이유">글또에 가입한 이유</h4>
-<p>저는 주변 환경에 굉장히 영향을 많이 받는 편입니다. 안타깝게도 전/현회사 모두 기술 블로그를 운영하거나 글에 관심이 있는 분위기가 아니다보니, 그런 사람들이 모여있는 곳을 원했습니다. 그러다가 올해 초에 알게 된 글또 10기 신청 알림 메일이 왔을 때 너무 기뻤습니다. 지원서가 생각보다 빡세서 떨어지면 어떡하지 걱정했었지만, “삶의 지도”라는 주제에 대해 작성했을 때도 제 인생에 대해 많이 생각해보게 되어 정말 좋았습니다. 여러모로 지쳐가던 때에 원동력으로 삼을 수 있는 사람들이 있는 곳에 참여하게 되었으니, 저도 다시 긍정적으로 생산성있는 일상을 만들어 보고 싶습니다. 😊
-<br />
-<br /></p>
-
-<h4 id="글감-정리">글감 정리</h4>
-<p>자유로운담소에 올라온 채정님의 글감정리를 보고 저도 작성해봤습니다. (채정님 감사합니다!)
-<img width="745" alt="글감정리" src="https://github.com/user-attachments/assets/cf7bbb74-2552-47c9-9a08-af322108c23c" />
-전반적으로 관심있으면서 제대로 한 번 깊게 파보고 싶은 부분들을 모아봤는데요, 변경 가능성이 있지만 2주씩 꾸준히 시간을 투자해서 저도 정리하고 보는 분들도 흥미있게 읽을 수 있도록 작성해보겠습니다 👍 
-<br />
-그리고 별개로 미뤄두었던 블로그 정비를 다시 해야겠다고 생각했습니다. 이번주 안에 반드시 댓글과 방명록 기능을 추가해 볼게요 😉
-<br />
-<br /></p>
-
-<h4 id="다짐">다짐</h4>
-
-<p>블로그를 작성하면서 공부하거나 작업하면서 알게 된 내용을 정리했지만, 다시 읽어보면 가독성도 떨어지고 뭔가 다른 사람들의 블로그를 베끼는 것 같더라구요. 그래서 저는 글또를 통해 좋은 글을 많이 보고 주제에 대해 충분히 고민해보고 작성해보려고 합니다. 또 글을 쓰는 재미와 방법에 대해 많이 알아가고 싶어요. 첫 글부터 마감일에 작성하게 되어서 괜시리 머쓱하지만 바로 다음주 글부터는 미리미리 써보도록 하겠습니다 ‼️</p>
-
-<p>글또가 본격적으로 시작한지 벌써 2주가 되었네요. 그동안 소모임에도 간간히 참여하고(주로 달려또🏃), 이번주에는 같은 백엔드인 다혜님을 튜사에서 만나 작업 겸 저녁챗을 진행했는데 감사하게도 이런저런 얘기를 해주셔서 덕분에 좋은 시간을 보냈습니다. ㅎㅎ 남은 10월에도 튜사에 한 번 정도는 더 방문해보고 싶네요. 지원서에 적었던 것처럼 열정적인 글또분들에게 원동력을 얻어서 더 열심히 참여하고 글도 써봐야겠습니다.</p>]]></content><author><name>Dajeong Park</name></author><category term="blog" /><category term="회고" /><category term="글또" /><category term="글또10기" /><summary type="html"><![CDATA[이직 7월에 SI 스타트업으로 이직했습니다. 공모전 발표 다음날이라 순위의 영향은 크지 않았겠지만, 작업한 내용이 Github에 올라가 있으니 코드 내용으로 봐주셨겠죠. 조금 더 면접을 보고 결정하고 싶었지만, 포트폴리오가 괜찮은 편이라 긍정적으로 결정했습니다.]]></summary></entry></feed>
+</ul>]]></content><author><name>Dajeong Park</name></author><category term="wiki" /><category term="Spring" /><category term="SpringBoot" /><category term="Validation" /><category term="글또" /><category term="글또10기" /><summary type="html"><![CDATA[배경 백엔드 작업에서 Validation은 꽤나 중요도가 높은 작업으로, 클라이언트가 보내는 데이터가 서버에서 기대하는 형식과 규칙을 충족하는지 확인하는 과정을 의미합니다. 주로 웹 애플리케이션에서 클라이언트가 API를 통해 데이터를 전송할 때 백엔드에서는 이 데이터가 정확한지, 요구사항을 만족하는지 검증을 해야 데이터베이스에 저장하거나 다음 처리를 진행하게 됩니다.]]></summary></entry></feed>
