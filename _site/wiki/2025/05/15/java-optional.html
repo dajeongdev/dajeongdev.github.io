@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SBCV6PTMNJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-SBCV6PTMNJ');
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>null-safe하게 Optional 사용하기 | Every Single Day</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="null-safe하게 Optional 사용하기" />
+<meta name="author" content="Dajeong Park" />
+<meta property="og:locale" content="ko" />
+<meta name="description" content="배경 프로젝트 작업 중 Optional을 자주 사용하고 있다는 걸 인지하게 되었다. 기본 개념부터 주의할 점을 다시 살펴보니, 생각보다 다양한 방식으로 null-safe한 처리가 가능하다는 걸 알게 되었고, 흐름을 더 명확하게 표현할 수 있다는 점도 인상 깊었다. 이번 기회에 Optional을 어떻게 쓰는 것이 바람직한지, 실무에서 자주 하는 실수는 무엇인지 정리해보고자 한다." />
+<meta property="og:description" content="배경 프로젝트 작업 중 Optional을 자주 사용하고 있다는 걸 인지하게 되었다. 기본 개념부터 주의할 점을 다시 살펴보니, 생각보다 다양한 방식으로 null-safe한 처리가 가능하다는 걸 알게 되었고, 흐름을 더 명확하게 표현할 수 있다는 점도 인상 깊었다. 이번 기회에 Optional을 어떻게 쓰는 것이 바람직한지, 실무에서 자주 하는 실수는 무엇인지 정리해보고자 한다." />
+<link rel="canonical" href="http://localhost:4000/wiki/2025/05/15/java-optional.html" />
+<meta property="og:url" content="http://localhost:4000/wiki/2025/05/15/java-optional.html" />
+<meta property="og:site_name" content="Every Single Day" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-05-15T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="null-safe하게 Optional 사용하기" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2025-05-15T00:00:00+09:00","datePublished":"2025-05-15T00:00:00+09:00","description":"배경 프로젝트 작업 중 Optional을 자주 사용하고 있다는 걸 인지하게 되었다. 기본 개념부터 주의할 점을 다시 살펴보니, 생각보다 다양한 방식으로 null-safe한 처리가 가능하다는 걸 알게 되었고, 흐름을 더 명확하게 표현할 수 있다는 점도 인상 깊었다. 이번 기회에 Optional을 어떻게 쓰는 것이 바람직한지, 실무에서 자주 하는 실수는 무엇인지 정리해보고자 한다.","headline":"null-safe하게 Optional 사용하기","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2025/05/15/java-optional.html"},"url":"http://localhost:4000/wiki/2025/05/15/java-optional.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon.ico/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/favicon.ico/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/favicon.ico/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/favicon.ico/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/favicon.ico/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/favicon.ico/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/favicon.ico/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/favicon.ico/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon.ico/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/favicon.ico/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon.ico/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon.ico/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="shortcut icon" href="">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Every Single Day" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="Every Single Day" src="" onerror="this.style.display='none'">
+  Every Single Day
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger"><a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/tags.html">TAGS</a>
+
+
+
+
+</div>
+        </nav></div>
+  </div>
+</header>
+
+<script>
+  (function() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;
+
+      var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  })();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<!--<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+-->
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">null-safe하게 Optional 사용하기</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2025-05-15T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> May 15, 2025
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 20 mins</span>
+  </p><div class="post-tags"><a class="post-tag" href="/tags.html#Java">#Java</a><a class="post-tag" href="/tags.html#Java8">#Java8</a><a class="post-tag" href="/tags.html#Optional">#Optional</a></div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h3 id="배경">배경</h3>
+<p>프로젝트 작업 중 Optional을 자주 사용하고 있다는 걸 인지하게 되었다. 기본 개념부터 주의할 점을 다시 살펴보니, 생각보다 다양한 방식으로 null-safe한 처리가 가능하다는 걸 알게 되었고, 흐름을 더 명확하게 표현할 수 있다는 점도 인상 깊었다. 이번 기회에 Optional을 어떻게 쓰는 것이 바람직한지, 실무에서 자주 하는 실수는 무엇인지 정리해보고자 한다.
+<br />
+<br /></p>
+
+<h2 id="optional">Optional</h2>
+<p><img src="https://dajeongdev.github.io/assets/images/posts/optional.png" /></p>
+
+<ul>
+  <li>Java에서 NullPointerException(NPE)은 가장 흔한 런타임 오류 중 하나다.</li>
+  <li>Java 8 이전에는 메서드가 null을 반환할 경우, 사용하는 쪽에서 null 여부를 주석이나 문서로만 유추해야 했다.</li>
+  <li>Java 8에서 도입된 Optional을 사용하여 null 여부를 명시적으로 표현할 수 있어, map, filter, flatMap 등 함수형 메서드를 지원하여 null-safe한 코드 작성이 가능하다.
+<br />
+<br /></li>
+</ul>
+
+<h2 id="optional-주요-메서드-요약">Optional 주요 메서드 요약</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>메서드</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>map()</td>
+      <td>내부 값을 가공하고 Optional로 감싸서 제공</td>
+    </tr>
+    <tr>
+      <td>flatMap()</td>
+      <td>내부 값이 또 다른 Optional일 때 중첩 방지</td>
+    </tr>
+    <tr>
+      <td>filter()</td>
+      <td>조건을 만족할 경우만 값을 유지</td>
+    </tr>
+    <tr>
+      <td>ifPresent()</td>
+      <td>값이 있으면 실행 (void 리턴)</td>
+    </tr>
+    <tr>
+      <td>ifPresentOrElse() (Java 9)</td>
+      <td>값이 있으면 A 실행, 없으면 B 실행</td>
+    </tr>
+    <tr>
+      <td>orElse()</td>
+      <td>값이 없을 경우 기본값 제공</td>
+    </tr>
+    <tr>
+      <td>orElseGet()</td>
+      <td>값이 없을 경우 Supplier 실행</td>
+    </tr>
+    <tr>
+      <td>orElseThrow()</td>
+      <td>값이 없을 경우 예외 발생</td>
+    </tr>
+    <tr>
+      <td>isPresent()/isEmpty()<br />(Java 11)</td>
+      <td>값 존재 여부 확인 (→ 가급적 사용 자제, ifPresent() 등 권장)</td>
+    </tr>
+    <tr>
+      <td>or() (Java 9)</td>
+      <td>비어 있을 경우 대체 Optional 제공</td>
+    </tr>
+    <tr>
+      <td>stream (Java 9)</td>
+      <td>Optional을 Stream으로 변환</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="orelse와-orelseget">orElse와 orElseGet</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// orElse는 항상 실행</span>
+<span class="nc">String</span> <span class="n">name</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="na">orElse</span><span class="o">(</span><span class="n">getExpensiveDefault</span><span class="o">());</span>
+
+<span class="c1">// orElseGet은 필요할 때만 실행(lazy)</span>
+<span class="nc">String</span> <span class="n">name</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="na">orElseGet</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="n">getExpensiveDefault</span><span class="o">());</span>
+</code></pre></div></div>
+
+<p>⭐️ <code class="language-plaintext highlighter-rouge">orElse()</code>는 기본값을 항상 먼저 계산하다. 불필요한 리소스 낭비가 되지 않도록, 기본값이 필수가 아니라면 <code class="language-plaintext highlighter-rouge">orElseGet()</code>을 사용하는 것이 좋다.</p>
+
+<h3 id="ispresent-사용-시-주의사항">isPresent() 사용 시 주의사항</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">(</span><span class="n">optionalUser</span><span class="o">.</span><span class="na">isPresent</span><span class="o">())</span> <span class="o">{</span>
+	<span class="nc">User</span> <span class="n">user</span> <span class="o">=</span> <span class="n">optionalUser</span><span class="o">.</span><span class="na">get</span><span class="o">();</span> <span class="c1">// 여전히 예외 위험 있음</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Optional의 목적은 null-safe한 코드를 작성하는 건데, isPresent()를 써서 if문으로 다시 체크한다면 결국 이전 방식(if (value ≠ null)과 다를 바 없기 때문에 Optional을 쓰는 이유가 불분명해지게 된다.
+    <ul>
+      <li>또한, isPresent()가 true라고 해도 중간에 다른 로직이 추가되면 get() 호출 시점에 Optional이 달라질 수 있어 위험하다.</li>
+    </ul>
+  </li>
+  <li>이럴 때는 아래처럼 명시적인 함수형 스타일을 사용하면 좋다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">User</span> <span class="n">user</span> <span class="o">=</span> <span class="n">optionalUser</span>
+	<span class="o">.</span><span class="na">orElseThrow</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="nc">NotFoundException</span><span class="o">(</span><span class="s">"사용자를 찾을 수 없습니다."</span><span class="o">));</span>
+</code></pre></div></div>
+
+<ul>
+  <li>ifPresent()도 비어있지 않을 때만 수행하는 작업을 표현하기 좋다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">optionalUser</span><span class="o">.</span><span class="na">ifPresent</span><span class="o">(</span><span class="n">user</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">user</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+</code></pre></div></div>
+
+<h3 id="filter">filter</h3>
+
+<ul>
+  <li>조건에 맞는 값만 유지</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">name</span> <span class="o">=</span> <span class="nc">Optional</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">"파인애플"</span><span class="o">);</span>
+<span class="n">name</span><span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">n</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="o">)</span>
+		<span class="o">.</span><span class="na">ifPresent</span><span class="o">(</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"이름이 너무 깁니다. : "</span> <span class="o">+</span> <span class="n">n</span><span class="o">));</span>
+</code></pre></div></div>
+
+<h3 id="map">map</h3>
+
+<ul>
+  <li>값을 null-safe하게 변환</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">name</span> <span class="o">=</span> <span class="nc">Optional</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">"파인애플"</span><span class="o">);</span>
+<span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">nameLength</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="nl">String:</span><span class="o">:</span><span class="n">length</span><span class="o">);</span>
+<span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"결과: {}"</span><span class="o">,</span> <span class="n">nameLength</span><span class="o">.</span><span class="na">orElse</span><span class="o">(</span><span class="mi">0</span><span class="o">));</span> <span class="c1">// 결과: 4</span>
+</code></pre></div></div>
+
+<h3 id="flatmap">flatMap</h3>
+
+<ul>
+  <li>중첩된 Optional 해제</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// User- &gt; Optional&lt;Profile&gt;를 반환하는 메서드가 있을 경우</span>
+<span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">User</span><span class="o">&gt;</span> <span class="n">user</span> <span class="o">=</span> <span class="nc">Optional</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="k">new</span> <span class="nc">User</span><span class="o">());</span>
+
+<span class="nc">String</span> <span class="n">email</span> <span class="o">=</span> <span class="n">user</span>
+	<span class="o">.</span><span class="na">flatMap</span><span class="o">(</span><span class="nl">User:</span><span class="o">:</span><span class="n">getProfile</span><span class="o">)</span> <span class="c1">// Optional&lt;Profile&gt;</span>
+	<span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="nl">Profile:</span><span class="o">:</span><span class="n">getEmail</span><span class="o">)</span>    <span class="c1">// Optional&lt;String&gt;</span>
+	<span class="c1">// map을 안 쓰면 Optioanl&lt;Optional&lt;String&gt;&gt;이 되어버림</span>
+	<span class="o">.</span><span class="na">orElse</span><span class="o">(</span><span class="s">"이메일 정보 없음"</span><span class="o">);</span>
+</code></pre></div></div>
+<p><br />
+<br /></p>
+
+<h2 id="optional-지양해야-할-사용법"><strong>Optional 지양해야 할 사용법</strong></h2>
+
+<h3 id="1-무분별한-optionalget-사용">1. 무분별한 Optional.get() 사용</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">User</span><span class="o">&gt;</span> <span class="n">user</span> <span class="o">=</span> <span class="n">userRepository</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="mi">1L</span><span class="o">);</span>
+<span class="o">**</span><span class="nc">User</span> <span class="n">u</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="na">get</span><span class="o">();**</span> 
+</code></pre></div></div>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Optional.get()</code>은 내부에 값이 없을 경우 런타임 예외(NoSuchElementException) 발생하며, null-safe하게 코드를 작성하려고 Optional을 쓰는데, get()을 쓰면 그 의미가 사라진다.</li>
+  <li>isPresent()와 함께 쓰더라도, 유지보수 중에 변경되면 예외 발생 가능성 존재한다.</li>
+</ul>
+
+<p><strong>👍 대안:</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">User</span> <span class="n">user</span> <span class="o">=</span> <span class="n">userRepository</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="mi">1L</span><span class="o">)</span>
+		<span class="o">.</span><span class="na">orElseThrow</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="nc">CommonException</span><span class="o">(</span><span class="nc">ErrorCode</span><span class="o">.</span><span class="na">NOT_FOUND</span><span class="o">));</span>
+</code></pre></div></div>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">orElse()</code>이나 <code class="language-plaintext highlighter-rouge">orElseThrow()</code> 사용</li>
+</ul>
+
+<h3 id="2-필드에--사용">2. 필드에  사용</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">name</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>JPA, Jackson, Hibernate 등 직렬화/역직렬화/매핑 과정에서 오류가 발생할 수 있다.</li>
+  <li>필드는 일반적으로 객체의 상태를 표현하는데, Optional은 계산 결과나 조건적 반환을 위한 용도라 맞지 않는고, 메모리 낭비 및 불필요한 래핑으로 가독성이 저하될 수 있다.</li>
+</ul>
+
+<p><strong>👍 대안:</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">getNameOptional</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="nc">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>필드는 일반 타입으로 선언, getter에서 Optional로 감싸는 방식 권장한다.</li>
+</ul>
+
+<h3 id="3-파라미터나-리턴값으로-사용">3. 파라미터나 리턴값으로 사용</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">updateName</span><span class="o">(</span><span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">name</span><span class="o">)</span> <span class="c1">// 잘못된 설계</span>
+</code></pre></div></div>
+<ul>
+  <li>Optional은 메서드 결과를 감싸기 위한 목적이지, 인자로 전달하는 용도가 아니며, 오히려 사용하는 쪽에서 of(), empty() 등을 강제하게 되어 복잡도가 증가한다.</li>
+</ul>
+
+<p><strong>👍 대안:</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">updateName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+	<span class="c1">// 내부에서 Optional.ofNullable(name)으로 처리</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>메서드 인자는 기본 타입으로 받고, 내부에서 Optional.ofNullable()로 처리한다.
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">User</span><span class="o">&gt;</span> <span class="nf">findById</span><span class="o">(</span><span class="nc">Long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="nc">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(...);</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>리턴 타입으로 Optional을 쓰면 “값이 없을 수도 있다”라는 의도가 명확하게 드러나므로 좋다.
+<br />
+<br /></li>
+</ul>
+
+<h2 id="optional-단점">Optional 단점</h2>
+
+<h3 id="1-성능-오버헤드">1. 성능 오버헤드</h3>
+<ul>
+  <li>Optional은 결국 하나의 래퍼 객체로, 값 하나를 감싸기 위해 객체가 추가로 생성된다. 특히 빈 Optional 객체는 재사용되지만, 값이 있을 경우 매번 Optional.of()로 새 인스턴스를 생성한다.</li>
+  <li>자주 호출되는 메서드에서 Optional을 남발하면 GC에 부담이 증가하고, 성능 저하 가능성이 높아진다.</li>
+</ul>
+
+<h3 id="2-체이닝이-지나치면-가독성-저하">2. 체이닝이 지나치면 가독성 저하</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">user</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">flatMap</span><span class="o">(</span><span class="nl">User:</span><span class="o">:</span><span class="n">getProfile</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="nl">Profile:</span><span class="o">:</span><span class="n">getEmail</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">email</span> <span class="o">-&gt;</span> <span class="n">email</span><span class="o">.</span><span class="na">endsWith</span><span class="o">(</span><span class="s">".com"</span><span class="o">))</span>
+    <span class="o">.</span><span class="na">orElse</span><span class="o">(</span><span class="s">"이메일 없음"</span><span class="o">);</span>
+</code></pre></div></div>
+<ul>
+  <li>함수형 스타일은 깔끔해 보일 수 있지만, 익숙하지 않은 개발자에겐 오히려 난해하다. 특히 예외 처리나 조건 분기가 복잡할 수록 명령형 코드보다 읽기 어려워질 수 있다.
+<br />
+<br /></li>
+</ul>
+
+<h2 id="optional을-사용하는-바람직한-위치">Optional을 사용하는 바람직한 위치</h2>
+<p>| 계층 | 사용 여부 | 이유 |
+| — | — | — |
+| Repository | 리턴값 | 조회 결과가 없을 수 있다는 의도를 명확히 드러냄 |
+| Service | 내부 처리/변환 시 | Optional을 바로 처리해서 도메인 객체로 변환하거나 예외 처리 |
+| Controller | ❌ | 응답 객체는 명확하고 단순한 타입이 바람직하므로 Optional 노출 지양 |</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Repository</span>
+<span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">User</span><span class="o">&gt;</span> <span class="nf">findById</span><span class="o">(</span><span class="nc">Long</span> <span class="n">id</span><span class="o">);</span>
+
+<span class="c1">// Service</span>
+<span class="kd">public</span> <span class="nc">User</span> <span class="nf">findUserOrThrow</span><span class="o">(</span><span class="nc">Long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+	<span class="k">return</span> <span class="n">userRepository</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="n">id</span><span class="o">)</span>
+			<span class="o">.</span><span class="na">orElseThrow</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="nc">CommonException</span><span class="o">(</span><span class="nc">ErrorCode</span><span class="o">.</span><span class="na">NOT_FOUND_USER</span><span class="o">));</span>
+<span class="o">}</span>
+
+<span class="c1">// Controller</span>
+<span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/users/{id}"</span><span class="o">)</span>
+<span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">UserResponse</span><span class="o">&gt;</span> <span class="nf">getUser</span><span class="o">(</span><span class="nd">@PathVariable</span><span class="o">(</span><span class="s">"id"</span><span class="o">)</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+	<span class="nc">User</span> <span class="n">user</span> <span class="o">=</span> <span class="n">userService</span><span class="o">.</span><span class="na">findUserOrThrow</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
+	<span class="k">return</span> <span class="nc">ResponseEntity</span><span class="o">.</span><span class="na">ok</span><span class="o">(</span><span class="nc">UserResponse</span><span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">user</span><span class="o">));</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>➡️ Repository는 Optional로 감싸서 리턴하고, Service에서 처리하고, Controller에서는 노출하지 않는 것이 바람직하다.
+<br />
+<br /></p>
+
+<h2 id="optional과-validationexception-처리">Optional과 Validation/Exception 처리</h2>
+
+<p>**1. Optional로 조건 분기 없이 깔끔한 예외 처리 가능하다.  **</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">User</span> <span class="n">user</span> <span class="o">=</span> <span class="n">userRepository</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="n">id</span><span class="o">)</span>
+	<span class="o">.</span><span class="na">orElseThrow</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="nc">CommonException</span><span class="o">(</span><span class="nc">ErrorCode</span><span class="o">.</span><span class="na">NOT_FOUND_USER</span><span class="o">));</span>
+</code></pre></div></div>
+<ul>
+  <li>orElseThrow()를 활용하면 null 체크와 예외 처리를 한 줄로 처리 가능하다.</li>
+</ul>
+
+<p><strong>2. Validation과의 연계는 Optional 밖에서 수행한다.</strong></p>
+<ul>
+  <li>입력값이 Optional인 경우, Spring Validation에서는 제대로 처리되지 않을 수 있으므로, 요청 DTO에는 기본 타입으로 선언하고, 이후 변환 시 Optional을 사용한다.
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserRequest</span> <span class="o">{</span>
+      <span class="nd">@NotBlank</span>
+      <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>받은 값이 null일 수 있다면, Service 계층에서 Optional.ofNullable(request.getName())으로 감싸서 처리하는 것이 낫다.
+<br />
+<br /></li>
+</ul>
+
+<h2 id="마무리">마무리</h2>
+<p>Optional은 제대로 사용하면 강력한 null-safe 도구지만, 목적에 맞지 않게 사용하거나 남용할 경우 오히려 가독성과 성능을 저하시킬 수 있으므로, 많이 사용할 수록 바람직한 방식으로 사용하는 것이 중요하다.</p>
+
+<p>✅ Optional은 리턴에만 적절하게 사용<br />
+❌ get(), isPresent() 남용 금지<br />
+🧩 orElseGet(), orElse 차이 유의<br /></p>
+
+
+    </div>
+
+</article>
+<div class="post-nav"><a class="previous" href="/blog/2025/05/02/review-geultto.html" title="조금 늦은 글또 회고">조금 늦은 글또 회고</a><span></span></div><div class="post-comments">  <div id="gisqus_thread"></div>
+  <script src="https://giscus.app/client.js"
+  data-repo="dajeongdev/dajeongdev.github.io"
+  data-repo-id="R_kgDOHS7Ikw"
+  data-category="General"
+  data-category-id="DIC_kwDOHS7Ik84Cj70Z"
+  data-mapping="pathname"
+  data-strict="0"
+  data-reactions-enabled="1"
+  data-emit-metadata="0"
+  data-input-position="bottom"
+  data-theme="preferred_color_scheme"
+  data-lang="ko"
+  crossorigin="anonymous"
+  async>
+  let giscusAttributes = {
+  src: "https://giscus.app/client.js",
+  "data-repo": "da-in/da-in.github.io",
+  "data-repo-id": "MDEwOlJlcG9zaXRvcnkzNTM5MDcyOTU=",
+  "data-category": "General",
+  "data-category-id": "DIC_kwDOFRgyX84CSEWg",
+  "data-mapping": "pathname",
+  "data-reactions-enabled": "1",
+  "data-emit-metadata": "0",
+  "data-theme": initTheme,
+  "data-input-position":
+    "bottom",
+  "data-lang": "",
+  crossorigin: "anonymous",
+  async: "",
+};
+
+let giscusScript = document.createElement("script");
+Object.entries(giscusAttributes).forEach(([key, value]) =>
+  giscusScript.setAttribute(key, value)
+);
+document.getElementById("tail-wrapper").appendChild(giscusScript);
+</script></div><div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/wiki/2023/11/13/prime-number.html" title="">자바로 소수 판별</a></li><li><a class="post-link" href="/wiki/2025/03/28/spring-transactional-annotation.html" title="">Spring @Transactional을 정말 제대로 쓰고 있는 걸까?</a></li><li><a class="post-link" href="/wiki/2024/03/17/string-replacement.html" title="">문자열 대치</a></li><li><a class="post-link" href="/wiki/2023/11/21/list-remove-method.html" title="">List에서 원소 삭제하기 remove()</a></li></ul>
+    </div></script>
+  </section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+      <div>Copyright © 2024 @Dajeong Park</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="http://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
