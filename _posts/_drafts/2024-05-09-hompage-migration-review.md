@@ -4,6 +4,7 @@ title: 홈페이지 마이그레이션 회고
 subtitle: 
 categories: blog
 tags: [Java, Spring, SpringBoot, Maven, Gradle, JSP, Thymeleaf Migration, Review]
+published: false
 ---
 포트폴리오를 작성하다보니 생각보다 예전에 했던 프로젝트들이 회고해볼 만한 게 많아서 한 번 되짚어보려고 한다.
 <br/>
