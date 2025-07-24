@@ -14,22 +14,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta>
   <meta name="google-site-verification" content="zKcasmEMRn8LOc1DeBiiQZrHbcmWeFCif-fjAjsiVjA" /><!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법 | Every Single Day</title>
+<title>QueryDSL에서 group_concat SEPARATOR 없이 구분자 처리하기 | Every Single Day</title>
 <meta name="generator" content="Jekyll v3.9.5" />
-<meta property="og:title" content="update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법" />
+<meta property="og:title" content="QueryDSL에서 group_concat SEPARATOR 없이 구분자 처리하기" />
 <meta name="author" content="Dajeong Park" />
 <meta property="og:locale" content="ko" />
-<meta name="description" content="배경 update문의 결과를 확인하는데 생성일 컬럼이 null로 update 되는 문제를 발견했다." />
-<meta property="og:description" content="배경 update문의 결과를 확인하는데 생성일 컬럼이 null로 update 되는 문제를 발견했다." />
-<link rel="canonical" href="http://localhost:4000/wiki/2024/01/12/jpa-created-date-column-null.html" />
-<meta property="og:url" content="http://localhost:4000/wiki/2024/01/12/jpa-created-date-column-null.html" />
+<meta name="description" content="💡 문제 상황" />
+<meta property="og:description" content="💡 문제 상황" />
+<link rel="canonical" href="http://localhost:4000/wiki/2025/06/03/queryds-separator.html" />
+<meta property="og:url" content="http://localhost:4000/wiki/2025/06/03/queryds-separator.html" />
 <meta property="og:site_name" content="Every Single Day" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2024-01-12T00:00:00+09:00" />
+<meta property="article:published_time" content="2025-06-03T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법" />
+<meta property="twitter:title" content="QueryDSL에서 group_concat SEPARATOR 없이 구분자 처리하기" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2024-01-12T00:00:00+09:00","datePublished":"2024-01-12T00:00:00+09:00","description":"배경 update문의 결과를 확인하는데 생성일 컬럼이 null로 update 되는 문제를 발견했다.","headline":"update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2024/01/12/jpa-created-date-column-null.html"},"url":"http://localhost:4000/wiki/2024/01/12/jpa-created-date-column-null.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2025-06-03T00:00:00+09:00","datePublished":"2025-06-03T00:00:00+09:00","description":"💡 문제 상황","headline":"QueryDSL에서 group_concat SEPARATOR 없이 구분자 처리하기","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2025/06/03/queryds-separator.html"},"url":"http://localhost:4000/wiki/2025/06/03/queryds-separator.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon.ico/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="/assets/favicon.ico/apple-icon-60x60.png">
@@ -641,11 +641,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법</h1>
+  <h1 class="post-title p-name" itemprop="name headline">QueryDSL에서 group_concat SEPARATOR 없이 구분자 처리하기</h1>
   <h2 class="post-subtitle"></h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2024-01-12T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Jan 12, 2024
+    <time class="dt-published" datetime="2025-06-03T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Jun 03, 2025
     </time>
 
     
@@ -682,56 +682,123 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
-  </p><div class="post-tags"><a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#JPA">#JPA</a></div></header>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
+  </p><div class="post-tags"><a class="post-tag" href="/tags.html#QueryDSL">#QueryDSL</a></div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <h3 id="배경">배경</h3>
+      <h3 id="-문제-상황">💡 문제 상황</h3>
+
+<p>종종 테이블의 여러 개로 들어가 있는 데이터를 List<String>의 형태로 보내야 할 때가 있다. QueryDSL을 사용할 때 이를 위해 보통 group_concat을 사용해 하나의 문자열로 묶은 뒤, DTO에서 String으로 받아 `String.split(”,”)`을 사용하여 List로 변환하하는 방식을 사용하곤 했다.</String></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Expressions</span><span class="o">.</span><span class="na">stringTemplate</span><span class="o">(</span><span class="s">"group_concat({0})"</span><span class="o">,</span> <span class="n">book</span><span class="o">.</span><span class="na">title</span><span class="o">);</span>
+</code></pre></div></div>
+<p>그런데 이 방식엔 치명적인 문제가 있다.
+<br />
+<br /></p>
+
+<h3 id="-데이터에-쉼표가-들어간다면">💫 데이터에 쉼표가 들어간다면?</h3>
+<p>예를 들어, 다음 같은 책 제목이 있다고 할 때</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"첫 여름, 완주"
+"다섯 번째 계절"
+</code></pre></div></div>
+<p>이 값들을 기존 방식대로 group_concat으로 묶은 뒤 DTO에서 <code class="language-plaintext highlighter-rouge">split(”,”)</code> 처리를 해보자.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">titles</span> <span class="o">=</span> <span class="s">"첫 여름, 완주, 다섯 번째 계절"</span><span class="o">;</span>
+<span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">aresult</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">titles</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">","</span><span class="o">));</span>
+<span class="c1">// ["첫 여름", " 완주", "다섯 번째 계절"]</span>
+</code></pre></div></div>
+
+<p>제목 안의 쉼표가 String.split()의 기준이 되어 값이 쪼개져버리는 문제가 발생한다.
+<br />
+<br /></p>
+
+<h3 id="-그럼-separator를-쓰면-되지-않을까">🤔 그럼 SEPARATOR를 쓰면 되지 않을까?</h3>
+<p>물론 MySQL에서는 <code class="language-plaintext highlighter-rouge">group_concat(… SEPARATOR ‘|||’)</code> 같은 방식으로 구분자를 지정할 수 있다.</p>
+
+<p>하지만 <strong>QueryDSL 내부의 Hibernate에서 이 SEPERATOR를 SQL이 아니라 JPQL로 파싱하려고 하기 때문에 SyntaxException을 발생</strong>하게 된다. 그래서 MySQL 전용 문법인 SEPARATOR를 직접 쓸 수 없다.</p>
+
+<p>참고로 <code class="language-plaintext highlighter-rouge">group_concat</code>을 사용하면 기본적으로 <code class="language-plaintext highlighter-rouge">,(쉼표)</code>를 구분자로 사용한다.
+<br />
+<br /></p>
+
+<h3 id="해결-querydsl에서-구분자-수동-삽입">해결: QueryDSL에서 구분자 수동 삽입</h3>
+
+<p><code class="language-plaintext highlighter-rouge">group_concat</code>의 기본 구분자를 바꿀 수는 없지만, <strong>각 값 뒤에 원하는 구분자(<code class="language-plaintext highlighter-rouge">|||</code>)를 직접 붙일 수 있다.</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// QueryDSL</span>
+<span class="nc">Expressions</span><span class="o">.</span><span class="na">stringTemplate</span><span class="o">(</span>
+    <span class="s">"group_concat(distinct concat({0}, '|||'))"</span><span class="o">,</span> <span class="n">book</span><span class="o">.</span><span class="na">title</span>
+<span class="o">)</span>
+
+<span class="c1">// DTO</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">convertTitles</span><span class="o">(</span><span class="nc">String</span> <span class="n">titles</span><span class="o">)</span> <span class="o">{</span>
+		<span class="c1">// 쉼표로 분리된 값들을 '|||' 기준으로 나눔</span>
+    <span class="k">return</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">titles</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">"\\\\|\\\\|\\\\|"</span><span class="o">))</span> 
+	    <span class="c1">// 앞에 붙을 수 있는 쉼표 제거</span>
+	  <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="s">","</span><span class="o">)</span> <span class="o">?</span> <span class="n">s</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">s</span><span class="o">)</span>
+      <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="o">!</span><span class="n">s</span><span class="o">.</span><span class="na">isBlank</span><span class="o">())</span>
+      <span class="o">.</span><span class="na">toList</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>이렇게 하면 <code class="language-plaintext highlighter-rouge">group_concat</code>은 여전히 쉼표로 값을 붙이지만, 각 값의 내부에는 우리가 지정한 구분자(<code class="language-plaintext highlighter-rouge">|||</code>)가 붙어 있어 안전하게 분리할 수 있다.
+<br />
+<br /> 
+<br /></p>
+
+<h3 id="추가-데이터-안에-반드시-쉼표-포함된다면">추가: 데이터 안에 반드시 쉼표 포함된다면?</h3>
+
+<p>만약 데이터 안에 쉼표가 반드시 포함된다면, 다음과 같이 한 번 더 escape 처리하는 것이 안전하다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// QueryDSL</span>
+<span class="nc">Expressions</span><span class="o">.</span><span class="na">stringTemplate</span><span class="o">(</span>
+    <span class="s">"replace(group_concat(distinct replace({0}, ',', '##COMMA##')), ',', '|||')"</span><span class="o">,</span>
+    <span class="n">book</span><span class="o">.</span><span class="na">title</span>
+<span class="o">)</span>
+
+<span class="c1">// DTO</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">convertTitles</span><span class="o">(</span><span class="nc">String</span> <span class="n">titles</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">titles</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">"\\\\|\\\\|\\\\|"</span><span class="o">))</span>
+	    <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"##COMMA##"</span><span class="o">,</span> <span class="s">","</span><span class="o">))</span>
+      <span class="o">.</span><span class="na">toList</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p><br />
+<br /></p>
+
+<h3 id="-native-query를-사용하지-않은-이유">✅ Native Query를 사용하지 않은 이유</h3>
+
+<p>Native Query를 사용하면 <code class="language-plaintext highlighter-rouge">SEPARATOR</code>나 <code class="language-plaintext highlighter-rouge">ORDER BY</code> 같은 SQL을 QueryDSL보다 자유롭게 쓸 수 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Query</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"select group_concat(distinct title SEPARATOR '|||') "</span> <span class="o">+</span>
+	<span class="s">"FROM book"</span><span class="o">,</span> <span class="n">nativeQuery</span> <span class="o">=</span> <span class="kc">true</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>하지만 나는 여러 이유로 QueryDSL 방식을 선택했다.</p>
 <ul>
-  <li>update문의 결과를 확인하는데 생성일 컬럼이 null로 update 되는 문제를 발견했다. <br />
+  <li>사용해야 하는 조건이 많음</li>
+  <li><strong>타입 안정성</strong>이 유리함</li>
+  <li>Native Query는 유지보수 어렵고, 타입 매핑이 불편함</li>
+  <li>문자열 조립을 잘못하면 <strong>SQL Injection 위험</strong>도 있음
+    <ul>
+      <li>QueryDSL에서 파라미터는 내부적으로 <code class="language-plaintext highlighter-rouge">PreparedStatement</code>로 바인딩되기 때문에 <strong>사용자 입력이 직접 쿼리 구조에 들어가지 않으며, SQL Injection 공격으로부터 안전</strong>
+<br />
+<br />
 <br /></li>
+    </ul>
+  </li>
 </ul>
 
-<h3 id="원인">원인</h3>
-<ul>
-  <li>정확히는 생성일 컬럼에 이름을 설정하기 위해 붙인 @Column 어노테이션의 옵션 중 하나인 updatable의 기본값이 true라서 값을 설정해주지 않은 생성일 컬럼에 null이 update 된 것이다.</li>
-</ul>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Target</span><span class="o">({</span><span class="no">METHOD</span><span class="o">,</span> <span class="no">FIELD</span><span class="o">})</span> 
-<span class="nd">@Retention</span><span class="o">(</span><span class="no">RUNTIME</span><span class="o">)</span>
-<span class="kd">public</span> <span class="nd">@interface</span> <span class="nc">Column</span> <span class="o">{</span>
-	    <span class="cm">/**
-	     * (Optional) Whether the column is included in SQL UPDATE 
-	     * statements generated by the persistence provider.
-	     */</span>
-	    <span class="kt">boolean</span> <span class="nf">updatable</span><span class="o">()</span> <span class="k">default</span> <span class="kc">true</span><span class="o">;</span>
-  <span class="o">}</span>
-</code></pre></div></div>
-<p><br /></p>
-
-<h3 id="해결-방법">해결 방법</h3>
-<ul>
-  <li>그래서 @Column 어노테이션의 updatable 옵션을 false로 지정해주어야 한다.</li>
-</ul>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@CreatedDate</span>
-<span class="nd">@Column</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"created_date_time"</span><span class="o">,</span> <span class="n">updatable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
-<span class="kd">private</span> <span class="nc">LocalDateTime</span> <span class="n">createdDateTime</span><span class="o">;</span>
-</code></pre></div></div>
-<p><br /></p>
-
-<h4 id="참고">참고</h4>
-<ul>
-  <li><a href="https://wakestand.tistory.com/935">JPA @CreatedDate Column Update시 Null 되는 현상 해결방법</a></li>
-</ul>
+<h3 id="-마무리">📌 마무리</h3>
+<p>더 좋은 방법이 있을 수 있겠지만 (있다면 댓글 부탁드립니다!)<br />
+QueryDSL은 group_concat에서 SEPERATOR를 직접 지정할 순 없지만, 우회적으로 구분자를 삽입하고 후처리하는 방식으로 문제를 충분히 해결할 수 있었다.</p>
 
 
     </div>
 
 </article>
-<div class="post-nav"><a class="previous" href="/wiki/2023/12/30/hibernate6-custom-function.html" title="hibernate6 custom function(MySQL Dialect)">hibernate6 custom function(MySQL Dialect)</a><a class="next" href="/wiki/2024/01/17/pathvariable-name-missing.html" title="SpringBoot 3.2부터 @PathVariable 이름 미지정 시 에러">SpringBoot 3.2부터 @PathVariable 이름 미지정 시...</a></div><div class="post-comments">  <div id="gisqus_thread"></div>
+<div class="post-nav"><a class="previous" href="/wiki/2025/05/15/java-optional.html" title="null-safe하게 Optional 사용하기">null-safe하게 Optional 사용하기</a><span></span></div><div class="post-comments">  <div id="gisqus_thread"></div>
   <script src="https://giscus.app/client.js"
   data-repo="dajeongdev/dajeongdev.github.io"
   data-repo-id="R_kgDOHS7Ikw"
@@ -771,7 +838,7 @@ document.getElementById("tail-wrapper").appendChild(giscusScript);
 </script></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/wiki/2024/07/01/jwt.html" title="SpringBoot 3.2부터 @PathVariable 이름 미지정 시 에러">JWT(JSON Web Token)</a></li><li><a class="post-link" href="/wiki/2025/03/28/spring-transactional-annotation.html" title="SpringBoot 3.2부터 @PathVariable 이름 미지정 시 에러">Spring @Transactional을 정말 제대로 쓰고 있는 걸까?</a></li><li><a class="post-link" href="/wiki/2024/12/23/spring-swagger.html" title="SpringBoot 3.2부터 @PathVariable 이름 미지정 시 에러">API 문서 자동화로 시간 절약하기 (feat.Swagger)</a></li><li><a class="post-link" href="/wiki/2023/11/21/list-remove-method.html" title="SpringBoot 3.2부터 @PathVariable 이름 미지정 시 에러">List에서 원소 삭제하기 remove()</a></li></ul>
+        <li><a class="post-link" href="/wiki/2023/11/13/array-slice-method.html" title="">배열 자르기</a></li><li><a class="post-link" href="/wiki/2024/10/27/spring-validation.html" title="">Validation 그거 어떻게 하는건데</a></li><li><a class="post-link" href="/wiki/2025/03/28/spring-transactional-annotation.html" title="">Spring @Transactional을 정말 제대로 쓰고 있는 걸까?</a></li><li><a class="post-link" href="/wiki/2023/11/13/mysql-in.html" title="">MySQL IN</a></li></ul>
     </div></script>
   </section>
 </div>
