@@ -6,7 +6,7 @@ subtitle:
 tags: [QueryDSL]
 ---
 
-### 💡 문제 상황
+### 배경
 
 종종 테이블의 여러 개로 들어가 있는 데이터를 List<String>의 형태로 보내야 할 때가 있다. QueryDSL을 사용할 때 이를 위해 보통 group_concat을 사용해 하나의 문자열로 묶은 뒤, DTO에서 String으로 받아 `String.split(”,”)`을 사용하여 List로 변환하하는 방식을 사용하곤 했다.
 ```java
@@ -17,7 +17,7 @@ Expressions.stringTemplate("group_concat({0})", book.title);
 <br/>
 
 
-### 💫 데이터에 쉼표가 들어간다면?
+### 데이터에 쉼표가 들어간다면?
 예를 들어, 다음 같은 책 제목이 있다고 할 때
 ```
 "첫 여름, 완주"
@@ -36,7 +36,7 @@ List<String> aresult = Arrays.asList(titles.split(","));
 <br/>
 
 
-### 🤔 그럼 SEPARATOR를 쓰면 되지 않을까?
+### 그럼 SEPARATOR를 쓰면 되지 않을까?
 물론 MySQL에서는 `group_concat(… SEPARATOR ‘|||’)` 같은 방식으로 구분자를 지정할 수 있다.
 
 하지만 **QueryDSL 내부의 Hibernate에서 이 SEPERATOR를 SQL이 아니라 JPQL로 파싱하려고 하기 때문에 SyntaxException을 발생**하게 된다. 그래서 MySQL 전용 문법인 SEPARATOR를 직접 쓸 수 없다.
@@ -95,7 +95,7 @@ public static List<String> convertTitles(String titles) {
 <br/>
 
 
-### ✅ Native Query를 사용하지 않은 이유
+### Native Query를 사용하지 않은 이유
 
 Native Query를 사용하면 `SEPARATOR`나 `ORDER BY` 같은 SQL을 QueryDSL보다 자유롭게 쓸 수 있다.
 
@@ -115,6 +115,6 @@ Native Query를 사용하면 `SEPARATOR`나 `ORDER BY` 같은 SQL을 QueryDSL보
 <br/>
 
 
-### 📌 마무리
+### 마무리
 더 좋은 방법이 있을 수 있겠지만 (있다면 댓글 부탁드립니다!)  
 QueryDSL은 group_concat에서 SEPERATOR를 직접 지정할 순 없지만, 우회적으로 구분자를 삽입하고 후처리하는 방식으로 문제를 충분히 해결할 수 있었다.
