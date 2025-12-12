@@ -19,8 +19,8 @@
 <meta property="og:title" content="QueryDSL에서 group_concat SEPARATOR 없이 구분자 처리하기" />
 <meta name="author" content="Dajeong Park" />
 <meta property="og:locale" content="ko" />
-<meta name="description" content="💡 문제 상황" />
-<meta property="og:description" content="💡 문제 상황" />
+<meta name="description" content="배경" />
+<meta property="og:description" content="배경" />
 <link rel="canonical" href="http://localhost:4000/wiki/2025/07/24/queryds-separator.html" />
 <meta property="og:url" content="http://localhost:4000/wiki/2025/07/24/queryds-separator.html" />
 <meta property="og:site_name" content="Every Single Day" />
@@ -29,7 +29,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="QueryDSL에서 group_concat SEPARATOR 없이 구분자 처리하기" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2025-07-24T00:00:00+09:00","datePublished":"2025-07-24T00:00:00+09:00","description":"💡 문제 상황","headline":"QueryDSL에서 group_concat SEPARATOR 없이 구분자 처리하기","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2025/07/24/queryds-separator.html"},"url":"http://localhost:4000/wiki/2025/07/24/queryds-separator.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2025-07-24T00:00:00+09:00","datePublished":"2025-07-24T00:00:00+09:00","description":"배경","headline":"QueryDSL에서 group_concat SEPARATOR 없이 구분자 처리하기","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2025/07/24/queryds-separator.html"},"url":"http://localhost:4000/wiki/2025/07/24/queryds-separator.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon.ico/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="/assets/favicon.ico/apple-icon-60x60.png">
@@ -688,7 +688,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <h3 id="-문제-상황">💡 문제 상황</h3>
+      <h3 id="배경">배경</h3>
 
 <p>종종 테이블의 여러 개로 들어가 있는 데이터를 List<String>의 형태로 보내야 할 때가 있다. QueryDSL을 사용할 때 이를 위해 보통 group_concat을 사용해 하나의 문자열로 묶은 뒤, DTO에서 String으로 받아 `String.split(”,”)`을 사용하여 List로 변환하하는 방식을 사용하곤 했다.</String></p>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Expressions</span><span class="o">.</span><span class="na">stringTemplate</span><span class="o">(</span><span class="s">"group_concat({0})"</span><span class="o">,</span> <span class="n">book</span><span class="o">.</span><span class="na">title</span><span class="o">);</span>
@@ -697,7 +697,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <br />
 <br /></p>
 
-<h3 id="-데이터에-쉼표가-들어간다면">💫 데이터에 쉼표가 들어간다면?</h3>
+<h3 id="데이터에-쉼표가-들어간다면">데이터에 쉼표가 들어간다면?</h3>
 <p>예를 들어, 다음 같은 책 제목이 있다고 할 때</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"첫 여름, 완주"
 "다섯 번째 계절"
@@ -713,7 +713,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <br />
 <br /></p>
 
-<h3 id="-그럼-separator를-쓰면-되지-않을까">🤔 그럼 SEPARATOR를 쓰면 되지 않을까?</h3>
+<h3 id="그럼-separator를-쓰면-되지-않을까">그럼 SEPARATOR를 쓰면 되지 않을까?</h3>
 <p>물론 MySQL에서는 <code class="language-plaintext highlighter-rouge">group_concat(… SEPARATOR ‘|||’)</code> 같은 방식으로 구분자를 지정할 수 있다.</p>
 
 <p>하지만 <strong>QueryDSL 내부의 Hibernate에서 이 SEPERATOR를 SQL이 아니라 JPQL로 파싱하려고 하기 때문에 SyntaxException을 발생</strong>하게 된다. 그래서 MySQL 전용 문법인 SEPARATOR를 직접 쓸 수 없다.</p>
@@ -767,7 +767,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <p><br />
 <br /></p>
 
-<h3 id="-native-query를-사용하지-않은-이유">✅ Native Query를 사용하지 않은 이유</h3>
+<h3 id="native-query를-사용하지-않은-이유">Native Query를 사용하지 않은 이유</h3>
 
 <p>Native Query를 사용하면 <code class="language-plaintext highlighter-rouge">SEPARATOR</code>나 <code class="language-plaintext highlighter-rouge">ORDER BY</code> 같은 SQL을 QueryDSL보다 자유롭게 쓸 수 있다.</p>
 
@@ -790,7 +790,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
   </li>
 </ul>
 
-<h3 id="-마무리">📌 마무리</h3>
+<h3 id="마무리">마무리</h3>
 <p>더 좋은 방법이 있을 수 있겠지만 (있다면 댓글 부탁드립니다!)<br />
 QueryDSL은 group_concat에서 SEPERATOR를 직접 지정할 순 없지만, 우회적으로 구분자를 삽입하고 후처리하는 방식으로 문제를 충분히 해결할 수 있었다.</p>
 
@@ -838,7 +838,7 @@ document.getElementById("tail-wrapper").appendChild(giscusScript);
 </script></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/wiki/2024/04/30/integer-class.html" title="">Integer Class</a></li><li><a class="post-link" href="/wiki/2023/11/13/cut-string-method.html" title="">문자열 자르기</a></li><li><a class="post-link" href="/wiki/2023/11/13/ascii-to-string.html" title="">아스키코드 문자 ↔ 숫자</a></li><li><a class="post-link" href="/wiki/2025/03/28/spring-transactional-annotation.html" title="">Spring @Transactional을 정말 제대로 쓰고 있는 걸까?</a></li></ul>
+        <li><a class="post-link" href="/wiki/2023/11/21/list-remove-method.html" title="">List에서 원소 삭제하기 remove()</a></li><li><a class="post-link" href="/wiki/2024/01/17/pathvariable-name-missing.html" title="">SpringBoot 3.2부터 @PathVariable 이름 미지정 시 에러</a></li><li><a class="post-link" href="/wiki/2024/04/29/americanote-server2-create-mysql-database.html" title="">아메리카노트 서버 구성 &lt;2&gt; MySQL 데이터베이스 생성</a></li><li><a class="post-link" href="/wiki/2024/04/28/americanote-server1-create-linux-server.html" title="">아메리카노트 서버 구성 &lt;1&gt; Linux 서버 생성</a></li></ul>
     </div></script>
   </section>
 </div>
