@@ -14,22 +14,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta>
   <meta name="google-site-verification" content="zKcasmEMRn8LOc1DeBiiQZrHbcmWeFCif-fjAjsiVjA" /><!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>배열 자르기 | Every Single Day</title>
+<title>Springdoc Swagger UI Failed to road remote configuration 원인 찾아내기 | Every Single Day</title>
 <meta name="generator" content="Jekyll v3.9.5" />
-<meta property="og:title" content="배열 자르기" />
+<meta property="og:title" content="Springdoc Swagger UI Failed to road remote configuration 원인 찾아내기" />
 <meta name="author" content="Dajeong Park" />
 <meta property="og:locale" content="ko" />
-<meta name="description" content="1. Stream의 skip과 limit" />
-<meta property="og:description" content="1. Stream의 skip과 limit" />
-<link rel="canonical" href="http://localhost:4000/wiki/2023/11/13/array-slice-method.html" />
-<meta property="og:url" content="http://localhost:4000/wiki/2023/11/13/array-slice-method.html" />
+<meta name="description" content="배경" />
+<meta property="og:description" content="배경" />
+<link rel="canonical" href="http://localhost:4000/wiki/2025/08/03/swagger-error.html" />
+<meta property="og:url" content="http://localhost:4000/wiki/2025/08/03/swagger-error.html" />
 <meta property="og:site_name" content="Every Single Day" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2023-11-13T00:00:00+09:00" />
+<meta property="article:published_time" content="2025-08-03T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="배열 자르기" />
+<meta property="twitter:title" content="Springdoc Swagger UI Failed to road remote configuration 원인 찾아내기" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2023-11-13T00:00:00+09:00","datePublished":"2023-11-13T00:00:00+09:00","description":"1. Stream의 skip과 limit","headline":"배열 자르기","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2023/11/13/array-slice-method.html"},"url":"http://localhost:4000/wiki/2023/11/13/array-slice-method.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2025-08-03T00:00:00+09:00","datePublished":"2025-08-03T00:00:00+09:00","description":"배경","headline":"Springdoc Swagger UI Failed to road remote configuration 원인 찾아내기","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2025/08/03/swagger-error.html"},"url":"http://localhost:4000/wiki/2025/08/03/swagger-error.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon.ico/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="/assets/favicon.ico/apple-icon-60x60.png">
@@ -641,11 +641,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">배열 자르기</h1>
+  <h1 class="post-title p-name" itemprop="name headline">Springdoc Swagger UI Failed to road remote configuration 원인 찾아내기</h1>
   <h2 class="post-subtitle"></h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2023-11-13T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Nov 13, 2023
+    <time class="dt-published" datetime="2025-08-03T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Aug 03, 2025
     </time>
 
     
@@ -682,50 +682,117 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
-  </p><div class="post-tags"><a class="post-tag" href="/tags.html#Java">#Java</a><a class="post-tag" href="/tags.html#Array">#Array</a><a class="post-tag" href="/tags.html#Method">#Method</a></div></header>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+  </p><div class="post-tags"><a class="post-tag" href="/tags.html#SpringBoot">#SpringBoot</a><a class="post-tag" href="/tags.html#Swagger">#Swagger</a><a class="post-tag" href="/tags.html#Springdoc">#Springdoc</a></div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <h3 id="1-stream의-skip과-limit">1. Stream의 skip과 limit</h3>
+      <h3 id="배경">배경</h3>
 
-<h4 id="arraysstreamskipnum">Arrays.stream.skip(num)</h4>
+<p>현재 작업중인 사이드 프로젝트에서 Springdoc 기반으로 Swagger를 사용하고 있다. 새로운 API 그룹을 만들기 위해 GroupedOpenApi 설정을 추가하면서 SwaggerConfig를 분리하다가, Swagger에서 화면이 갑자기 아래 이미지처럼 오류를 출력하며 로딩되지 않는 문제가 발생했다.</p>
+
+<p><img width="788" alt="github-actions2" src="https://dajeongdev.github.io/assets/images/posts/swagger-error.png" /></p>
+
+<p>혹시 몰라 Explore 버튼을 누르니 아래 같은 에러가 출력되었다.</p>
+
+<p><img width="788" alt="github-actions2" src="https://dajeongdev.github.io/assets/images/posts/swagger-error2.png" /></p>
+
+<p>처음에는 Springdoc 의존성과 Spring Boot 버전의 호환을 의심했는데, Springdoc의 스펙을 높이거나 Spring Boot의 버전을 낮춰봐도 문제는 그대로였다.
+<br />
+<br /></p>
+
+<h3 id="과정">과정</h3>
+
+<p>Swagger UI는 기본적으로 다음 경로에서 화면에 띄워줄스펙(JSON)을 조회한다.</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">/swagger-ui/**</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/v3/api-docs/**</code></li>
+</ol>
+
+<p>그래서 다음 부분을 차례로 확인해봤다.</p>
+
+<p><strong>1. GroupedOpenApi 설정</strong></p>
 <ul>
-  <li>skip은 숫자(num)만큼 아이템을 건너뛴 다음 그 뒤의 아이템으로 새로운 스트림을 생성한다.</li>
+  <li>경로도 확인하고, 해당 설정을 주석 처리해도 화면이 생성되지 않음</li>
 </ul>
 
-<h4 id="arraysstreamlimitnum">Arrays.stream.limit(num)</h4>
+<p><strong>2. YML에서 Springdoc의 paths-to-match 설정</strong></p>
 <ul>
-  <li>limit은 지정한 개수(num)만큼 가져와서 새로운 스트림을 리턴한다.</li>
+  <li>paths-to-match에 <code class="language-plaintext highlighter-rouge">/api/**</code> 경로만 스캔하도록 설정해두었기 때문에 혹시 스펙 생성이 필터링 되었는지 컨트롤러를 확인해봤지만, 이것도 문제가 아니었음
+<br />
+<br /></li>
 </ul>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span><span class="o">[]</span> <span class="n">array</span> <span class="o">=</span> <span class="o">{</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">7</span><span class="o">,</span> <span class="mi">8</span><span class="o">,</span> <span class="mi">9</span><span class="o">,</span> <span class="mi">10</span><span class="o">};</span>
+<h3 id="원인-발견">원인 발견</h3>
 
-<span class="kt">int</span><span class="o">[]</span> <span class="n">skip</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">array</span><span class="o">)</span>
-			<span class="o">.</span><span class="na">skip</span><span class="o">(</span><span class="mi">4</span><span class="o">)</span>
-			<span class="o">.</span><span class="na">toArray</span><span class="o">();</span> <span class="c1">// [5, 6, 7, 8, 9, 10]</span>
+<p>오류 화면을 보다가 Network 탭을 볼 생각이 들어 확인해보니 요청 경로가 <code class="language-plaintext highlighter-rouge">/api-docs/swagger-config</code>였고, <strong>403</strong> 상태코드를 출력하고 있었다.</p>
 
-<span class="kt">int</span><span class="o">[]</span> <span class="n">limit</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">array</span><span class="o">)</span>
-			<span class="o">.</span><span class="na">limit</span><span class="o">(</span><span class="mi">4</span><span class="o">)</span>
-			<span class="o">.</span><span class="na">toArray</span><span class="o">();</span> <span class="c1">// [1, 2, 3, 4]</span>
+<p>그리고 프로젝트에서는 Spring Security를 적용해두었는데, 허용 경로에는 위에 언급했던 default 경로뿐이었다. 즉, <strong>Swagger UI 페이지 자체는 로딩</strong>되었으나, <strong>UI가 내부적으로 요청하는 실제 스펙 경로(<code class="language-plaintext highlighter-rouge">/api-docs/swagger-config</code>) 요청이 Security에 의해 차단</strong>되고 있던 것이다.
+<br />
+<br /></p>
+
+<h3 id="해결">해결</h3>
+
+<p>그래서 SecurityConfig에 누락된 <code class="language-plaintext highlighter-rouge">/api-docs/**</code> 경로를 허용하도록 추가했다.</p>
+
+<p><strong>SecurityConfig.java</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SecurityConfig</span> <span class="kd">implements</span> <span class="nc">WebMvcConfigurer</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span><span class="o">[]</span> <span class="n">permitUrls</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">[]{</span>
+            <span class="s">"/swagger-ui.html"</span><span class="o">,</span>
+            <span class="s">"/swagger-ui/**"</span><span class="o">,</span>
+            <span class="s">"/api-docs/**"</span><span class="o">,</span> <span class="c1">// application.yml에 명시해둔 경로</span>
+            <span class="s">"/v3/api-docs/**"</span><span class="o">,</span>
+    <span class="o">};</span>
+    
+		<span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">SecurityFilterChain</span> <span class="nf">filterChain</span><span class="o">(</span><span class="nc">HttpSecurity</span> <span class="n">http</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="n">http</span>
+                <span class="o">.</span><span class="na">authorizeHttpRequests</span><span class="o">(</span><span class="n">authorizeRequest</span> <span class="o">-&gt;</span> <span class="n">authorizeRequest</span> <span class="c1">// 인증/인가 URL 지정</span>
+                        <span class="o">.</span><span class="na">requestMatchers</span><span class="o">(</span><span class="n">permitUrls</span><span class="o">).</span><span class="na">permitAll</span><span class="o">()</span> <span class="c1">// 허용 URL</span>
+                        <span class="o">.</span><span class="na">anyRequest</span><span class="o">().</span><span class="na">authenticated</span><span class="o">())</span> <span class="c1">// 나머지는 인증 필요</span>
+			<span class="o">...</span>
+        <span class="k">return</span> <span class="n">http</span><span class="o">.</span><span class="na">build</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </code></pre></div></div>
-<p><br /></p>
 
-<h3 id="2-copyofrange">2. copyOfRange</h3>
-<ul>
-  <li>i번째 숫자부터 j번째 숫자까지 자를 때 사용할 수 있다.</li>
-</ul>
+<p><strong>application.yml</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span><span class="o">[]</span> <span class="n">array</span> <span class="o">=</span> <span class="o">{</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">};</span>
-<span class="kt">int</span><span class="o">[]</span> <span class="n">temp</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">copyOfRange</span><span class="o">(</span><span class="n">array</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">4</span><span class="o">);</span> <span class="c1">// [3, 4, 5]</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">springdoc:</span>
+  <span class="n">swagger</span><span class="o">-</span><span class="nl">ui:</span>
+    <span class="o">...</span>
+  <span class="n">api</span><span class="o">-</span><span class="nl">docs:</span>
+    <span class="nl">path:</span> <span class="o">/</span><span class="n">api</span><span class="o">-</span><span class="n">docs</span> <span class="err">#</span> <span class="n">openAPI</span> <span class="n">접근</span> <span class="n">경로</span>
 </code></pre></div></div>
+
+<p>추가 후에는 Swagger UI가 정상적으로 JSON 스펙을 로딩했고, 모든 API가 잘 표시되었다.
+<br />
+<br /></p>
+
+<h3 id="결론">결론</h3>
+
+<p>이번 문제는 Swagger 설정 오류로 보였지만, 사실 커스텀으로 OpenAPI 접근 경로를 설정해놓고 SecurityConfig에는 누락한 게 원인이었다.</p>
+
+<p>Springdoc에서 OpenAPI 기본 경로(<code class="language-plaintext highlighter-rouge">/v3/api-docs</code>)를 대신 커스텀 경로를 사용하는 경우에는 SecurityConfig에서도 반드시 동일한 경로를 허용해주어야 한다.</p>
+
+<p>이번 케이스는 작은 실수였지만, 생각보다 시간을 잡아먹은 삽질이었다. 앞으로는 Swagger 관련 이슈가 있을 때는 YML 설정과 Security를 가장 먼저 검토해볼 것 같다.
+<br />
+<br /></p>
+
+<h4 id="참고">참고</h4>
+<ul>
+  <li>https://yundevnote.tistory.com/71</li>
+</ul>
 
 
     </div>
 
 </article>
-<div class="post-nav"><a class="previous" href="/blog/2023/11/13/1-promise.html" title="every single day">every single day</a><a class="next" href="/wiki/2023/11/13/ascii-to-string.html" title="아스키코드 문자 ↔ 숫자">아스키코드 문자 ↔ 숫자</a></div><div class="post-comments">  <div id="gisqus_thread"></div>
+<div class="post-nav"><a class="previous" href="/wiki/2025/07/24/queryds-separator.html" title="QueryDSL에서 group_concat SEPARATOR 없이 구분자 처리하기">QueryDSL에서 group_concat SEPARATOR 없이 구분자 처리하기...</a><span></span></div><div class="post-comments">  <div id="gisqus_thread"></div>
   <script src="https://giscus.app/client.js"
   data-repo="dajeongdev/dajeongdev.github.io"
   data-repo-id="R_kgDOHS7Ikw"
@@ -765,7 +832,7 @@ document.getElementById("tail-wrapper").appendChild(giscusScript);
 </script></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/wiki/2024/04/29/americanote-server3-deploy-project.html" title="아스키코드 문자 ↔ 숫자">아메리카노트 서버 구성 &lt;3&gt; 프로젝트 배포</a></li><li><a class="post-link" href="/wiki/2024/01/12/jpa-created-date-column-null.html" title="아스키코드 문자 ↔ 숫자">update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법</a></li><li><a class="post-link" href="/wiki/2025/03/28/spring-transactional-annotation.html" title="아스키코드 문자 ↔ 숫자">Spring @Transactional을 정말 제대로 쓰고 있는 걸까?</a></li><li><a class="post-link" href="/wiki/2023/11/13/cut-string-method.html" title="아스키코드 문자 ↔ 숫자">문자열 자르기</a></li></ul>
+        <li><a class="post-link" href="/wiki/2025/05/15/java-optional.html" title="">null-safe하게 Optional 사용하기</a></li><li><a class="post-link" href="/wiki/2023/11/13/intellij-shortcut.html" title="">IntelliJ 단축키 정리</a></li><li><a class="post-link" href="/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain.html" title="">아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용</a></li><li><a class="post-link" href="/wiki/2025/03/28/spring-transactional-annotation.html" title="">Spring @Transactional을 정말 제대로 쓰고 있는 걸까?</a></li></ul>
     </div></script>
   </section>
 </div>
