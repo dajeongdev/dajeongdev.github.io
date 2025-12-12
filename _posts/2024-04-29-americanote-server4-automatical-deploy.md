@@ -5,13 +5,6 @@ subtitle:
 categories: wiki
 tags: [Server, NaverCloudPlatform, Project, Deploy]
 ---
----
-layout: post
-title: 아메리카노트 서버 구성 <4> 자동 배포
-subtitle: 
-categories: wiki
-tags: [Server, NaverCloudPlatform, Project, Deploy, GithubActions]
----
 - 프로젝트를 서버에 배포해봤다면 번거롭다는 생각을 한번쯤 해봤을 것 같습니다. 그래서 이번에는 그 배포를 자동으로 진행해보겠습니다.
 - 자동 배포는 Github Actions의 self-hosted runner를 사용했습니다.
 <br/>
@@ -28,7 +21,7 @@ tags: [Server, NaverCloudPlatform, Project, Deploy, GithubActions]
 #### 2. 서버에서 명령어 입력하기
 - 서버에 Github Actions runner를 생성해주는 명령어들로 하나씩 차근차근 입력해 줍니다.
 - 마지막 명령어 실행 중 **Must not run with sudo** 라는 에러 메시지가 발생하면 `export RUNNER_ALLOW_RUNASROOT="1”`를 입력한 뒤 재시도하면 됩니다.
-<img width="788" height="843" alt="github-actions2" src="https://github.com/user-attachments/assets/d0a58c5d-12a8-4829-8c6c-d69f5111f452" />
+<img width="788" alt="github-actions2" src="https://dajeongdev.github.io/assets/images/posts/github_actions2.png">
 - 설치 완료 이후 화면
 <img width="671" alt="github-actions3" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/9bf0bd39-e89e-468b-9755-6debf9c54ac6">
 - 이후 아래 명령어를 입력하면 Github Actions를 수신할 준비가 완료됩니다.
@@ -40,7 +33,7 @@ sudo ./svc.sh start
 <br/>
 
 
-#### 3. 리포지토리에서 Actions workflow 생성
+#### 3. 리포지토리에서 Actons workflow 생성
 - 다시 리포지토리로 돌아가서 Actions 탭에서 왼쪽 상단의 New workflow를 클릭한 뒤 저희 프로젝트에 맞는 ‘Java with Gradle’을 선택하여 워크플로우를 생성합니다.
 - 이 워크플로우가 바로 Github Actions가 서버에서 수행할 업무들입니다.
 - 이전 페이지([<3> 프로젝트 배포](https://dajeongdev.github.io/wiki/2024/04/29/deploy-project.html))에서 직접 설치 및 작성한 것과 동일하게 진행합니다.
