@@ -21,7 +21,7 @@ tags: [Server, NaverCloudPlatform, Project, Deploy]
 #### 2. 서버에서 명령어 입력하기
 - 서버에 Github Actions runner를 생성해주는 명령어들로 하나씩 차근차근 입력해 줍니다.
 - 마지막 명령어 실행 중 **Must not run with sudo** 라는 에러 메시지가 발생하면 `export RUNNER_ALLOW_RUNASROOT="1”`를 입력한 뒤 재시도하면 됩니다.
-<img width="788" alt="github-actions2" src="https://dajeongdev.github.io/assets/images/posts/github_actions2.png">
+<img width="788" alt="github-actions2" src="https://dajeongdev.github.io/assets/images/posts/github-actions2.png">
 - 설치 완료 이후 화면
 <img width="671" alt="github-actions3" src="https://github.com/dajeongdev/dajeongdev.github.io/assets/61612976/9bf0bd39-e89e-468b-9755-6debf9c54ac6">
 - 이후 아래 명령어를 입력하면 Github Actions를 수신할 준비가 완료됩니다.
