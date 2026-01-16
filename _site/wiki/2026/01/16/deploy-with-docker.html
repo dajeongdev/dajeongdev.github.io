@@ -14,22 +14,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta>
   <meta name="google-site-verification" content="zKcasmEMRn8LOc1DeBiiQZrHbcmWeFCif-fjAjsiVjA" /><!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Springdoc Swagger UI Failed to road remote configuration 원인 찾아내기 | Every Single Day</title>
+<title>Docker + Github Actions 기반 자동 배포 구축하기 | Every Single Day</title>
 <meta name="generator" content="Jekyll v3.9.5" />
-<meta property="og:title" content="Springdoc Swagger UI Failed to road remote configuration 원인 찾아내기" />
+<meta property="og:title" content="Docker + Github Actions 기반 자동 배포 구축하기" />
 <meta name="author" content="Dajeong Park" />
 <meta property="og:locale" content="ko" />
 <meta name="description" content="배경" />
 <meta property="og:description" content="배경" />
-<link rel="canonical" href="http://localhost:4000/wiki/2025/08/03/swagger-error.html" />
-<meta property="og:url" content="http://localhost:4000/wiki/2025/08/03/swagger-error.html" />
+<link rel="canonical" href="http://localhost:4000/wiki/2026/01/16/deploy-with-docker.html" />
+<meta property="og:url" content="http://localhost:4000/wiki/2026/01/16/deploy-with-docker.html" />
 <meta property="og:site_name" content="Every Single Day" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2025-08-03T00:00:00+09:00" />
+<meta property="article:published_time" content="2026-01-16T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Springdoc Swagger UI Failed to road remote configuration 원인 찾아내기" />
+<meta property="twitter:title" content="Docker + Github Actions 기반 자동 배포 구축하기" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2025-08-03T00:00:00+09:00","datePublished":"2025-08-03T00:00:00+09:00","description":"배경","headline":"Springdoc Swagger UI Failed to road remote configuration 원인 찾아내기","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2025/08/03/swagger-error.html"},"url":"http://localhost:4000/wiki/2025/08/03/swagger-error.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2026-01-16T00:00:00+09:00","datePublished":"2026-01-16T00:00:00+09:00","description":"배경","headline":"Docker + Github Actions 기반 자동 배포 구축하기","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2026/01/16/deploy-with-docker.html"},"url":"http://localhost:4000/wiki/2026/01/16/deploy-with-docker.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon.ico/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="/assets/favicon.ico/apple-icon-60x60.png">
@@ -641,11 +641,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">Springdoc Swagger UI Failed to road remote configuration 원인 찾아내기</h1>
+  <h1 class="post-title p-name" itemprop="name headline">Docker + Github Actions 기반 자동 배포 구축하기</h1>
   <h2 class="post-subtitle"></h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2025-08-03T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Aug 03, 2025
+    <time class="dt-published" datetime="2026-01-16T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Jan 16, 2026
     </time>
 
     
@@ -682,117 +682,292 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
-  </p><div class="post-tags"><a class="post-tag" href="/tags.html#SpringBoot">#SpringBoot</a><a class="post-tag" href="/tags.html#Swagger">#Swagger</a><a class="post-tag" href="/tags.html#Springdoc">#Springdoc</a></div></header>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 16 mins</span>
+  </p><div class="post-tags"><a class="post-tag" href="/tags.html#CICD">#CICD</a><a class="post-tag" href="/tags.html#Docker">#Docker</a><a class="post-tag" href="/tags.html#GithubActions">#GithubActions</a></div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
       <h3 id="배경">배경</h3>
 
-<p>현재 작업중인 사이드 프로젝트에서 Springdoc 기반으로 Swagger를 사용하고 있다. 새로운 API 그룹을 만들기 위해 GroupedOpenApi 설정을 추가하면서 SwaggerConfig를 분리하다가, Swagger에서 화면이 갑자기 아래 이미지처럼 오류를 출력하며 로딩되지 않는 문제가 발생했다.</p>
-
-<p><img width="788" alt="github-actions2" src="https://dajeongdev.github.io/assets/images/posts/swagger-error.png" /></p>
-
-<p>혹시 몰라 Explore 버튼을 누르니 아래 같은 에러가 출력되었다.</p>
-
-<p><img width="788" alt="github-actions2" src="https://dajeongdev.github.io/assets/images/posts/swagger-error2.png" /></p>
-
-<p>처음에는 Springdoc 의존성과 Spring Boot 버전의 호환을 의심했는데, Springdoc의 스펙을 높이거나 Spring Boot의 버전을 낮춰봐도 문제는 그대로였다.
+<p>프로젝트가 절반 정도 진행되니 수동 배포하는 게 생산성이 너무 떨어진다는 걸 체감하기 시작했다.
+그래서 이전처럼 Github Actions 기반의 자동 배포를 하려고 했지만, 이왕 하는 김에 요즘 많이 사용하는 Docker + Github Actions 조합을 적용해보기로 했다.
 <br />
 <br /></p>
 
 <h3 id="과정">과정</h3>
-
-<p>Swagger UI는 기본적으로 다음 경로에서 화면에 띄워줄스펙(JSON)을 조회한다.</p>
-
-<ol>
-  <li><code class="language-plaintext highlighter-rouge">/swagger-ui/**</code></li>
-  <li><code class="language-plaintext highlighter-rouge">/v3/api-docs/**</code></li>
-</ol>
-
-<p>그래서 다음 부분을 차례로 확인해봤다.</p>
-
-<p><strong>1. GroupedOpenApi 설정</strong></p>
+<h4 id="1-로컬에서-먼저-docker-확인하기">1. 로컬에서 먼저 Docker 확인하기</h4>
+<p>자동 배포 전에 Docker 실행 흐름을 알고 싶어 로컬에서 먼저 확인했다.</p>
 <ul>
-  <li>경로도 확인하고, 해당 설정을 주석 처리해도 화면이 생성되지 않음</li>
+  <li><a href="https://www.docker.com/products/docker-desktop/">Docker</a> 설치</li>
+  <li>
+    <p><strong>⭐️ Dockerfile는 반드시 프로젝트 루트에 위치</strong></p>
+
+    <div class="language-docker highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  FROM amazoncorretto:21.0.4
+  WORKDIR /app 
+    
+  ARG JAR_FILE=build/libs/*.jar
+  COPY ${JAR_FILE} app.jar
+    
+  ENTRYPOINT ["java", "-jar", "app.jar"]
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>로컬에서 Dockerfile 실행</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c"># jar 생성</span>
+  ./gradlew build
+    
+  <span class="c"># 이미지 생성</span>
+  docker build <span class="nt">-t</span> &lt;사용할 이미지 이름&gt; <span class="nb">.</span> <span class="c"># 현재 디렉토리 전체를 빌드 컨텍스트로 사용</span>
+    
+  <span class="c"># 이미지 확인</span>
+  docker images
+    
+  <span class="c"># 컨테이너 실행</span>
+  docker run <span class="nt">-d</span> <span class="nt">-p</span> &lt;포트번호&gt;:&lt;포트번호&gt; <span class="nt">--name</span> &lt;컨테이너 이름&gt; &lt;이미지 이름&gt;
+</code></pre></div>    </div>
+
+    <ul>
+      <li>여기까지 진행하면 로컬에서 docker를 성공적으로 띄웠다는 걸 확인할 수 있다.
+<br />
+<br /></li>
+    </ul>
+  </li>
 </ul>
 
-<p><strong>2. YML에서 Springdoc의 paths-to-match 설정</strong></p>
+<h4 id="2-docker-composeyml-생성">2. docker-compose.yml 생성</h4>
 <ul>
-  <li>paths-to-match에 <code class="language-plaintext highlighter-rouge">/api/**</code> 경로만 스캔하도록 설정해두었기 때문에 혹시 스펙 생성이 필터링 되었는지 컨트롤러를 확인해봤지만, 이것도 문제가 아니었음
-<br />
+  <li>docker-compose.yml 파일은 여러 개의 <code class="language-plaintext highlighter-rouge">docker run</code> 명령어를 파일 하나로 관리해준다.</li>
+  <li>하지만 매번 아래처럼 명령어를 입력해서 실행시키는 게 위험하고 귀찮았다.
+    <div class="language-docker highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  docker run -d -p &lt;포트번호&gt;:&lt;포트번호&gt; -e &lt;프로파일 설정&gt; --name &lt;컨테이너 이름&gt; &lt;이미지 이름&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>그래서 docker-compose.yml로 관리하도록 변경했다.
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">services</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span>
+      <span class="na">image</span><span class="pi">:</span> <span class="s">&lt;이미지 이름&gt;</span>
+      <span class="na">container_name</span><span class="pi">:</span> <span class="s">&lt;컨테이너 이름&gt;</span>
+      <span class="na">ports</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s2">"</span><span class="s">&lt;포트번호&gt;:&lt;포트번호&gt;"</span>
+      <span class="na">environment</span><span class="pi">:</span>
+        <span class="na">SPRING_PROFILES_ACTIVE</span><span class="pi">:</span> <span class="s">prod</span>
+</code></pre></div>    </div>
+
+    <p><strong>실행</strong></p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  docker compose up <span class="nt">-d</span>
+</code></pre></div>    </div>
+
+    <p><strong>중지</strong></p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  docker compose down
+</code></pre></div>    </div>
+    <p><br />
+<br /></p>
+  </li>
+</ul>
+
+<h4 id="3-민감-정보-분리-application-secretyml--env"><strong>3. 민감 정보 분리 (application-secret.yml → .env)</strong></h4>
+
+<p><strong>기존 방법</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">application-secret.yml</code>을 <code class="language-plaintext highlighter-rouge">.gitignore</code> 처리</li>
+  <li>자동 배포 시 서버에 동일한 설정을 다시 만들어야 함</li>
+</ul>
+
+<p><strong>개선 방향</strong></p>
+<ul>
+  <li>application-secret.yml에는 환경 변수 placeholder만 남김</li>
+  <li>실제 값은 <code class="language-plaintext highlighter-rouge">.env</code> 파일과 Github Repository Variables로 관리</li>
+</ul>
+
+<p><strong>application-secret.yml</strong></p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
+  <span class="na">datasource</span><span class="pi">:</span>
+    <span class="na">url</span><span class="pi">:</span> <span class="s">${DB_URL}</span>
+    <span class="na">username</span><span class="pi">:</span> <span class="s">${DB_USERNAME}</span>
+    <span class="na">password</span><span class="pi">:</span> <span class="s">${DB_PASSWORD}</span>
+</code></pre></div></div>
+
+<p><strong>.env</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DB_URL=...
+DB_USERNAME=...
+DB_PASSWORD=...
+</code></pre></div></div>
+
+<p><strong>docker-compose.yml</strong></p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">app</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">&lt;이미지 이름&gt;</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">&lt;컨테이너 이름&gt;</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">&lt;포트번호&gt;:&lt;포트번호&gt;"</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">SPRING_PROFILES_ACTIVE</span><span class="pi">:</span> <span class="s">prod</span>
+    <span class="na">env_file</span><span class="pi">:</span>
+<span class="err">	</span>    <span class="pi">-</span> <span class="s">.env</span>
+</code></pre></div></div>
+<p><br />
+<br /></p>
+
+<h4 id="4-서버에-docker-설치">4. 서버에 Docker 설치</h4>
+<ul>
+  <li>Ubuntu 기준으로 Docker를 설치했다.</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 기존 패키지 업데이트</span>
+<span class="nb">sudo </span>apt update
+<span class="nb">sudo </span>apt upgrade <span class="nt">-y</span>
+
+<span class="c"># 필요 패키지 설치</span>
+<span class="nb">sudo </span>apt <span class="nb">install</span> <span class="nt">-y</span> apt-transport-https ca-certificates curl software-properties-common lsb-release
+
+<span class="c"># Docker GPG key 추가</span>
+curl <span class="nt">-fsSL</span> https://download.docker.com/linux/ubuntu/gpg | <span class="nb">sudo </span>gpg <span class="nt">--dearmor</span> <span class="nt">-o</span> /usr/share/keyrings/docker-archive-keyring.gpg
+
+<span class="c"># Docker repository 추가</span>
+<span class="nb">echo</span> <span class="se">\</span>
+  <span class="s2">"deb [arch=</span><span class="si">$(</span>dpkg <span class="nt">--print-architecture</span><span class="si">)</span><span class="s2"> signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] </span><span class="se">\</span><span class="s2">
+  https://download.docker.com/linux/ubuntu </span><span class="si">$(</span>lsb_release <span class="nt">-cs</span><span class="si">)</span><span class="s2"> stable"</span> | <span class="se">\</span>
+  <span class="nb">sudo tee</span> /etc/apt/sources.list.d/docker.list <span class="o">&gt;</span> /dev/null
+
+<span class="c"># Docker 설치</span>
+<span class="nb">sudo </span>apt update
+<span class="nb">sudo </span>apt <span class="nb">install</span> <span class="nt">-y</span> docker-ce docker-ce-cli containerd.io
+
+<span class="c"># Docker 권한 설정 (sudo 없이 실행)</span>
+<span class="nb">sudo </span>usermod <span class="nt">-aG</span> docker <span class="nv">$USER</span>
+
+<span class="c"># Docker Compose 설치</span>
+<span class="nb">sudo </span>curl <span class="nt">-L</span> <span class="s2">"https://github.com/docker/compose/releases/download/v2.24.1/docker-compose-</span><span class="si">$(</span><span class="nb">uname</span> <span class="nt">-s</span><span class="si">)</span><span class="s2">-</span><span class="si">$(</span><span class="nb">uname</span> <span class="nt">-m</span><span class="si">)</span><span class="s2">"</span> <span class="nt">-o</span> /usr/local/bin/docker-compose
+<span class="nb">sudo chmod</span> +x /usr/local/bin/docker-compose
+
+<span class="c"># 버전 확인</span>
+docker-compose <span class="nt">--version</span>
+
+<span class="c"># Docker Compose로 실행</span>
+docker compose up <span class="nt">-d</span> <span class="nt">--build</span>
+
+<span class="c"># 로그 확인</span>
+docker compose logs <span class="nt">-f</span>
+</code></pre></div></div>
+<p><br />
+<br /></p>
+
+<h4 id="5-github-actions-자동-배포">5. Github Actions 자동 배포</h4>
+
+<p><strong>전체 흐름</strong></p>
+<ol>
+  <li>feature 브랜치에 push</li>
+  <li>self-hosted runner에서 실행</li>
+  <li>Gradle 빌드</li>
+  <li>Docker 이미지 빌드</li>
+  <li>기존 컨테이너 종료</li>
+  <li>docker compose 재실행</li>
+</ol>
+
+<p><strong>진행</strong></p>
+<ul>
+  <li>서버에 먼저 Github Actions Runner 설치한다.</li>
+  <li>그리고 프로젝트 루트에 /.gihub/workflows 폴더 만들고, 배포할 yml 파일을 작성한다.</li>
+</ul>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Auto Deploy</span>
+
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">feature</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">build</span><span class="pi">:</span>
+
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">self-hosted</span>
+    <span class="na">environment</span><span class="pi">:</span> <span class="s">prod</span>
+
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="c1"># 코트 체크아웃</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Checkout</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v4</span>
+
+      <span class="c1"># JDK 설정</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up JDK </span><span class="m">21</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/setup-java@v4</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">java-version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">21'</span>
+          <span class="na">distribution</span><span class="pi">:</span> <span class="s1">'</span><span class="s">zulu'</span>
+
+      <span class="c1"># env 파일 생성</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Create prod env file</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">mkdir -p /home/ubuntu/project/env</span>
+          
+          <span class="s">cat &lt;&lt;EOF &gt; /home/ubuntu/project/env/prod.env</span>
+          <span class="s">SPRING_PROFILES_ACTIVE=prod</span>
+          
+          <span class="s"># ... .env 파일에 Variables 매핑 설정</span>
+          <span class="s">EOF</span>
+          
+          <span class="s">chmod 600 /home/ubuntu/project/env/prod.env</span>
+
+      <span class="c1"># Gradle 권한 부여</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Grant permission for gradlew</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">chmod +x ./gradlew</span>
+
+      <span class="c1"># 테스트 없이 빌드</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Build with Gradle</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">./gradlew clean build -x test</span>
+
+      <span class="c1"># 기존 컨테이너 중지 및 제거</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Stop &amp; Remove Existing Containers</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">docker compose down</span>
+          <span class="s">echo "Existing containers stopped and removed."</span>
+
+      <span class="c1"># 컨테이너 실행</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Run Docker Compose</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">docker compose up -d --build</span>
+          <span class="s">echo "Docker containers running."</span>
+</code></pre></div></div>
+<p><br />
+<br /></p>
+
+<h3 id="-트러블슈팅">💫 트러블슈팅</h3>
+
+<h4 id="1-docker-composeyml-위치">1. docker-compose.yml 위치</h4>
+<ul>
+  <li>처음에는 <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> 파일이 설정 파일 같아서 /src/main/resources 폴더에 넣어뒀더니 계속 에러가 발생했다.</li>
+  <li>여러 번의 에러를 통해 Dockerfile이 있는 프로젝트 루트에 넣어야 한다는 걸 알았다.
 <br /></li>
 </ul>
 
-<h3 id="원인-발견">원인 발견</h3>
+<h4 id="2-private-key과-env-파일의-값-매핑-이슈">2. private key과 .env 파일의 값 매핑 이슈</h4>
+<p><strong>문제 상황</strong></p>
+<ol>
+  <li>애플 로그인의 private key 값을 기존 application-secret.yml에서는 멀티라인으로 사용</li>
+  <li>하지만 <code class="language-plaintext highlighter-rouge">.env</code> 파일은 멀티라인 미지원
+<br /></li>
+</ol>
 
-<p>오류 화면을 보다가 Network 탭을 볼 생각이 들어 확인해보니 요청 경로가 <code class="language-plaintext highlighter-rouge">/api-docs/swagger-config</code>였고, <strong>403</strong> 상태코드를 출력하고 있었다.</p>
+<p><strong>시도</strong></p>
+<ol>
+  <li>줄바꿈을 \n로 치환</li>
+  <li>Base64 인코딩</li>
+  <li>BEGIN / END 구문 제거 후 인코딩</li>
+  <li>줄바꿈을 \n로 치환 + BEGIN / END 구문 제거 → 성공<br />
+<br /></li>
+</ol>
 
-<p>그리고 프로젝트에서는 Spring Security를 적용해두었는데, 허용 경로에는 위에 언급했던 default 경로뿐이었다. 즉, <strong>Swagger UI 페이지 자체는 로딩</strong>되었으나, <strong>UI가 내부적으로 요청하는 실제 스펙 경로(<code class="language-plaintext highlighter-rouge">/api-docs/swagger-config</code>) 요청이 Security에 의해 차단</strong>되고 있던 것이다.
-<br />
-<br /></p>
-
-<h3 id="해결">해결</h3>
-
-<p>그래서 SecurityConfig에 누락된 <code class="language-plaintext highlighter-rouge">/api-docs/**</code> 경로를 허용하도록 추가했다.</p>
-
-<p><strong>SecurityConfig.java</strong></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SecurityConfig</span> <span class="kd">implements</span> <span class="nc">WebMvcConfigurer</span> <span class="o">{</span>
-
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span><span class="o">[]</span> <span class="n">permitUrls</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">[]{</span>
-            <span class="s">"/swagger-ui.html"</span><span class="o">,</span>
-            <span class="s">"/swagger-ui/**"</span><span class="o">,</span>
-            <span class="s">"/api-docs/**"</span><span class="o">,</span> <span class="c1">// application.yml에 명시해둔 경로</span>
-            <span class="s">"/v3/api-docs/**"</span><span class="o">,</span>
-    <span class="o">};</span>
-    
-		<span class="nd">@Bean</span>
-    <span class="kd">public</span> <span class="nc">SecurityFilterChain</span> <span class="nf">filterChain</span><span class="o">(</span><span class="nc">HttpSecurity</span> <span class="n">http</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-        <span class="n">http</span>
-                <span class="o">.</span><span class="na">authorizeHttpRequests</span><span class="o">(</span><span class="n">authorizeRequest</span> <span class="o">-&gt;</span> <span class="n">authorizeRequest</span> <span class="c1">// 인증/인가 URL 지정</span>
-                        <span class="o">.</span><span class="na">requestMatchers</span><span class="o">(</span><span class="n">permitUrls</span><span class="o">).</span><span class="na">permitAll</span><span class="o">()</span> <span class="c1">// 허용 URL</span>
-                        <span class="o">.</span><span class="na">anyRequest</span><span class="o">().</span><span class="na">authenticated</span><span class="o">())</span> <span class="c1">// 나머지는 인증 필요</span>
-			<span class="o">...</span>
-        <span class="k">return</span> <span class="n">http</span><span class="o">.</span><span class="na">build</span><span class="o">();</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p><strong>application.yml</strong></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">springdoc:</span>
-  <span class="n">swagger</span><span class="o">-</span><span class="nl">ui:</span>
-    <span class="o">...</span>
-  <span class="n">api</span><span class="o">-</span><span class="nl">docs:</span>
-    <span class="nl">path:</span> <span class="o">/</span><span class="n">api</span><span class="o">-</span><span class="n">docs</span> <span class="err">#</span> <span class="n">openAPI</span> <span class="n">접근</span> <span class="n">경로</span>
-</code></pre></div></div>
-
-<p>추가 후에는 Swagger UI가 정상적으로 JSON 스펙을 로딩했고, 모든 API가 잘 표시되었다.
-<br />
-<br /></p>
-
-<h3 id="결론">결론</h3>
-
-<p>이번 문제는 Swagger 설정 오류로 보였지만, 사실 커스텀으로 OpenAPI 접근 경로를 설정해놓고 SecurityConfig에는 누락한 게 원인이었다.</p>
-
-<p>Springdoc에서 OpenAPI 기본 경로(<code class="language-plaintext highlighter-rouge">/v3/api-docs</code>)를 대신 커스텀 경로를 사용하는 경우에는 SecurityConfig에서도 반드시 동일한 경로를 허용해주어야 한다.</p>
-
-<p>이번 케이스는 작은 실수였지만, 생각보다 시간을 잡아먹은 삽질이었다. 앞으로는 Swagger 관련 이슈가 있을 때는 YML 설정과 Security를 가장 먼저 검토해볼 것 같다.
-<br />
-<br /></p>
-
-<h4 id="참고">참고</h4>
-<ul>
-  <li>https://yundevnote.tistory.com/71</li>
-</ul>
+<p><strong>정리</strong><br />
+겨우 해결하고 나니 이게 안전한 방법인지 의문이 들어서 다음에는 AWS Parameter Store / Secrets Manager나 GitHub OIDC + 외부 Secret 관리 같은 방식도 검토해보려고 한다.</p>
 
 
     </div>
 
 </article>
-<div class="post-nav"><a class="previous" href="/wiki/2025/07/24/queryds-separator.html" title="QueryDSL에서 group_concat SEPARATOR 없이 구분자 처리하기">QueryDSL에서 group_concat SEPARATOR 없이 구분자 처리하기...</a><span></span></div><div class="post-comments">  <div id="gisqus_thread"></div>
+<div class="post-nav"><a class="previous" href="/wiki/2025/12/12/swagger-error.html" title="Swagger UI에서 발생한 Failed to road remote configuration 원인 찾아내기">Swagger UI에서 발생한 Failed to road...</a><span></span></div><div class="post-comments">  <div id="gisqus_thread"></div>
   <script src="https://giscus.app/client.js"
   data-repo="dajeongdev/dajeongdev.github.io"
   data-repo-id="R_kgDOHS7Ikw"
@@ -832,7 +1007,7 @@ document.getElementById("tail-wrapper").appendChild(giscusScript);
 </script></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/wiki/2025/05/15/java-optional.html" title="">null-safe하게 Optional 사용하기</a></li><li><a class="post-link" href="/wiki/2023/11/13/intellij-shortcut.html" title="">IntelliJ 단축키 정리</a></li><li><a class="post-link" href="/wiki/2024/04/29/americanote-server6-apply-https-to-the-domain.html" title="">아메리카노트 서버 구성 &lt;6&gt; HTTPS 적용</a></li><li><a class="post-link" href="/wiki/2025/03/28/spring-transactional-annotation.html" title="">Spring @Transactional을 정말 제대로 쓰고 있는 걸까?</a></li></ul>
+        <li><a class="post-link" href="/wiki/2024/04/30/integer-class.html" title="">Integer Class</a></li><li><a class="post-link" href="/wiki/2025/07/24/queryds-separator.html" title="">QueryDSL에서 group_concat SEPARATOR 없이 구분자 처리하기</a></li><li><a class="post-link" href="/wiki/2024/03/05/queue.html" title="">Queue</a></li><li><a class="post-link" href="/wiki/2025/12/12/swagger-error.html" title="">Swagger UI에서 발생한 Failed to road remote configuration 원인 찾아내기</a></li></ul>
     </div></script>
   </section>
 </div>

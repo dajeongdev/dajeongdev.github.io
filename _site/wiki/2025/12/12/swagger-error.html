@@ -14,22 +14,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta>
   <meta name="google-site-verification" content="zKcasmEMRn8LOc1DeBiiQZrHbcmWeFCif-fjAjsiVjA" /><!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>String 배열 -&gt; String | Every Single Day</title>
+<title>Swagger UI에서 발생한 Failed to road remote configuration 원인 찾아내기 | Every Single Day</title>
 <meta name="generator" content="Jekyll v3.9.5" />
-<meta property="og:title" content="String 배열 -&gt; String" />
+<meta property="og:title" content="Swagger UI에서 발생한 Failed to road remote configuration 원인 찾아내기" />
 <meta name="author" content="Dajeong Park" />
 <meta property="og:locale" content="ko" />
-<meta name="description" content="배경 코딩테스트 문제를 풀면서 String 배열을 String으로 변환하는 작업이 자주 나와서 기록해두려고 한다." />
-<meta property="og:description" content="배경 코딩테스트 문제를 풀면서 String 배열을 String으로 변환하는 작업이 자주 나와서 기록해두려고 한다." />
-<link rel="canonical" href="http://localhost:4000/wiki/2024/02/26/string-array-to-string.html" />
-<meta property="og:url" content="http://localhost:4000/wiki/2024/02/26/string-array-to-string.html" />
+<meta name="description" content="배경" />
+<meta property="og:description" content="배경" />
+<link rel="canonical" href="http://localhost:4000/wiki/2025/12/12/swagger-error.html" />
+<meta property="og:url" content="http://localhost:4000/wiki/2025/12/12/swagger-error.html" />
 <meta property="og:site_name" content="Every Single Day" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2024-02-26T00:00:00+09:00" />
+<meta property="article:published_time" content="2025-12-12T00:00:00+09:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="String 배열 -&gt; String" />
+<meta property="twitter:title" content="Swagger UI에서 발생한 Failed to road remote configuration 원인 찾아내기" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2024-02-26T00:00:00+09:00","datePublished":"2024-02-26T00:00:00+09:00","description":"배경 코딩테스트 문제를 풀면서 String 배열을 String으로 변환하는 작업이 자주 나와서 기록해두려고 한다.","headline":"String 배열 -&gt; String","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2024/02/26/string-array-to-string.html"},"url":"http://localhost:4000/wiki/2024/02/26/string-array-to-string.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Dajeong Park"},"dateModified":"2025-12-12T00:00:00+09:00","datePublished":"2025-12-12T00:00:00+09:00","description":"배경","headline":"Swagger UI에서 발생한 Failed to road remote configuration 원인 찾아내기","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/wiki/2025/12/12/swagger-error.html"},"url":"http://localhost:4000/wiki/2025/12/12/swagger-error.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon.ico/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="/assets/favicon.ico/apple-icon-60x60.png">
@@ -641,11 +641,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">String 배열 -&gt; String</h1>
+  <h1 class="post-title p-name" itemprop="name headline">Swagger UI에서 발생한 Failed to road remote configuration 원인 찾아내기</h1>
   <h2 class="post-subtitle"></h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2024-02-26T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Feb 26, 2024
+    <time class="dt-published" datetime="2025-12-12T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Dec 12, 2025
     </time>
 
     
@@ -682,85 +682,117 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
-  </p><div class="post-tags"><a class="post-tag" href="/tags.html#Java">#Java</a><a class="post-tag" href="/tags.html#String">#String</a></div></header>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+  </p><div class="post-tags"><a class="post-tag" href="/tags.html#SpringBoot">#SpringBoot</a><a class="post-tag" href="/tags.html#Swagger">#Swagger</a><a class="post-tag" href="/tags.html#Springdoc">#Springdoc</a></div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
       <h3 id="배경">배경</h3>
+
+<p>현재 작업중인 사이드 프로젝트에서 Springdoc 기반으로 Swagger를 사용하고 있다. 새로운 API 그룹을 만들기 위해 GroupedOpenApi 설정을 추가하면서 SwaggerConfig를 분리하다가, Swagger에서 화면이 갑자기 아래 이미지처럼 오류를 출력하며 로딩되지 않는 문제가 발생했다.</p>
+
+<p><img width="788" alt="github-actions2" src="https://dajeongdev.github.io/assets/images/posts/swagger-error.png" /></p>
+
+<p>혹시 몰라 Explore 버튼을 누르니 아래 같은 에러가 출력되었다.</p>
+
+<p><img width="788" alt="github-actions2" src="https://dajeongdev.github.io/assets/images/posts/swagger-error2.png" /></p>
+
+<p>처음에는 Springdoc 의존성과 Spring Boot 버전의 호환을 의심했는데, Springdoc의 스펙을 높이거나 Spring Boot의 버전을 낮춰봐도 문제는 그대로였다.
+<br />
+<br /></p>
+
+<h3 id="과정">과정</h3>
+
+<p>Swagger UI는 기본적으로 다음 경로에서 화면에 띄워줄스펙(JSON)을 조회한다.</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">/swagger-ui/**</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/v3/api-docs/**</code></li>
+</ol>
+
+<p>그래서 다음 부분을 차례로 확인해봤다.</p>
+
+<p><strong>1. GroupedOpenApi 설정</strong></p>
 <ul>
-  <li>코딩테스트 문제를 풀면서 String 배열을 String으로 변환하는 작업이 자주 나와서 기록해두려고 한다. <br />
+  <li>경로도 확인하고, 해당 설정을 주석 처리해도 화면이 생성되지 않음</li>
+</ul>
+
+<p><strong>2. YML에서 Springdoc의 paths-to-match 설정</strong></p>
+<ul>
+  <li>paths-to-match에 <code class="language-plaintext highlighter-rouge">/api/**</code> 경로만 스캔하도록 설정해두었기 때문에 혹시 스펙 생성이 필터링 되었는지 컨트롤러를 확인해봤지만, 이것도 문제가 아니었음
+<br />
 <br /></li>
 </ul>
 
-<h4 id="1-stringjoincharsequence-delimiter-charsequence-elements">1. String.join(CharSequence delimiter, CharSequence… elements)</h4>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">join()</code> 메서드는 delimiter(구분자)를 사용하여 elements(대상 배열)을 문자열을 리턴할 수 있다.</li>
-  <li>String.join() 메서드는 Java 1.8 이상부터 사용 가능
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">strArr</span> <span class="o">=</span> <span class="o">{</span><span class="s">"hello"</span><span class="o">,</span> <span class="s">"java"</span><span class="o">};</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">join</span><span class="o">(</span><span class="s">","</span><span class="o">,</span> <span class="n">strArr</span><span class="o">));</span>
-<span class="c1">// 결과 : hello,java</span>
-</code></pre></div>    </div>
-    <p><br /></p>
-  </li>
-</ul>
+<h3 id="원인-발견">원인 발견</h3>
 
-<h4 id="2-arraystostringobject-a">2. Arrays.toString(Object[] a)</h4>
-<ul>
-  <li>Arrays 클래스의 <code class="language-plaintext highlighter-rouge">toString()</code> 메서드를 사용하여 배열 모양의 문자열을 리턴할 수 있다.
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">strArr</span> <span class="o">=</span> <span class="o">{</span><span class="s">"hello"</span><span class="o">,</span> <span class="s">"java"</span><span class="o">};</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">strArr</span><span class="o">));</span>
-<span class="c1">// 결과 : [hello, java]</span>
-</code></pre></div>    </div>
-    <p><br /></p>
-  </li>
-</ul>
+<p>오류 화면을 보다가 Network 탭을 볼 생각이 들어 확인해보니 요청 경로가 <code class="language-plaintext highlighter-rouge">/api-docs/swagger-config</code>였고, <strong>403</strong> 상태코드를 출력하고 있었다.</p>
 
-<h4 id="3-stream---collectorsjoining">3. Stream - Collectors.joining()</h4>
-<ul>
-  <li>Stream의 <code class="language-plaintext highlighter-rouge">Collectors.joining()</code> 메서드를 사용하여 문자열을 리턴할 수 있다.</li>
-  <li>Stream은 Java 1.8 이상부터 사용 가능
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">strArr</span> <span class="o">=</span> <span class="o">{</span><span class="s">"hello"</span><span class="o">,</span> <span class="s">"java"</span><span class="o">};</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">strArr</span><span class="o">).</span><span class="na">collect</span><span class="o">(</span><span class="nc">Collectors</span><span class="o">.</span><span class="na">joining</span><span class="o">()));</span>
-<span class="c1">// 결과 : hellojava</span>
-</code></pre></div>    </div>
-    <p><br /></p>
-  </li>
-</ul>
+<p>그리고 프로젝트에서는 Spring Security를 적용해두었는데, 허용 경로에는 위에 언급했던 default 경로뿐이었다. 즉, <strong>Swagger UI 페이지 자체는 로딩</strong>되었으나, <strong>UI가 내부적으로 요청하는 실제 스펙 경로(<code class="language-plaintext highlighter-rouge">/api-docs/swagger-config</code>) 요청이 Security에 의해 차단</strong>되고 있던 것이다.
+<br />
+<br /></p>
 
-<h4 id="4-stringbuilderappendstring-str">4. StringBuilder.append(String str)</h4>
-<ul>
-  <li>가장 기본적인 방법 중에는 StringBuilder를 생성하여 <code class="language-plaintext highlighter-rouge">append()</code> 메서드를 사용하여 문자열을 리턴할 수 있다.</li>
-  <li>빠르지만 for문을 사용하기 때문에 코드가 조금 길어진다는 단점이 있다.
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">strArr</span> <span class="o">=</span> <span class="o">{</span><span class="s">"hello"</span><span class="o">,</span> <span class="s">"java"</span><span class="o">};</span>
-<span class="nc">StringBuilder</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span><span class="o">();</span>
-<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">strArr</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-  <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">strArr</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+<h3 id="해결">해결</h3>
+
+<p>그래서 SecurityConfig에 누락된 <code class="language-plaintext highlighter-rouge">/api-docs/**</code> 경로를 허용하도록 추가했다.</p>
+
+<p><strong>SecurityConfig.java</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SecurityConfig</span> <span class="kd">implements</span> <span class="nc">WebMvcConfigurer</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span><span class="o">[]</span> <span class="n">permitUrls</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">[]{</span>
+            <span class="s">"/swagger-ui.html"</span><span class="o">,</span>
+            <span class="s">"/swagger-ui/**"</span><span class="o">,</span>
+            <span class="s">"/api-docs/**"</span><span class="o">,</span> <span class="c1">// application.yml에 명시해둔 경로</span>
+            <span class="s">"/v3/api-docs/**"</span><span class="o">,</span>
+    <span class="o">};</span>
+    
+		<span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">SecurityFilterChain</span> <span class="nf">filterChain</span><span class="o">(</span><span class="nc">HttpSecurity</span> <span class="n">http</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="n">http</span>
+                <span class="o">.</span><span class="na">authorizeHttpRequests</span><span class="o">(</span><span class="n">authorizeRequest</span> <span class="o">-&gt;</span> <span class="n">authorizeRequest</span> <span class="c1">// 인증/인가 URL 지정</span>
+                        <span class="o">.</span><span class="na">requestMatchers</span><span class="o">(</span><span class="n">permitUrls</span><span class="o">).</span><span class="na">permitAll</span><span class="o">()</span> <span class="c1">// 허용 URL</span>
+                        <span class="o">.</span><span class="na">anyRequest</span><span class="o">().</span><span class="na">authenticated</span><span class="o">())</span> <span class="c1">// 나머지는 인증 필요</span>
+			<span class="o">...</span>
+        <span class="k">return</span> <span class="n">http</span><span class="o">.</span><span class="na">build</span><span class="o">();</span>
+    <span class="o">}</span>
 <span class="o">}</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sb</span><span class="o">);</span>
-<span class="c1">// 결과 : hellojava</span>
-</code></pre></div>    </div>
-    <p><br /></p>
-  </li>
-</ul>
+</code></pre></div></div>
 
-<h4 id="5-apache-commons-lang-3--라이브러리">5. Apache Commons Lang 3  라이브러리</h4>
+<p><strong>application.yml</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">springdoc:</span>
+  <span class="n">swagger</span><span class="o">-</span><span class="nl">ui:</span>
+    <span class="o">...</span>
+  <span class="n">api</span><span class="o">-</span><span class="nl">docs:</span>
+    <span class="nl">path:</span> <span class="o">/</span><span class="n">api</span><span class="o">-</span><span class="n">docs</span> <span class="err">#</span> <span class="n">openAPI</span> <span class="n">접근</span> <span class="n">경로</span>
+</code></pre></div></div>
+
+<p>추가 후에는 Swagger UI가 정상적으로 JSON 스펙을 로딩했고, 모든 API가 잘 표시되었다.
+<br />
+<br /></p>
+
+<h3 id="결론">결론</h3>
+
+<p>이번 문제는 Swagger 설정 오류로 보였지만, 사실 커스텀으로 OpenAPI 접근 경로를 설정해놓고 SecurityConfig에는 누락한 게 원인이었다.</p>
+
+<p>Springdoc에서 OpenAPI 기본 경로(<code class="language-plaintext highlighter-rouge">/v3/api-docs</code>)를 대신 커스텀 경로를 사용하는 경우에는 SecurityConfig에서도 반드시 동일한 경로를 허용해주어야 한다.</p>
+
+<p>이번 케이스는 작은 실수였지만, 생각보다 시간을 잡아먹은 삽질이었다. 앞으로는 Swagger 관련 이슈가 있을 때는 YML 설정과 Security를 가장 먼저 검토해볼 것 같다.
+<br />
+<br /></p>
+
+<h4 id="참고">참고</h4>
 <ul>
-  <li><a href="https://commons.apache.org/proper/commons-lang">Apache Commons Lang 3</a> 라이브러리는 Java의 유틸리티 클래스 패키지로, 문자열, 배열, 숫자 등 매우 다양하고 편리한 기능을 제공한다.</li>
-  <li>그 중 StringUtils 클래스의 <code class="language-plaintext highlighter-rouge">join()</code> 메서드를 사용하여 문자열 배열을 문자열로 리턴할 수 있다.
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">strArr</span> <span class="o">=</span> <span class="o">{</span><span class="s">"hello"</span><span class="o">,</span> <span class="s">"java"</span><span class="o">};</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">StringUtils</span><span class="o">.</span><span class="na">join</span><span class="o">(</span><span class="n">strArr</span><span class="o">,</span> <span class="s">","</span><span class="o">));</span>
-<span class="c1">// 결과 : hello,java</span>
-</code></pre></div>    </div>
-  </li>
+  <li>https://yundevnote.tistory.com/71</li>
 </ul>
 
 
     </div>
 
 </article>
-<div class="post-nav"><a class="previous" href="/wiki/2024/01/17/pathvariable-name-missing.html" title="SpringBoot 3.2부터 @PathVariable 이름 미지정 시 에러">SpringBoot 3.2부터 @PathVariable 이름 미지정 시...</a><a class="next" href="/wiki/2024/02/29/programmers-12906.html" title="프로그래머스 - 같은 숫자는 싫어 풀이">프로그래머스 - 같은 숫자는 싫어 풀이...</a></div><div class="post-comments">  <div id="gisqus_thread"></div>
+<div class="post-nav"><a class="previous" href="/wiki/2025/07/24/queryds-separator.html" title="QueryDSL에서 group_concat SEPARATOR 없이 구분자 처리하기">QueryDSL에서 group_concat SEPARATOR 없이 구분자 처리하기...</a><a class="next" href="/wiki/2026/01/16/deploy-with-docker.html" title="Docker + Github Actions 기반 자동 배포 구축하기">Docker + Github Actions 기반 자동...</a></div><div class="post-comments">  <div id="gisqus_thread"></div>
   <script src="https://giscus.app/client.js"
   data-repo="dajeongdev/dajeongdev.github.io"
   data-repo-id="R_kgDOHS7Ikw"
@@ -800,7 +832,7 @@ document.getElementById("tail-wrapper").appendChild(giscusScript);
 </script></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/wiki/2025/02/13/spring-scheduled-annotation.html" title="프로그래머스 - 같은 숫자는 싫어 풀이">Spring @Scheduled로 간단하게 원하는 시간에 스케줄을 등록해보자</a></li><li><a class="post-link" href="/blog/2024/04/19/naver-cloud-review.html" title="프로그래머스 - 같은 숫자는 싫어 풀이">비사이드 포텐데이 403 프로젝트에서 Naver Cloud Platform 사용 후기</a></li><li><a class="post-link" href="/wiki/2025/07/24/queryds-separator.html" title="프로그래머스 - 같은 숫자는 싫어 풀이">QueryDSL에서 group_concat SEPARATOR 없이 구분자 처리하기</a></li><li><a class="post-link" href="/wiki/2024/01/12/jpa-created-date-column-null.html" title="프로그래머스 - 같은 숫자는 싫어 풀이">update 시 @CreatedDate를 붙인 컬럼에 null이 들어가는 문제와 해결 방법</a></li></ul>
+        <li><a class="post-link" href="/wiki/2024/04/29/americanote-server2-create-mysql-database.html" title="Docker + Github Actions 기반 자동 배포 구축하기">아메리카노트 서버 구성 &lt;2&gt; MySQL 데이터베이스 생성</a></li><li><a class="post-link" href="/wiki/2023/11/13/default-method.html" title="Docker + Github Actions 기반 자동 배포 구축하기">default method</a></li><li><a class="post-link" href="/wiki/2024/07/13/accesstoken-refreshtoken.html" title="Docker + Github Actions 기반 자동 배포 구축하기">AccessToken과 RefreshToken</a></li><li><a class="post-link" href="/wiki/2026/01/16/deploy-with-docker.html" title="Docker + Github Actions 기반 자동 배포 구축하기">Docker + Github Actions 기반 자동 배포 구축하기</a></li></ul>
     </div></script>
   </section>
 </div>
